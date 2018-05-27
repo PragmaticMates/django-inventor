@@ -13,19 +13,20 @@ from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
 from inventor import settings as inventor_settings
 from inventor.managers import ListingQuerySet
+from inventor.mixins import BookingMixin
 
 
-# TODO: opening hours, meals and drinks, street view, faq, booking
+# TODO: opening hours, meals and drinks, street view, faq
 
 class Listing(models.Model):
     SOCIAL_NETWORKS = ['Facebook', 'Twitter', 'Google', 'Instagram', 'Vimeo', 'YouTube', 'LinkedIn', 'Dribbble',
                        'Skype', 'Foursquare', 'Behance']  # TODO: move to settings
 
-    PRICE_UNITS = [(
+    PRICE_UNITS = [
         ('PERSON', _('person')),
         ('NIGHT', _('night')),
         ('DAY', _('day')),
-    )]
+    ]
 
     # definition
     title = models.CharField(_('title'), max_length=100, unique=True)
@@ -34,18 +35,18 @@ class Listing(models.Model):
     # management
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('author'))
     published = models.BooleanField(_('published'), default=True)
-    featured = models.BooleanField(_('featured'), default=False)
+    promoted = models.BooleanField(_('promoted'), default=False)
 
     # specification
     categories = models.ManyToManyField(to='inventor.Category', verbose_name=_('categories'), blank=True, related_name='listings_of_category')
     amenities = models.ManyToManyField(to='inventor.Amenity', verbose_name=_('amenities'), blank=True, related_name='listings_having_amenity')
-    services = models.ManyToManyField(to='inventor.Service', verbose_name=_('services'), blank=True, related_name='listings_with_services')
+    features = models.ManyToManyField(to='inventor.Feature', verbose_name=_('features'), blank=True, related_name='listings_with_features')
 
     # price
     price_starts_at = models.BooleanField(_('price starts at'), default=False)
     price = models.DecimalField(_('price'), help_text=inventor_settings.CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0)],
         blank=True, null=True, default=None)
-    price_unit = models.CharField(_('price per unit'), choices=PRICE_UNITS, blank=True)
+    price_unit = models.CharField(_('price per unit'), choices=PRICE_UNITS, max_length=6, blank=True)
 
     # address
     location = models.ForeignKey('inventor.Location', on_delete=models.SET_NULL,
@@ -160,7 +161,9 @@ class Listing(models.Model):
             pass
 
 
-class Accommodation(Listing):
+class Accommodation(BookingMixin, Listing):
+    # TODO: type, class
+
     class Meta:
         verbose_name = _('accommodation')
         verbose_name_plural = _('accommodations')
@@ -265,7 +268,7 @@ class Category(models.Model):
 
 
 class Amenity(models.Model):
-    title = models.CharField(_('name'), max_length=100, unique=True)
+    title = models.CharField(_('title'), max_length=100, unique=True)
 
     # TODO: listing types
 
@@ -278,14 +281,14 @@ class Amenity(models.Model):
         return self.title
 
 
-class Service(models.Model):
-    title = models.CharField(_('name'), max_length=100, unique=True)
+class Feature(models.Model):
+    title = models.CharField(_('title'), max_length=100, unique=True)
 
     # TODO: listing types
 
     class Meta:
-        verbose_name = _('service')
-        verbose_name_plural = _('services')
+        verbose_name = _('feature')
+        verbose_name_plural = _('features')
         ordering = ('title',)
 
     def __str__(self):
