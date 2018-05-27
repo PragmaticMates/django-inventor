@@ -15,11 +15,17 @@ from inventor import settings as inventor_settings
 from inventor.managers import ListingQuerySet
 
 
-# TODO: banner, opening hours, videos, meals and drinks, street view, faq, booking
+# TODO: opening hours, meals and drinks, street view, faq, booking
 
 class Listing(models.Model):
     SOCIAL_NETWORKS = ['Facebook', 'Twitter', 'Google', 'Instagram', 'Vimeo', 'YouTube', 'LinkedIn', 'Dribbble',
                        'Skype', 'Foursquare', 'Behance']  # TODO: move to settings
+
+    PRICE_UNITS = [(
+        ('PERSON', _('person')),
+        ('NIGHT', _('night')),
+        ('DAY', _('day')),
+    )]
 
     # definition
     title = models.CharField(_('title'), max_length=100, unique=True)
@@ -36,8 +42,10 @@ class Listing(models.Model):
     services = models.ManyToManyField(to='inventor.Service', verbose_name=_('services'), blank=True, related_name='listings_with_services')
 
     # price
+    price_starts_at = models.BooleanField(_('price starts at'), default=False)
     price = models.DecimalField(_('price'), help_text=inventor_settings.CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0)],
         blank=True, null=True, default=None)
+    price_unit = models.CharField(_('price per unit'), choices=PRICE_UNITS, blank=True)
 
     # address
     location = models.ForeignKey('inventor.Location', on_delete=models.SET_NULL,
@@ -108,6 +116,24 @@ class Listing(models.Model):
         ]
 
         return ', '.join(address_parts).strip(' ,')
+
+    @property
+    def get_price_display(self):
+        if not self.price:
+            return ''
+
+        if inventor_settings.CURRENCY_AFTER_AMOUNT:
+            price_display = '{}{}'.format(self.price, inventor_settings.CURRENCY)
+        else:
+            price_display = '{}{}'.format(inventor_settings.CURRENCY, self.price)
+
+        if self.price_starts_at:
+            price_display = '{} {}'.format(_('starts at'), price_display)
+
+        if self.price_unit:
+            price_display = '{} / {}'.format(price_display, self.get_price_unit_display())
+
+        return price_display
 
     @cached_property
     def rating(self):
