@@ -2,7 +2,7 @@ import os
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import JSONField
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Avg
 from django.core.validators import MinValueValidator
@@ -79,11 +79,9 @@ class Listing(models.Model):
     website = models.URLField(_('website'), max_length=400, blank=True)
 
     # social
-    social_networks = ArrayField(verbose_name=_('social networks'),
-        base_field=models.CharField(verbose_name=_('social network'), max_length=10, choices=[(network, network) for network in SOCIAL_NETWORKS]),
-        size=len(SOCIAL_NETWORKS), blank=True)
+    social_networks = JSONField(verbose_name=_('social networks'), blank=True, default={})
 
-    # gallery
+    # relations
     comments = GenericRelation(get_comment_model(), content_type_field='content_type', object_id_field='object_pk',
                                related_query_name='contest')
 
@@ -223,12 +221,12 @@ class Vehicle(Listing):
         ordering = ('title',)
 
 
-class Person(Listing):
+class Character(Listing):
     section = _('dating')
 
     class Meta:
-        verbose_name = _('person')
-        verbose_name_plural = _('persons')
+        verbose_name = _('character')
+        verbose_name_plural = _('characters')
         ordering = ('title',)
 
 

@@ -14,6 +14,7 @@ setup(
     url='https://github.com/PragmaticMates/django-inventor',
     packages=[
         'inventor',
+        'inventor.migrations',
         #'inventor.templatetags'
     ],
     include_package_data=True,
