@@ -73,6 +73,7 @@ class Listing(models.Model):
     )
 
     # contact information
+    person = models.CharField(_('person'), max_length=100, blank=True)
     phone = models.CharField(_('phone'), max_length=40, blank=True)
     email = models.EmailField(_('email'), blank=True)
     website = models.URLField(_('website'), max_length=400, blank=True)
@@ -83,7 +84,6 @@ class Listing(models.Model):
         size=len(SOCIAL_NETWORKS), blank=True)
 
     # gallery
-    photos = GenericRelation('inventor.Photo', content_type_field='content_type', object_id_field='object_id', related_query_name='listing')
     comments = GenericRelation(get_comment_model(), content_type_field='content_type', object_id_field='object_pk',
                                related_query_name='contest')
 
