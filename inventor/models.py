@@ -337,9 +337,6 @@ class Album(models.Model):
 
 class Photo(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, related_name='as_photo')
-    object_id = models.PositiveIntegerField()
-    object = GenericForeignKey()
     file = models.ImageField(
         verbose_name=_('file'),
         help_text=_('photo, image or icon'),
