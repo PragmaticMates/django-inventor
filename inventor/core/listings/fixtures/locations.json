@@ -4,9 +4,9 @@
     "pk": 1,
     "fields": {
       "title": "New York City",
-      "lft": 1,
-      "rght": 4,
-      "tree_id": 1,
+      "lft": 0,
+      "rght": 0,
+      "tree_id": 0,
       "level": 0
     }
   },
@@ -16,10 +16,10 @@
     "fields": {
       "parent": 1,
       "title": "Manhattan",
-      "lft": 2,
-      "rght": 3,
-      "tree_id": 1,
-      "level": 1
+      "lft": 0,
+      "rght": 0,
+      "tree_id": 0,
+      "level": 0
     }
   }
 ]

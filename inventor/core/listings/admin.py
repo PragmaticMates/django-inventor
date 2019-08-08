@@ -6,7 +6,7 @@ from mptt.admin import DraggableMPTTAdmin
 
 from inventor.core.listings.models.general import Album, Location, Category, Feature, Video, Photo
 from inventor.core.listings.models.listing_types import Accommodation, Property, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, \
-    Nature  # TODO: add remaining types
+    Nature
 
 
 class AlbumInline(admin.StackedInline):
