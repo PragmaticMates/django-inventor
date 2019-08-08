@@ -2,9 +2,8 @@ from django.contrib import admin
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
-from mptt.admin import DraggableMPTTAdmin
 
-from inventor.core.listings.models.general import Album, Location, Category, Feature, Video, Photo
+from inventor.core.listings.models.general import Album, Video, Photo
 from inventor.core.listings.models.listing_types import Accommodation, Property, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, \
     Nature
 
@@ -45,19 +44,6 @@ class ListingAdmin(admin.ModelAdmin):
         js = (
             'js/map-widget-utils.js',
         )
-
-
-@admin.register(Category, Location)
-class CategoryAndLocationAdmin(DraggableMPTTAdmin):
-    search_fields = ['title']
-    list_display = ('tree_actions', 'indented_title')
-    list_display_links = ('indented_title', )
-
-
-@admin.register(Feature)
-class FeatureAdmin(admin.ModelAdmin):
-    search_fields = ['title']
-    list_display = ('title',)
 
 
 class PhotoInline(admin.StackedInline):

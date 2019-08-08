@@ -1,13 +1,13 @@
 [
   {
-    "model": "listings.Feature",
+    "model": "lexicons.Feature",
     "pk": 1,
     "fields": {
       "title": "WiFi"
     }
   },
   {
-    "model": "listings.Feature",
+    "model": "lexicons.Feature",
     "pk": 2,
     "fields": {
       "title": "TV"

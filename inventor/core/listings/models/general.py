@@ -1,8 +1,7 @@
 import os
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.postgres.fields import HStoreField, ArrayField
+from django.contrib.postgres.fields import HStoreField
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Avg
 from django.core.validators import MinValueValidator
@@ -11,10 +10,9 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
-from mptt.fields import TreeForeignKey
-from mptt.models import MPTTModel
 
 from inventor import settings as inventor_settings
+from inventor.core.lexicons.models import Category, Feature, Location
 from inventor.core.listings.managers import ListingQuerySet
 
 
@@ -41,8 +39,8 @@ class Listing(models.Model):
     promoted = models.BooleanField(_('promoted'), default=False)
 
     # specification
-    categories = models.ManyToManyField(to='listings.Category', verbose_name=_('categories'), blank=True, related_name='listings_of_category')
-    features = models.ManyToManyField(to='listings.Feature', verbose_name=_('features'), blank=True, related_name='listings_with_features')
+    categories = models.ManyToManyField(to=Category, verbose_name=_('categories'), blank=True, related_name='listings_of_category')
+    features = models.ManyToManyField(to=Feature, verbose_name=_('features'), blank=True, related_name='listings_with_features')
 
     # price
     price_starts_at = models.BooleanField(_('price starts at'), default=False)
@@ -51,7 +49,7 @@ class Listing(models.Model):
     price_unit = models.CharField(_('price per unit'), choices=PRICE_UNITS, max_length=6, blank=True)
 
     # address
-    location = models.ForeignKey('listings.Location', on_delete=models.SET_NULL,
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL,
         blank=True, null=True, default=None)
     street = models.CharField(_('street'), max_length=200, blank=True)
     postcode = models.CharField(_('postcode'), max_length=30, blank=True)
@@ -162,59 +160,6 @@ class Listing(models.Model):
             pass
         except OSError:
             pass
-
-
-class Category(MPTTModel):
-    title = models.CharField(_('title'), max_length=100, unique=True)
-    listing_type = models.ForeignKey(
-        ContentType, verbose_name=_('listing type'), on_delete=models.PROTECT,
-        blank=True, null=True, default=None)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-
-    class MPTTMeta:
-        order_insertion_by = ['title']
-
-    class Meta:
-        verbose_name = _('category')
-        verbose_name_plural = _('categories')
-        ordering = ('title',)
-
-    def __str__(self):
-        return self.title
-
-
-class Feature(models.Model):
-    # WiFi, TV, hairdryer
-    # pet friendly, free parking, wheelchair accessible
-    title = models.CharField(_('title'), max_length=100, unique=True)
-    listing_type = models.ForeignKey(
-        ContentType, verbose_name=_('listing type'), on_delete=models.PROTECT,
-        blank=True, null=True, default=None)
-
-    class Meta:
-        verbose_name = _('feature')
-        verbose_name_plural = _('features')
-        ordering = ('title',)
-
-    def __str__(self):
-        return self.title
-
-
-class Location(MPTTModel):
-    title = models.CharField(_('title'), max_length=100, unique=True)
-    description = models.TextField(_('description'), blank=True)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-
-    class MPTTMeta:
-        order_insertion_by = ['title']
-
-    class Meta:
-        verbose_name = _('location')
-        verbose_name_plural = _('locations')
-        ordering = ('title',)
-
-    def __str__(self):
-        return self.title
 
 
 class Video(models.Model):
