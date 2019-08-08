@@ -1,0 +1,16 @@
+{% load i18n accounts humanize threadedcomments_tags comments_contrib %}
+
+<!--<legend class="small">{% trans 'Comments' %}</legend>-->
+<div class="box-with-shadow">
+    <div id="comments-wrapper" class="comments d-flex justify-content-between flex-column h-100">
+        {% render_comment_list for object %}
+
+        {% if not hide_form %}
+            <div id="comment-form-wrapper">
+                {% include 'accounts/helpers/user_info.html' %}
+
+                {% render_comment_form for object %}
+            </div>
+        {% endif %}
+    </div>
+</div>

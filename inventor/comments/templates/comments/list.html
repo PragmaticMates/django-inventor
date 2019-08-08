@@ -1,0 +1,32 @@
+{% comment %}
+  This template replaces the default "comments/list.html" of "django.contrib.comments",
+  to allow rendering the comments as tree.
+{% endcomment %}
+{% load i18n threadedcomments_tags static humanize accounts utils %}
+
+<div id="comments">
+    {% for comment in comment_list|fill_tree|annotate_tree %}
+        {% if comment.open %}
+            <ul class="comment-wrapper">
+        {% else %}
+            </li>
+        {% endif %}
+        <li id="c{{ comment.id }}" class="comment">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
+            <div class="row">
+                <div class="col-md-7">
+                    {% include 'accounts/helpers/user_info.html' with user=comment.user %}
+                </div>
+                <div class="col-md-5 text-right">
+                    <small class="date">{{ comment.submit_date|naturaltime }}</small>
+                </div>
+            </div>
+            <nav class="float-xs-right">
+                <a class="comment_reply_link" href="#" data-comment-id="{{ comment.id }}">{% trans 'Reply' %}</a>
+{#                    <a class="light" href="#">{% trans 'Report' %}</a>#}
+            </nav>
+            {{ comment.comment|linebreaks }}
+        {% for close in comment.close %}</li></ul>{% endfor %}
+    {% empty %}
+        <p class="p-5 m-0">{% trans 'No comments yet.' %}</p>
+    {% endfor %}
+</div>

@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
-from inventor.models import Album, Accommodation, Location, Category, Feature, Amenity, Video, Photo
+from inventor.listings.models.general import Album, Location, Category, Feature, Video, Photo
+from inventor.listings.models.listing_types import Accommodation  # TODO: add remaining types
 
 
 class AlbumInline(admin.StackedInline):
@@ -24,14 +25,14 @@ class ListingAdmin(admin.ModelAdmin):
     fieldsets = (
         (_('Definition'), {'fields': ('title', 'description',)}),
         (_('Management'), {'fields': ('author', 'published', 'promoted')}),
-        (_('Specification'), {'fields': (('categories', 'amenities', 'features'),)}),
+        (_('Specification'), {'fields': (('categories', 'features'),)}),
         (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit'),)}),
         (_('Address'), {'fields': ('location', 'street', 'postcode', 'city', 'country', 'point')}),
         (_('Previews'), {'fields': (('image', 'banner'),)}),
         (_('Contact information'), {'fields': ('person', 'phone', 'email', 'website')}),
         (_('Social connections'), {'fields': ('social_networks',)}),
     )
-    filter_vertical = ['categories', 'amenities', 'features']
+    filter_vertical = ['categories', 'features']
     inlines = [VideoInline, AlbumInline]  # add comments?
     formfield_overrides = {
         models.PointField: {"widget": GooglePointFieldWidget}
@@ -56,12 +57,6 @@ class LocationAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    search_fields = ['title']
-    list_display = ('title',)
-
-
-@admin.register(Amenity)
-class AmenityAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_display = ('title',)
 

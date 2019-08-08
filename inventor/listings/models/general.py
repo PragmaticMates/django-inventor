@@ -1,8 +1,7 @@
 import os
 from django.conf import settings
-from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.postgres.fields import JSONField
+from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.postgres.fields import HStoreField
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Avg
 from django.core.validators import MinValueValidator
@@ -12,20 +11,23 @@ from django.utils.translation import ugettext_lazy as _
 from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
 from inventor import settings as inventor_settings
-from inventor.managers import ListingQuerySet
-from inventor.mixins import BookingMixin
+from inventor.listings.managers import ListingQuerySet
 
 
 # TODO: opening hours, meals and drinks, street view, faq
 
 class Listing(models.Model):
+    TYPES = [
+        # TODO: all listing types using factory pattern
+    ]
     SOCIAL_NETWORKS = ['Facebook', 'Twitter', 'Google', 'Instagram', 'Vimeo', 'YouTube', 'LinkedIn', 'Dribbble',
                        'Skype', 'Foursquare', 'Behance']  # TODO: move to settings
 
     PRICE_UNITS = [
-        ('PERSON', _('person')),
-        ('NIGHT', _('night')),
-        ('DAY', _('day')),
+        ('PERSON', _('person')),                  # tickets
+        ('DAY', _('day')),                        # vehicle per day
+        ('NIGHT', _('night')),                    # room unit per night
+        ('PERSON_NIGHT', _('person per night')),  # person per night (booking)
     ]
 
     # definition
@@ -38,9 +40,8 @@ class Listing(models.Model):
     promoted = models.BooleanField(_('promoted'), default=False)
 
     # specification
-    categories = models.ManyToManyField(to='inventor.Category', verbose_name=_('categories'), blank=True, related_name='listings_of_category')
-    amenities = models.ManyToManyField(to='inventor.Amenity', verbose_name=_('amenities'), blank=True, related_name='listings_having_amenity')
-    features = models.ManyToManyField(to='inventor.Feature', verbose_name=_('features'), blank=True, related_name='listings_with_features')
+    categories = models.ManyToManyField(to='listings.Category', verbose_name=_('categories'), blank=True, related_name='listings_of_category')
+    features = models.ManyToManyField(to='listings.Feature', verbose_name=_('features'), blank=True, related_name='listings_with_features')
 
     # price
     price_starts_at = models.BooleanField(_('price starts at'), default=False)
@@ -49,13 +50,13 @@ class Listing(models.Model):
     price_unit = models.CharField(_('price per unit'), choices=PRICE_UNITS, max_length=6, blank=True)
 
     # address
-    location = models.ForeignKey('inventor.Location', on_delete=models.SET_NULL,
+    location = models.ForeignKey('listings.Location', on_delete=models.SET_NULL,
         blank=True, null=True, default=None)
-    street = models.CharField(_('street'), max_length=200)
-    postcode = models.CharField(_('postcode'), max_length=30, db_index=True)
-    city = models.CharField(_('city'), max_length=50)
+    street = models.CharField(_('street'), max_length=200, blank=True)
+    postcode = models.CharField(_('postcode'), max_length=30, blank=True)
+    city = models.CharField(_('city'), max_length=50, blank=True)
     country = CountryField(verbose_name=_('country'), db_index=True)
-    point = models.PointField(_('point'), blank=True, null=True, default=None)
+    point = models.PointField(_('point'), blank=True, null=True, default=None, db_index=True)
 
     # previews
     image = models.ImageField(
@@ -63,6 +64,7 @@ class Listing(models.Model):
         help_text=_('photo or image'),
         max_length=1024,
         upload_to='images',
+        blank=True
     )
 
     banner = models.ImageField(
@@ -70,6 +72,7 @@ class Listing(models.Model):
         help_text=_('photo or image'),
         max_length=1024 * 5,
         upload_to='banners',
+        blank=True
     )
 
     # contact information
@@ -79,7 +82,7 @@ class Listing(models.Model):
     website = models.URLField(_('website'), max_length=400, blank=True)
 
     # social
-    social_networks = JSONField(verbose_name=_('social networks'), blank=True, default={})
+    social_networks = HStoreField(verbose_name=_('social networks'), blank=True)
 
     # relations
     comments = GenericRelation(get_comment_model(), content_type_field='content_type', object_id_field='object_pk',
@@ -93,6 +96,7 @@ class Listing(models.Model):
         verbose_name = _('listing')
         verbose_name_plural = _('listings')
         ordering = ('title',)
+        db_table = 'listings_general'
 
     def __str__(self):
         return self.title
@@ -159,99 +163,11 @@ class Listing(models.Model):
             pass
 
 
-class Accommodation(BookingMixin, Listing):
-    # TODO: type, class
-
-    class Meta:
-        verbose_name = _('accommodation')
-        verbose_name_plural = _('accommodations')
-        ordering = ('title',)
-
-
-class Restaurant(Listing):
-    class Meta:
-        verbose_name = _('restaurant or bar')
-        verbose_name_plural = _('restaurants and bars')
-        ordering = ('title',)
-
-
-class Business(Listing):
-    class Meta:
-        verbose_name = _('business')
-        verbose_name_plural = _('businesses')
-        ordering = ('title',)
-
-
-class Travel(Listing):
-    section = _('tourism')
-
-    class Meta:
-        verbose_name = _('travel')
-        verbose_name_plural = _('travels')
-        ordering = ('title',)
-
-
-class Event(Listing):
-    class Meta:
-        verbose_name = _('event')
-        verbose_name_plural = _('events')
-        ordering = ('title',)
-
-
-class Shop(Listing):
-    class Meta:
-        verbose_name = _('shop')
-        verbose_name_plural = _('shops')
-        ordering = ('title',)
-
-
-class Goods(Listing):
-    class Meta:
-        verbose_name = _('goods')
-        verbose_name_plural = _('goods')
-        ordering = ('title',)
-
-
-class Vehicle(Listing):
-    section = _('automotive')
-
-    class Meta:
-        verbose_name = _('vehicle')
-        verbose_name_plural = _('vehicle')
-        ordering = ('title',)
-
-
-class Character(Listing):
-    section = _('dating')
-
-    class Meta:
-        verbose_name = _('character')
-        verbose_name_plural = _('characters')
-        ordering = ('title',)
-
-
-class Course(Listing):
-    section = _('education')
-
-    class Meta:
-        verbose_name = _('course')
-        verbose_name_plural = _('courses')
-        ordering = ('title',)
-
-
-class Animal(Listing):
-    class Meta:
-        verbose_name = _('animal')
-        verbose_name_plural = _('animals')
-        ordering = ('title',)
-
-
-class Category(models.Model):
+class Category(models.Model):  # TODO: mptt
     title = models.CharField(_('title'), max_length=100, unique=True)
-
-    # TODO: listing types
+    listing_type = models.CharField(_('listing type'), blank=True, choices=Listing.TYPES, max_length=13)
     # listing_types = ArrayField(verbose_name=_('listing types'),
-    #                        base_field=models.CharField(verbose_name=_('listing type'), max_length=10,
+    #                        base_field=models.CharField(verbose_name=_('listing type'), max_length=13,
     #                                                    choices=Listing.TYPES),
     #                        size=len(Listing.TYPES),
     #                        blank=True)
@@ -265,24 +181,11 @@ class Category(models.Model):
         return self.title
 
 
-class Amenity(models.Model):
-    title = models.CharField(_('title'), max_length=100, unique=True)
-
-    # TODO: listing types
-
-    class Meta:
-        verbose_name = _('amenity')
-        verbose_name_plural = _('amenities')
-        ordering = ('title',)
-
-    def __str__(self):
-        return self.title
-
-
 class Feature(models.Model):
+    # WiFi, TV, hairdryer
+    # pet friendly, free parking, wheelchair accessible
     title = models.CharField(_('title'), max_length=100, unique=True)
-
-    # TODO: listing types
+    listing_type = models.CharField(_('listing type'), blank=True, choices=Listing.TYPES, max_length=13)
 
     class Meta:
         verbose_name = _('feature')
@@ -293,7 +196,7 @@ class Feature(models.Model):
         return self.title
 
 
-class Location(models.Model):
+class Location(models.Model):  # TODO: mptt
     title = models.CharField(_('title'), max_length=100, unique=True)
     description = models.TextField(_('description'), blank=True)
 
@@ -323,7 +226,7 @@ class Video(models.Model):
 
 class Album(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
-    title = models.CharField(_('title'), max_length=100, unique=True)
+    title = models.CharField(_('title'), max_length=100, blank=True)
     description = models.TextField(_('description'), blank=True)
 
     class Meta:
@@ -341,7 +244,7 @@ class Photo(models.Model):
         verbose_name=_('file'),
         help_text=_('photo, image or icon'),
         max_length=1024 * 5,
-        upload_to='photos',
+        upload_to='photos',  # TODO: listing folder
     )
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)

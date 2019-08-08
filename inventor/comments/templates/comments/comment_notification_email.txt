@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% blocktrans with user=comment.user %}{{ user }} wrote:{% endblocktrans %}
+
+{{ comment.comment }}
+
+{% blocktrans %}Read more at this URL: {{ url }}{% endblocktrans %}

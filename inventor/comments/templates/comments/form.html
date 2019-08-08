@@ -1,0 +1,11 @@
+{% load comments i18n crispy_forms_tags %}
+
+<form action="{% comment_form_target %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.path }}"/>
+    {% crispy form %}
+
+    <div class="form-actions">
+        <input type="submit" name="post" class="btn btn-primary" value="{% trans 'Send' %}">
+    </div>
+</form>
