@@ -3,14 +3,23 @@
     "model": "listings.Location",
     "pk": 1,
     "fields": {
-      "title": "New York City"
+      "title": "New York City",
+      "lft": 1,
+      "rght": 4,
+      "tree_id": 1,
+      "level": 0
     }
   },
   {
     "model": "listings.Location",
     "pk": 2,
     "fields": {
-      "title": "Manhattan"
+      "parent": 1,
+      "title": "Manhattan",
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 1,
+      "level": 1
     }
   }
 ]

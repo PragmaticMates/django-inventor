@@ -11,6 +11,9 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
+
 from inventor import settings as inventor_settings
 from inventor.core.listings.managers import ListingQuerySet
 
@@ -161,11 +164,15 @@ class Listing(models.Model):
             pass
 
 
-class Category(models.Model):  # TODO: mptt
+class Category(MPTTModel):
     title = models.CharField(_('title'), max_length=100, unique=True)
     listing_type = models.ForeignKey(
         ContentType, verbose_name=_('listing type'), on_delete=models.PROTECT,
         blank=True, null=True, default=None)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+
+    class MPTTMeta:
+        order_insertion_by = ['title']
 
     class Meta:
         verbose_name = _('category')
@@ -193,9 +200,13 @@ class Feature(models.Model):
         return self.title
 
 
-class Location(models.Model):  # TODO: mptt
+class Location(MPTTModel):
     title = models.CharField(_('title'), max_length=100, unique=True)
     description = models.TextField(_('description'), blank=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+
+    class MPTTMeta:
+        order_insertion_by = ['title']
 
     class Meta:
         verbose_name = _('location')
