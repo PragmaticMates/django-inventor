@@ -1,7 +1,8 @@
 import os
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
-from django.contrib.postgres.fields import HStoreField
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.postgres.fields import HStoreField, ArrayField
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Avg
 from django.core.validators import MinValueValidator
@@ -17,9 +18,6 @@ from inventor.core.listings.managers import ListingQuerySet
 # TODO: opening hours, meals and drinks, street view, faq
 
 class Listing(models.Model):
-    TYPES = [
-        # TODO: all listing types using factory pattern
-    ]
     SOCIAL_NETWORKS = ['Facebook', 'Twitter', 'Google', 'Instagram', 'Vimeo', 'YouTube', 'LinkedIn', 'Dribbble',
                        'Skype', 'Foursquare', 'Behance']  # TODO: move to settings
 
@@ -165,12 +163,9 @@ class Listing(models.Model):
 
 class Category(models.Model):  # TODO: mptt
     title = models.CharField(_('title'), max_length=100, unique=True)
-    listing_type = models.CharField(_('listing type'), blank=True, choices=Listing.TYPES, max_length=13)
-    # listing_types = ArrayField(verbose_name=_('listing types'),
-    #                        base_field=models.CharField(verbose_name=_('listing type'), max_length=13,
-    #                                                    choices=Listing.TYPES),
-    #                        size=len(Listing.TYPES),
-    #                        blank=True)
+    listing_type = models.ForeignKey(
+        ContentType, verbose_name=_('listing type'), on_delete=models.PROTECT,
+        blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = _('category')
@@ -185,7 +180,9 @@ class Feature(models.Model):
     # WiFi, TV, hairdryer
     # pet friendly, free parking, wheelchair accessible
     title = models.CharField(_('title'), max_length=100, unique=True)
-    listing_type = models.CharField(_('listing type'), blank=True, choices=Listing.TYPES, max_length=13)
+    listing_type = models.ForeignKey(
+        ContentType, verbose_name=_('listing type'), on_delete=models.PROTECT,
+        blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = _('feature')

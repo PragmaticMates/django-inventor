@@ -1,0 +1,16 @@
+[
+  {
+    "model": "listings.Feature",
+    "pk": 1,
+    "fields": {
+      "title": "WiFi"
+    }
+  },
+  {
+    "model": "listings.Feature",
+    "pk": 2,
+    "fields": {
+      "title": "TV"
+    }
+  }
+]

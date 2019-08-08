@@ -9,7 +9,7 @@ class Property(Listing):
 
     class Meta:
         verbose_name = _('property')
-        verbose_name_plural = _('property')
+        verbose_name_plural = _('properties')
         ordering = ('title',)
 
 

@@ -1,0 +1,16 @@
+[
+  {
+    "model": "listings.Category",
+    "pk": 1,
+    "fields": {
+      "title": "Real Estate"
+    }
+  },
+  {
+    "model": "listings.Category",
+    "pk": 2,
+    "fields": {
+      "title": "Apartment buildings"
+    }
+  }
+]

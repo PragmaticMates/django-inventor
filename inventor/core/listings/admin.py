@@ -3,7 +3,8 @@ from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
 from inventor.core.listings.models.general import Album, Location, Category, Feature, Video, Photo
-from inventor.core.listings.models.listing_types import Accommodation  # TODO: add remaining types
+from inventor.core.listings.models.listing_types import Accommodation, Property, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, \
+    Nature  # TODO: add remaining types
 
 
 class AlbumInline(admin.StackedInline):
@@ -44,11 +45,6 @@ class ListingAdmin(admin.ModelAdmin):
         )
 
 
-@admin.register(Accommodation)
-class AccommodationAdmin(ListingAdmin):
-    pass
-
-
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
     search_fields = ['title', 'description']
@@ -78,3 +74,10 @@ class AlbumAdmin(admin.ModelAdmin):
     list_display = ('listing', 'title', 'description')
     raw_id_fields = ['listing']
     inlines = [PhotoInline]
+
+
+# Listing types
+
+@admin.register(Property, Accommodation, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, Nature)
+class ListingTypeAdmin(ListingAdmin):
+    pass

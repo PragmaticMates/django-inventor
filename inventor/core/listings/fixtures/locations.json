@@ -1,0 +1,16 @@
+[
+  {
+    "model": "listings.Location",
+    "pk": 1,
+    "fields": {
+      "title": "New York City"
+    }
+  },
+  {
+    "model": "listings.Location",
+    "pk": 2,
+    "fields": {
+      "title": "Manhattan"
+    }
+  }
+]
