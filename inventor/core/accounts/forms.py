@@ -9,7 +9,7 @@ from django_select2.forms import ModelSelect2Widget, ModelSelect2MultipleWidget
 
 from permissions_widget.forms import PermissionSelectMultipleField
 from permissions_widget.layout import PermissionWidget
-from inventor.accounts.models import User
+from inventor.core.accounts.models import User
 
 
 class UserWidget(ModelSelect2Widget):

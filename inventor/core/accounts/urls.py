@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.utils.translation import pgettext_lazy
-from inventor.accounts.views import UserDetailView, UpdateProfileView, UserUpdateView, \
+from inventor.core.accounts.views import UserDetailView, UpdateProfileView, UserUpdateView, \
     UserCreateView, UserDeleteView  # UserListView
 
 app_name = 'accounts'

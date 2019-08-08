@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
-from inventor.listings.models.general import Album, Location, Category, Feature, Video, Photo
-from inventor.listings.models.listing_types import Accommodation  # TODO: add remaining types
+from inventor.core.listings.models.general import Album, Location, Category, Feature, Video, Photo
+from inventor.core.listings.models.listing_types import Accommodation  # TODO: add remaining types
 
 
 class AlbumInline(admin.StackedInline):

@@ -7,7 +7,7 @@ import django.core.validators
 from django.db import migrations, models
 import django.db.models.deletion
 import internationalflavor.countries.models
-import inventor.bookings.mixins
+import inventor.core.bookings.mixins
 
 
 class Migration(migrations.Migration):
@@ -117,7 +117,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'accommodations',
                 'ordering': ('title',),
             },
-            bases=(inventor.bookings.mixins.BookingMixin, 'listings.listing'),
+            bases=(inventor.core.bookings.mixins.BookingMixin, 'listings.listing'),
         ),
         migrations.CreateModel(
             name='Course',

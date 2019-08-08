@@ -7,8 +7,8 @@ from django.urls import reverse
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 # from whistle.mixins import UserNotificationsMixin
-from inventor.accounts.managers import UserManager, UserQuerySet
-from inventor.accounts.utils import avatar_path_handler, avatar_thumbnail_exists, create_avatar_thumbnail
+from inventor.core.accounts.managers import UserManager, UserQuerySet
+from inventor.core.accounts.utils import avatar_path_handler, avatar_thumbnail_exists, create_avatar_thumbnail
 
 
 class User(AbstractBaseUser, PermissionsMixin):  # UserNotificationsMixin

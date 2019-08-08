@@ -5,9 +5,9 @@ from django.urls import reverse_lazy, reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView, ListView, CreateView, DetailView, DeleteView
 from pragmatic.mixins import LoginPermissionRequiredMixin, DeleteObjectMixin
-# from inventor.accounts.filters import UserFilter
-from inventor.accounts.forms import UpdateProfileForm, UserForm
-from inventor.accounts.models import User
+# from inventor.core.accounts.filters import UserFilter
+from inventor.core.accounts.forms import UpdateProfileForm, UserForm
+from inventor.core.accounts.models import User
 
 
 class UserDetailView(LoginPermissionRequiredMixin, DetailView):

@@ -1,6 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
-from inventor.bookings.mixins import BookingMixin
-from inventor.listings.models.general import Listing
+from inventor.core.bookings.mixins import BookingMixin
+from inventor.core.listings.models.general import Listing
 
 
 class Property(Listing):

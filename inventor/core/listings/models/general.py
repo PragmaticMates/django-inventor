@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
 from inventor import settings as inventor_settings
-from inventor.listings.managers import ListingQuerySet
+from inventor.core.listings.managers import ListingQuerySet
 
 
 # TODO: opening hours, meals and drinks, street view, faq
