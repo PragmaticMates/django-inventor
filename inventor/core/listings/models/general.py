@@ -55,7 +55,7 @@ class Listing(models.Model):
     street = models.CharField(_('street'), max_length=200, blank=True)
     postcode = models.CharField(_('postcode'), max_length=30, blank=True)
     city = models.CharField(_('city'), max_length=50, blank=True)
-    country = CountryField(verbose_name=_('country'), db_index=True)
+    country = CountryField(verbose_name=_('country'), blank=True, db_index=True)
     point = models.PointField(_('point'), blank=True, null=True, default=None, db_index=True)
 
     # previews
