@@ -1,7 +1,8 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 
-from inventor.core.lexicons.models import Location, Category, Feature, Amenity
+from inventor.core.lexicons.models import Location, Category, Feature
+from inventor.core.lexicons.models import AccommodationAmenity, AccommodationType
 
 
 @admin.register(Category, Location)
@@ -17,7 +18,9 @@ class FeatureAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug')
 
 
-@admin.register(Amenity)
+# Accommodation
+
+@admin.register(AccommodationAmenity, AccommodationType)
 class AmenityAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_display = ('title', 'slug')

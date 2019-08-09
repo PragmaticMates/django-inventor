@@ -1,6 +1,6 @@
 [
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 1,
     "fields": {
       "title": "Air conditioning",
@@ -8,7 +8,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 2,
     "fields": {
       "title": "Cable TV",
@@ -16,7 +16,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 3,
     "fields": {
       "title": "Coffee pot",
@@ -24,7 +24,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 4,
     "fields": {
       "title": "Cot",
@@ -32,7 +32,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 5,
     "fields": {
       "title": "Dishwasher",
@@ -40,7 +40,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 6,
     "fields": {
       "title": "DVD",
@@ -48,7 +48,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 7,
     "fields": {
       "title": "Fan",
@@ -56,7 +56,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 8,
     "fields": {
       "title": "Fridge",
@@ -64,7 +64,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 9,
     "fields": {
       "title": "Grill",
@@ -72,7 +72,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 10,
     "fields": {
       "title": "Hairdryer",
@@ -80,7 +80,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 11,
     "fields": {
       "title": "Heating",
@@ -88,7 +88,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 12,
     "fields": {
       "title": "Internet",
@@ -96,7 +96,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 13,
     "fields": {
       "title": "Iron",
@@ -104,7 +104,7 @@
     }
   },
   {
-    "model": "lexicons.Amenity",
+    "model": "lexicons.AccommodationAmenity",
     "pk": 14,
     "fields": {
       "title": "Juicer",

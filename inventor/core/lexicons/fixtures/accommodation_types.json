@@ -1,0 +1,34 @@
+[
+  {
+    "model": "lexicons.AccommodationType",
+    "pk": 1,
+    "fields": {
+      "title": "Hotel",
+      "slug": "hotel"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationType",
+    "pk": 2,
+    "fields": {
+      "title": "Apartment",
+      "slug": "apartment"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationType",
+    "pk": 3,
+    "fields": {
+      "title": "Chalet",
+      "slug": "chalet"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationType",
+    "pk": 4,
+    "fields": {
+      "title": "Hostel",
+      "slug": "hostel"
+    }
+  }
+]
