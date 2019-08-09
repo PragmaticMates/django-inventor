@@ -110,3 +110,4 @@ venv.bak/
 .DS_Store
 .sass-cache
 bin
+node_modules/

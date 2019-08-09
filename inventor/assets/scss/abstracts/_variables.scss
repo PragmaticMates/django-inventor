@@ -1,0 +1,54 @@
+//@font-face {
+//    font-family: "Ubuntu";
+//    src: url("../fonts/Ubuntu-Light.ttf");
+//    font-weight: 300; // 300
+//}
+//@font-face {
+//    font-family: "Ubuntu";
+//    src: url("../fonts/Ubuntu-Regular.ttf");
+//    font-weight: 400; // 400
+//}
+//@font-face {
+//    font-family: "Ubuntu";
+//    src: url("../fonts/Ubuntu-Medium.ttf");
+//    font-weight: 500; // 500
+//}
+//@font-face {
+//    font-family: "Ubuntu";
+//    src: url("../fonts/Ubuntu-Bold.ttf");
+//    font-weight: 700; // 700
+//}
+//@font-face {
+//    font-family: "Ubuntu";
+//    src: url("../fonts/Ubuntu-LightItalic.ttf");
+//    font-style: italic;
+//    font-weight: 300; //200
+//}
+//@font-face {
+//    font-family: "Ubuntu";
+//    src: url("../fonts/Ubuntu-Italic.ttf");
+//    font-style: italic;
+//    font-weight: 400; //400
+//}
+//@font-face {
+//    font-family: "Ubuntu";
+//    src: url("../fonts/Ubuntu-MediumItalic.ttf");
+//    font-style: italic;
+//    font-weight: 500; //500
+//}
+//@font-face {
+//    font-family: "Ubuntu";
+//    src: url("../fonts/Ubuntu-BoldItalic.ttf");
+//    font-style: italic;
+//    font-weight: 700; // 700
+//}
+
+
+/* override fontawesome */
+$fa-font-path: "../libraries/fontawesome-pro-5.7.2-web/webfonts";
+
+/* override bootstrap */
+$grid-breakpoints: (
+    2x: 1600px,
+    3x: 1900px,
+);
