@@ -3,14 +3,24 @@
     "model": "lexicons.Feature",
     "pk": 1,
     "fields": {
-      "title": "WiFi"
+      "title": "pet friendly",
+      "slug": "pet-friendy"
     }
   },
   {
     "model": "lexicons.Feature",
     "pk": 2,
     "fields": {
-      "title": "TV"
+      "title": "free parking",
+      "slug": "free-parking"
+    }
+  },
+  {
+    "model": "lexicons.Feature",
+    "pk": 3,
+    "fields": {
+      "title": "wheelchair accessible",
+      "slug": "wheelchair-accessible"
     }
   }
 ]

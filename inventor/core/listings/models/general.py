@@ -17,8 +17,12 @@ from inventor.core.listings.managers import ListingQuerySet
 
 
 # TODO: opening hours, meals and drinks, street view, faq
+from inventor.core.listings.mixins import SlugMixin
 
-class Listing(models.Model):
+
+class Listing(SlugMixin, models.Model):
+    FORCE_SLUG_REGENERATION = False
+
     SOCIAL_NETWORKS = ['Facebook', 'Twitter', 'Google', 'Instagram', 'Vimeo', 'YouTube', 'LinkedIn', 'Dribbble',
                        'Skype', 'Foursquare', 'Behance']  # TODO: move to settings
 
@@ -31,6 +35,7 @@ class Listing(models.Model):
 
     # definition
     title = models.CharField(_('title'), max_length=100, unique=True)
+    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH)
     description = models.TextField(_('description'), blank=True)
 
     # management

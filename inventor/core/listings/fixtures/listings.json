@@ -4,6 +4,7 @@
     "pk": 1,
     "fields": {
       "title": "Myuna Causeway",
+      "slug": "myuna-causeway",
       "description": "Aliquam malesuada luctus mauris, non ultrices purus consectetur vel. Mauris nulla sem, semper ut dui et, pulvinar elementum nisi. Sed sit amet sagittis ante. Duis porta velit eu congue gravida. Phasellus vehicula tortor arcu, quis fermentum purus placerat quis. In hac habitasse platea dictumst. Sed nisl orci, mattis et semper vel, facilisis et mi. Nulla faucibus libero vel velit aliquam finibus. Sed sollicitudin fringilla velit, a commodo turpis commodo eu.\n\nEtiam vulputate placerat magna. Nunc non sodales diam, malesuada auctor nisl. Ut lorem quam, auctor quis auctor nec, condimentum in purus. Donec aliquet tristique imperdiet. Duis rhoncus interdum lectus eget iaculis. Morbi elementum sapien libero, sed lacinia diam gravida in. Suspendisse in nibh magna. Aenean ex ex, viverra et neque ac, volutpat pharetra purus. Sed vel neque turpis. Phasellus eu hendrerit arcu, et rutrum magna. Nunc gravida, justo sed mollis feugiat, elit purus rutrum metus, at sagittis purus magna non purus. In hac habitasse platea dictumst.",
       "author": 1,
       "published": true,
@@ -26,7 +27,7 @@
         "youtube": "C"
       },
       "categories": [1,2],
-      "features": [1,2],
+      "features": [1,2,3],
       "location": 18,
       "created": "2019-08-08 00:00:00+02:00",
       "modified": "2019-08-08 00:00:00+02:00"

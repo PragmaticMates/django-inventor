@@ -21,11 +21,11 @@ class VideoInline(admin.StackedInline):
 class ListingAdmin(admin.ModelAdmin):
     date_hierarchy = 'created'
     search_fields = ['title', 'description']
-    list_display = ('id', 'title', 'address', 'location', 'created')
+    list_display = ('id', 'title', 'slug', 'address', 'location', 'created')
     list_filter = ('country', )
     autocomplete_fields = ['author', 'location']
     fieldsets = (
-        (_('Definition'), {'fields': ('title', 'description',)}),
+        (_('Definition'), {'fields': ('title', 'slug', 'description',)}),
         (_('Management'), {'fields': ('author', 'published', 'promoted')}),
         (_('Specification'), {'fields': (('categories', 'features'),)}),
         (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit'),)}),

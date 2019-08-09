@@ -4,6 +4,7 @@
     "pk": 1,
     "fields": {
       "title": "Real Estate",
+      "slug": "real-estate",
       "lft": 1,
       "rght": 4,
       "tree_id": 1,
@@ -16,6 +17,7 @@
     "fields": {
       "parent": 1,
       "title": "Apartment buildings",
+      "slug": "apartment-buildings",
       "lft": 2,
       "rght": 3,
       "tree_id": 1,

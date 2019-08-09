@@ -4,6 +4,7 @@
     "pk": 1,
     "fields": {
       "title": "Long Island",
+      "slug": "long-island",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -16,6 +17,7 @@
     "fields": {
       "parent": 1,
       "title": "Nassau County",
+      "slug": "nassau-county",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -28,6 +30,7 @@
     "fields": {
       "parent": 1,
       "title": "Peconic County",
+      "slug": "peconic-county",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -40,6 +43,7 @@
     "fields": {
       "parent": 1,
       "title": "Suffolk County",
+      "slug": "suffolk-county",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -51,6 +55,7 @@
     "pk": 5,
     "fields": {
       "title": "New Jersey",
+      "slug": "new-jersey",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -63,6 +68,7 @@
     "fields": {
       "parent": 5,
       "title": "Edison",
+      "slug": "edison",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -75,6 +81,7 @@
     "fields": {
       "parent": 5,
       "title": "Elizabeth",
+      "slug": "elizabeth",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -87,6 +94,7 @@
     "fields": {
       "parent": 5,
       "title": "Hamilton",
+      "slug": "hamilton",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -99,6 +107,7 @@
     "fields": {
       "parent": 5,
       "title": "Jersey City",
+      "slug": "jersey-city",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -111,6 +120,7 @@
     "fields": {
       "parent": 5,
       "title": "Lakewood",
+      "slug": "lakewood",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -123,6 +133,7 @@
     "fields": {
       "parent": 5,
       "title": "Newark",
+      "slug": "newark",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -135,6 +146,7 @@
     "fields": {
       "parent": 5,
       "title": "Paterson",
+      "slug": "paterson",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -147,6 +159,7 @@
     "fields": {
       "parent": 5,
       "title": "Toms River",
+      "slug": "toms-river",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -159,6 +172,7 @@
     "fields": {
       "parent": 5,
       "title": "Trenton",
+      "slug": "trenton",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -171,6 +185,7 @@
     "fields": {
       "parent": 5,
       "title": "Woodbridge",
+      "slug": "woodbridge",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -182,6 +197,7 @@
     "pk": 16,
     "fields": {
       "title": "New York City",
+      "slug": "new-york-city",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -194,6 +210,7 @@
     "fields": {
       "parent": 16,
       "title": "Brooklyn",
+      "slug": "brooklyn",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -206,6 +223,7 @@
     "fields": {
       "parent": 16,
       "title": "Manhattan",
+      "slug": "manhattan",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -218,6 +236,7 @@
     "fields": {
       "parent": 16,
       "title": "Queens",
+      "slug": "queens",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -230,6 +249,7 @@
     "fields": {
       "parent": 16,
       "title": "Staten Island",
+      "slug": "staten-island",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
@@ -242,6 +262,7 @@
     "fields": {
       "parent": 16,
       "title": "The Bronx",
+      "slug": "the-bronx",
       "lft": 0,
       "rght": 0,
       "tree_id": 0,
