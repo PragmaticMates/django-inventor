@@ -45,10 +45,10 @@
 
 
 /* override fontawesome */
-$fa-font-path: "../libraries/fontawesome-pro-5.7.2-web/webfonts";
+$fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
 
 /* override bootstrap */
-$grid-breakpoints: (
-    2x: 1600px,
-    3x: 1900px,
-);
+//$grid-breakpoints: (
+//    2x: 1600px,
+//    3x: 1900px,
+//);
