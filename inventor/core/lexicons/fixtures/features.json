@@ -1,0 +1,16 @@
+[
+  {
+    "model": "lexicons.Feature",
+    "pk": 1,
+    "fields": {
+      "title": "WiFi"
+    }
+  },
+  {
+    "model": "lexicons.Feature",
+    "pk": 2,
+    "fields": {
+      "title": "TV"
+    }
+  }
+]

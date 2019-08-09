@@ -1,0 +1,25 @@
+[
+  {
+    "model": "lexicons.Category",
+    "pk": 1,
+    "fields": {
+      "title": "Real Estate",
+      "lft": 1,
+      "rght": 4,
+      "tree_id": 1,
+      "level": 0
+    }
+  },
+  {
+    "model": "lexicons.Category",
+    "pk": 2,
+    "fields": {
+      "parent": 1,
+      "title": "Apartment buildings",
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 1,
+      "level": 1
+    }
+  }
+]
