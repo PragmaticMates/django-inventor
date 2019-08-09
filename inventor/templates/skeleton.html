@@ -1,0 +1,43 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Title -->
+        <title>{{ settings.PAGE_TITLE }}</title>
+
+        <!-- Meta tags -->
+        <meta charset="utf-8">
+        <meta name="description" content="{{ settings.PAGE_DESCRIPTION }}" />
+        <meta name="keywords" content="{{ settings.PAGE_KEYWORDS }}" />
+        <meta name="author" content="Pragmatic Mates s.r.o." />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
+        <meta name="apple-mobile-web-app-title" content="{{ settings.PAGE_APPLE_MOBILE_WEB_APP_TITLE }}">
+
+        {% block meta %}{% endblock %}
+
+        <!-- Styles -->
+<!--        <link rel="icon" href="{% static 'assets/images/icons/iOS-icon-white.png' %}">-->
+<!--        <link rel="apple-touch-icon" href="{% static 'assets/images/icons/iOS-icon-white.png' %}">-->
+<!--        <link href="{% static 'assets/css/inventor.css' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}" rel="stylesheet" type="text/css">-->
+        <link href="{% static 'assets/css/inventor.css' %}" rel="stylesheet" type="text/css">
+
+        {% block css %}{% endblock %}
+
+        <script src="{% static 'assets/node_modules/jquery/dist/jquery.slim.min.js' %}"></script>
+        <script src="{% static 'assets/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+        {% block priority_js %}{% endblock %}
+        <script src="{% url 'javascript-catalog' %}"></script>
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}{% if content_only %} content-only{% endif %}">
+        {% block body %}
+        {% endblock %}
+
+        <!-- JavaScripts -->
+<!--        <script defer src="{% static 'assets/js/common.js' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}"></script>-->
+
+        {% block js %}{% endblock %}
+    </body>
+</html>
