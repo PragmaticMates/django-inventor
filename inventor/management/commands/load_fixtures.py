@@ -9,7 +9,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         print('Loading fixtures...')
-        call_command('loaddata', 'categories.json', 'features.json', 'locations.json', 'listings.json')
+        call_command('loaddata',
+                     'categories.json',
+                     'features.json',
+                     'locations.json',
+                     'amenities.json',
+                     'listings.json'
+                     )
         print('Fixtures loaded.')
         print('Rebuilding MPTT trees...')
         Category.objects.rebuild()

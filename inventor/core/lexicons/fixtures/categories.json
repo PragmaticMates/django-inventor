@@ -5,9 +5,9 @@
     "fields": {
       "title": "Real Estate",
       "slug": "real-estate",
-      "lft": 1,
-      "rght": 4,
-      "tree_id": 1,
+      "lft": 0,
+      "rght": 0,
+      "tree_id": 0,
       "level": 0
     }
   },
@@ -18,10 +18,10 @@
       "parent": 1,
       "title": "Apartment buildings",
       "slug": "apartment-buildings",
-      "lft": 2,
-      "rght": 3,
-      "tree_id": 1,
-      "level": 1
+      "lft": 0,
+      "rght": 0,
+      "tree_id": 0,
+      "level": 0
     }
   }
 ]

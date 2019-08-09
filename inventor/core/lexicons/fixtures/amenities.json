@@ -1,0 +1,114 @@
+[
+  {
+    "model": "lexicons.Amenity",
+    "pk": 1,
+    "fields": {
+      "title": "Air conditioning",
+      "slug": "air-conditioning"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 2,
+    "fields": {
+      "title": "Cable TV",
+      "slug": "cable-tv"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 3,
+    "fields": {
+      "title": "Coffee pot",
+      "slug": "coffee-pot"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 4,
+    "fields": {
+      "title": "Cot",
+      "slug": "cot"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 5,
+    "fields": {
+      "title": "Dishwasher",
+      "slug": "dishwasher"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 6,
+    "fields": {
+      "title": "DVD",
+      "slug": "dvd"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 7,
+    "fields": {
+      "title": "Fan",
+      "slug": "fan"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 8,
+    "fields": {
+      "title": "Fridge",
+      "slug": "fridge"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 9,
+    "fields": {
+      "title": "Grill",
+      "slug": "grill"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 10,
+    "fields": {
+      "title": "Hairdryer",
+      "slug": "hairdryer"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 11,
+    "fields": {
+      "title": "Heating",
+      "slug": "heating"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 12,
+    "fields": {
+      "title": "Internet",
+      "slug": "internet"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 13,
+    "fields": {
+      "title": "Iron",
+      "slug": "iron"
+    }
+  },
+  {
+    "model": "lexicons.Amenity",
+    "pk": 14,
+    "fields": {
+      "title": "Juicer",
+      "slug": "juicer"
+    }
+  }
+]
