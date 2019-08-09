@@ -1,0 +1,80 @@
+{% extends 'skeleton.html' %}
+{% load static i18n %}
+
+{% block body %}
+{#    {% include 'helpers/messages.html' %}#}
+
+    <div id="layout" class="">
+        <!-- Sidebar -->
+{#        {% include 'layout/sidebar.html' %}#}
+
+        <!-- Page Content -->
+        <div id="page-content">
+{#            {% include 'helpers/environment-notice.html' %}#}
+
+            <!-- Header -->
+{#            {% include 'layout/header.html' %}#}
+
+            <!-- Top-->
+            <section class="top">
+                <div class="container-fluid d-flex flex-grow">
+                    <div class="section-top">
+                        <div>
+
+                            <!-- Breadcrumb -->
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    {% block breadcrumb %}
+                                    {% endblock %}
+                                </ol>
+                            </nav>
+
+{#                            {% include 'navigation/configuration.html' %}#}
+
+                            <!-- Title -->
+                            <h1>{% block title %}{% endblock %}</h1>
+
+                            <!-- Export -->
+{#                            <a class href="{% block export_url %}{% endblock %}"><i class="far fa-2x fa-fw fa-save"></i></a>#}
+                        </div>
+
+                        <!-- Page Stats -->
+                        {% block page_stats %}
+                        {% endblock %}
+
+                        <!-- Page Actions -->
+                        <div class="page-actions align-self-center col-auto text-right">
+                            {% block page_actions %}
+                            {% endblock %}
+                        </div>
+                    </div>
+
+                    <div class="section-top-submenu">
+                        <div>
+                            <nav class="submenu nav top-nav">
+                                {% block submenu %}
+                                {% endblock %}
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="details">
+                <div class="container-fluid">
+                    {% block details %}
+                    {% endblock %}
+                </div>
+            </section>
+            <main>
+                <div class="container-fluid">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </main>
+
+            <!-- Footer -->
+{#            {% include 'layout/footer.html' %}#}
+        </div>
+
+    </div>
+{% endblock %}

@@ -20,12 +20,12 @@
 <!--        <link rel="icon" href="{% static 'assets/images/icons/iOS-icon-white.png' %}">-->
 <!--        <link rel="apple-touch-icon" href="{% static 'assets/images/icons/iOS-icon-white.png' %}">-->
 <!--        <link href="{% static 'assets/css/inventor.css' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}" rel="stylesheet" type="text/css">-->
-        <link href="{% static 'assets/css/inventor.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'css/inventor.css' %}" rel="stylesheet" type="text/css">
 
         {% block css %}{% endblock %}
 
-        <script src="{% static 'assets/node_modules/jquery/dist/jquery.slim.min.js' %}"></script>
-        <script src="{% static 'assets/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'node_modules/jquery/dist/jquery.slim.min.js' %}"></script>
+        <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 
         {% block priority_js %}{% endblock %}
         <script src="{% url 'javascript-catalog' %}"></script>
