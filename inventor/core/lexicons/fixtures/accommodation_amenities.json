@@ -1,0 +1,114 @@
+[
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 1,
+    "fields": {
+      "title": "Air conditioning",
+      "slug": "air-conditioning"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 2,
+    "fields": {
+      "title": "Cable TV",
+      "slug": "cable-tv"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 3,
+    "fields": {
+      "title": "Coffee pot",
+      "slug": "coffee-pot"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 4,
+    "fields": {
+      "title": "Cot",
+      "slug": "cot"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 5,
+    "fields": {
+      "title": "Dishwasher",
+      "slug": "dishwasher"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 6,
+    "fields": {
+      "title": "DVD",
+      "slug": "dvd"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 7,
+    "fields": {
+      "title": "Fan",
+      "slug": "fan"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 8,
+    "fields": {
+      "title": "Fridge",
+      "slug": "fridge"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 9,
+    "fields": {
+      "title": "Grill",
+      "slug": "grill"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 10,
+    "fields": {
+      "title": "Hairdryer",
+      "slug": "hairdryer"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 11,
+    "fields": {
+      "title": "Heating",
+      "slug": "heating"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 12,
+    "fields": {
+      "title": "Internet",
+      "slug": "internet"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 13,
+    "fields": {
+      "title": "Iron",
+      "slug": "iron"
+    }
+  },
+  {
+    "model": "lexicons.AccommodationAmenity",
+    "pk": 14,
+    "fields": {
+      "title": "Juicer",
+      "slug": "juicer"
+    }
+  }
+]
