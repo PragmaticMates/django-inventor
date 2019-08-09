@@ -1,6 +1,20 @@
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from inventor.core.bookings.mixins import BookingMixin
+from inventor.core.lexicons.models import Amenity
 from inventor.core.listings.models.general import Listing
+
+
+class Accommodation(BookingMixin, Listing):
+    section = _('travel')
+    amenities = models.ManyToManyField(to=Amenity, verbose_name=_('amenities'), blank=True)
+    # TODO: type: hotel, apartment, cottage
+    # TODO: class: 1-5
+
+    class Meta:
+        verbose_name = _('accommodation')
+        verbose_name_plural = _('accommodations')
+        ordering = ('title',)
 
 
 class Property(Listing):
@@ -10,17 +24,6 @@ class Property(Listing):
     class Meta:
         verbose_name = _('property')
         verbose_name_plural = _('properties')
-        ordering = ('title',)
-
-
-class Accommodation(BookingMixin, Listing):
-    section = _('travel')
-    # TODO: type: hotel, apartment, cottage
-    # TODO: class: 1-5
-
-    class Meta:
-        verbose_name = _('accommodation')
-        verbose_name_plural = _('accommodations')
         ordering = ('title',)
 
 

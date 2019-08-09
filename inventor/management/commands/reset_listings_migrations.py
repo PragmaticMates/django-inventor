@@ -1,4 +1,5 @@
 import os
+import shutil
 from os.path import normpath, join
 
 from django.core.management import call_command
@@ -27,13 +28,13 @@ class Command(BaseCommand):
         for app in apps:
             print('Deleting migrations for app {}'.format(app))
 
-            # joined = join(SOURCE_ROOT, 'inventor/core/{}/migrations/'.format(app), '0001_initial.py')
             joined = join(SOURCE_ROOT, 'inventor/core/{}/migrations/'.format(app))
             initial_migration_path = normpath(joined)
 
             if os.path.exists(initial_migration_path):
                 print('Deleting {}'.format(initial_migration_path))
-                os.remove(initial_migration_path)
+                # os.remove(initial_migration_path)
+                shutil.rmtree(initial_migration_path, ignore_errors=False, onerror=None)
             else:
                 print('Migration {} does NOT exist!'.format(initial_migration_path))
 

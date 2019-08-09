@@ -59,3 +59,16 @@ class Location(SlugMixin, MPTTModel):
 
     def __str__(self):
         return self.title
+
+
+class Amenity(SlugMixin, models.Model):
+    title = models.CharField(_('title'), max_length=100, unique=True)
+    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
+
+    class Meta:
+        verbose_name = _('accommodation amenity')
+        verbose_name_plural = _('accommodation amenities')
+        ordering = ('title',)
+
+    def __str__(self):
+        return self.title

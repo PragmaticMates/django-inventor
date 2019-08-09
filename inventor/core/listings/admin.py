@@ -61,6 +61,6 @@ class AlbumAdmin(admin.ModelAdmin):
 
 # Listing types
 
-@admin.register(Property, Accommodation, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, Nature)
+@admin.register(Accommodation, Property, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, Nature)
 class ListingTypeAdmin(ListingAdmin):
     pass
