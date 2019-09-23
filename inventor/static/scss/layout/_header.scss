@@ -1,0 +1,36 @@
+header {
+    border-top: .4rem solid;
+    border-image-source: linear-gradient(45deg, rgb(42, 204, 195), rgb(71, 64, 222));
+    border-image-slice: 1;
+
+    > .container {
+        >.row {
+            min-height: 80px;
+        }
+    }
+
+    .logo {
+        max-height: 44px;
+    }
+
+    .navbar {
+        .nav-item {
+            white-space: nowrap;
+            font-size: .8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding-left: .6rem;
+            padding-right: .6rem;
+
+            .nav-link {
+                //transition: $di-transition;
+
+                &:hover {
+                    color: #fff;
+                    background-image: linear-gradient(45deg, rgb(31, 183, 234), rgb(28, 165, 233));
+                    border-radius: $border-radius-sm;
+                }
+            }
+        }
+    }
+}

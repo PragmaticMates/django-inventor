@@ -21,4 +21,5 @@ gulp.task('compile', function(done) {
 gulp.task('watch', function() {
 	gulp.watch( './scss/inventor.scss', gulp.series('compile') );
 	gulp.watch( './scss/abstracts/*.scss', gulp.series('compile') );
+	gulp.watch( './scss/layout/*.scss', gulp.series('compile') );
 });

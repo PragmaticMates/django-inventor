@@ -2,18 +2,24 @@
 {% load static i18n %}
 
 {% block body %}
-{#    {% include 'helpers/messages.html' %}#}
+    {#    {% include 'helpers/messages.html' %}#}
 
-{#    {% include 'helpers/environment-notice.html' %}#}
+    {#    {% include 'helpers/environment-notice.html' %}#}
 
     <!-- Header -->
     {% include 'layout/header.html' %}
 
     <!-- Top fullwidth -->
-    {% include 'layout/top_fullwidth.html' %}
+{#    {% include 'layout/top_fullwidth.html' %}#}
+{#    <div class="container">#}
+    {% block top_full_width %}{% endblock %}
+{#    </div>#}
 
     <!-- Content -->
-    {% include 'layout/content.html' %}
+    <main class="container">
+        {#    {% include 'layout/content.html' %}#}
+        {% block content %}{% endblock %}
+    </main>
 
     <!-- Bottom -->
     {% include 'layout/bottom.html' %}

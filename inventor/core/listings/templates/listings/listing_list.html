@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+
+{% block top_full_width %}
+    <div class="container-fluid bg-primary">
+        <div class="container">
+            <div class="row">
+                <h1>{% trans 'Listings' %}</h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="row my-5">
+        {% for object in object_list %}
+            <div class="col-md-3">
+                <div class="card">{{ object }}</div>
+            </div>
+        {{ empty }}
+        {% endfor %}
+    </div>
+{% endblock %}
