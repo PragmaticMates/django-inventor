@@ -14,9 +14,17 @@
     <div class="row my-5">
         {% for object in object_list %}
             <div class="col-md-3">
-                <div class="card">{{ object }}</div>
+                <div class="card shadow-sm listing-item">
+                    <div class="listing-image {% if object.image %}bg-cover{% else %} d-flex align-items-center justify-content-center{% endif %}"
+                        {% if object.image %}style="background-image: url('{{ MEDIA_URL }}{{ object.image }}');" {% endif %}>
+                    </div>
+                    <div class="p-4">
+                        <strong class="d-block">{{ object.title }}</strong>
+                        <span>{{ object.description }}</span>
+                    </div>
+                </div>
             </div>
-        {{ empty }}
+        {% empty %}{% trans 'No data to display' %}
         {% endfor %}
     </div>
 {% endblock %}
