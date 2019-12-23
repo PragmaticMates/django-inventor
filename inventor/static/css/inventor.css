@@ -11440,6 +11440,45 @@ header {
       background-image: linear-gradient(45deg, #1fb7ea, #1ca5e9);
       border-radius: 0.2rem; }
 
+header {
+  background-color: #fff;
+  border-top: .4rem solid;
+  border-image-source: linear-gradient(45deg, #2accc3, #4740de);
+  border-image-slice: 1; }
+  header > .container > .row {
+    min-height: 80px; }
+  header .logo {
+    max-height: 44px; }
+  header .navbar .nav-item {
+    white-space: nowrap;
+    font-size: .8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding-left: .6rem;
+    padding-right: .6rem; }
+    header .navbar .nav-item .nav-link:hover {
+      color: #fff;
+      background-image: linear-gradient(45deg, #1fb7ea, #1ca5e9);
+      border-radius: 0.2rem; }
+
+#carouselHomeControls .carousel-inner {
+  height: 550px; }
+  #carouselHomeControls .carousel-inner .carousel-item {
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    height: 550px; }
+    #carouselHomeControls .carousel-inner .carousel-item.active {
+      background-position: left center;
+      animation: bg-slide 11s linear;
+      animation-iteration-count: 1; }
+
+@-webkit-keyframes bg-slide {
+  from {
+    background-position: left center; }
+  to {
+    background-position: right center; } }
+
 .listing-item .listing-image {
   min-height: 10rem; }
 
