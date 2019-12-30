@@ -11471,23 +11471,37 @@ header {
       background-repeat: no-repeat;
       background-size: auto 100%;
       height: 550px;
-      width: 100%;
-      position: absolute;
       left: 0;
-      top: 0; }
+      position: absolute;
+      top: 0;
+      width: 100%; }
       #carouselHomeControls .carousel-inner .carousel-item .bg-image:after {
-        content: "";
-        height: 550px;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
         background-image: url("../images/pattern2.png");
-        background-repeat: repeat; }
+        background-repeat: repeat;
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0; }
     #carouselHomeControls .carousel-inner .carousel-item.active .bg-image {
       background-position: left center;
       animation: bg-slide 11s linear;
       animation-iteration-count: 1; }
+  #carouselHomeControls .carousel-inner .carousel-main {
+    align-items: center;
+    bottom: 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    top: 0; }
+    #carouselHomeControls .carousel-inner .carousel-main h1 {
+      margin-bottom: 1rem; }
 
 @-webkit-keyframes bg-slide {
   from {
