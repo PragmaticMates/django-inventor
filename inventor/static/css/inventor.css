@@ -11435,10 +11435,27 @@ header {
     text-transform: uppercase;
     padding-left: .6rem;
     padding-right: .6rem; }
-    header .navbar .nav-item .nav-link:hover {
-      color: #fff;
-      background-image: linear-gradient(45deg, #1fb7ea, #1ca5e9);
-      border-radius: 0.2rem; }
+    header .navbar .nav-item .nav-link {
+      transition: all 0.3s ease;
+      background-image: none;
+      position: relative;
+      z-index: 1; }
+      header .navbar .nav-item .nav-link:before {
+        background-image: linear-gradient(45deg, #1fb7ea, #1ca5e9);
+        opacity: 0;
+        position: absolute;
+        content: '';
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        transition: all 0.3s ease; }
+      header .navbar .nav-item .nav-link:hover {
+        color: #fff;
+        border-radius: 0.2rem; }
+        header .navbar .nav-item .nav-link:hover:before {
+          opacity: 1; }
 
 header {
   background-color: #fff;
@@ -11456,10 +11473,27 @@ header {
     text-transform: uppercase;
     padding-left: .6rem;
     padding-right: .6rem; }
-    header .navbar .nav-item .nav-link:hover {
-      color: #fff;
-      background-image: linear-gradient(45deg, #1fb7ea, #1ca5e9);
-      border-radius: 0.2rem; }
+    header .navbar .nav-item .nav-link {
+      transition: all 0.3s ease;
+      background-image: none;
+      position: relative;
+      z-index: 1; }
+      header .navbar .nav-item .nav-link:before {
+        background-image: linear-gradient(45deg, #1fb7ea, #1ca5e9);
+        opacity: 0;
+        position: absolute;
+        content: '';
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        transition: all 0.3s ease; }
+      header .navbar .nav-item .nav-link:hover {
+        color: #fff;
+        border-radius: 0.2rem; }
+        header .navbar .nav-item .nav-link:hover:before {
+          opacity: 1; }
 
 #carouselHomeControls .carousel-inner {
   height: 550px; }
