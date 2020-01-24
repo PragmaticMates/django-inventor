@@ -11419,6 +11419,12 @@ readers do not read off random characters that represent icons */
   background-size: cover;
   background-position: center; }
 
+html {
+  font-size: 14px; }
+
+body {
+  font-size: 14px; }
+
 header {
   background-color: #fff;
   border-top: .4rem solid;
@@ -11430,7 +11436,7 @@ header {
     max-height: 44px; }
   header .navbar .nav-item {
     white-space: nowrap;
-    font-size: .8rem;
+    font-size: .86rem;
     font-weight: 600;
     text-transform: uppercase;
     padding-left: .6rem;
@@ -11468,7 +11474,7 @@ header {
     max-height: 44px; }
   header .navbar .nav-item {
     white-space: nowrap;
-    font-size: .8rem;
+    font-size: .86rem;
     font-weight: 600;
     text-transform: uppercase;
     padding-left: .6rem;
@@ -11543,7 +11549,50 @@ header {
   to {
     background-position: right center; } }
 
-.listing-item .listing-image {
-  min-height: 10rem; }
+.listing-item {
+  position: relative; }
+  .listing-item .listing-label {
+    background-color: #25aae8;
+    color: #fff;
+    font-size: .93rem;
+    left: 0;
+    min-width: 3rem;
+    position: absolute;
+    padding: .21rem 1.07rem;
+    top: 0; }
+  .listing-item .listing-image {
+    min-height: 12.86rem; }
+  .listing-item .listing-name {
+    background-color: #106c97;
+    color: #fff;
+    padding: 1.21rem 1.43rem;
+    position: relative;
+    transition: all 0.3s ease; }
+    .listing-item .listing-name strong {
+      display: block;
+      font-size: 1.14rem;
+      font-weight: 600; }
+    .listing-item .listing-name small {
+      opacity: .6; }
+    .listing-item .listing-name .listing-price {
+      background-color: #f09c0b;
+      color: #fff;
+      font-size: .93rem;
+      right: 0.71rem;
+      min-width: 3rem;
+      position: absolute;
+      padding: .21rem 1.07rem;
+      top: 0;
+      transform: translateY(-50%); }
+  .listing-item .listing-contact {
+    background-color: #f6f6f6;
+    color: #A1A2A3;
+    display: flex;
+    justify-content: space-between;
+    padding: .71rem 1.43rem; }
+  .listing-item .listing-rating {
+    padding: .71rem 1.43rem; }
+  .listing-item:hover .listing-name {
+    background-color: #25aae8; }
 
 /*# sourceMappingURL=inventor.css.map */

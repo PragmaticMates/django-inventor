@@ -1,5 +1,68 @@
 .listing-item {
+    $bg-color: map_get($theme-colors, primary);
+    position: relative;
+
+    .listing-label {
+        background-color: lighten($bg-color, 10%);
+        color: #fff;
+        font-size: .93rem;
+        left: 0;
+        min-width: 3rem;
+        position: absolute;
+        padding: .21rem 1.07rem;
+        top: 0;
+    }
+
     .listing-image {
-        min-height: 10rem;
+        min-height: 12.86rem;
+    }
+
+    .listing-name {
+        background-color: darken($bg-color, 10%);
+        color: #fff;
+        padding: 1.21rem 1.43rem;
+        position: relative;
+        transition: $di-transition;
+
+        strong {
+            display: block;
+            font-size: 1.14rem;
+            font-weight: 600;
+        }
+
+        small {
+            opacity: .6;
+        }
+
+        .listing-price {
+            background-color: darken(map_get($theme-colors, warning), 16%);
+            color: #fff;
+            font-size: .93rem;
+            right: 0.71rem;
+            min-width: 3rem;
+            position: absolute;
+            padding: .21rem 1.07rem;
+            top: 0;
+            transform: translateY(-50%);
+        }
+    }
+
+    .listing-contact {
+        $color-light: map_get($theme-colors, light);
+        background-color: lighten($color-light, 33%);
+        color: $color-light;
+        display: flex;
+        justify-content: space-between;
+        padding: .71rem 1.43rem;
+    }
+
+    .listing-rating {
+        padding: .71rem 1.43rem;
+    }
+
+    &:hover {
+        .listing-name {
+            background-color: lighten($bg-color, 10%);
+        }
     }
 }
