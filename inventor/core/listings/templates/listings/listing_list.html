@@ -16,7 +16,7 @@
             {% for i in '123456789' %}
             {% for object in object_list %}
                 <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm listing-item">
+                    <div class="card rounded-0 shadow-sm listing-item">
                         <div class="listing-label">
                             some label
                         </div>
@@ -32,13 +32,13 @@
                                 {{ object.price }}
                             </div>
                         </div>
-                        <div class="listing-contact">
-                            <strong class="d-block">{% trans 'Phone' %}:</strong>
-                            <a class="d-block" href="tel:{{ object.phone }}">{{ object.phone }}</a>
-                        </div>
-                        <div class="listing-rating">
-                            <strong class="d-block">{{ object.rating }}</strong>
-                        </div>
+{#                        <div class="listing-contact">#}
+{#                            <strong class="d-block">{% trans 'Phone' %}:</strong>#}
+{#                            <a class="d-block" href="tel:{{ object.phone }}">{{ object.phone }}</a>#}
+{#                        </div>#}
+{#                        <div class="listing-rating">#}
+{#                            <strong class="d-block">{{ object.rating }}</strong>#}
+{#                        </div>#}
                     </div>
                 </div>
                 {% empty %}{% trans 'No data to display' %}
