@@ -3400,10 +3400,10 @@ input[type="button"].btn-block {
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
+  padding: 0 0;
+  margin-bottom: 0;
   list-style: none;
-  background-color: #e9ecef;
+  background-color: transparent;
   border-radius: 0.25rem; }
 
 .breadcrumb-item + .breadcrumb-item {
@@ -11508,43 +11508,14 @@ header {
         header .navbar .nav-item .nav-link:hover:before {
           opacity: 1; }
 
-header {
-  background-color: #fff;
-  border-top: .4rem solid;
-  border-image-source: linear-gradient(45deg, #2accc3, #4740de);
-  border-image-slice: 1; }
-  header > .container > .row {
-    min-height: 80px; }
-  header .logo {
-    max-height: 44px; }
-  header .navbar .nav-item {
-    white-space: nowrap;
-    font-size: .86rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding-left: .6rem;
-    padding-right: .6rem; }
-    header .navbar .nav-item .nav-link {
-      transition: all 0.3s ease;
-      background-image: none;
-      position: relative;
-      z-index: 1; }
-      header .navbar .nav-item .nav-link:before {
-        background-image: linear-gradient(45deg, #1fb7ea, #1ca5e9);
-        opacity: 0;
-        position: absolute;
-        content: '';
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: -1;
-        transition: all 0.3s ease; }
-      header .navbar .nav-item .nav-link:hover {
-        color: #fff;
-        border-radius: 0.2rem; }
-        header .navbar .nav-item .nav-link:hover:before {
-          opacity: 1; }
+.top-full-width {
+  align-items: center;
+  background-image: url("/static/images/polygonal_mountains_stretched_o70_2.jpg");
+  background-position: center center;
+  background-size: cover;
+  border-bottom: 1px solid #d7d7d747;
+  display: flex;
+  height: 10rem; }
 
 #carouselHomeControls .carousel-inner {
   height: 550px; }

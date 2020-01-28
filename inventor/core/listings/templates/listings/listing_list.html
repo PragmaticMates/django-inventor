@@ -1,11 +1,21 @@
 {% extends 'layout.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block top_full_width %}
-    <div class="container-fluid bg-primary">
+{#    <div class="container-fluid" style="background-color:#F9F9F9; border-bottom: 1px solid #D7D7D7;">#}
+    <div class="top-full-width container-fluid">
         <div class="container">
             <div class="row">
-                <h1>{% trans 'Listings' %}</h1>
+                <div class="col-12 py-4">
+                    <h1>{% trans 'Listings' %}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Library</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
