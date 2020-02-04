@@ -5,7 +5,9 @@ header {
     //border-image-slice: 1;
 
     .header-top {
+        align-items: center;
         background-color: #f8f8f8;
+        display: flex;
         height: 24px;
 
         #language-switcher {
