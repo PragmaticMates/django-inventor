@@ -46,8 +46,8 @@
                         <span class="text-light font-weight-light" style="opacity: .5;">Travel</span>
                         <span class="text-primary font-weight-bold">.sk</span>
                     </span>
-{#                    <span class="font-weight-light h5 mb-0">TatryTravel.sk</span>#}
-{#                    <small class="text-light">Turistika – Ubytovanie – Atrakcie</small>#}
+                    {#                    <span class="font-weight-light h5 mb-0">TatryTravel.sk</span>#}
+                    {#                    <small class="text-light">Turistika – Ubytovanie – Atrakcie</small>#}
                 </div>
             </div>
             <div class="col-sm"></div>
@@ -128,7 +128,23 @@
                         </div>
                     </nav>
                 </div>
+                <div class="col-sm-auto ml-auto">
+                    <form id="search" role="search" action="/" method="get" class="search-form float-right">
+                        <i class="fas fa-search"></i>
+                        <input name="search" placeholder="Vyhľadávanie" type="text" autocomplete="off">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </header>
+
+<script>
+    // init search
+    $(document).ready(function () {
+        $('.search-form i').click(function () {
+            $('.search-form').toggleClass('search-open');
+        });
+    });
+
+</script>

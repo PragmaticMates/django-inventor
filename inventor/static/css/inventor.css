@@ -11498,6 +11498,30 @@ header {
     max-height: 44px; }
   header .header-bottom {
     background-color: #0b4b69; }
+    header .header-bottom .search-form {
+      padding: 0 .5rem;
+      height: 3.21rem; }
+      header .header-bottom .search-form input {
+        border: 0;
+        height: 3.21rem;
+        padding: 0;
+        transition: all 0.3s ease;
+        width: 0; }
+        header .header-bottom .search-form input:focus {
+          border: none;
+          outline: none; }
+      header .header-bottom .search-form i {
+        color: #fff;
+        line-height: 3.21rem;
+        transition: all 0.3s ease; }
+      header .header-bottom .search-form.search-open {
+        background-color: #eeefef; }
+        header .header-bottom .search-form.search-open input {
+          background-color: #eeefef;
+          padding: 0 .3rem;
+          width: 10.36rem; }
+        header .header-bottom .search-form.search-open i {
+          color: #158DC5; }
     header .header-bottom .navbar {
       padding: 0; }
       header .header-bottom .navbar .nav-item {
@@ -11508,7 +11532,7 @@ header {
         padding-left: .6rem;
         padding-right: .6rem;
         border-radius: 0 !important;
-        height: 45px;
+        height: 3.21rem;
         display: flex;
         align-items: center;
         transition: all 0.3s ease; }
