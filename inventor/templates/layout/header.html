@@ -15,77 +15,119 @@
     {#            </div>#}
     {#        </div>#}
     {#    </div>#}
-    <div class="container">
+    <div class="container-fluid header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-auto d-flex align-items-center">
+                    <div id="language-switcher">
+                        <ul class="nav">
+                            <li class="nav-item sk">
+                                <a class="nav-link active" href="/sk/">SK</a>
+                            </li>
+                            <li class="nav-item en">
+                                <a class="nav-link" href="/en/">EN</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-auto ml-auto d-flex align-items-center">
+                    <a href="#" class="text-dark"><i class="fas fa-user mr-2"></i>{% trans 'Prihlasit sa' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container header-middle">
         <div class="row">
             <div class="col-sm-auto d-flex align-items-center">
                 <img class="logo img-fluid" src="https://tatrytravel.sk/wp-content/uploads/2018/06/tatry.png" alt="logo">
                 <div class="d-flex flex-column">
-                    <span class="font-weight-light h5 mb-0">TatryTravel.sk</span>
-                    <small class="text-light">Turistika – Ubytovanie – Atrakcie</small>
+                    <span class="font-weight-light h3 mb-0" style="text-transform: uppercase;">
+                        <strong class="font-weight-bolder">Tatry</strong>
+                        <span class="text-light font-weight-light" style="opacity: .5;">Travel</span>
+                        <span class="text-primary font-weight-bold">.sk</span>
+                    </span>
+{#                    <span class="font-weight-light h5 mb-0">TatryTravel.sk</span>#}
+{#                    <small class="text-light">Turistika – Ubytovanie – Atrakcie</small>#}
                 </div>
             </div>
-            <div class="col-sm d-flex align-items-center justify-content-end pr-0">
-                <nav class="navbar navbar-expand-lg navbar-light bg-white">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">{% trans 'Vysoke Tatry' %} <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {% trans 'Podujatia' %}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {% trans 'Turistika' %}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {% trans 'Ubytovanie' %}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">{% trans 'Stravovanie' %}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">{% trans 'Nakupovanie' %}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+            <div class="col-sm"></div>
+            <div class="col-sm-2 d-flex align-items-center">
+                <i class="fas fa-2x fa-hiking text-primary mr-2"></i>
+                <h4 class="mb-0 font-weight-light text-light">{% trans 'Turistika' %}</h4>
+            </div>
+            <div class="col-sm-2 d-flex align-items-center">
+                <i class="fas fa-lg fa-bed text-primary mr-2"></i>
+                <h5 class="mb-0 font-weight-light text-light">{% trans 'Ubytovanie' %}</h5>
+            </div>
+            <div class="col-sm-2 d-flex align-items-center">
+                <i class="fas fa-2x fa-calendar-alt text-primary mr-2"></i>
+                <h4 class="mb-0 font-weight-light">{% trans 'Atrakcie' %}</h4>
             </div>
             {#            <div class="col-sm-2 d-flex align-items-center">#}
             {#                <span class="mr-3"><i class="fab fa-facebook-f"></i></span>#}
             {#                <span class="mr-3"><i class="fab fa-google"></i></span>#}
             {#                <span class=""><i class="fab fa-youtube"></i></span>#}
             {#            </div>#}
-            <div class="col-sm-auto d-flex align-items-center pl-0">
-                <span class=""><i class="fas fa-user"></i></span>
+        </div>
+    </div>
+    <div class="container-fluid header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm d-flex align-items-center">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">{% trans 'Vysoke Tatry' %} <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {% trans 'Podujatia' %}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {% trans 'Turistika' %}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {% trans 'Ubytovanie' %}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">{% trans 'Stravovanie' %}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">{% trans 'Nakupovanie' %}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

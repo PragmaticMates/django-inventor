@@ -181,7 +181,7 @@ a {
   background-color: transparent; }
   a:hover {
     color: #0e5c80;
-    text-decoration: underline; }
+    text-decoration: none; }
 
 a:not([href]):not([tabindex]) {
   color: inherit;
@@ -2098,9 +2098,9 @@ fieldset:disabled a.btn {
   text-decoration: none; }
   .btn-link:hover {
     color: #0e5c80;
-    text-decoration: underline; }
+    text-decoration: none; }
   .btn-link:focus, .btn-link.focus {
-    text-decoration: underline;
+    text-decoration: none;
     box-shadow: none; }
   .btn-link:disabled, .btn-link.disabled {
     color: #6c757d;
@@ -11470,43 +11470,57 @@ body {
   font-size: 14px;
   font-family: 'Ubuntu', sans-serif; }
 
+a {
+  transition: all 0.3s ease; }
+  a.text-dark:hover {
+    color: #158DC5 !important; }
+
 header {
-  background-color: #fff;
-  border-top: .4rem solid;
-  border-image-source: linear-gradient(45deg, #2accc3, #4740de);
-  border-image-slice: 1; }
-  header > .container > .row {
-    min-height: 80px; }
-  header .logo {
-    max-height: 44px; }
-  header .navbar .nav-item {
-    white-space: nowrap;
-    font-size: .86rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding-left: .6rem;
-    padding-right: .6rem; }
-    header .navbar .nav-item .nav-link {
-      transition: all 0.3s ease;
-      background-image: none;
-      position: relative;
-      z-index: 1; }
-      header .navbar .nav-item .nav-link:before {
-        background-image: linear-gradient(45deg, #1fb7ea, #1ca5e9);
-        opacity: 0;
+  background-color: #fff; }
+  header .header-top {
+    background-color: #f8f8f8;
+    height: 24px; }
+    header .header-top #language-switcher .nav-link {
+      padding: 0 1rem 0 0;
+      color: #A1A2A3; }
+      header .header-top #language-switcher .nav-link.active, header .header-top #language-switcher .nav-link:hover {
+        color: #158DC5 !important; }
+    header .header-top #language-switcher li {
+      color: #A1A2A3;
+      position: relative; }
+      header .header-top #language-switcher li + li:before {
         position: absolute;
-        content: '';
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: -1;
+        left: -.65rem;
+        content: '|'; }
+  header .header-middle > .row {
+    min-height: 80px; }
+  header .header-middle .logo {
+    max-height: 44px; }
+  header .header-bottom {
+    background-color: #0b4b69; }
+    header .header-bottom .navbar {
+      padding: 0; }
+      header .header-bottom .navbar .nav-item {
+        white-space: nowrap;
+        font-size: .86rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding-left: .6rem;
+        padding-right: .6rem;
+        border-radius: 0 !important;
+        height: 45px;
+        display: flex;
+        align-items: center;
         transition: all 0.3s ease; }
-      header .navbar .nav-item .nav-link:hover {
-        color: #fff;
-        border-radius: 0.2rem; }
-        header .navbar .nav-item .nav-link:hover:before {
-          opacity: 1; }
+        header .header-bottom .navbar .nav-item:hover {
+          border-radius: 0.2rem;
+          background-color: #158DC5; }
+        header .header-bottom .navbar .nav-item .nav-link {
+          background-image: none;
+          color: #fff;
+          position: relative;
+          transition: all 0.3s ease;
+          z-index: 1; }
 
 .top-full-width {
   align-items: center;

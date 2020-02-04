@@ -6,3 +6,13 @@ body {
     font-size: $di-font-size;
     font-family: 'Ubuntu', sans-serif;
 }
+
+a {
+    transition: $di-transition;
+
+    &.text-dark {
+        &:hover {
+            color: map-get($theme-colors, primary) !important;
+        }
+    }
+}
