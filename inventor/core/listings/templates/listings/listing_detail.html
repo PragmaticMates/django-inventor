@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% load i18n static %}
+
+{% block top_full_width %}
+{#    <div class="top-full-width container-fluid">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-12 py-4">#}
+{#                    <h1>{% trans 'Listings' %}</h1>#}
+{#                    <nav aria-label="breadcrumb">#}
+{#                        <ol class="breadcrumb">#}
+{#                            <li class="breadcrumb-item"><a href="#">Home</a></li>#}
+{#                            <li class="breadcrumb-item"><a href="#">Library</a></li>#}
+{#                            <li class="breadcrumb-item active" aria-current="page">Data</li>#}
+{#                        </ol>#}
+{#                    </nav>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-12">
+                <h2>{{ object.title }}</h2>
+                <div><b>slug</b>: {{ object.slug|default:'-' }}</div>
+                <div><b>description</b>: {{ object.description|default:'-' }}</div>
+                <div><b>author</b>: {{ object.author|default:'-' }}</div>
+                <div><b>published</b>: {{ object.published|default:'-' }}</div>
+                <div><b>promoted</b>: {{ object.promoted|default:'-' }}</div>
+                <div><b>categories</b>: {{ object.categories.all|default:'-' }}</div>
+                <div><b>features</b>: {{ object.features.all|default:'-' }}</div>
+                <div><b>price_starts_at</b>: {{ object.price_starts_at|default:'-' }}</div>
+                <div><b>price</b>: {{ object.price|default:'-' }}</div>
+                <div><b>price_unit</b>: {{ object.price_unit|default:'-' }}</div>
+                <div><b>location</b>: {{ object.location|default:'-' }}</div>
+                <div><b>street</b>: {{ object.street|default:'-' }}</div>
+                <div><b>postcode</b>: {{ object.postcode|default:'-' }}</div>
+                <div><b>city</b>: {{ object.city|default:'-' }}</div>
+                <div><b>country</b>: {{ object.country|default:'-' }}</div>
+                <div><b>point</b>: {{ object.point|default:'-' }}</div>
+                <div><b>image</b>: {{ object.image|default:'-' }}</div>
+                <div><b>banner</b>: {{ object.banner|default:'-' }}</div>
+                <div><b>person</b>: {{ object.person|default:'-' }}</div>
+                <div><b>phone</b>: {{ object.phone|default:'-' }}</div>
+                <div><b>email</b>: {{ object.email|default:'-' }}</div>
+                <div><b>website</b>: {{ object.website|default:'-' }}</div>
+                <div><b>social_networks</b>: {{ object.social_networks|default:'-' }}</div>
+                <div><b>comments</b>: {{ object.comments|default:'-' }}</div>
+                <div><b>created</b>: {{ object.created|default:'-' }}</div>
+                <div><b>modified</b>: {{ object.modified|default:'-' }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,10 +1,11 @@
-from django.conf.urls import url
+from django.urls import path
 from django.utils.translation import pgettext_lazy
 
-from inventor.core.listings.views import ListingListView
+from inventor.core.listings.views import ListingListView, ListingDetailView
 
 app_name = 'listings'
 
 urlpatterns = [
-    url(pgettext_lazy("url", r'^items/$'), ListingListView.as_view(), name='listing_list'),
+    path(pgettext_lazy('url', 'items/<int:pk>/'), ListingDetailView.as_view(), name='listing_detail'),
+    path(pgettext_lazy('url', 'items/'), ListingListView.as_view(), name='listing_list'),
 ]
