@@ -11463,6 +11463,17 @@ readers do not read off random characters that represent icons */
   background-size: cover;
   background-position: center; }
 
+.bg-light-translucent {
+  background-color: #fafafa; }
+
+.col-sm-20p {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  flex: 0 0 20%;
+  max-width: 20%; }
+
 html {
   font-size: 14px; }
 
@@ -11474,6 +11485,11 @@ a {
   transition: all 0.3s ease; }
   a.text-dark:hover {
     color: #158DC5 !important; }
+
+footer {
+  background-color: #0b4b69;
+  color: #fff;
+  font-weight: 300; }
 
 header {
   background-color: #fff; }

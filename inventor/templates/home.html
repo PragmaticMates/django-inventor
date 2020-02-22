@@ -5,13 +5,13 @@
     <div id="carouselHomeControls" class="carousel slide home-slider" data-ride="carousel" data-interval="10000" data-pause="false">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="bg-image"  style="background-image: url('{% static 'images/4_low.jpg' %}')"></div>
+                <div class="bg-image" style="background-image: url('{% static 'images/4_low.jpg' %}')"></div>
             </div>
             <div class="carousel-item">
-                <div class="bg-image"  style="background-image: url('{% static 'images/1_low.jpg' %}')"></div>
+                <div class="bg-image" style="background-image: url('{% static 'images/1_low.jpg' %}')"></div>
             </div>
             <div class="carousel-item">
-                <div class="bg-image"  style="background-image: url('{% static 'images/3_low.jpg' %}')"></div>
+                <div class="bg-image" style="background-image: url('{% static 'images/3_low.jpg' %}')"></div>
             </div>
             <div class="carousel-main">
                 <h1>{% trans 'Vysoké Tatry a turistika' %}</h1>
@@ -30,5 +30,69 @@
 {% endblock %}
 
 {% block content %}
-    Welcome
+
+    <section>
+        <div class="container-fluid bg-light-translucent">
+            <div class="container">
+                <div class="row">
+                    <div class="col my-5">
+                        <h2 class="mt-4 text-center">
+                            <strong>Top ubytovanie</strong> <span class="font-weight-light">2020</span>
+                        </h2>
+                        <h5 class="text-light font-weight-light text-center mb-3">Najlepšie ubytovacie a stravovacie zariadenia</h5>
+                    </div>
+                </div>
+                <div class="row pb-5">
+                    {% for i in '123' %}
+                        {% for object in top_listings %}
+                            <div class="col-md-4">
+                                {% include 'listings/widgets/listing_item.html' %}
+                            </div>
+                            {% empty %}{% trans 'No data to display' %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col my-5">
+                    <h2 class="mt-4 text-center">
+                        <span class="font-weight-light">Top wellness, Vysoké Tatry a okolie 2020</span>
+                    </h2>
+                    <h5 class="text-light font-weight-light text-center mb-3">Ostatné wellness objekty, ktoré ponúkajú  minimálne saunu a vírivku</h5>
+                </div>
+            </div>
+            <div class="row pb-5">
+                <div class="col-sm-20p text-center">
+                    <a href="#" target="_blank">
+                        <img width="175" height="175" src="https://tatrytravel.sk/wp-content/uploads/2018/10/01-46.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="">
+                    </a>
+                </div>
+                <div class="col-sm-20p text-center">
+                    <a href="#" target="_blank">
+                        <img width="175" height="175" src="https://tatrytravel.sk/wp-content/uploads/2018/10/02-39.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="">
+                    </a>
+                </div>
+                <div class="col-sm-20p text-center">
+                    <a href="#" target="_blank">
+                        <img width="175" height="175" src="https://tatrytravel.sk/wp-content/uploads/2018/10/03-37.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="">
+                    </a>
+                </div>
+                <div class="col-sm-20p text-center">
+                    <a href="#" target="_blank">
+                        <img width="175" height="175" src="https://tatrytravel.sk/wp-content/uploads/2018/10/04-31.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="">
+                    </a>
+                </div>
+                <div class="col-sm-20p text-center">
+                    <a href="#" target="_blank">
+                        <img width="175" height="175" src="https://tatrytravel.sk/wp-content/uploads/2018/10/05-19.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
