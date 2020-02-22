@@ -11606,7 +11606,8 @@ header {
     background-position: right center; } }
 
 .listing-item {
-  position: relative; }
+  position: relative;
+  margin-bottom: 30px; }
   .listing-item .listing-label {
     background-color: #25aae8;
     color: #fff;
@@ -11617,29 +11618,85 @@ header {
     padding: .21rem 1.07rem;
     top: 0; }
   .listing-item .listing-image {
-    min-height: 12.86rem; }
+    min-height: 18rem;
+    position: relative; }
+    .listing-item .listing-image:before {
+      background: linear-gradient(#0000002b 10rem, #000);
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%; }
+  .listing-item .listing-ribbon {
+    position: absolute;
+    height: 6rem;
+    right: 0;
+    overflow: hidden;
+    z-index: 1;
+    text-align: right;
+    top: 0;
+    width: 6rem; }
+    .listing-item .listing-ribbon span {
+      box-shadow: 0 3px 10px -5px black;
+      background-color: #25aae8;
+      background: linear-gradient(#53bced 0%, #179ddc 100%);
+      color: #FFF;
+      display: block;
+      font-size: .9rem;
+      font-weight: bold;
+      line-height: 1.8rem;
+      position: absolute;
+      right: -1.8rem;
+      text-transform: uppercase;
+      text-align: center;
+      top: 1.3rem;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      width: 8.4rem; }
   .listing-item .listing-name {
-    background-color: #106c97;
+    bottom: 0;
     color: #fff;
     padding: 1.21rem 1.43rem;
-    position: relative;
-    transition: all 0.3s ease; }
+    position: absolute;
+    transition: all 0.3s ease;
+    width: 100%; }
     .listing-item .listing-name strong {
       display: block;
-      font-size: 1.14rem;
-      font-weight: 600; }
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: .5rem 0 .3rem 0; }
     .listing-item .listing-name small {
-      opacity: .6; }
-    .listing-item .listing-name .listing-price {
+      opacity: .6;
+      font-size: 1rem; }
+    .listing-item .listing-name .listing-category {
       background-color: #f09c0b;
+      bottom: 0;
       color: #fff;
-      font-size: .93rem;
-      right: 0.71rem;
-      min-width: 3rem;
-      position: absolute;
-      padding: .21rem 1.07rem;
-      top: 0;
-      transform: translateY(-50%); }
+      border-radius: 1rem;
+      font-weight: 300;
+      font-size: .8rem;
+      padding: .4rem .8rem;
+      text-transform: uppercase; }
+  .listing-item .listing-price {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 1rem;
+    color: #A1A2A3;
+    display: flex;
+    font-size: .9rem;
+    left: 1.5rem;
+    line-height: 1.5rem;
+    min-width: 3rem;
+    position: absolute;
+    padding: 0 .5rem 0 .2rem;
+    top: 1.5rem; }
+    .listing-item .listing-price i {
+      background-color: #59D28F;
+      color: #fff;
+      border-radius: 50%;
+      padding: .3rem .25rem .2rem .3rem;
+      font-size: .6rem; }
   .listing-item .listing-contact {
     background-color: #f6f6f6;
     color: #A1A2A3;
@@ -11648,7 +11705,5 @@ header {
     padding: .71rem 1.43rem; }
   .listing-item .listing-rating {
     padding: .71rem 1.43rem; }
-  .listing-item:hover .listing-name {
-    background-color: #25aae8; }
 
 /*# sourceMappingURL=inventor.css.map */
