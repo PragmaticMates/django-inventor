@@ -22,7 +22,8 @@ class ListingAdmin(admin.ModelAdmin):
     date_hierarchy = 'created'
     search_fields = ['title', 'description']
     list_display = ('id', 'title', 'slug', 'address', 'location', 'created')
-    list_filter = ('country', )
+    list_display_links = ('title',)
+    # list_filter = ('location', 'country', )
     autocomplete_fields = ['author', 'location']
     fieldsets = (
         (_('Definition'), {'fields': ('title', 'slug', 'description',)}),
@@ -34,7 +35,7 @@ class ListingAdmin(admin.ModelAdmin):
         (_('Contact information'), {'fields': ('person', 'phone', 'email', 'website')}),
         (_('Social connections'), {'fields': ('social_networks',)}),
     )
-    filter_vertical = ['categories', 'features']
+    filter_vertical = ['categories', 'features']  # TODO: filter categories for selected listing type only
     inlines = [VideoInline, AlbumInline]  # add comments?
     formfield_overrides = {
         models.PointField: {"widget": GooglePointFieldWidget}

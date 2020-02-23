@@ -7,12 +7,22 @@ from inventor.core.listings.models.general import Listing
 
 
 class Accommodation(BookingMixin, Listing):
+    # Apartmán
+    # Chata v prírode
+    # Dovolenkový dom
+    # Horská chata
+    # Hotel
+    # Hostel
+    # Penzión
+    # Privát
+    # Resort
+
     section = _('travel')
     amenities = models.ManyToManyField(to=AccommodationAmenity, verbose_name=_('amenities'), blank=True)
     type = models.ForeignKey(
         AccommodationType, verbose_name=_('type'), on_delete=models.SET_NULL, related_name='type',
         blank=True, null=True, default=None)
-    star_rating: models.SmallIntegerField(
+    star_rating = models.SmallIntegerField(
         verbose_name=_('Star rating'), validators=[MinValueValidator(1), MaxValueValidator(5)],
         blank=True, null=True, default=None)
 

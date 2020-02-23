@@ -1,0 +1,42 @@
+[
+  {
+    "model": "lexicons.PropertyType",
+    "pk": 1,
+    "fields": {
+      "title": "Building",
+      "slug": "building"
+    }
+  },
+  {
+    "model": "lexicons.PropertyType",
+    "pk": 2,
+    "fields": {
+      "title": "Building area",
+      "slug": "building-area"
+    }
+  },
+  {
+    "model": "lexicons.PropertyType",
+    "pk": 3,
+    "fields": {
+      "title": "House",
+      "slug": "house"
+    }
+  },
+  {
+    "model": "lexicons.PropertyType",
+    "pk": 4,
+    "fields": {
+      "title": "Flat",
+      "slug": "flat"
+    }
+  },
+  {
+    "model": "lexicons.PropertyType",
+    "pk": 5,
+    "fields": {
+      "title": "Villa",
+      "slug": "villa"
+    }
+  }
+]

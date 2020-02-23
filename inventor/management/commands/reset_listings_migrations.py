@@ -40,5 +40,6 @@ class Command(BaseCommand):
 
         for app in apps:
             print('Setting migrations for app {}'.format(app))
+
             call_command('makemigrations', app)
             call_command('migrate', app)

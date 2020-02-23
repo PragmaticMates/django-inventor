@@ -3,6 +3,6 @@
 Directory listing Django app
 
 ## build css
-cd inventor/assets/
+cd inventor/static/
 npm ci
 gulp watch

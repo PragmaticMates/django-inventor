@@ -25,7 +25,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy
 
 
-admin.site.site_title = settings.SITE_NAME.title()
+admin.site.site_title = getattr(settings, 'SITE_TITLE', 'Site').title()
 admin.site.index_title = ugettext_lazy('App administration')
 admin.site.site_header = settings.ADMIN_SITE_HEADER
 

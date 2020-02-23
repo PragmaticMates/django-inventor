@@ -50,12 +50,12 @@ class Listing(SlugMixin, models.Model):
     # price
     price_starts_at = models.BooleanField(_('price starts at'), default=False)
     price = models.DecimalField(_('price'), help_text=inventor_settings.CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0)],
-        blank=True, null=True, default=None)
+                                blank=True, null=True, default=None)
     price_unit = models.CharField(_('price per unit'), choices=PRICE_UNITS, max_length=6, blank=True)
 
     # address
     location = models.ForeignKey(Location, on_delete=models.SET_NULL,
-        blank=True, null=True, default=None)
+                                 blank=True, null=True, default=None)
     street = models.CharField(_('street'), max_length=200, blank=True)
     postcode = models.CharField(_('postcode'), max_length=30, blank=True)
     city = models.CharField(_('city'), max_length=50, blank=True)
@@ -90,7 +90,7 @@ class Listing(SlugMixin, models.Model):
 
     # relations
     comments = GenericRelation(get_comment_model(), content_type_field='content_type', object_id_field='object_pk',
-                               related_query_name='contest')
+                               related_query_name='comment')
 
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
@@ -145,6 +145,12 @@ class Listing(SlugMixin, models.Model):
     @cached_property
     def rating(self):
         avg_rating = self.comments.aggregate(Avg('rating'))
+        # TODO: rating subjects:
+        # - Facilities / Amenities
+        # - Cleanliness
+        # - Comfort
+        # - Location
+        # - Services?
         rating = avg_rating['rating__avg']
         if rating:
             rating = round(rating, 2)
@@ -175,7 +181,7 @@ class Video(models.Model):
 
     class Meta:
         verbose_name = _('video')
-        verbose_name_plural = _('video')
+        verbose_name_plural = _('videos')
         ordering = ('title', )
 
     def __str__(self):

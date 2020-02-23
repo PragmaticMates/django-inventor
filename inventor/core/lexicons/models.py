@@ -7,6 +7,19 @@ from mptt.models import MPTTModel
 from inventor.core.listings.mixins import SlugMixin
 
 
+class RegularLexicon(SlugMixin, models.Model):
+    title = models.CharField(_('title'), max_length=100, unique=True)
+    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
+    description = models.TextField(_('description'), blank=True)
+
+    class Meta:
+        abstract = True
+        ordering = ('title',)
+
+    def __str__(self):
+        return self.title
+
+
 class Category(SlugMixin, MPTTModel):
     title = models.CharField(_('title'), max_length=100, unique=True)
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
@@ -32,7 +45,7 @@ class Feature(SlugMixin, models.Model):
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
     # listing_type = models.ForeignKey(
     #     ContentType, verbose_name=_('listing type'), on_delete=models.PROTECT,
-    #     blank=True, null=True, default=None)
+    #     blank=True, null=True, default=None)  # or many to many?
 
     class Meta:
         verbose_name = _('feature')
@@ -61,27 +74,29 @@ class Location(SlugMixin, MPTTModel):
         return self.title
 
 
-class AccommodationAmenity(SlugMixin, models.Model):
-    title = models.CharField(_('title'), max_length=100, unique=True)
-    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
+# Accommodation
 
+class AccommodationAmenity(RegularLexicon):
     class Meta:
         verbose_name = _('accommodation amenity')
         verbose_name_plural = _('accommodation amenities')
         ordering = ('title',)
 
-    def __str__(self):
-        return self.title
 
-
-class AccommodationType(SlugMixin, models.Model):
-    title = models.CharField(_('title'), max_length=100, unique=True)
-    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
-
+class AccommodationType(RegularLexicon):
     class Meta:
         verbose_name = _('accommodation type')
-        verbose_name_plural = _('accommodation type')
+        verbose_name_plural = _('accommodation types')
         ordering = ('title',)
 
-    def __str__(self):
-        return self.title
+
+# Property
+
+class PropertyType(RegularLexicon):
+    class Meta:
+        verbose_name = _('property type')
+        verbose_name_plural = _('property types')
+        ordering = ('title',)
+
+
+from .signals import *  # TODO: move to AppConfig
