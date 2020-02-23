@@ -1,0 +1,5 @@
+footer {
+    background-color: darken(map_get($theme-colors, primary), 20%);
+    color: #fff;
+    font-weight: 300;
+}

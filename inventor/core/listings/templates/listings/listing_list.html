@@ -25,31 +25,8 @@
         <div class="row my-5">
             {% for i in '123456789' %}
             {% for object in object_list %}
-                <div class="col-md-3 mb-4">
-                    <div class="card rounded-0 shadow-sm listing-item">
-                        <div class="listing-label">
-                            some label
-                        </div>
-                        <div class="listing-image {% if object.image %}bg-cover{% else %} d-flex align-items-center justify-content-center{% endif %}"
-                             {% if object.image %}style="background-image: url('{{ MEDIA_URL }}{{ object.image }}');" {% endif %}>
-                        </div>
-{#                        <div class="listing-name px-4 py-2 bg-primary text-white">#}
-                        <div class="listing-name">
-                            <strong class="d-block">{{ object.title }}</strong>
-{#                            <small>{{ object.description }}</small>#}
-                            <small><i class="fas fa-map-marker-alt mr-2"></i>{{ object.city }}</small>
-                            <div class="listing-price">
-                                {{ object.price }}
-                            </div>
-                        </div>
-{#                        <div class="listing-contact">#}
-{#                            <strong class="d-block">{% trans 'Phone' %}:</strong>#}
-{#                            <a class="d-block" href="tel:{{ object.phone }}">{{ object.phone }}</a>#}
-{#                        </div>#}
-{#                        <div class="listing-rating">#}
-{#                            <strong class="d-block">{{ object.rating }}</strong>#}
-{#                        </div>#}
-                    </div>
+                <div class="col-md-4">
+                    {% include 'listings/widgets/listing_item.html' %}
                 </div>
                 {% empty %}{% trans 'No data to display' %}
             {% endfor %}
