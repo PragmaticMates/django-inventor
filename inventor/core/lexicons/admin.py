@@ -1,8 +1,8 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 
-from inventor.core.lexicons.models import Location, Category, Feature, PropertyType
-from inventor.core.lexicons.models import AccommodationAmenity, AccommodationType
+from inventor.core.lexicons.models import Location, Category, Feature
+from inventor.core.lexicons.models import AccommodationAmenity
 
 
 @admin.register(Category)
@@ -29,9 +29,9 @@ class FeatureAdmin(admin.ModelAdmin):
 # Regular Lexicons
 
 @admin.register(
-    AccommodationAmenity, AccommodationType,
-    PropertyType
+    AccommodationAmenity,
+    # AccommodationType, PropertyType
 )
-class AmenityAdmin(admin.ModelAdmin):
+class RegularLexiconAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_display = ('title', 'slug', 'description')

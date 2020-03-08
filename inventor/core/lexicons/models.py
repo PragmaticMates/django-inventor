@@ -21,7 +21,7 @@ class RegularLexicon(SlugMixin, models.Model):
 
 
 class Category(SlugMixin, MPTTModel):
-    title = models.CharField(_('title'), max_length=100, unique=True)
+    title = models.CharField(_('title'), max_length=100)
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
     listing_type = models.ForeignKey(
         ContentType, verbose_name=_('listing type'), on_delete=models.SET_NULL,
@@ -84,20 +84,23 @@ class AccommodationAmenity(RegularLexicon):
         ordering = ('title',)
 
 
-class AccommodationType(RegularLexicon):
-    class Meta:
-        verbose_name = _('accommodation type')
-        verbose_name_plural = _('accommodation types')
-        ordering = ('title',)
+# TODO: Deprecated: replaced by categories
+
+# class AccommodationType(RegularLexicon):
+#     class Meta:
+#         verbose_name = _('accommodation type')
+#         verbose_name_plural = _('accommodation types')
+#         ordering = ('title',)
 
 
 # Property
 
-class PropertyType(RegularLexicon):
-    class Meta:
-        verbose_name = _('property type')
-        verbose_name_plural = _('property types')
-        ordering = ('title',)
+# TODO: Deprecated: replaced by categories
+# class PropertyType(RegularLexicon):
+#     class Meta:
+#         verbose_name = _('property type')
+#         verbose_name_plural = _('property types')
+#         ordering = ('title',)
 
 
 from .signals import *  # TODO: move to AppConfig

@@ -7,8 +7,13 @@ class SlugMixin(object):
 
     def save(self, **kwargs):
         if self.slug != slugify(self.title) or self.FORCE_SLUG_REGENERATION:
-            self.slug = slugify(self.title)
+            slug = slugify(self.title)
+            self.slug = slug
+            index = 1
 
-        # TODO: Ensure uniqueness
+            # Ensure uniqueness
+            while self.__class__.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+                self.slug = f'{slug}-{index}'
+                index += 1
 
         return super().save(**kwargs)

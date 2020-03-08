@@ -11,7 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print('Loading fixtures...')
         call_command('loaddata',
-                     'categories.json',
+                     'categories.json',  # TODO: update with values from deprecated accommodation and property types
                      'features.json',
                      'locations.json',
                      'accommodation_amenities.json',
