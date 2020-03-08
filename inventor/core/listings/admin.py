@@ -3,6 +3,7 @@ from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
 
+from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo
 from inventor.core.listings.models.listing_types import Accommodation, Property, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, \
     Nature
@@ -25,11 +26,12 @@ class ListingAdmin(admin.ModelAdmin):
     list_display_links = ('title',)
     # list_filter = ('location', 'country', )
     autocomplete_fields = ['author', 'location']
+
     fieldsets = (
         (_('Definition'), {'fields': ('title', 'slug', 'description',)}),
         (_('Management'), {'fields': ('author', 'published', 'promoted')}),
         (_('Specification'), {'fields': (('categories', 'features'),)}),
-        (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit'),)}),
+        (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person'),)}),
         (_('Address'), {'fields': ('location', 'country', 'address', 'point')}),
         (_('Previews'), {'fields': (('image', 'banner'),)}),
         (_('Contact information'), {'fields': ('person', 'phone', 'email', 'website')}),
@@ -62,6 +64,13 @@ class AlbumAdmin(admin.ModelAdmin):
 
 # Listing types
 
-@admin.register(Accommodation, Property, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, Nature)
+@admin.register(Property, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, Nature)
 class ListingTypeAdmin(ListingAdmin):
     pass
+
+
+@admin.register(Accommodation)
+class AccommodationAdmin(ListingAdmin):
+    fieldsets = ListingTypeAdmin.fieldsets + BookingMixinAdmin.fieldsets + (
+        (_('Specific'), {'fields': ('amenities', 'star_rating', 'rooms')}),
+    )
