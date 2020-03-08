@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import DateTimeRangeField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -25,6 +26,9 @@ class Accommodation(BookingMixin, Listing):
     star_rating = models.SmallIntegerField(
         verbose_name=_('Star rating'), validators=[MinValueValidator(1), MaxValueValidator(5)],
         blank=True, null=True, default=None)
+    rooms = models.SmallIntegerField(
+        verbose_name=_('number of rooms'), validators=[MinValueValidator(1)],
+        blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = _('accommodation')
@@ -42,7 +46,7 @@ class Property(Listing):
         ordering = ('title',)
 
 
-class EatAndDrink(Listing):  # TODO
+class EatAndDrink(BookingMixin, Listing):  # TODO
     section = _('gastronomy')
     # type: restaurant, cafe, pub, bistro, fast-food
 
@@ -66,14 +70,17 @@ class Vacation(Listing):  # Relax/Vacation
     section = _('tourism')
 
     class Meta:
-        verbose_name = _('travel')
-        verbose_name_plural = _('travels')
+        verbose_name = _('vacation')
+        verbose_name_plural = _('vacations')
         ordering = ('title',)
 
 
 class Event(Listing):
     section = _('events')
     # concert, speech, conference
+
+    date = DateTimeRangeField(_('datetime range'), db_index=True,
+                              blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = _('event')

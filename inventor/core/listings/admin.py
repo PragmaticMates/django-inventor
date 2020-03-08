@@ -30,7 +30,7 @@ class ListingAdmin(admin.ModelAdmin):
         (_('Management'), {'fields': ('author', 'published', 'promoted')}),
         (_('Specification'), {'fields': (('categories', 'features'),)}),
         (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit'),)}),
-        (_('Address'), {'fields': ('location', 'street', 'postcode', 'city', 'country', 'point')}),
+        (_('Address'), {'fields': ('location', 'country', 'address', 'point')}),
         (_('Previews'), {'fields': (('image', 'banner'),)}),
         (_('Contact information'), {'fields': ('person', 'phone', 'email', 'website')}),
         (_('Social connections'), {'fields': ('social_networks',)}),

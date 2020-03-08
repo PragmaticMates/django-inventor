@@ -27,14 +27,14 @@ class Listing(SlugMixin, models.Model):
                        'Skype', 'Foursquare', 'Behance']  # TODO: move to settings
 
     PRICE_UNITS = [
-        ('PERSON', _('person')),                  # tickets
+        ('ENTRY', _('entry')),                    # tickets
+        ('HOUR', _('hour')),                      # parking
         ('DAY', _('day')),                        # vehicle per day
         ('NIGHT', _('night')),                    # room unit per night
-        ('PERSON_NIGHT', _('person per night')),  # person per night (booking)
     ]
 
     # definition
-    title = models.CharField(_('title'), max_length=100, unique=True)
+    title = models.CharField(_('title'), max_length=100)
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH)
     description = models.TextField(_('description'), blank=True)
 
@@ -51,14 +51,18 @@ class Listing(SlugMixin, models.Model):
     price_starts_at = models.BooleanField(_('price starts at'), default=False)
     price = models.DecimalField(_('price'), help_text=inventor_settings.CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0)],
                                 blank=True, null=True, default=None)
-    price_unit = models.CharField(_('price per unit'), choices=PRICE_UNITS, max_length=6, blank=True)
+    price_unit = models.CharField(_('price per unit'), choices=PRICE_UNITS, max_length=5, blank=True)
+    price_per_person = models.BooleanField(_('price per person'), default=False)
 
     # address
     location = models.ForeignKey(Location, on_delete=models.SET_NULL,
                                  blank=True, null=True, default=None)
-    street = models.CharField(_('street'), max_length=200, blank=True)
-    postcode = models.CharField(_('postcode'), max_length=30, blank=True)
-    city = models.CharField(_('city'), max_length=50, blank=True)
+
+    address = models.TextField(_('address'), help_text=_('street, postcode, city'), max_length=500, blank=True)
+
+    # street = models.CharField(_('street'), max_length=200, blank=True)
+    # postcode = models.CharField(_('postcode'), max_length=30, blank=True)
+    # city = models.CharField(_('city'), max_length=50, blank=True)
     country = CountryField(verbose_name=_('country'), blank=True, db_index=True)
     point = models.PointField(_('point'), blank=True, null=True, default=None, db_index=True)
 
@@ -86,7 +90,7 @@ class Listing(SlugMixin, models.Model):
     website = models.URLField(_('website'), max_length=400, blank=True)
 
     # social
-    social_networks = HStoreField(verbose_name=_('social networks'), blank=True)
+    social_networks = HStoreField(verbose_name=_('social networks'), blank=True, default=dict)
 
     # relations
     comments = GenericRelation(get_comment_model(), content_type_field='content_type', object_id_field='object_pk',
@@ -112,17 +116,8 @@ class Listing(SlugMixin, models.Model):
         return reverse('inventor:listing_update', args=(self.pk,))
 
     @property
-    def address(self):
-        return '{}, {} {}, {}'.format(self.street, self.postcode, self.city, self.country).strip(', ')
-
-    @property
-    def country_and_city(self):
-        address_parts = [
-            self.get_country_display(),
-            self.city
-        ]
-
-        return ', '.join(address_parts).strip(' ,')
+    def full_address(self):
+        return '{}, {}'.format(self.address, self.country).strip(', ')
 
     @property
     def get_price_display(self):
