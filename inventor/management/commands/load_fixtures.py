@@ -15,8 +15,8 @@ class Command(BaseCommand):
                      'features.json',
                      'locations.json',
                      'accommodation_amenities.json',
-                     'accommodation_types.json',
-                     'property_types.json',
+                     #'accommodation_types.json',
+                     #'property_types.json',
                      'listings.json'
                      )
         print('Fixtures loaded.')

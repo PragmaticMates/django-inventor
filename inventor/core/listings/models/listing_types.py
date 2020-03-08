@@ -17,7 +17,7 @@ class Accommodation(BookingMixin, Listing):
     # Privát
     # Resort
 
-    section = _('travel')
+    section = _('travel')  # ?
     amenities = models.ManyToManyField(to=AccommodationAmenity, verbose_name=_('amenities'), blank=True)
     type = models.ForeignKey(
         AccommodationType, verbose_name=_('type'), on_delete=models.SET_NULL, related_name='type',
