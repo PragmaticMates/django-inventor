@@ -12,6 +12,8 @@ from inventor.utils import SingleSubmitFormHelper, PositiveBooleanFilter
 
 class ListingFilter(django_filters.FilterSet):
     keyword = django_filters.CharFilter(label=_('Keyword'), method=lambda qs, name, value: qs.by_keyword(value))
+    # price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment='listings.Listing.price')  # TODO
+    price = django_filters.RangeFilter(label=_('Price'), help_text=_('€'))
 
     class Meta:
         model = Listing
