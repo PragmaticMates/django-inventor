@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% load i18n static %}
+{% load i18n static pragmatic_tags %}
 
 {% block top_full_width %}
 {#    <div class="container-fluid" style="background-color:#F9F9F9; border-bottom: 1px solid #D7D7D7;">#}
@@ -29,13 +29,15 @@
             <div class="col-md-9">
                 <div class="row">
                     {% for object in object_list %}
-                    <div class="col-md-4">
-                        {% include 'listings/widgets/listing_item.html' %}
-                    </div>
+                        <div class="col-md-4">
+                            {% include 'listings/widgets/listing_item.html' %}
+                        </div>
                     {% empty %}
                         {% trans 'No data to display' %}
                     {% endfor %}
                 </div>
+
+                {% paginator page_obj %}
             </div>
         </div>
     </div>
