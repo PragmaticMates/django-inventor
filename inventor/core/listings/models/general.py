@@ -110,10 +110,10 @@ class Listing(SlugMixin, models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('inventor:listing_detail', args=(self.pk,))
+        return reverse('listings:listing_detail', args=(self.slug,))
 
     def get_update_url(self):
-        return reverse('inventor:listing_update', args=(self.pk,))
+        return reverse('listings:listing_update', args=(self.pk,))
 
     @property
     def full_address(self):
@@ -166,6 +166,9 @@ class Listing(SlugMixin, models.Model):
             pass
         except OSError:
             pass
+
+    def get_listing_type_display(self):
+        return self.__class__._meta.verbose_name
 
 
 class Video(models.Model):

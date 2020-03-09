@@ -88,12 +88,12 @@ class Event(Listing):
         ordering = ('title',)
 
 
-class Goods(Listing):
+class Shop(Listing):  # Store
     section = _('shopping')
 
     class Meta:
-        verbose_name = _('goods')
-        verbose_name_plural = _('goods')
+        verbose_name = _('shop')
+        verbose_name_plural = _('shops')
         ordering = ('title',)
 
 

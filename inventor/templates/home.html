@@ -43,13 +43,11 @@
                     </div>
                 </div>
                 <div class="row pb-5">
-                    {% for i in '123' %}
-                        {% for object in top_listings %}
-                            <div class="col-md-4">
-                                {% include 'listings/widgets/listing_item.html' %}
-                            </div>
-                            {% empty %}{% trans 'No data to display' %}
-                        {% endfor %}
+                    {% for object in top_accommodations %}
+                        <div class="col-md-4">
+                            {% include 'listings/widgets/listing_item.html' %}
+                        </div>
+                        {% empty %}{% trans 'No data to display' %}
                     {% endfor %}
                 </div>
             </div>

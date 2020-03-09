@@ -1,41 +1,24 @@
 {% load i18n static %}
 
 <div class="card rounded-0 shadow-sm listing-item">
-    <div class="listing-image {% if object.image %}bg-cover{% else %} d-flex align-items-center justify-content-center{% endif %}"
-         {% if object.image %}style="background-image: url('{{ MEDIA_URL }}{{ object.image }}');" {% endif %}>
-{#                            <div class="listing-label">#}
-{#                                some label#}
-{#                            </div>#}
-        <div class="listing-price">
-            <i class="fas fa-tag mr-2"></i>{{ object.price|default:0 }} €
+    <a href="{{ object.get_absolute_url }}">
+        <div class="listing-image {% if object.image %}bg-cover{% else %} d-flex align-items-center justify-content-center{% endif %}"
+             {% if object.image %}style="background-image: url('{{ MEDIA_URL }}{{ object.image }}');" {% endif %}>
+            {% if object.price %}
+            <div class="listing-price">
+                <i class="fas fa-tag mr-2"></i>{{ object.get_price_display }}
+            </div>
+            {% endif %}
+            <div class="listing-ribbon">
+                <span>{% trans 'TOP' %}</span>
+            </div>
+            <div class="listing-name">
+                <span class="listing-category">
+                    {{ object.get_listing_type_display }}
+                </span>
+                <strong class="d-block">{{ object.title|capfirst }}</strong>
+                <small><i class="fas fa-map-marker-alt mr-2"></i>{{ object.location }}</small>
+            </div>
         </div>
-        <div class="listing-ribbon">
-            <span>TOP</span>
-        </div>
-        <div class="listing-name">
-            <span class="listing-category">
-{#                                    {{ object.section }}#}
-                Apartman
-            </span>
-            <strong class="d-block">{{ object.title|capfirst }}</strong>
-{#                            <small>{{ object.description }}</small>#}
-            <small><i class="fas fa-map-marker-alt mr-2"></i>{{ object.city }}</small>
-        </div>
-    </div>
-{#                        <div class="listing-name px-4 py-2 bg-primary text-white">#}
-{#                        <div class="listing-name">#}
-{#                            <strong class="d-block">{{ object.title }}</strong>#}
-{#                            <small>{{ object.description }}</small>#}
-{#                            <small><i class="fas fa-map-marker-alt mr-2"></i>{{ object.city }}</small>#}
-{#                            <div class="listing-price">#}
-{#                                {{ object.price }}#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="listing-contact">#}
-{#                            <strong class="d-block">{% trans 'Phone' %}:</strong>#}
-{#                            <a class="d-block" href="tel:{{ object.phone }}">{{ object.phone }}</a>#}
-{#                        </div>#}
-{#                        <div class="listing-rating">#}
-{#                            <strong class="d-block">{{ object.rating }}</strong>#}
-{#                        </div>#}
+    </a>
 </div>

@@ -5,7 +5,7 @@ from mapwidgets import GooglePointFieldWidget
 
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo
-from inventor.core.listings.models.listing_types import Accommodation, Property, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, \
+from inventor.core.listings.models.listing_types import Accommodation, Property, EatAndDrink, Service, Vacation, Event, Shop, Vehicle, Profile, Job, Course, \
     Nature
 
 
@@ -64,7 +64,7 @@ class AlbumAdmin(admin.ModelAdmin):
 
 # Listing types
 
-@admin.register(Property, EatAndDrink, Service, Vacation, Event, Goods, Vehicle, Profile, Job, Course, Nature)
+@admin.register(Property, EatAndDrink, Service, Vacation, Event, Shop, Vehicle, Profile, Job, Course, Nature)
 class ListingTypeAdmin(ListingAdmin):
     pass
 
