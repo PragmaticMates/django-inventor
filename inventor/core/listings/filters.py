@@ -74,3 +74,12 @@ class ListingFilter(django_filters.FilterSet):
             required=False,
             widget=forms.CheckboxSelectMultiple
         )
+
+        # changed filter logic of features
+        self.filters['features'].method = 'filter_features'
+
+    def filter_features(self, queryset, name, value):
+        # return listings having ALL features, not AT LEAST one
+        for feature in value:
+            queryset = queryset.filter(features=feature)
+        return queryset

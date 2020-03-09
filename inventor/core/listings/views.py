@@ -24,7 +24,7 @@ class ListingListView(LoginPermissionRequiredMixin, ListView):
         # return self.sort_queryset(queryset)
 
     def get_whole_queryset(self):
-        return self.model.objects.order_by('-promoted', 'modified')
+        return super().get_queryset().select_subclasses().order_by('-promoted', 'modified')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
