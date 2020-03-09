@@ -61,3 +61,5 @@ class ListingFilter(django_filters.FilterSet):
 
         if listing_type:
             self.form.fields['categories'].queryset = Category.objects.of_listing_type(listing_type).exclude(parent=None)
+        else:
+            self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
