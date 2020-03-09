@@ -23,3 +23,9 @@ class ListingQuerySet(InheritanceQuerySet):
 
     def not_promoted(self):
         return self.filter(promoted=False)
+
+    def by_keyword(self, keyword):
+        return self.filter(
+            Q(title__unaccent__icontains=keyword) |
+            Q(description__unaccent__icontains=keyword)
+        )

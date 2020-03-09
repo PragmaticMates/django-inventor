@@ -10,10 +10,13 @@ from inventor.utils import SingleSubmitFormHelper, PositiveBooleanFilter
 
 
 class ListingFilter(django_filters.FilterSet):
+    keyword = django_filters.CharFilter(label=_('Keyword'), method=lambda qs, name, value: qs.by_keyword(value))
+
     class Meta:
         model = Listing
         fields = [
-            'title', 'promoted',
+            'keyword',
+            'promoted',
             'location',
             'price',
             'categories', 'features'
@@ -45,7 +48,8 @@ class ListingFilter(django_filters.FilterSet):
         self.helper.form_tag = False
         self.helper.disable_csrf = True
         self.helper.layout = Layout(
-            'title', 'promoted',
+            'keyword',
+            'promoted',
             'location',
             'price',
             'categories', 'features'
