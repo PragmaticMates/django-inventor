@@ -23,7 +23,7 @@ class Command(BaseCommand):
 
             if os.path.exists(initial_migration_path):
                 print('Resetting migrations for app {}'.format(app))
-                call_command('migrate', app, 'zero')
+                call_command('migrate', app, 'zero', '--fake')
 
         for app in apps:
             print('Deleting migrations for app {}'.format(app))
@@ -42,4 +42,4 @@ class Command(BaseCommand):
             print('Setting migrations for app {}'.format(app))
 
             call_command('makemigrations', app)
-            call_command('migrate', app)
+            call_command('migrate', app, '--fake')
