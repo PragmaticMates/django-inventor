@@ -20,7 +20,7 @@ class ListingListView(LoginPermissionRequiredMixin, ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        queryset = self.filter.qs.only('id', 'slug', 'title', 'location_id', 'location__title', 'image', 'price', 'price_unit', 'price_starts_at').annotate(location_title=F('location__title'))
+        queryset = self.filter.qs.only('id', 'slug', 'title', 'location_id', 'location__title', 'image', 'price', 'price_unit', 'price_starts_at', 'promoted').annotate(location_title=F('location__title'))
         return queryset
         # return self.sort_queryset(queryset)
 
