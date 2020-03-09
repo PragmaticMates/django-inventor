@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         call_command('migrate')
-        self.reset_app_migrations(['lexicons', 'listings'])
+        self.reset_app_migrations(['lexicons', 'listings', 'bookings'])
         call_command('load_fixtures')
 
     def reset_app_migrations(self, apps):
