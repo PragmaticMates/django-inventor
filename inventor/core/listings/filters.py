@@ -14,6 +14,7 @@ class ListingFilter(django_filters.FilterSet):
     keyword = django_filters.CharFilter(label=_('Keyword'), method=lambda qs, name, value: qs.by_keyword(value))
     # price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment='listings.Listing.price')  # TODO
     price = django_filters.RangeFilter(label=_('Price'), help_text=_('€'))
+    # categories = django_filters.MultipleChoiceFilter(choices=Vehicle.TYPES, widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = Listing
@@ -59,7 +60,17 @@ class ListingFilter(django_filters.FilterSet):
         )
         self.form.fields['location'].empty_label = _('All locations')
 
+        # dynamic categories
+        self.filters['categories'].field_name = 'categories__slug'
+
         if listing_type:
             self.form.fields['categories'].queryset = Category.objects.of_listing_type(listing_type).exclude(parent=None)
         else:
             self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
+
+        self.form.fields['categories'] = forms.MultipleChoiceField(
+            label=_('Categories'),
+            choices=list(self.form.fields['categories'].queryset.values_list('slug', 'title')),  # TODO: cache?
+            required=False,
+            widget=forms.CheckboxSelectMultiple
+        )
