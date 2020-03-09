@@ -13,5 +13,5 @@ class BookingAdmin(admin.ModelAdmin):
 
 class BookingMixinAdmin(admin.ModelAdmin):
     fieldsets = (
-        (_('Booking'), {'fields': ('bookings_enabled', ('booking_period', 'bookings_min_period', 'bookings_max_period'), ('bookings_min_persons', 'capacity'))}),
+        (_('Booking'), {'fields': ('booking_enabled', ('booking_period', 'booking_min_period', 'booking_max_period'), ('booking_min_persons', 'capacity'))}),
     )

@@ -8,15 +8,17 @@ class BookingMixin(models.Model):
         ('DAY', _('day')),
         ('NIGHT', _('night')),
     ]
-    bookings_enabled = models.BooleanField(_('bookings enabled'), default=True)
+    booking_enabled = models.BooleanField(_('bookings enabled'), default=True)
+    booking_url = models.URLField(_('booking URL'), max_length=300,
+                                  blank=True)
     booking_period = models.CharField(_('booking period'), choices=PERIODS, max_length=5, blank=True)
-    bookings_min_period = models.SmallIntegerField(verbose_name=_('min period'),
+    booking_min_period = models.SmallIntegerField(verbose_name=_('min period'),
                                                    blank=True, null=True, default=None)
-    bookings_max_period = models.SmallIntegerField(verbose_name=_('max period'),
+    booking_max_period = models.SmallIntegerField(verbose_name=_('max period'),
                                                    blank=True, null=True, default=None)
-    bookings_min_persons = models.SmallIntegerField(verbose_name=_('min persons'),
+    booking_min_persons = models.SmallIntegerField(verbose_name=_('min persons'),
                                                     blank=True, null=True, default=None)
-    # bookings_max_persons = models.SmallIntegerField(verbose_name=_('max persons'),
+    # booking_max_persons = models.SmallIntegerField(verbose_name=_('max persons'),
     #                                                 blank=True, null=True, default=None)
     capacity = models.SmallIntegerField(verbose_name=_('capacity'),
         blank=True, null=True, default=None)
