@@ -1,0 +1,24 @@
+{% load i18n crispy_forms_tags %}
+
+<section class="filter-vertical">
+    <h3>{% trans 'Filter' %}</h3>
+    <form action="" method="get" class="filter">
+        {% if request.GET.display %}
+            <input type="hidden" name="display" value="{{ request.GET.display }}">
+        {% endif %}
+        {% if request.GET.sorting %}
+            <input type="hidden" name="sorting" value="{{ request.GET.sorting }}">
+        {% endif %}
+        {% if request.GET.paginate_by %}
+            <input type="hidden" name="paginate_by" value="{{ request.GET.paginate_by }}">
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12">
+                {% crispy filter.form filter.helper %}
+            </div>
+            <div class="form-actions col-sm-12">
+                <button type="submit" class="btn btn-primary col"><i class="fas fa-search"></i> {% trans 'Search' %}</button>
+            </div>
+        </div>
+    </form>
+</section>
