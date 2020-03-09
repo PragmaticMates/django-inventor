@@ -5,6 +5,7 @@ from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
 from inventor.core.listings.mixins import SlugMixin
+from .querysets import CategoryQuerySet
 
 
 class RegularLexicon(SlugMixin, models.Model):
@@ -27,6 +28,7 @@ class Category(SlugMixin, MPTTModel):
         ContentType, verbose_name=_('listing type'), on_delete=models.SET_NULL,
         blank=True, null=True, default=None)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    objects = CategoryQuerySet.as_manager()
 
     class MPTTMeta:
         order_insertion_by = ['title']

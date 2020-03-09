@@ -5,6 +5,7 @@ from django.db import models
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from inventor.core.lexicons.models import Category
 from inventor.core.listings.models.general import Listing
 from inventor.utils import SingleSubmitFormHelper, PositiveBooleanFilter
 
@@ -42,7 +43,7 @@ class ListingFilter(django_filters.FilterSet):
             },
         }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, listing_type=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = SingleSubmitFormHelper()
         self.helper.form_tag = False
@@ -55,3 +56,6 @@ class ListingFilter(django_filters.FilterSet):
             'categories', 'features'
         )
         self.form.fields['location'].empty_label = _('All locations')
+
+        if listing_type:
+            self.form.fields['categories'].queryset = Category.objects.of_listing_type(listing_type).exclude(parent=None)

@@ -15,7 +15,7 @@ class ListingListView(LoginPermissionRequiredMixin, ListView):
     paginate_by = 12
 
     def dispatch(self, request, *args, **kwargs):
-        self.filter = self.filter_class(request.GET, queryset=self.get_whole_queryset())
+        self.filter = self.filter_class(data=request.GET, queryset=self.get_whole_queryset(), listing_type=None if self.model == Listing else self.model)
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -27,7 +27,7 @@ class ListingListView(LoginPermissionRequiredMixin, ListView):
         return self.model.objects.order_by('-promoted', 'modified')
 
     def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(*kwargs)
+        context_data = super().get_context_data(**kwargs)
         context_data.update({
             'title': self.model._meta.verbose_name_plural,
             'filter': self.filter
