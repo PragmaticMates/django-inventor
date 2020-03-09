@@ -132,9 +132,9 @@
                     </nav>
                 </div>
                 <div class="col-sm-auto ml-auto">
-                    <form id="search" role="search" action="/" method="get" class="search-form float-right">
+                    <form id="search" role="search" action="{% url 'listings:listing_list' %}" method="get" class="search-form float-right">
                         <i class="fas fa-search"></i>
-                        <input name="search" placeholder="Vyhľadávanie" type="text" autocomplete="off">
+                        <input name="keyword" placeholder="{% trans 'Search' %}" type="text" autocomplete="off">
                     </form>
                 </div>
             </div>
