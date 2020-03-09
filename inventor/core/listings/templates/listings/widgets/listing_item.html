@@ -1,9 +1,10 @@
-{% load i18n static %}
+{% load i18n static thumbnail %}
 
 <div class="card rounded-0 shadow-sm listing-item">
     <a href="{{ object.get_absolute_url }}">
         <div class="listing-image {% if object.image %}bg-cover{% else %} d-flex align-items-center justify-content-center{% endif %}"
-             {% if object.image %}style="background-image: url('{{ MEDIA_URL }}{{ object.image }}');" {% endif %}>
+             {% if object.image %}style="background-image: url('{% thumbnail object.image "500" as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}');" {% endif %}>
+
             {% if object.price %}
                 <div class="listing-price">
                     <i class="fas fa-tag mr-2"></i>{{ object.get_price_display }}
