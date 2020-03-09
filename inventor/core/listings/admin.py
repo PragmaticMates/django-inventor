@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
+from sorl.thumbnail.admin import AdminImageMixin
 
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo
@@ -19,7 +20,7 @@ class VideoInline(admin.StackedInline):
     extra = 1
 
 
-class ListingAdmin(admin.ModelAdmin):
+class ListingAdmin(AdminImageMixin, admin.ModelAdmin):
     date_hierarchy = 'created'
     search_fields = ['title', 'description']
     list_display = ('id', 'title', 'slug', 'address', 'location', 'created')

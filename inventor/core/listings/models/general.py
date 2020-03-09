@@ -10,6 +10,7 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
+from sorl import thumbnail
 
 from inventor import settings as inventor_settings
 from inventor.core.lexicons.models import Category, Feature, Location
@@ -67,7 +68,7 @@ class Listing(SlugMixin, models.Model):
     point = models.PointField(_('point'), blank=True, null=True, default=None, db_index=True)
 
     # previews
-    image = models.ImageField(
+    image = thumbnail.ImageField(
         verbose_name=_('image'),
         help_text=_('photo or image'),
         max_length=1024,
