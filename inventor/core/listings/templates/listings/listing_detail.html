@@ -87,14 +87,18 @@
                         {{ object.description }}
                     </p>
                 </section>
-                <section class="mb-4">
-                    <h2>{% trans 'Amenities' %}</h2>
-                    <div class="row">
-                        {% for amenity in object.amenities.all %}
-                            <div class="col-md-3">{{ amenity }}</div>
-                        {% endfor %}
-                    </div>
-                </section>
+
+                {% if object.amenities.exists %}
+                    <section class="mb-4">
+                        <h2>{% trans 'Amenities' %}</h2>
+                        <div class="row">
+                            {% for amenity in object.amenities.all %}
+                                <div class="col-md-3">{{ amenity }}</div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endif %}
+
                 <section class="mb-4">
                     <h2>{% trans 'Features' %}</h2>
                     <div class="row">

@@ -38,5 +38,8 @@ class ListingListView(LoginPermissionRequiredMixin, ListView):
 
 class ListingDetailView(LoginPermissionRequiredMixin, DetailView):
     model = Listing
+    template_name = 'listings/listing_detail.html'
     permission_required = 'listings.view_listing'
 
+    def get_queryset(self):
+        return super().get_queryset().select_subclasses()
