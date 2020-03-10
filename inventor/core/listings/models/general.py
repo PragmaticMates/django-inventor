@@ -52,7 +52,7 @@ class Listing(SlugMixin, models.Model):
     price_starts_at = models.BooleanField(_('price starts at'), default=False)
     price = models.DecimalField(_('price'), help_text=inventor_settings.CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0)],
                                 blank=True, null=True, default=None)
-    price_unit = models.CharField(_('price per unit'), choices=PRICE_UNITS, max_length=5, blank=True)
+    price_unit = models.CharField(_('price unit'), choices=PRICE_UNITS, max_length=5, blank=True)
     price_per_person = models.BooleanField(_('price per person'), default=False)
 
     # address

@@ -79,7 +79,7 @@ class UserCreateView(LoginPermissionRequiredMixin, CreateView):
         user.set_password(password)
 
         # send password to user
-        user.email_user(_('Welcome to swida'), _('Your password is {}').format(password), fail_silently=False)
+        user.email_user(_('Welcome to TatryTravel.sk'), _('Your password is {}').format(password), fail_silently=False)
 
         messages.success(self.request, _('User successfully created'))
         return super(UserCreateView, self).form_valid(form)
