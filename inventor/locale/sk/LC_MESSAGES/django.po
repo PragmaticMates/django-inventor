@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-10 21:22+0100\n"
-"PO-Revision-Date: 2020-03-10 21:23+0058\n"
+"PO-Revision-Date: 2020-03-10 21:30+0058\n"
 "Last-Translator: b'  <erik.telepovsky@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -601,11 +601,11 @@ msgstr "gastronómia"
 
 #: core/listings/models/listing_types.py:54
 msgid "eat & drink"
-msgstr "jedlo a nápoje"
+msgstr "stravovacie zariadenie"
 
 #: core/listings/models/listing_types.py:55
 msgid "eat & drinks"
-msgstr "jedlo a nápoje"
+msgstr "stravovacie zariadenia"
 
 #: core/listings/models/listing_types.py:60
 #: core/listings/models/listing_types.py:65
@@ -622,11 +622,11 @@ msgstr "turizmus"
 
 #: core/listings/models/listing_types.py:73
 msgid "vacation"
-msgstr "dovolenka"
+msgstr "atrakcia"
 
 #: core/listings/models/listing_types.py:74
 msgid "vacations"
-msgstr "dovolenky"
+msgstr "atrakcie"
 
 #: core/listings/models/listing_types.py:79
 #: core/listings/models/listing_types.py:87
@@ -845,7 +845,7 @@ msgstr "Turistika vo Vysokých Tatrách"
 
 #: templates/home.html:114
 msgid "Season is open and welcomes tourists from all over the world."
-msgstr "Sezóna je otvorená a víta turistov z celého sveta."
+msgstr "Sezóna je otvorená a víta turistov z celého sveta"
 
 #: templates/layout/header.html:36
 msgid "Sign in"
