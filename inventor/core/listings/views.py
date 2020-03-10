@@ -3,16 +3,12 @@ from django.views.generic import ListView, DetailView
 
 from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.models.listing_types import Accommodation
-from pragmatic.mixins import LoginPermissionRequiredMixin
-
 from inventor.core.listings.models.general import Listing
 
 
-class ListingListView(LoginPermissionRequiredMixin, ListView):
+class ListingListView(ListView):
     model = Listing
     filter_class = ListingFilter
-    test = Accommodation
-    permission_required = 'listings.list_listing'
     paginate_by = 12
 
     def dispatch(self, request, *args, **kwargs):
@@ -36,10 +32,9 @@ class ListingListView(LoginPermissionRequiredMixin, ListView):
         return context_data
 
 
-class ListingDetailView(LoginPermissionRequiredMixin, DetailView):
+class ListingDetailView(DetailView):
     model = Listing
     template_name = 'listings/listing_detail.html'
-    permission_required = 'listings.view_listing'
 
     def get_queryset(self):
         return super().get_queryset().select_subclasses()
