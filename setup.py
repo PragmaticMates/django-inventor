@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 
 setup(
     name='django-inventor',
-    version='0.1.0',
+    version='0.2.0',
     description='Directory listing Django app',
     long_description=open('README.md').read(),
     author='Pragmatic Mates',
@@ -12,13 +12,9 @@ setup(
     maintainer='Pragmatic Mates',
     maintainer_email='info@pragmaticmates.com',
     url='https://github.com/PragmaticMates/django-inventor',
-    packages=[
-        'inventor',
-        #'inventor.migrations',
-        #'inventor.templatetags'
-    ],
+    packages=find_packages(),
     include_package_data=True,
-    # install_requires=('django-filter', 'django', 'python-pragmatic', 'django-pragmatic'),
+    install_requires=('django-filter', 'django', 'python-pragmatic', 'django-pragmatic'),
     classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
