@@ -33,7 +33,7 @@
                 <div class="col-sm-auto ml-auto d-flex align-items-center">
                     <a href="#" class="text-dark">
 {#                        <i class="fas fa-user mr-2"></i>#}
-                        {% trans 'Prihlasit sa' %}
+                        {% trans 'Sign in' %}
                     </a>
                 </div>
             </div>
@@ -55,16 +55,16 @@
             </div>
             <div class="col-sm"></div>
             <div class="col-sm-auto d-flex align-items-center">
-                <i class="fas fa-2x fa-hiking text-primary mr-2"></i>
-                <h4 class="mb-0 font-weight-light text-light">{% trans 'Turistika' %}</h4>
+                <i class="fas fa-2x fa-hiking text-primary mr-3"></i>
+                <h4 class="mb-0 font-weight-light text-light">{% trans 'Hiking' %}</h4>
             </div>
             <div class="col-sm-auto d-flex align-items-center">
-                <i class="fas fa-2x fa-bed text-primary mr-2"></i>
-                <h4 class="mb-0 font-weight-light text-light">{% trans 'Ubytovanie' %}</h4>
+                <i class="fas fa-2x fa-bed text-primary mr-3"></i>
+                <h4 class="mb-0 font-weight-light text-light">{% trans 'Accommodation' %}</h4>
             </div>
             <div class="col-sm-auto d-flex align-items-center">
-                <i class="fas fa-2x fa-calendar-alt text-primary mr-2"></i>
-                <h4 class="mb-0 font-weight-light text-light">{% trans 'Atrakcie' %}</h4>
+                <i class="fas fa-2x fa-calendar-alt text-primary mr-3"></i>
+                <h4 class="mb-0 font-weight-light text-light">{% trans 'Attractions' %}</h4>
             </div>
             {#            <div class="col-sm-2 d-flex align-items-center">#}
             {#                <span class="mr-3"><i class="fab fa-facebook-f"></i></span>#}
@@ -85,48 +85,29 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">{% trans 'Vysoke Tatry' %} <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {% trans 'Podujatia' %}
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {% trans 'Turistika' %}
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {% trans 'Ubytovanie' %}
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'inventor:home' %}">{% trans 'Home' %} <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">{% trans 'Stravovanie' %}</a>
+                                    <a class="nav-link" href="{% url 'listings:listing_list' %}">{% trans 'Explore' %}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">{% trans 'Nakupovanie' %}</a>
+                                    <a class="nav-link" href="#">{% trans 'News' %}</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">{% trans 'Contact' %}</a>
+                                </li>
+{#                                <li class="nav-item dropdown">#}
+{#                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                        {% trans 'Ubytovanie' %}#}
+{#                                    </a>#}
+{#                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+{#                                        <a class="dropdown-item" href="#">Action</a>#}
+{#                                        <a class="dropdown-item" href="#">Another action</a>#}
+{#                                        <div class="dropdown-divider"></div>#}
+{#                                        <a class="dropdown-item" href="#">Something else here</a>#}
+{#                                    </div>#}
+{#                                </li>#}
                             </ul>
                         </div>
                     </nav>

@@ -9,17 +9,19 @@
                     <h1>{{ object.title }}</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Library</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                            <li class="breadcrumb-item"><a href="{% url 'inventor:home' %}">{% trans 'Home' %}</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'listings:listing_list' %}">{% trans 'Listings' %}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{% trans 'Detail' %}</li>
                         </ol>
                     </nav>
                 </div>
-                <div class="col-md-auto py-4 d-flex align-items-center">
-                    <div class="p-4 bg-white text-primary">
-                        <h4 class="mb-0">{{ object.get_price_display }}</h4>
+                {% if object.price %}
+                    <div class="col-md-auto py-4 d-flex align-items-center">
+                        <div class="p-4 bg-primary text-white">
+                            <h4 class="mb-0">{{ object.get_price_display }}</h4>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -51,6 +53,9 @@
                                     <a class="nav-link" href="#">{% trans 'Location' %}</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="#">{% trans 'Contact' %}</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="#">{% trans 'Reviews' %}</a>
                                 </li>
                             </ul>
@@ -65,14 +70,14 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-md-8">
-                <img class="img-fluid mb-4" src="{{ object.image.url }}">
+                <img class="img-fluid mb-4" src="{% thumbnail object.image '750' as preview %}{{ preview.url }}{% endthumbnail %}">
                 <section class="mb-4">
                     {% for album in object.album_set.all %}
                         <h2>{{ album.title }}</h2>
                         <p>{{ album.description }}</p>
                         {% for photo in album.photo_set.all %}
                             {#                        <img class="img-thumbnail" src="{{ photo.file.url }}">#}
-                            <img class="img-thumbnail" src="{% thumbnail photo.file "150" as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}">
+                            <img class="img-thumbnail" src="{% thumbnail photo.file '150' as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}">
                         {% endfor %}
                     {% endfor %}
                 </section>
