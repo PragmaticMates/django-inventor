@@ -173,8 +173,25 @@ class Listing(SlugMixin, models.Model):
         except OSError:
             pass
 
+    @property
+    def listing_class(self):
+        return self.__class__
+
     def get_listing_type_display(self):
-        return self.__class__._meta.verbose_name
+        return self.listing_class._meta.verbose_name
+
+    def get_listing_type_display_plural(self):
+        return self.listing_class._meta.verbose_name_plural
+
+    @classmethod
+    def get_list_url_name(cls):
+        url_name = f'{cls.__name__.lower()}_list'
+        return f'{url_name}'
+
+    @classmethod
+    def get_list_url(cls):
+        url_name = cls.get_list_url_name()
+        return reverse(f'listings:{url_name}')
 
     def get_real_instance(self):
         """ get object child instance """
