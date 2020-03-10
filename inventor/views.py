@@ -17,5 +17,6 @@ class HomeView(TemplateView):
                       'location_id', 'location__title',
                       'image', 'price', 'price_unit', 'price_starts_at')
                 .annotate(location_title=F('location__title'))
+                .order_by('?')[:6]
         })
         return context_data

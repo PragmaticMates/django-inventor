@@ -125,10 +125,15 @@ class Listing(SlugMixin, models.Model):
         if not self.price:
             return ''
 
+        price = str(self.price)
+
+        if price.endswith('.00'):
+            price = price[:-3]
+
         if inventor_settings.CURRENCY_AFTER_AMOUNT:
-            price_display = '{}{}'.format(self.price, inventor_settings.CURRENCY)
+            price_display = '{}{}'.format(price, inventor_settings.CURRENCY)
         else:
-            price_display = '{}{}'.format(inventor_settings.CURRENCY, self.price)
+            price_display = '{}{}'.format(inventor_settings.CURRENCY, price)
 
         if self.price_starts_at:
             price_display = '{} {}'.format(_('starts at'), price_display)

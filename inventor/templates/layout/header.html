@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n static %}
 
 <header class="sticky-top shadow-sm">
     {#    <div class="bg-primary text-white py-2">#}
@@ -42,7 +42,7 @@
     <div class="container header-middle">
         <div class="row">
             <div class="col-sm-auto d-flex align-items-center">
-                <img class="logo img-fluid" src="https://tatrytravel.sk/wp-content/uploads/2018/06/tatry.png" alt="logo">
+                <img class="logo img-fluid" src="{% static 'images/TatryTravel-logo.svg' %}" alt="logo">
                 <div class="d-flex flex-column">
                     <span class="font-weight-light h3 mb-0" style="text-transform: uppercase;">
                         <strong class="font-weight-bolder">Tatry</strong>

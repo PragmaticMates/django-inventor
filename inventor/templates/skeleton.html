@@ -3,10 +3,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <!-- Title -->
         <title>{{ settings.PAGE_TITLE }}</title>
-
-        <!-- Meta tags -->
         <meta charset="utf-8">
         <meta name="description" content="{{ settings.PAGE_DESCRIPTION }}" />
         <meta name="keywords" content="{{ settings.PAGE_KEYWORDS }}" />
@@ -16,11 +13,9 @@
 
         {% block meta %}{% endblock %}
 
-        <!-- Styles -->
-<!--        <link rel="icon" href="{% static 'assets/images/icons/iOS-icon-white.png' %}">-->
-<!--        <link rel="apple-touch-icon" href="{% static 'assets/images/icons/iOS-icon-white.png' %}">-->
-<!--        <link href="{% static 'assets/css/inventor.css' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}" rel="stylesheet" type="text/css">-->
-        <link href="{% static 'css/inventor.css' %}" rel="stylesheet" type="text/css">
+        <link rel="icon" href="{% static 'images/TatryTravel-logo.svg' %}">
+        <link rel="apple-touch-icon" href="{% static 'images/TatryTravel-logo.svg' %}">
+        <link href="{% static 'css/inventor.css' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}" rel="stylesheet" type="text/css">
 
         {% block css %}{% endblock %}
 
@@ -35,8 +30,7 @@
         {% block body %}
         {% endblock %}
 
-        <!-- JavaScripts -->
-<!--        <script defer src="{% static 'assets/js/common.js' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}"></script>-->
+        {#<script defer src="{% static 'assets/js/common.js' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}"></script>#}
 
         {% block js %}{% endblock %}
     </body>
