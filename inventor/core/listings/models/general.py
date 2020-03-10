@@ -176,6 +176,34 @@ class Listing(SlugMixin, models.Model):
     def get_listing_type_display(self):
         return self.__class__._meta.verbose_name
 
+    def get_real_instance(self):
+        """ get object child instance """
+
+        def get_subclasses(cls):
+            subclasses = cls.__subclasses__()
+            result = []
+            for subclass in subclasses:
+                if not subclass._meta.abstract:
+                    result.append(subclass)
+                else:
+                    result += get_subclasses(subclass)
+            return result
+
+        if hasattr(self, '_real_instance'):  # try looking in our cache
+            return self._real_instance
+
+        subclasses = get_subclasses(self.__class__)
+
+        if not subclasses:  # already real_instance
+            self._real_instance = self
+            return self._real_instance
+        else:
+            subclasses_names = [cls.__name__.lower() for cls in subclasses]
+            for subcls_name in subclasses_names:
+                if hasattr(self, subcls_name):
+                    return getattr(self, subcls_name, self)
+            return self
+
 
 class Video(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)

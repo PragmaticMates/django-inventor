@@ -1,8 +1,6 @@
 from django.db.models import F
 from django.views.generic import ListView, DetailView
-
 from inventor.core.listings.filters import ListingFilter
-from inventor.core.listings.models.listing_types import Accommodation
 from inventor.core.listings.models.general import Listing
 
 
@@ -36,5 +34,11 @@ class ListingDetailView(DetailView):
     model = Listing
     template_name = 'listings/listing_detail.html'
 
+    # def get_queryset(self):
+    #     return super().get_queryset().select_subclasses()
+
     def get_queryset(self):
-        return super().get_queryset().select_subclasses()
+        return super().get_queryset().only('id')
+
+    def get_object(self, queryset=None):
+        return super().get_object(queryset).get_real_instance()
