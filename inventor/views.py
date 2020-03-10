@@ -11,7 +11,7 @@ class HomeView(TemplateView):
         context_data = super().get_context_data(**kwargs)
         context_data.update({
             'top_accommodations': Accommodation.objects
-                .promoted()
+                # .promoted()
                 .select_subclasses()
                 .only('id', 'slug', 'title', 'promoted',
                       'location_id', 'location__title',
