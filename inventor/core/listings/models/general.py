@@ -193,6 +193,23 @@ class Listing(SlugMixin, models.Model):
         url_name = cls.get_list_url_name()
         return reverse(f'listings:{url_name}')
 
+    # https://stackoverflow.com/questions/21063078/convert-a-subclass-model-instance-to-another-subclass-model-instance-in-django
+    def convert(self, to_type):
+        instance = self
+        # print(f'[{instance.id}]\t {instance}')
+
+        # create new instance with same parent ID
+        new_instance = to_type(listing_ptr_id=instance.id)
+
+        # update parent fields
+        new_instance.__dict__.update(instance.__dict__)
+
+        # delete the subclass while keeping the parent
+        instance.delete(keep_parents=True)
+
+        # save new instance
+        new_instance.save()
+
     def get_real_instance(self):
         """ get object child instance """
 
