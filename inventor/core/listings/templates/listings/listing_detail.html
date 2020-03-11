@@ -78,9 +78,9 @@
                         <p>{{ album.description }}</p>
                         <div class="row mx-n1 gallery">
                         {% for photo in album.photo_set.all %}
-                            <div class="col-xl-2 col-md-3 col-sm-6 p-1">
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-4 p-1">
                                 <a class="gallery-thumbnail" href="{{ photo.file.url }}"
-                                   style=" background-image: url('{% thumbnail photo.file '150' as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}')"></a>
+                                   style=" background-image: url('{% thumbnail photo.file '500' as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}')"></a>
                             </div>
                         {% endfor %}
                         </div>
