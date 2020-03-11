@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
@@ -6,7 +6,7 @@ from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 
 from inventor.core.bookings.admin import BookingMixinAdmin
-from inventor.core.listings.models.general import Album, Video, Photo
+from inventor.core.listings.models.general import Album, Video, Photo, Listing
 from inventor.core.listings.models.listing_types import Accommodation, Property, EatAndDrink, Service, Vacation, Event, Shop, Vehicle, Profile, Job, Course, \
     Nature
 
@@ -25,6 +25,22 @@ class AlbumInline(NestedStackedInline):
 class VideoInline(admin.StackedInline):
     model = Video
     extra = 1
+
+
+def make_convert_to_type_action(listing_type):
+    def convert_to_type(modeladmin, request, queryset):
+        for listing in queryset:
+            listing.convert(listing_type)
+            messages.info(request, "Listing {0} converted to {1}".format(listing, listing.get_listing_type_display()))
+
+    listing_type_display = listing_type._meta.verbose_name
+    convert_to_type.short_description = _("Convert to {0}").format(listing_type_display)
+    # We need a different '__name__' for each action - Django
+    # uses this as a key in the drop-down box.
+    listing_type_identifier = listing_type.__name__.lower()
+    convert_to_type.__name__ = 'convert_to_type_{0}'.format(listing_type_identifier)
+
+    return convert_to_type
 
 
 class ListingAdmin(AdminImageMixin, NestedModelAdmin):
@@ -57,6 +73,17 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
             'js/map-widget-utils.js',
         )
 
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+
+        for listing_type in Listing.__subclasses__():
+            action = make_convert_to_type_action(listing_type)
+            actions[action.__name__] = (action,
+                                        action.__name__,
+                                        action.short_description)
+
+        return actions
+
 
 class PhotoInline(admin.StackedInline):
     model = Photo
@@ -73,11 +100,11 @@ class AlbumAdmin(admin.ModelAdmin):
 
 # Listing types
 
-@admin.register(Property, EatAndDrink, Service, Vacation, Event, Shop, Vehicle, Profile, Job, Course, Nature)
+@admin.register(*Listing.__subclasses__())
 class ListingTypeAdmin(ListingAdmin):
     pass
 
-
+admin.site.unregister(Accommodation)
 @admin.register(Accommodation)
 class AccommodationAdmin(ListingAdmin):
     fieldsets = ListingTypeAdmin.fieldsets + BookingMixinAdmin.fieldsets + (
