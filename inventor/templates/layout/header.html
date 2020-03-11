@@ -128,6 +128,9 @@
     $(document).ready(function () {
         $('.search-form i').click(function () {
             $('.search-form').toggleClass('search-open');
+            let $search = $('.search-form input');
+            $search.val('');
+            $search.focus();
         });
     });
 
