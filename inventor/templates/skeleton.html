@@ -16,6 +16,7 @@
         <link rel="icon" href="{% static 'images/TatryTravel-logo.svg' %}">
         <link rel="apple-touch-icon" href="{% static 'images/TatryTravel-logo.svg' %}">
         <link href="{% static 'css/inventor.css' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}" rel="stylesheet" type="text/css">
+        <link href="{% static 'node_modules/simplelightbox/dist/simple-lightbox.min.css' %}" rel="stylesheet" type="text/css">
 
         {% block css %}{% endblock %}
 
@@ -30,7 +31,7 @@
         {% block body %}
         {% endblock %}
 
-        {#<script defer src="{% static 'assets/js/common.js' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}"></script>#}
+        <script defer src="{% static 'node_modules/simplelightbox/dist/simple-lightbox.min.js' %}"></script>
 
         {% block js %}{% endblock %}
     </body>

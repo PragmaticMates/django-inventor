@@ -72,13 +72,18 @@
             <div class="col-md-8">
                 <img class="img-fluid mb-4" src="{% thumbnail object.image '750' as preview %}{{ preview.url }}{% endthumbnail %}">
                 <section class="mb-4">
+                    <h2>{% trans 'Gallery' %}</h2>
                     {% for album in object.album_set.all %}
-                        <h2>{{ album.title }}</h2>
+                        <b>{{ album.title }}</b>
                         <p>{{ album.description }}</p>
+                        <div class="row mx-n1 gallery">
                         {% for photo in album.photo_set.all %}
-                            {#                        <img class="img-thumbnail" src="{{ photo.file.url }}">#}
-                            <img class="img-thumbnail" src="{% thumbnail photo.file '150' as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}">
+                            <div class="col-xl-2 col-md-3 col-sm-6 p-1">
+                                <a class="gallery-thumbnail" href="{{ photo.file.url }}"
+                                   style=" background-image: url('{% thumbnail photo.file '150' as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}')"></a>
+                            </div>
                         {% endfor %}
+                        </div>
                     {% endfor %}
                 </section>
                 <section class="mb-4">
@@ -156,4 +161,10 @@
 {#            </div>#}
 {#        </div>#}
 {#    </div>#}
+
+    <script>
+        jQuery(document).ready(function ($) {
+            var lightbox = new SimpleLightbox('.gallery a', { /* options */});
+        });
+    </script>
 {% endblock %}
