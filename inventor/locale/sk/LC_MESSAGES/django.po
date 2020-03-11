@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-10 21:22+0100\n"
-"PO-Revision-Date: 2020-03-10 21:30+0058\n"
+"PO-Revision-Date: 2020-03-10 21:58+0058\n"
 "Last-Translator: b'  <erik.telepovsky@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -622,11 +622,11 @@ msgstr "turizmus"
 
 #: core/listings/models/listing_types.py:73
 msgid "vacation"
-msgstr "atrakcia"
+msgstr "aktivita"
 
 #: core/listings/models/listing_types.py:74
 msgid "vacations"
-msgstr "atrakcie"
+msgstr "aktivity"
 
 #: core/listings/models/listing_types.py:79
 #: core/listings/models/listing_types.py:87
