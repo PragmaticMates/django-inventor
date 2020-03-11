@@ -18,8 +18,9 @@
                     <a class="col bg-white text-dark d-flex flex-column text-center p-3 mx-3" style="min-width: 150px;" href="{% url 'listings:accommodation_list' %}"><i class="fal fa-2x mt-2 fa-bed mb-3"></i> {% trans 'Accommodation' %}</a>
                     <a class="col bg-white text-dark d-flex flex-column text-center p-3 mx-3" style="min-width: 150px;" href="{% url 'listings:eatanddrink_list' %}"><i class="fal fa-2x mt-2 fa-utensils-alt mb-3"></i> {% trans 'Gastronomy' %}</a>
                     <a class="col bg-white text-dark d-flex flex-column text-center p-3 mx-3" style="min-width: 150px;" href="{% url 'listings:event_list' %}"><i class="fal fa-2x mt-2 fa-calendar-alt mb-3"></i> {% trans 'Events' %}</a>
-                    <a class="col bg-white text-dark d-flex flex-column text-center p-3 mx-3" style="min-width: 150px;" href="{% url 'listings:vacation_list' %}"><i class="fal fa-2x mt-2 fa-hiking mb-3"></i> {% trans 'Hiking' %}</a> {# Trips #}
-                    <a class="col bg-white text-dark d-flex flex-column text-center p-3 mx-3" style="min-width: 150px;" href="{% url 'listings:vacation_list' %}"><i class="fal fa-2x mt-2 fa-island-tropical mb-3"></i> {% trans 'Relax' %}</a> {# Activities #}
+                    <a class="col bg-white text-dark d-flex flex-column text-center p-3 mx-3" style="min-width: 150px;" href="{% url 'listings:trip_list' %}"><i class="fal fa-2x mt-2 fa-hiking mb-3"></i> {% trans 'Hiking' %}</a>
+                    <a class="col bg-white text-dark d-flex flex-column text-center p-3 mx-3" style="min-width: 150px;" href="{% url 'listings:activity_list' %}"><i class="fal fa-2x mt-2 fa-island-tropical mb-3"></i> {% trans 'Relax' %}</a>
+                    <a class="col bg-white text-dark d-flex flex-column text-center p-3 mx-3" style="min-width: 150px;" href="{% url 'listings:vacation_list' %}"><i class="fal fa-2x mt-2 fa-island-tropical mb-3"></i> {% trans 'Holiday' %}</a>
                     <a class="col bg-white text-dark d-flex flex-column text-center p-3 mx-3" style="min-width: 150px;" href="{% url 'listings:shop_list' %}"><i class="fal fa-2x mt-2 fa-shopping-cart mb-3"></i> {% trans 'Shopping' %}</a>
                 </div>
             </div>

@@ -66,12 +66,30 @@ class Service(Listing):
         ordering = ('title',)
 
 
-class Vacation(Listing):  # Relax/Vacation
-    section = _('tourism')
+class Vacation(Listing):
+    section = _('holiday')
 
     class Meta:
         verbose_name = _('vacation')
         verbose_name_plural = _('vacations')
+        ordering = ('title',)
+
+
+class Activity(Listing):
+    section = _('relax')
+
+    class Meta:
+        verbose_name = _('activity')
+        verbose_name_plural = _('activities')
+        ordering = ('title',)
+
+
+class Trip(Listing):
+    section = _('tourism')
+
+    class Meta:
+        verbose_name = _('trip')
+        verbose_name_plural = _('trips')
         ordering = ('title',)
 
 

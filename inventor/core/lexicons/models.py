@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -5,7 +7,7 @@ from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
 from inventor.core.listings.mixins import SlugMixin
-from .querysets import CategoryManager
+from inventor.core.lexicons.querysets import CategoryManager
 
 
 class RegularLexicon(SlugMixin, models.Model):
@@ -64,6 +66,12 @@ class Location(SlugMixin, MPTTModel):
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
     description = models.TextField(_('description'), blank=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    photo = models.ImageField(
+        verbose_name=_('photo'),
+        max_length=1024 * 5,
+        upload_to='locations',
+        blank=True, null=True, default=None
+    )
 
     class MPTTMeta:
         order_insertion_by = ['title']
@@ -75,6 +83,22 @@ class Location(SlugMixin, MPTTModel):
 
     def __str__(self):
         return self.title
+
+    def delete(self, **kwargs):
+        """ Deletes file before deleting instance """
+        self.delete_file()
+        super().delete(**kwargs)
+
+    def delete_file(self):
+        """ Deletes image file """
+        try:
+            os.remove(self.photo.path)
+        except ValueError:
+            pass
+        except IOError:
+            pass
+        except OSError:
+            pass
 
 
 # Accommodation
