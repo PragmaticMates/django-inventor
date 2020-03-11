@@ -107,7 +107,7 @@
                     <section class="mb-4" id="description">
                         <h2>{% trans 'Description' %}</h2>
                         <p class="text-light">
-                            {{ object.description }}
+                            {{ object.description|linebreaksbr }}
                         </p>
                     </section>
                 {% endif %}
