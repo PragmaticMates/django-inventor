@@ -37,18 +37,31 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#"><i class="mr-2 fa fa-image"></i> {% trans 'Gallery' %}<span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="mr-2 fa fa-pen"></i> {% trans 'Description' %}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="mr-2 fa fa-list"></i> {% trans 'Amenities' %}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="mr-2 fa fa-video"></i> {% trans 'Video' %}</a>
-                                </li>
+                                {% if object.album_set.exists %}
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#gallery"><i class="mr-2 fa fa-image"></i> {% trans 'Gallery' %}<span class="sr-only">(current)</span></a>
+                                    </li>
+                                {% endif %}
+                                {% if object.description %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#description"><i class="mr-2 fa fa-pen"></i> {% trans 'Description' %}</a>
+                                    </li>
+                                {% endif %}
+                                {% if object.amenities.exists %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#amenities"><i class="mr-2 fa fa-list"></i> {% trans 'Amenities' %}</a>
+                                    </li>
+                                {% endif %}
+                                {% if object.features.exists %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#features"><i class="mr-2 fa fa-list"></i> {% trans 'Features' %}</a>
+                                    </li>
+                                {% endif %}
+                                {% if object.videos.exists %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#videos"><i class="mr-2 fa fa-video"></i> {% trans 'Video' %}</a>
+                                    </li>
+                                {% endif %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="#"><i class="mr-2 fa fa-map-marker-alt"></i> {% trans 'Location' %}</a>
                                 </li>
@@ -70,31 +83,37 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-md-8">
-                <img class="img-fluid mb-4" src="{% thumbnail object.image '750' as preview %}{{ preview.url }}{% endthumbnail %}">
-                <section class="mb-4">
-                    <h2>{% trans 'Gallery' %}</h2>
-                    {% for album in object.album_set.all %}
-                        <b>{{ album.title }}</b>
-                        <p>{{ album.description }}</p>
-                        <div class="row mx-n1 gallery">
-                        {% for photo in album.photo_set.all %}
-                            <div class="col-xl-2 col-md-3 col-sm-4 col-4 p-1">
-                                <a class="gallery-thumbnail" href="{{ photo.file.url }}"
-                                   style=" background-image: url('{% thumbnail photo.file '500' as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}')"></a>
+                {% if object.image %}
+                    <img class="img-fluid mb-4" src="{% thumbnail object.image '750' as preview %}{{ preview.url }}{% endthumbnail %}">
+                {% endif %}
+                {% if object.album_set.exists %}
+                    <section class="mb-4" id="gallery">
+                        <h2>{% trans 'Gallery' %}</h2>
+                        {% for album in object.album_set.all %}
+                            <b>{{ album.title }}</b>
+                            <p>{{ album.description }}</p>
+                            <div class="row mx-n1 gallery">
+                            {% for photo in album.photo_set.all %}
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-4 p-1">
+                                    <a class="gallery-thumbnail" href="{{ photo.file.url }}"
+                                       style=" background-image: url('{% thumbnail photo.file '500' as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}')"></a>
+                                </div>
+                            {% endfor %}
                             </div>
                         {% endfor %}
-                        </div>
-                    {% endfor %}
-                </section>
-                <section class="mb-4">
-                    <h2>{% trans 'Description' %}</h2>
-                    <p>
-                        {{ object.description }}
-                    </p>
-                </section>
+                    </section>
+                {% endif %}
+                {% if object.description %}
+                    <section class="mb-4" id="description">
+                        <h2>{% trans 'Description' %}</h2>
+                        <p>
+                            {{ object.description }}
+                        </p>
+                    </section>
+                {% endif %}
 
                 {% if object.amenities.exists %}
-                    <section class="mb-4">
+                    <section class="mb-4" id="amenities">
                         <h2>{% trans 'Amenities' %}</h2>
                         <div class="row">
                             {% for amenity in object.amenities.all %}
@@ -104,23 +123,28 @@
                     </section>
                 {% endif %}
 
-                <section class="mb-4">
-                    <h2>{% trans 'Features' %}</h2>
-                    <div class="row">
-                        {% for feature in object.features.all %}
-                            <div class="col-auto">
-                                <div class="card p-3 bg-primary text-white mb-3">{{ feature }}
+                {% if object.features.exists %}
+                    <section class="mb-4" id="features">
+                        <h2>{% trans 'Features' %}</h2>
+                        <div class="row">
+                            {% for feature in object.features.all %}
+                                <div class="col-auto">
+                                    <div class="card p-3 bg-primary text-white mb-3">{{ feature }}
+                                    </div>
                                 </div>
-                            </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endif %}
+
+                {% if object.videos.exists %}
+                    <section class="mb-4" id="videos">
+                        <h2>{% trans 'Videos' %}</h2>
+                        {% for video in object.videos.all %}
+                            <div>{{ video }}</div>
                         {% endfor %}
-                    </div>
-                </section>
-                <section class="mb-4">
-                    <h2>{% trans 'Videos' %}</h2>
-                    {% for video in object.videos.all %}
-                        <div>{{ video }}</div>
-                    {% endfor %}
-                </section>
+                    </section>
+                {% endif %}
             </div>
             <div class="col-md-4">
 
@@ -165,6 +189,13 @@
     <script>
         jQuery(document).ready(function ($) {
             var lightbox = new SimpleLightbox('.gallery a', { /* options */});
+
+            $(".second-navbar .nav-link").click(function(e) {
+                e.preventDefault();
+                const aid = $(this).attr("href");
+                const offset = $(aid).offset().top - $('header').height();
+                $('html,body').animate({scrollTop: offset},'slow');
+            });
         });
     </script>
 {% endblock %}
