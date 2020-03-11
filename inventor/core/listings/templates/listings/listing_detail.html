@@ -90,7 +90,7 @@
                     <section class="mb-4" id="gallery">
                         <h2>{% trans 'Gallery' %}</h2>
                         {% for album in object.album_set.all %}
-                            <b>{{ album.title }}</b>
+                            <b class="text-secondary">{{ album.title }}</b>
                             <p>{{ album.description }}</p>
                             <div class="row mx-n1 gallery">
                             {% for photo in album.photo_set.all %}
@@ -106,7 +106,7 @@
                 {% if object.description %}
                     <section class="mb-4" id="description">
                         <h2>{% trans 'Description' %}</h2>
-                        <p>
+                        <p class="text-light">
                             {{ object.description }}
                         </p>
                     </section>
@@ -115,9 +115,9 @@
                 {% if object.amenities.exists %}
                     <section class="mb-4" id="amenities">
                         <h2>{% trans 'Amenities' %}</h2>
-                        <div class="row">
+                        <div class="column-count-xl-4 column-count-lg-3 column-count-sm-2 column-count-1">
                             {% for amenity in object.amenities.all %}
-                                <div class="col-md-3">{{ amenity }}</div>
+                                <div class="mb-2 text-secondary"><i class="fad fa-check-circle fa-lg mr-3 text-success"></i>{{ amenity }}</div>
                             {% endfor %}
                         </div>
                     </section>
@@ -129,8 +129,7 @@
                         <div class="row">
                             {% for feature in object.features.all %}
                                 <div class="col-auto">
-                                    <div class="card p-3 bg-primary text-white mb-3">{{ feature }}
-                                    </div>
+                                    <div class="bg-info rounded text-white px-3 py-2 mb-3">{{ feature }}</div>
                                 </div>
                             {% endfor %}
                         </div>
