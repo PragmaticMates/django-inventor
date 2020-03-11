@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
+from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 
 from inventor.core.bookings.admin import BookingMixinAdmin
@@ -10,9 +11,15 @@ from inventor.core.listings.models.listing_types import Accommodation, Property,
     Nature
 
 
-class AlbumInline(admin.StackedInline):
+class PhotoInline(NestedStackedInline):
+    model = Photo
+    extra = 1
+
+
+class AlbumInline(NestedStackedInline):
     model = Album
     extra = 1
+    inlines = [PhotoInline]
 
 
 class VideoInline(admin.StackedInline):
@@ -20,13 +27,15 @@ class VideoInline(admin.StackedInline):
     extra = 1
 
 
-class ListingAdmin(AdminImageMixin, admin.ModelAdmin):
+class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     date_hierarchy = 'created'
-    search_fields = ['title', 'description']
+    search_fields = ['id', 'title', 'description']
     list_display = ('id', 'title', 'slug', 'address', 'location', 'created')
     list_display_links = ('title',)
     # list_filter = ('location', 'country', )
     autocomplete_fields = ['author', 'location']
+    list_select_related = ['location']
+    inlines = [VideoInline, AlbumInline]  # add comments?
 
     fieldsets = (
         (_('Definition'), {'fields': ('title', 'slug', 'description',)}),
@@ -39,7 +48,6 @@ class ListingAdmin(AdminImageMixin, admin.ModelAdmin):
         (_('Social connections'), {'fields': ('social_networks',)}),
     )
     filter_vertical = ['categories', 'features']  # TODO: filter categories for selected listing type only
-    inlines = [VideoInline, AlbumInline]  # add comments?
     formfield_overrides = {
         models.PointField: {"widget": GooglePointFieldWidget}
     }
