@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
-
+from sorl.thumbnail.admin import AdminImageMixin
 from inventor.core.lexicons.models import Location, Category, Feature
 from inventor.core.lexicons.models import AccommodationAmenity
 
@@ -14,7 +14,7 @@ class CategoryAdmin(DraggableMPTTAdmin):
 
 
 @admin.register(Location)
-class LocationAdmin(DraggableMPTTAdmin):
+class LocationAdmin(AdminImageMixin, DraggableMPTTAdmin):
     search_fields = ['title']
     list_display = ('tree_actions', 'indented_title', 'slug')
     list_display_links = ('indented_title',)

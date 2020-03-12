@@ -7,8 +7,7 @@ from sorl.thumbnail.admin import AdminImageMixin
 
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo, Listing
-from inventor.core.listings.models.listing_types import Accommodation, Property, EatAndDrink, Service, Vacation, Event, Shop, Vehicle, Profile, Job, Course, \
-    Nature
+from inventor.core.listings.models.listing_types import Accommodation
 
 
 class PhotoInline(NestedStackedInline):
@@ -103,6 +102,7 @@ class AlbumAdmin(admin.ModelAdmin):
 @admin.register(*Listing.__subclasses__())
 class ListingTypeAdmin(ListingAdmin):
     pass
+
 
 admin.site.unregister(Accommodation)
 @admin.register(Accommodation)

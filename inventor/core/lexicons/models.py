@@ -2,10 +2,11 @@ import os
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
-
+from sorl import thumbnail
 from inventor.core.listings.mixins import SlugMixin
 from inventor.core.lexicons.querysets import CategoryManager
 
@@ -66,7 +67,7 @@ class Location(SlugMixin, MPTTModel):
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
     description = models.TextField(_('description'), blank=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-    photo = models.ImageField(
+    photo = thumbnail.ImageField(
         verbose_name=_('photo'),
         max_length=1024 * 5,
         upload_to='locations',
@@ -83,6 +84,11 @@ class Location(SlugMixin, MPTTModel):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        from inventor.core.listings.models.general import Listing
+        url = Listing.get_list_url()
+        return f'{url}?location={self.pk}'  # TODO: replace with slug (modify filter field at first)
 
     def delete(self, **kwargs):
         """ Deletes file before deleting instance """

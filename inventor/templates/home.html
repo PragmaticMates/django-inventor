@@ -37,7 +37,6 @@
 {% endblock %}
 
 {% block content %}
-
     <section>
         <div class="container-fluid bg-light-translucent">
             <div class="container">
@@ -275,6 +274,27 @@
             </div>
         </div>
     </section>
+
+    <section>
+        <div class="container-fluid bg-light-translucent">
+            <div class="row">
+                <div class="col my-5">
+                    <h2 class="mt-4 text-center">
+                        <strong>{% trans 'Locations' %} TODO: carousel</strong>
+                    </h2>
+                    <h5 class="text-light font-weight-light text-center mb-3">{% trans 'in Hight Tatras' %}</h5>
+                </div>
+            </div>
+            <div class="row pb-5">
+                {% for location in locations %}
+                    <div class="col-md-1">
+                        {% include 'lexicons/widgets/location.html' %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
     <section>
         <div class="container mb-4 py-5">
             <div class="row">

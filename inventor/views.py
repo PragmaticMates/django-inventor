@@ -1,6 +1,7 @@
 from django.db.models import F
 from django.views.generic import TemplateView
 
+from inventor.core.lexicons.models import Location
 from inventor.core.listings.models.listing_types import Accommodation
 
 
@@ -17,6 +18,7 @@ class HomeView(TemplateView):
                       'location_id', 'location__title',
                       'image', 'price', 'price_unit', 'price_starts_at')
                 .annotate(location_title=F('location__title'))
-                .order_by('?')[:6]
+                .order_by('?')[:6],
+            'locations': Location.objects.all()
         })
         return context_data
