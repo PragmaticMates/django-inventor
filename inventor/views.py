@@ -15,9 +15,9 @@ class HomeView(TemplateView):
                 # .promoted()
                 .select_subclasses()
                 .only('id', 'slug', 'title', 'promoted',
-                      'location_id', 'location__title',
+                      'locality_id', 'locality__title',
                       'image', 'price', 'price_unit', 'price_starts_at')
-                .annotate(location_title=F('location__title'))
+                .annotate(locality_title=F('locality__title'))
                 .order_by('?')[:6],
             'localities': Locality.objects.all()
         })
