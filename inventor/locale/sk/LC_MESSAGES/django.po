@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-11 19:00+0100\n"
-"PO-Revision-Date: 2020-03-11 19:01+0058\n"
+"PO-Revision-Date: 2020-03-12 22:59+0058\n"
 "Last-Translator: b'  <erik.telepovsky@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -392,11 +392,11 @@ msgstr "fotografia"
 
 #: core/lexicons/models.py:80
 msgid "location"
-msgstr "lokácia"
+msgstr "lokalita"
 
 #: core/lexicons/models.py:81
 msgid "locations"
-msgstr "lokácie"
+msgstr "lokality"
 
 #: core/lexicons/models.py:108
 msgid "accommodation amenity"
@@ -452,7 +452,7 @@ msgstr "€"
 
 #: core/listings/filters.py:61
 msgid "All locations"
-msgstr "Všetky umiestnenia"
+msgstr "Všetky lokality"
 
 #: core/listings/filters.py:72
 msgid "Categories"
@@ -772,7 +772,7 @@ msgstr "Video"
 
 #: core/listings/templates/listings/listing_detail.html:66
 msgid "Location"
-msgstr "Poloha"
+msgstr "Lokalita"
 
 #: core/listings/templates/listings/listing_detail.html:72
 msgid "Reviews"
