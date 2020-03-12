@@ -13,7 +13,7 @@ from internationalflavor.countries import CountryField
 from sorl import thumbnail
 
 from inventor import settings as inventor_settings
-from inventor.core.lexicons.models import Category, Feature, Location
+from inventor.core.lexicons.models import Category, Feature, Locality
 from inventor.core.listings.managers import ListingQuerySet
 
 
@@ -55,8 +55,8 @@ class Listing(SlugMixin, models.Model):
     price_unit = models.CharField(_('price unit'), choices=PRICE_UNITS, max_length=5, blank=True)
     price_per_person = models.BooleanField(_('price per person'), default=False)
 
-    # address
-    location = models.ForeignKey(Location, on_delete=models.SET_NULL,
+    # location
+    locality = models.ForeignKey(Locality, on_delete=models.SET_NULL,
                                  blank=True, null=True, default=None)
 
     address = models.TextField(_('address'), help_text=_('street, postcode, city'), max_length=500, blank=True)

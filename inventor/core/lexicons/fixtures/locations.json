@@ -1,6 +1,6 @@
 [
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 1,
     "fields": {
       "title": "Long Island",
@@ -12,7 +12,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 2,
     "fields": {
       "parent": 1,
@@ -25,7 +25,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 3,
     "fields": {
       "parent": 1,
@@ -38,7 +38,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 4,
     "fields": {
       "parent": 1,
@@ -51,7 +51,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 5,
     "fields": {
       "title": "New Jersey",
@@ -63,7 +63,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 6,
     "fields": {
       "parent": 5,
@@ -76,7 +76,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 7,
     "fields": {
       "parent": 5,
@@ -89,7 +89,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 8,
     "fields": {
       "parent": 5,
@@ -102,7 +102,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 9,
     "fields": {
       "parent": 5,
@@ -115,7 +115,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 10,
     "fields": {
       "parent": 5,
@@ -128,7 +128,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 11,
     "fields": {
       "parent": 5,
@@ -141,7 +141,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 12,
     "fields": {
       "parent": 5,
@@ -154,7 +154,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 13,
     "fields": {
       "parent": 5,
@@ -167,7 +167,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 14,
     "fields": {
       "parent": 5,
@@ -180,7 +180,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 15,
     "fields": {
       "parent": 5,
@@ -193,7 +193,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 16,
     "fields": {
       "title": "New York City",
@@ -205,7 +205,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 17,
     "fields": {
       "parent": 16,
@@ -218,7 +218,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 18,
     "fields": {
       "parent": 16,
@@ -231,7 +231,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 19,
     "fields": {
       "parent": 16,
@@ -244,7 +244,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 20,
     "fields": {
       "parent": 16,
@@ -257,7 +257,7 @@
     }
   },
   {
-    "model": "lexicons.Location",
+    "model": "lexicons.Locality",
     "pk": 21,
     "fields": {
       "parent": 16,

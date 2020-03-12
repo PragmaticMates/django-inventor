@@ -14,7 +14,7 @@ class ListingListView(ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        queryset = self.filter.qs.only('id', 'slug', 'title', 'location_id', 'location__title', 'image', 'price', 'price_unit', 'price_starts_at', 'promoted').annotate(location_title=F('location__title'))
+        queryset = self.filter.qs.only('id', 'slug', 'title', 'locality_id', 'locality__title', 'image', 'price', 'price_unit', 'price_starts_at', 'promoted').annotate(locality_title=F('locality__title'))
         return queryset
         # return self.sort_queryset(queryset)
 
