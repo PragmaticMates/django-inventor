@@ -6,13 +6,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md py-4 mb-3">
-                    <nav aria-label="breadcrumb" class="mb-2">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{% url 'inventor:home' %}">{% trans 'Home' %}</a></li>
-                            <li class="breadcrumb-item"><a href="{{ object.listing_class.get_list_url }}">{{ object.get_listing_type_display_plural|title }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{% trans 'Detail' %}</li>
-                        </ol>
-                    </nav>
+{#                    <nav aria-label="breadcrumb" class="mb-2">#}
+{#                        <ol class="breadcrumb">#}
+{#                            <li class="breadcrumb-item"><a href="{% url 'inventor:home' %}">{% trans 'Home' %}</a></li>#}
+{#                            <li class="breadcrumb-item"><a href="{{ object.listing_class.get_list_url }}">{{ object.get_listing_type_display_plural|title }}</a></li>#}
+{#                            <li class="breadcrumb-item active" aria-current="page">{% trans 'Detail' %}</li>#}
+{#                        </ol>#}
+{#                    </nav>#}
+                    <a href="{{ object.get_list_url }}" class="listing-category d-inline-block mb-2">
+                        {{ object.get_listing_type_display }}
+                    </a>
                     <h1 class="mb-3">{{ object.title }}</h1>
 {#                    <span class="listing-category d-inline-block mb-3">#}
 {#                        {{ object.get_listing_type_display }}#}
