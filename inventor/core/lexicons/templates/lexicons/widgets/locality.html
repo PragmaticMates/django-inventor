@@ -8,8 +8,10 @@
              {% endif %}>
         </div>
         <div class="locality-title">
-            <strong class="d-block">{{ locality.title|capfirst }}</strong>
-            <small>{{ locality.listing_set.distinct.count }} {% trans 'listings' %}</small>
+            <strong class="d-block h3">{{ locality.title|capfirst }}</strong>
+            <small class="h6">
+                {% blocktrans count num_listings=locality.listing_set.distinct.count %}{{ num_listings }} listing{% plural %}{{ num_listings }} listings{% endblocktrans %}
+            </small>
         </div>
     </a>
 </div>
