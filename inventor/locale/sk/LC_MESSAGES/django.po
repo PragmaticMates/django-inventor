@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-13 02:17+0100\n"
-"PO-Revision-Date: 2020-03-13 02:19+0058\n"
+"PO-Revision-Date: 2020-03-13 02:32+0058\n"
 "Last-Translator: b'  <erik.telepovsky@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -438,7 +438,7 @@ msgstr "Cena"
 #: core/listings/templates/listings/listing_detail.html:76
 #: core/listings/templates/listings/listing_detail.html:179
 msgid "Location"
-msgstr "Lokácia"
+msgstr "Poloha"
 
 #: core/listings/admin.py:61
 msgid "Previews"
