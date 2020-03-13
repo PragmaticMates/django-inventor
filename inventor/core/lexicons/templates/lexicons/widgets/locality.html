@@ -1,9 +1,11 @@
 {% load i18n static thumbnail %}
 
-<div class="card rounded-0 shadow-sm listing-item">
+<div class="card rounded-0 shadow-sm locality-item">
     <a href="{{ locality.get_absolute_url }}">
         <div class="locality-photo {% if locality.photo %}bg-cover{% else %} d-flex align-items-center justify-content-center{% endif %}"
-             {% if locality.photo %}style="background-image: url('{% thumbnail locality.photo "500" as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}');" {% endif %}>
+             {% if locality.photo %}style="background-image: url('{% thumbnail locality.photo "500" as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}');"
+             {% else %}style="background-image: url('{% static 'images/lomnica.jpg' %}');"  {# todo remove #}
+             {% endif %}>
         </div>
         <div class="locality-title">
             <strong class="d-block">{{ locality.title|capfirst }}</strong>
