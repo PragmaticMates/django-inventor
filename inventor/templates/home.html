@@ -285,13 +285,23 @@
                     <h5 class="text-light font-weight-light text-center mb-3">{% trans 'in Hight Tatras' %}</h5>
                 </div>
             </div>
-            <div class="row pb-5">
-                {% for location in locations %}
-                    <div class="col-md-1">
-                        {% include 'lexicons/widgets/location.html' %}
+                <div id="carousel-location" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        {% for location in locations %}
+                            <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 {% if forloop.first %}active{% endif %}">
+                                {% include 'lexicons/widgets/location.html' %}
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            </div>
+                    <a class="carousel-control-prev" href="#carousel-location" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">{% trams 'Previous' %}</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-location" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">{% trans 'Next' %}</span>
+                    </a>
+                </div>
         </div>
     </section>
 
@@ -302,10 +312,31 @@
                     <span>Máte nápad? Chcete  zdarma publikovať na stránke?</span><strong> Privítame fotografie, tipy na podujatia, turistiku, ubytovanie, stravovanie, nakupovanie atď ... </strong>
                 </div>
                 <div class="col-sm-3">
-                    <a href="https://tatrytravel.sk/kontakt/" class="btn btn-primary">Neváhajte a kontaktujte nás<a>
+                    <a href="https://tatrytravel.sk/kontakt/" class="btn btn-primary">Neváhajte a kontaktujte nás</a>
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        $('#carousel-location').on('slide.bs.carousel', function (e) {
+            var $e = $(e.relatedTarget);
+            var idx = $e.index();
+            var itemsPerSlide = 5;
+            var totalItems = $('.carousel-item').length;
+
+            if (idx >= totalItems - (itemsPerSlide - 1)) {
+                var it = itemsPerSlide - (totalItems - idx);
+                for (var i = 0; i < it; i++) {
+                    // append slides to end
+                    if (e.direction == "left") {
+                        $('.carousel-item').eq(i).appendTo('.carousel-inner');
+                    } else {
+                        $('.carousel-item').eq(0).appendTo('.carousel-inner');
+                    }
+                }
+            }
+        });
+    </script>
 
 {% endblock %}
