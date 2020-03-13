@@ -20,7 +20,7 @@ class ListingFilter(django_filters.FilterSet):
         fields = [
             'keyword',
             'promoted',
-            'location',
+            'locality',
             'price',
             'categories', 'features'
         ]
@@ -53,11 +53,11 @@ class ListingFilter(django_filters.FilterSet):
         self.helper.layout = Layout(
             'keyword',
             'promoted',
-            'location',
+            'locality',
             'price',
             'categories', 'features'
         )
-        self.form.fields['location'].empty_label = _('All locations')
+        self.form.fields['locality'].empty_label = _('All localities')
 
         # dynamic categories
         self.filters['categories'].field_name = 'categories__slug'

@@ -62,7 +62,7 @@ class Feature(SlugMixin, models.Model):
         return self.title
 
 
-class Location(SlugMixin, MPTTModel):
+class Locality(SlugMixin, MPTTModel):
     title = models.CharField(_('title'), max_length=100, unique=True)
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
     description = models.TextField(_('description'), blank=True)
@@ -70,7 +70,7 @@ class Location(SlugMixin, MPTTModel):
     photo = thumbnail.ImageField(
         verbose_name=_('photo'),
         max_length=1024 * 5,
-        upload_to='locations',
+        upload_to='localities',
         blank=True, null=True, default=None
     )
 
@@ -78,8 +78,8 @@ class Location(SlugMixin, MPTTModel):
         order_insertion_by = ['title']
 
     class Meta:
-        verbose_name = _('location')
-        verbose_name_plural = _('locations')
+        verbose_name = _('locality')
+        verbose_name_plural = _('localities')
         ordering = ('title',)
 
     def __str__(self):
@@ -88,7 +88,7 @@ class Location(SlugMixin, MPTTModel):
     def get_absolute_url(self):
         from inventor.core.listings.models.general import Listing
         url = Listing.get_list_url()
-        return f'{url}?location={self.pk}'  # TODO: replace with slug (modify filter field at first)
+        return f'{url}?locality={self.pk}'  # TODO: replace with slug (modify filter field at first)
 
     def delete(self, **kwargs):
         """ Deletes file before deleting instance """

@@ -2,7 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
-from inventor.core.listings.models.general import Location, Category
+from inventor.core.listings.models.general import Locality, Category
 
 
 class Command(BaseCommand):
@@ -35,5 +35,5 @@ class Command(BaseCommand):
 
         print('Rebuilding MPTT trees...')
         Category.objects.rebuild()
-        Location.objects.rebuild()
+        Locality.objects.rebuild()
         print('MPTT trees rebuilded.')

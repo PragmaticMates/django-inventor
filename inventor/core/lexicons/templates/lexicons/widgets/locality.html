@@ -1,0 +1,13 @@
+{% load i18n static thumbnail %}
+
+<div class="card rounded-0 shadow-sm listing-item">
+    <a href="{{ locality.get_absolute_url }}">
+        <div class="locality-photo {% if locality.photo %}bg-cover{% else %} d-flex align-items-center justify-content-center{% endif %}"
+             {% if locality.photo %}style="background-image: url('{% thumbnail locality.photo "500" as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}');" {% endif %}>
+        </div>
+        <div class="locality-title">
+            <strong class="d-block">{{ locality.title|capfirst }}</strong>
+            <small>{{ locality.listing_set.distinct.count }} {% trans 'listings' %}</small>
+        </div>
+    </a>
+</div>

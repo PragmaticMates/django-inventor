@@ -45,11 +45,11 @@ def make_convert_to_type_action(listing_type):
 class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     date_hierarchy = 'created'
     search_fields = ['id', 'title', 'description']
-    list_display = ('id', 'title', 'slug', 'address', 'location', 'created')
+    list_display = ('id', 'title', 'slug', 'address', 'locality', 'created')
     list_display_links = ('title',)
-    # list_filter = ('location', 'country', )
-    autocomplete_fields = ['author', 'location']
-    list_select_related = ['location']
+    # list_filter = ('locality', 'country', )
+    autocomplete_fields = ['author', 'locality']
+    list_select_related = ['locality']
     inlines = [VideoInline, AlbumInline]  # add comments?
 
     fieldsets = (
@@ -57,7 +57,7 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
         (_('Management'), {'fields': ('author', 'published', 'promoted')}),
         (_('Specification'), {'fields': (('categories', 'features'),)}),
         (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person'),)}),
-        (_('Address'), {'fields': ('location', 'country', 'address', 'point')}),
+        (_('Location'), {'fields': ('locality', 'country', 'address', 'point')}),
         (_('Previews'), {'fields': (('image', 'banner'),)}),
         (_('Contact information'), {'fields': ('person', 'phone', 'email', 'website')}),
         (_('Social connections'), {'fields': ('social_networks',)}),
