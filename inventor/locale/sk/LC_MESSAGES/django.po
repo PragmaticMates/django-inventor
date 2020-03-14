@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-13 02:17+0100\n"
-"PO-Revision-Date: 2020-03-13 02:32+0058\n"
+"POT-Creation-Date: 2020-03-13 17:53+0100\n"
+"PO-Revision-Date: 2020-03-13 17:53+0058\n"
 "Last-Translator: b'  <erik.telepovsky@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -391,12 +391,10 @@ msgid "photo"
 msgstr "fotografia"
 
 #: core/lexicons/models.py:81
-#| msgid "location"
 msgid "locality"
 msgstr "lokalita"
 
 #: core/lexicons/models.py:82
-#| msgid "locations"
 msgid "localities"
 msgstr "lokality"
 
@@ -408,10 +406,14 @@ msgstr "vybavenie ubytovania"
 msgid "accommodation amenities"
 msgstr "vybavenia ubytovania"
 
-#: core/lexicons/templates/lexicons/widgets/locality.html:10
-#: core/listings/models/general.py:106
-msgid "listings"
-msgstr "položky"
+#: core/lexicons/templates/lexicons/widgets/locality.html:13
+#, python-format
+msgid "%(num_listings)s listing"
+msgid_plural "%(num_listings)s listings"
+msgstr[0] "%(num_listings)s položka"
+msgstr[1] "%(num_listings)s položky"
+msgstr[2] "%(num_listings)s položky"
+msgstr[3] "%(num_listings)s položiek"
 
 #: core/listings/admin.py:36
 #, python-brace-format
@@ -462,7 +464,6 @@ msgid "Keyword"
 msgstr "Kľúčové slovo"
 
 #: core/listings/filters.py:60
-#| msgid "All locations"
 msgid "All localities"
 msgstr "Všetky lokality"
 
@@ -533,6 +534,10 @@ msgstr "webstránka"
 #: core/listings/models/general.py:94
 msgid "social networks"
 msgstr "sociálne siete"
+
+#: core/listings/models/general.py:106
+msgid "listings"
+msgstr "položky"
 
 #: core/listings/models/general.py:139
 msgid "starts at"
@@ -845,11 +850,11 @@ msgstr "Relax"
 msgid "Shopping"
 msgstr "Nakupovanie"
 
-#: templates/home.html:30
+#: templates/home.html:30 templates/home.html:298
 msgid "Previous"
 msgstr "Predchádzajúce"
 
-#: templates/home.html:34
+#: templates/home.html:34 templates/home.html:302
 msgid "Next"
 msgstr "Ďalšie"
 
@@ -882,12 +887,10 @@ msgid "Season is open and welcomes tourists from all over the world."
 msgstr "Sezóna je otvorená a víta turistov z celého sveta"
 
 #: templates/home.html:283
-#| msgid "Location"
 msgid "Localities"
 msgstr "Lokality"
 
 #: templates/home.html:285
-#| msgid "Hiking in High Tatras"
 msgid "in Hight Tatras"
 msgstr "vo Vysokých Tatrách"
 
