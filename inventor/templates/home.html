@@ -285,10 +285,10 @@
                     <h5 class="text-light font-weight-light text-center mb-3">{% trans 'in Hight Tatras' %}</h5>
                 </div>
             </div>
-                <div id="carousel-location" class="carousel slide" data-ride="carousel">
+                <div id="carousel-location" class="carousel slide" >
                     <div class="carousel-inner row w-100 mx-auto" role="listbox">
                         {% for locality in localities %}
-                            <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 {% if forloop.first %}active{% endif %}">
+                            <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 {% if forloop.first %}active{% endif %}">
                                 {% include 'lexicons/widgets/locality.html' %}
                             </div>
                         {% endfor %}
@@ -323,7 +323,7 @@
             $('#carousel-location').on('slide.bs.carousel', function (e) {
                 var $e = $(e.relatedTarget);
                 var idx = $e.index();
-                var itemsPerSlide = 5;
+                var itemsPerSlide = 7;
                 var totalItems = $('#carousel-location .carousel-item').length;
 
                 if (idx >= totalItems - (itemsPerSlide - 1)) {
