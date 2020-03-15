@@ -1,13 +1,26 @@
 from django.db.models import F
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView
+from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
+
 from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.models.general import Listing
 
 
-class ListingListView(ListView):
+class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     model = Listing
     filter_class = ListingFilter
     paginate_by = 12
+    displays = ['columns']
+    paginate_by_display = {'columns': [12, 24, 48]}
+    sorting_options = {
+        '-created': _('Newest'),
+        'created': _('Oldest'),
+        # '-modified': _('Recently modified'),
+        'price': _('Price (Low to high)'),
+        '-price': _('Price (High to low)'),
+        'title': _('Title'),
+    }
 
     def dispatch(self, request, *args, **kwargs):
         self.filter = self.filter_class(data=request.GET, queryset=self.get_whole_queryset(), listing_type=None if self.model == Listing else self.model)
@@ -15,8 +28,7 @@ class ListingListView(ListView):
 
     def get_queryset(self):
         queryset = self.filter.qs.only('id', 'slug', 'title', 'locality_id', 'locality__title', 'image', 'price', 'price_unit', 'price_starts_at', 'promoted').annotate(locality_title=F('locality__title'))
-        return queryset
-        # return self.sort_queryset(queryset)
+        return self.sort_queryset(queryset)
 
     def get_whole_queryset(self):
         return super().get_queryset().select_subclasses().order_by('-promoted', 'modified')

@@ -27,6 +27,13 @@
                 {% include 'helpers/filter-vertical.html' %}
             </side>
             <div class="col-md-9">
+                <div class="queryset-actions row">
+{#                    <div class="col-sm-auto">{% include 'helpers/filter-modal.html' with asynchronous_load=True small=True %}</div>#}
+{#                    <div class="col-sm d-none d-lg-block">{% filter_values filter %}</div>#}
+                    <div class="col-sm"></div>
+                    {% sorting %}
+                    {% display_modes %}
+                </div>
                 <div class="row">
                     {% for object in object_list %}
                         <div class="col-md-4">
