@@ -278,14 +278,14 @@
     <section>
         <div class="container-fluid bg-light-translucent">
             <div class="row">
-                <div class="col my-5">
+                <div class="col mt-5">
                     <h2 class="mt-4 text-center">
                         <strong>{% trans 'Localities' %} TODO: carousel</strong>
                     </h2>
                     <h5 class="text-light font-weight-light text-center mb-3">{% trans 'in Hight Tatras' %}</h5>
                 </div>
             </div>
-                <div id="carousel-location" class="carousel slide" >
+                <div id="carousel-location" class="carousel slide py-5" >
                     <div class="carousel-inner row w-100 mx-auto" role="listbox">
                         {% for locality in localities %}
                             <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 {% if forloop.first %}active{% endif %}">
@@ -306,13 +306,17 @@
     </section>
 
     <section>
-        <div class="container mb-4 py-5">
+        <div class="container mb-4 py-5 call-to-action">
             <div class="row">
-                <div class="col-sm-9">
-                    <span>Máte nápad? Chcete  zdarma publikovať na stránke?</span><strong> Privítame fotografie, tipy na podujatia, turistiku, ubytovanie, stravovanie, nakupovanie atď ... </strong>
+                <div class="col-sm-auto d-flex align-items-center">
+                    <i class="fal fa-3x fa-layer-group text-primary"></i>
                 </div>
-                <div class="col-sm-3">
-                    <a href="https://tatrytravel.sk/kontakt/" class="btn btn-primary">Neváhajte a kontaktujte nás</a>
+                <div class="col-sm d-flex justify-content-center flex-column">
+                    <span>Máte nápad? Chcete  zdarma publikovať na stránke?</span>
+                    <strong> Privítame fotografie, tipy na podujatia, turistiku, ubytovanie, stravovanie, nakupovanie atď ... </strong>
+                </div>
+                <div class="col-sm-3 d-flex align-items-center">
+                    <a href="https://tatrytravel.sk/kontakt/" class="btn btn-lg btn-primary">Neváhajte a kontaktujte nás</a>
                 </div>
             </div>
         </div>
