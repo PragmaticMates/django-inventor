@@ -13,7 +13,7 @@ from pragmatic.filters import SliderFilter
 
 class ListingFilter(django_filters.FilterSet):
     keyword = django_filters.CharFilter(label=_('Keyword'), method=lambda qs, name, value: qs.by_keyword(value))
-    price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment='listings.Listing.price')
+    price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, show_inputs=False, segment='listings.Listing.price')
     locality = django_filters.ChoiceFilter(label=_('Locality'), choices=Locality.objects.all().values_list('slug', 'title'), field_name='locality__slug')
 
     class Meta:
