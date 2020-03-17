@@ -88,7 +88,7 @@ class Locality(SlugMixin, MPTTModel):
     def get_absolute_url(self):
         from inventor.core.listings.models.general import Listing
         url = Listing.get_list_url()
-        return f'{url}?locality={self.pk}'  # TODO: replace with slug (modify filter field at first)
+        return f'{url}?locality={self.slug}'
 
     def delete(self, **kwargs):
         """ Deletes file before deleting instance """

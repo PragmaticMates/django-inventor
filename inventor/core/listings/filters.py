@@ -5,7 +5,7 @@ from django.db import models
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from inventor.core.lexicons.models import Category
+from inventor.core.lexicons.models import Category, Locality
 from inventor.core.listings.models.general import Listing
 from inventor.utils import SingleSubmitFormHelper, PositiveBooleanFilter
 from pragmatic.filters import SliderFilter
@@ -14,6 +14,7 @@ from pragmatic.filters import SliderFilter
 class ListingFilter(django_filters.FilterSet):
     keyword = django_filters.CharFilter(label=_('Keyword'), method=lambda qs, name, value: qs.by_keyword(value))
     price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment='listings.Listing.price')
+    locality = django_filters.ChoiceFilter(label=_('Locality'), choices=Locality.objects.all().values_list('slug', 'title'), field_name='locality__slug')
 
     class Meta:
         model = Listing
@@ -60,7 +61,7 @@ class ListingFilter(django_filters.FilterSet):
         )
         self.form.fields['locality'].empty_label = _('All localities')
 
-        # categories searched by slug
+        # categories and localities searched by slug
         self.filters['categories'].field_name = 'categories__slug'
 
         if listing_type:
