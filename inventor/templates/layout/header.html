@@ -42,16 +42,18 @@
     <div class="container header-middle">
         <div class="row">
             <div class="col-sm-auto d-flex align-items-center">
-                <img class="logo img-fluid mr-2" src="{% static 'images/TatryTravel-logo.svg' %}" alt="logo">
-                <div class="d-flex flex-column">
-                    <span class="font-weight-light h3 mb-0" style="text-transform: uppercase;">
-                        <strong class="font-weight-bolder">Tatry</strong>
-                        <span class="text-light font-weight-light" style="opacity: .5;">Travel</span>
-                        <span class="text-primary font-weight-bold">.sk</span>
-                    </span>
-                    {#                    <span class="font-weight-light h5 mb-0">TatryTravel.sk</span>#}
-                    {#                    <small class="text-light">Turistika – Ubytovanie – Atrakcie</small>#}
-                </div>
+                <a href="{% url 'inventor:home' %}" class="d-flex align-items-center">
+                    <img class="logo img-fluid mr-2" src="{% static 'images/TatryTravel-logo.svg' %}" alt="logo">
+                    <div class="d-flex flex-column">
+                        <span class="font-weight-light h3 mb-0" style="text-transform: uppercase;">
+                            <strong class="font-weight-bolder">Tatry</strong>
+                            <span class="text-light font-weight-light" style="opacity: .5;">Travel</span>
+                            <span class="text-primary font-weight-bold">.sk</span>
+                        </span>
+                        {#                    <span class="font-weight-light h5 mb-0">TatryTravel.sk</span>#}
+                        {#                    <small class="text-light">Turistika – Ubytovanie – Atrakcie</small>#}
+                    </div>
+                </a>
             </div>
             <div class="col-sm"></div>
             <div class="col-sm-auto d-flex align-items-center">
