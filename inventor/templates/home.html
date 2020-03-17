@@ -117,25 +117,37 @@
                 </div>
                 <div class="row pb-5">
                     <div class="col-lg-6">
-                        <div class="accordion" id="accordionExample">
+                        <div class="accordion" id="accordionFAQ1">
                             <div class="card">
                                 <div class="card-header border-0 bg-white" id="headingOne">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                             Tatranské informačné centrá
                                         </button>
                                     </h2>
                                 </div>
 
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionFAQ1">
                                     <div class="card-body">
-                                        <div id="faq-19018" class="faq-item-answer" aria-expanded="true" style="">
-                                            <p><img class=" wp-image-19019 aligncenter" src="https://tatrytravel.sk/wp-content/uploads/2018/10/csm_TIC_9c3548e931-600x600.jpg" alt="" width="141" height="141" srcset="https://tatrytravel.sk/wp-content/uploads/2018/10/csm_TIC_9c3548e931-600x600.jpg 600w, https://tatrytravel.sk/wp-content/uploads/2018/10/csm_TIC_9c3548e931-300x300.jpg 300w, https://tatrytravel.sk/wp-content/uploads/2018/10/csm_TIC_9c3548e931.jpg 712w" sizes="(max-width: 141px) 100vw, 141px"></p>
-                                            <p style="text-align: center;"><strong>TIK Štrbské Pleso:&nbsp;</strong>+421 911 333 466</p>
-                                            <p style="text-align: center;"><strong>TIK Starý Smokovec:&nbsp;</strong>+421 52 442 34 40</p>
-                                            <p style="text-align: center;"><strong>TIK Tatranská Lomnica:&nbsp;</strong>+421 52 446 81 19</p>
-                                            <p style="text-align: center;"><strong>MIK Poprad:&nbsp;</strong>+421 52 16 186</p>
-                                            <p style="text-align: center;"><strong>Viac informácii o Tatranských informačných centrách nájdete <a href="https://tatrytravel.sk/turistika/?travel-activities%5B%5D=informacne-centra" target="_blank" rel="noopener">tu</a>.</strong></p>
+                                        <div class="faq-item-answer" aria-expanded="false">
+                                            <p class="text-center">
+                                                <img class="img-fluid" src="{% static 'images/faq/info.jpg' %}">
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>TIK Štrbské Pleso: </strong>+421 911 333 466
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>TIK Starý Smokovec: </strong>+421 52 442 34 40
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>TIK Tatranská Lomnica: </strong>+421 52 446 81 19
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>MIK Poprad: </strong>+421 52 16 186
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Viac informácii o Tatranských informačných centrách nájdete <a href="https://tatrytravel.sk/turistika/?travel-activities%5B%5D=informacne-centra" target="_blank" rel="noopener">tu</a>.</strong>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -149,9 +161,9 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionFAQ1">
                                     <div class="card-body">
-                                        <div id="faq-18971" class="faq-item-answer" aria-expanded="true" style="">
+                                        <div class="faq-item-answer" aria-expanded="false">
                                             <p>Pod touto možnosťou vybavenia sa rozumie, že ubytovacie zariadenie disponuje iba jednou z týchto možností. Viac ubytovacích zariadení, ktoré sú vybavené saunou alebo vírivkou nájdete <a href="https://tatrytravel.sk/ubytovanie/?vybavenie_ubytovania%5B%5D=sauna" target="_blank" rel="noopener">tu</a>.</p>
                                         </div>
                                     </div>
@@ -166,9 +178,9 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionFAQ1">
                                     <div class="card-body">
-                                        Počas letných prázdnin, prevažná časť ubytovania vo Vysokých Tatrách ponúka len týždňové pobyty a rezervovať si ich treba už v zime či jari. Mimo sezóny je ubytovanie v Tatrách na víkendy dostupnejšie.
+                                        <p>Počas letných prázdnin, prevažná časť ubytovania vo Vysokých Tatrách ponúka len týždňové pobyty a rezervovať si ich treba už v zime či jari. Mimo sezóny je ubytovanie v Tatrách na víkendy dostupnejšie.</p>
                                     </div>
                                 </div>
                             </div>
@@ -181,57 +193,111 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionFAQ1">
                                     <div class="card-body">
-                                        Ak si rezervujete ubytovanie cez priame kontakty na ubytovateľov napr. z www.tatrytravel.sk. Zľavu môžete získať, aj keď platíte v hotovosti, pripadne si zľavu dohodnete priamo s majiteľom ubytovania na mieste.
+                                        <p>Ak si rezervujete ubytovanie cez priame kontakty na ubytovateľov napr. z www.tatrytravel.sk. Zľavu môžete získať, aj keď platíte v hotovosti, pripadne si zľavu dohodnete priamo s majiteľom ubytovania na mieste.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="accordion" id="accordionExample">
+                        <div class="accordion" id="accordionFAQ2">
                             <div class="card">
                                 <div class="card-header border-0 bg-white" id="headingOne">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                             Dôležité kontakty Výsoké Tatry
                                         </button>
                                     </h2>
                                 </div>
 
-                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionFAQ2">
                                     <div class="card-body">
-                                        <div id="faq-19011" class="faq-item-answer" aria-expanded="true" style="">
-                                            <p><img class=" wp-image-19012 aligncenter" src="https://tatrytravel.sk/wp-content/uploads/2018/10/hzs.jpg" alt="" width="140" height="154"></p>
-                                            <p style="text-align: center;"><b>Tiesňová linka:&nbsp;</b>18 300</p>
-                                            <p style="text-align: center;"><strong>Operačné stredisko tiesňového volania:&nbsp;</strong>operacne@hzs.sk</p>
-                                            <p style="text-align: center;"><strong>Adresa:&nbsp;</strong>Oblastné stredisko HZS Starý Smokovec 23</p>
-                                            <p style="text-align: center;"><strong>Tel.č.:&nbsp;</strong>+421 52 442 28 20</p>
-                                            <p style="text-align: center;"><strong>E-mail:&nbsp;</strong>vtatry@hzs.sk</p>
-                                            <p style="text-align: center;"><strong>Web:&nbsp;</strong>www.hzs.sk</p>
-                                            <p><img class=" wp-image-19014 aligncenter" src="https://tatrytravel.sk/wp-content/uploads/2018/10/1171569_pz-sr-logo-policia.jpg" alt="" width="141" height="139"></p>
-                                            <p style="text-align: center;"><strong>Tiesňová linka:&nbsp;</strong>158</p>
-                                            <p style="text-align: center;"><strong>Adresa:&nbsp;</strong>Nový Smokovec 20, 062 01</p>
-                                            <p style="text-align: center;"><strong>Tel.č.:&nbsp;</strong>+421 52 442 23 33</p>
-                                            <p style="text-align: center;"><strong>Štrbské pleso tel.č.:&nbsp;</strong>+421 52 436 95 17</p>
-                                            <p style="text-align: center;"><strong>Informátor:&nbsp;</strong>+421 961 893 176 (pon-pia 7.30-15.30 hod.)</p>
-                                            <p style="text-align: center;"><img class="alignnone wp-image-19015" src="https://tatrytravel.sk/wp-content/uploads/2018/10/poliklinika.jpg" alt="" width="140" height="133"></p>
-                                            <p style="text-align: center;"><strong>Tiesňové volanie:&nbsp;</strong>112, 155</p>
-                                            <p style="text-align: center;"><strong>Poliklinika Nový Smokovec/Pohotovosť:&nbsp;</strong>+421 52 442 24 44</p>
-                                            <p style="text-align: center;"><strong>Ordinačné hodiny:&nbsp;</strong>Pon-Pia 15.00-7.00 hod. So-Ne Nonstop</p>
-                                            <p style="text-align: center;"><strong>Detská pohotovosť – Nemocnica Poprad:&nbsp;</strong>+421 52 712 54 31</p>
-                                            <p style="text-align: center;"><strong>Ordinačné hodiny:&nbsp;</strong>Pon-Pia 15.30-7.00 hod. So-Ne 7.00-12.30 13.00-7.00 hod.</p>
-                                            <p style="text-align: center;"><strong>Detská poliklinika prízemie (posledný vchod vľavo) č. dverí 022</strong></p>
-                                            <p style="text-align: center;"><img class="alignnone  wp-image-19016" src="https://tatrytravel.sk/wp-content/uploads/2018/10/Tanap.jpg" alt="" width="141" height="141"></p>
-                                            <p style="text-align: center;">Aktuality súvisiace so sezónnymi uzáverami chodníkov v&nbsp;Tatranskom národnom parku,</p>
-                                            <p style="text-align: center;">náučné chodníky, fauna a&nbsp;flóra národného parku,</p>
-                                            <p style="text-align: center;">otváracie hodiny Múzea TANAPu a&nbsp;Botanickej záhrady TANAPu +&nbsp;ďalšie informácie.</p>
-                                            <p style="text-align: center;"><strong>Tel.č.:&nbsp;</strong>+421 52 478 03 11</p>
-                                            <p style="text-align: center;"><strong>Web:&nbsp;</strong>www.lesytanap.sk</p>
-                                            <p><img class=" wp-image-19017 aligncenter" src="https://tatrytravel.sk/wp-content/uploads/2018/10/správa.jpg" alt="" width="95" height="142"></p>
-                                            <p style="text-align: center;">Návštevný poriadok, informácie o&nbsp;národnom parku z&nbsp;pohľadu ochrany prírody.</p>
-                                            <p style="text-align: center;"><strong>Web:&nbsp;</strong>www.spravatanap.sk</p>
+                                        <div class="faq-item-answer" aria-expanded="false">
+                                            <p class="text-center">
+                                                <img class="img-fluid" src="{% static 'images/faq/hzs.jpg' %}" alt="">
+                                            </p>
+                                            <p class="text-center">
+                                                <b>Tiesňová linka: </b>18 300
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Operačné stredisko tiesňového volania: </strong>operacne@hzs.sk
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Adresa: </strong>Oblastné stredisko HZS Starý Smokovec 23
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Tel.č.: </strong>+421 52 442 28 20
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>E-mail: </strong>vtatry@hzs.sk
+                                            </p>
+                                            <p class="text-center mb-4">
+                                                <strong>Web: </strong>www.hzs.sk
+                                            </p>
+
+                                            <p class="text-center">
+                                                <img class="img-fluid" src="{% static 'images/faq/pzsr.jpg' %}" alt="">
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Tiesňová linka: </strong>158
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Adresa: </strong>Nový Smokovec 20, 062 01
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Tel.č.: </strong>+421 52 442 23 33
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Štrbské pleso tel.č.: </strong>+421 52 436 95 17
+                                            </p>
+                                            <p class="text-center mb-4">
+                                                <strong>Informátor: </strong>+421 961 893 176 (pon-pia 7.30-15.30 hod.)
+                                            </p>
+
+                                            <p class="text-center">
+                                                <img class="img-fluid" src="{% static 'images/faq/poliklinika.jpg' %}" alt="">
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Tiesňové volanie: </strong>112, 155
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Poliklinika Nový Smokovec/Pohotovosť: </strong>+421 52 442 24 44
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Ordinačné hodiny: </strong>Pon-Pia 15.00-7.00 hod. So-Ne Nonstop
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Detská pohotovosť – Nemocnica Poprad: </strong>+421 52 712 54 31
+                                            </p>
+                                            <p class="text-center">
+                                                <strong>Ordinačné hodiny: </strong>Pon-Pia 15.30-7.00 hod. So-Ne 7.00-12.30 13.00-7.00 hod.
+                                            </p>
+                                            <p class="text-center mb-4">
+                                                <strong>Detská poliklinika prízemie (posledný vchod vľavo) č. dverí 022</strong>
+                                            </p>
+
+                                            <p class="text-center">
+                                                <img class="img-fluid" src="{% static 'images/faq/tanap.jpg' %}" alt="">
+                                            </p>
+                                            <p class="text-center">Aktuality súvisiace so sezónnymi uzáverami chodníkov vTatranskom národnom parku,</p>
+                                            <p class="text-center">náučné chodníky, fauna a flóra národného parku,</p>
+                                            <p class="text-center">otváracie hodiny Múzea TANAPu a Botanickej záhrady TANAPu + ďalšie informácie.</p>
+                                            <p class="text-center">
+                                                <strong>Tel.č.: </strong>+421 52 478 03 11
+                                            </p>
+                                            <p class="text-center mb-4">
+                                                <strong>Web: </strong>www.lesytanap.sk
+                                            </p>
+
+                                            <p class="text-center">
+                                                <img class="img-fluid" src="{% static 'images/faq/sprava.jpg' %}" alt="">
+                                            </p>
+                                            <p class="text-center">Návštevný poriadok, informácie o národnom parku z pohľadu ochrany prírody.</p>
+                                            <p class="text-center">
+                                                <strong>Web: </strong>www.spravatanap.sk
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -245,9 +311,9 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionFAQ2">
                                     <div class="card-body">
-                                        <div id="faq-18969" class="faq-item-answer" aria-expanded="true" style="">
+                                        <div id="faq-18969" class="faq-item-answer" aria-expanded="false" style="">
                                             <p>Pod túto kategóriu zahŕňame ubytovacie zariadenia, ktoré svojim hosťom ponúkajú širšiu ponuku pre možnosť relaxu a to minimálne saunu a vírivku. Viac ubytovacích zariadení s možnosťou wellnessu nájdete <a href="https://tatrytravel.sk/ubytovanie/?listing_categories%5B%5D=wellness-v-objekte" target="_blank" rel="noopener">tu</a>.</p>
                                         </div>
                                     </div>
@@ -262,9 +328,9 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+                                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionFAQ2">
                                     <div class="card-body">
-                                       Ideálne je sa stravovať v reštauráciach s celoročnou prevádzkou.
+                                        <p>Ideálne je sa stravovať v reštauráciach s celoročnou prevádzkou.</p>
                                     </div>
                                 </div>
                             </div>
