@@ -26,6 +26,11 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         self.filter = self.filter_class(data=request.GET, queryset=self.get_whole_queryset(), listing_type=None if self.model == Listing else self.model)
         return super().dispatch(request, *args, **kwargs)
 
+    def get_template_names(self):
+        names = super().get_template_names()
+        names.append(f"listings/listing{self.template_name_suffix}.html")
+        return names
+
     def get_queryset(self):
         queryset = self.filter.qs.only('id', 'slug', 'title', 'locality_id', 'locality__title', 'image', 'price', 'price_unit', 'price_starts_at', 'promoted').annotate(locality_title=F('locality__title'))
         return self.sort_queryset(queryset)
