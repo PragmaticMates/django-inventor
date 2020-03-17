@@ -70,6 +70,7 @@ class ListingFilter(django_filters.FilterSet):
             # dynamic segment based on listing type
             segment = f'listings.{listing_type.__name__}.price'
             self.filters['price'].init_segments(segment)
+            self.form.fields['price'] = self.filters['price'].field
             # self.filters['price'] = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment=segment)
             # self.price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment=segment)
 
