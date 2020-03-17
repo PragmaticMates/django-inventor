@@ -13,7 +13,7 @@ from pragmatic.filters import SliderFilter
 
 class ListingFilter(django_filters.FilterSet):
     keyword = django_filters.CharFilter(label=_('Keyword'), method=lambda qs, name, value: qs.by_keyword(value))
-    price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment='listings.Listing.price')  # TODO: dynamic segment based on listing_type
+    price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment='listings.Listing.price')
 
     class Meta:
         model = Listing
@@ -47,6 +47,7 @@ class ListingFilter(django_filters.FilterSet):
 
     def __init__(self, listing_type=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         self.helper = SingleSubmitFormHelper()
         self.helper.form_tag = False
         self.helper.disable_csrf = True
@@ -59,11 +60,19 @@ class ListingFilter(django_filters.FilterSet):
         )
         self.form.fields['locality'].empty_label = _('All localities')
 
-        # dynamic categories
+        # categories searched by slug
         self.filters['categories'].field_name = 'categories__slug'
 
         if listing_type:
+            # dynamic categories
             self.form.fields['categories'].queryset = Category.objects.of_listing_type(listing_type).exclude(parent=None)
+
+            # dynamic segment based on listing type
+            segment = f'listings.{listing_type.__name__}.price'
+            self.filters['price'].init_segments(segment)
+            # self.filters['price'] = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment=segment)
+            # self.price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, segment=segment)
+
         else:
             self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
 
