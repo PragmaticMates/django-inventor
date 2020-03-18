@@ -2,9 +2,10 @@
 
 <div class="card rounded-0 shadow-sm locality-item">
     <a href="{{ locality.get_absolute_url }}">
-        <div class="locality-photo {% if locality.photo %}bg-cover{% else %} d-flex align-items-center justify-content-center{% endif %}"
+        <div class="locality-photo {% if locality.photo %}bg-cover{% else %} d-flex align-items-center justify-content-center
+        {% if forloop.counter|divisibleby:6 %}bg-blue{% elif forloop.counter|divisibleby:5 %}bg-red{% elif forloop.counter|divisibleby:4 %}bg-indigo{% elif forloop.counter|divisibleby:3 %}bg-yellow{% elif forloop.counter|divisibleby:2 %}bg-teal{% else %}bg-orange{% endif %}{% endif %}"
              {% if locality.photo %}style="background-image: url('{% thumbnail locality.photo "500" as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}');"
-             {% else %}style="background-image: url('{% static 'images/lomnica.jpg' %}');"  {# todo remove #}
+{#             {% else %}style="background-image: url('{% static 'images/lomnica.jpg' %}');"  {# todo remove #}
              {% endif %}>
         </div>
         <div class="locality-title">
