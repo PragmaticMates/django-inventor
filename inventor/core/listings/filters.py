@@ -83,6 +83,13 @@ class ListingFilter(django_filters.FilterSet):
             widget=forms.CheckboxSelectMultiple
         )
 
+        self.form.fields['features'] = forms.MultipleChoiceField(
+            label=_('Features'),
+            choices=list(self.form.fields['features'].queryset.values_list('pk', 'title')),  # TODO: cache?
+            required=False,
+            widget=forms.CheckboxSelectMultiple
+        )
+
         # changed filter logic of features
         self.filters['features'].method = 'filter_features'
 
