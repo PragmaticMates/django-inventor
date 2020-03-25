@@ -36,7 +36,7 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         return self.sort_queryset(queryset)
 
     def get_whole_queryset(self):
-        return super().get_queryset().published().select_subclasses().order_by('-promoted', 'modified')
+        return super().get_queryset().ublished().select_subclasses().order_by('-promoted', 'modified')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -55,7 +55,7 @@ class ListingDetailView(DetailView):
     #     return super().get_queryset().select_subclasses()
 
     def get_queryset(self):
-        return super().get_queryset().only('id')
+        return super().get_queryset().published().only('id')  # TODO: not published listings are visible for staff and listing author
 
     def get_object(self, queryset=None):
         return super().get_object(queryset).get_real_instance()
