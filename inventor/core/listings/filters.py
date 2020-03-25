@@ -1,20 +1,28 @@
 import django_filters
-from crispy_forms.bootstrap import InlineRadios
 from crispy_forms.layout import Layout
-from django.db import models
 from django import forms
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django_select2.forms import ModelSelect2Widget
+from pragmatic.filters import SliderFilter
 
 from inventor.core.lexicons.models import Category, Locality
 from inventor.core.listings.models.general import Listing
 from inventor.utils import SingleSubmitFormHelper, PositiveBooleanFilter
-from pragmatic.filters import SliderFilter
 
 
 class ListingFilter(django_filters.FilterSet):
     keyword = django_filters.CharFilter(label=_('Keyword'), method=lambda qs, name, value: qs.by_keyword(value))
     price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, show_inputs=False, queryset_method='published', segment='listings.Listing.price')
-    locality = django_filters.ChoiceFilter(label=_('Locality'), choices=Locality.objects.all().values_list('slug', 'title'), field_name='locality__slug')
+    locality = django_filters.ModelChoiceFilter(
+        label=_('Locality'),
+        queryset=Locality.objects.all(),
+        widget=ModelSelect2Widget(
+            model=Locality,
+            queryset=Locality.objects.all(),
+            search_fields=['title__icontains'],
+        )
+    )
 
     class Meta:
         model = Listing
