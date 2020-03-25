@@ -348,7 +348,7 @@
         </div>
     </section>
 
-    <section>
+    <section class="categories">
         <div class="container pb-4">
             <div class="row">
                 <div class="col my-5">
@@ -362,7 +362,7 @@
             <div class="row pb-5">
                 <div class="col-12">
                     <nav>
-                        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             {% for category in categories %}
                                 <a class="nav-item nav-link {% if forloop.first %}active{% endif %}" id="nav-{{ category.slug }}-tab" data-toggle="tab" href="#nav-{{ category.slug }}" role="tab" aria-controls="nav-contact" aria-selected="{{ forloop.first|yesno:"true,false" }}">{{ category }}</a>
                             {% endfor %}
