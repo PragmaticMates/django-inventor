@@ -34,7 +34,8 @@
 
         <script defer src="{% static 'node_modules/simplelightbox/dist/simple-lightbox.min.js' %}"></script>
         <script defer src="{% static 'node_modules/bootstrap-slider/dist/bootstrap-slider.min.js' %}"></script>
-        <script defer src="{% static 'js/sliders.js' %}?{{ settings.DEPLOYMENT_TIMESTAMP }}"></script> {# django-pragmatic #}
+        <script defer src="{% static 'js/sliders.js' %}?v={{ deployment_timestamp }}"></script> {# django-pragmatic #}
+        <script defer src="{% static 'js/forms.js' %}?v={{ deployment_timestamp }}"></script> {# django-pragmatic #}
 
         {% block js %}{% endblock %}
     </body>
