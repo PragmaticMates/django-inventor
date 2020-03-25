@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block content %}
-    <section>
+    <section class="border-bottom-light">
         <div class="container-fluid bg-light-translucent">
             <div class="container">
                 <div class="row">
@@ -64,7 +64,7 @@
         </div>
     </section>
 
-    <section>
+    <section class="border-bottom-light">
         <div class="container">
             <div class="row">
                 <div class="col my-5">
@@ -104,9 +104,9 @@
         </div>
     </section>
 
-    <section>
+    <section class="faq border-bottom-light">
         <div class="container-fluid bg-light-translucent">
-            <div class="container mb-4">
+            <div class="container pb-4">
                 <div class="row">
                     <div class="col my-5">
                         <h2 class="mt-4 text-center title">
@@ -349,7 +349,45 @@
     </section>
 
     <section>
-        <div class="container-fluid bg-light-translucent">
+        <div class="container pb-4">
+            <div class="row">
+                <div class="col my-5">
+                    <h2 class="mt-4 text-center title">
+                        <span class="font-weight-light">{% trans 'Directory' %}</span>
+                        <strong>{% trans 'Categories' %}</strong>
+                    </h2>
+                    <h5 class="text-light font-weight-light text-center mb-3">{% trans 'Check the list of all categories and subcategories available for our items in directory application' %}</h5>
+                </div>
+            </div>
+            <div class="row pb-5">
+                <div class="col-12">
+                    <nav>
+                        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                            {% for category in categories %}
+                                <a class="nav-item nav-link {% if forloop.first %}active{% endif %}" id="nav-{{ category.slug }}-tab" data-toggle="tab" href="#nav-{{ category.slug }}" role="tab" aria-controls="nav-contact" aria-selected="{{ forloop.first|yesno:"true,false" }}">{{ category }}</a>
+                            {% endfor %}
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        {% for category in categories %}
+                            <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="nav-{{ category.slug }}" role="tabpanel" aria-labelledby="nav-{{ category.slug }}-tab">
+                                <ul class="row nav">
+                                    {% for child in category.children.all %}
+                                        <li class="col-sm-3 nav-item">
+                                            <a class="nav-link" href="{{ child.get_absolute_url }}">{{ child }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="border-bottom-light">
+        <div class="container-fluid bg-light-translucent pb-4">
             <div class="row">
                 <div class="col mt-5">
                     <h2 class="mt-4 text-center title">
@@ -358,23 +396,23 @@
                     <h5 class="text-light font-weight-light text-center mb-3">{% trans 'in Hight Tatras' %}</h5>
                 </div>
             </div>
-                <div id="carousel-location" class="carousel slide py-5" >
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        {% for locality in localities %}
-                            <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 {% if forloop.first %}active{% endif %}">
-                                {% include 'lexicons/widgets/locality.html' %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <a class="carousel-control-prev" href="#carousel-location" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">{% trans 'Previous' %}</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carousel-location" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">{% trans 'Next' %}</span>
-                    </a>
+            <div id="carousel-location" class="carousel slide py-5" >
+                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                    {% for locality in localities %}
+                        <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 {% if forloop.first %}active{% endif %}">
+                            {% include 'lexicons/widgets/locality.html' %}
+                        </div>
+                    {% endfor %}
                 </div>
+                <a class="carousel-control-prev" href="#carousel-location" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">{% trans 'Previous' %}</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-location" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">{% trans 'Next' %}</span>
+                </a>
+            </div>
         </div>
     </section>
 

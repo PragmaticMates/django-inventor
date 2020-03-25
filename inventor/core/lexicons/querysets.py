@@ -5,3 +5,6 @@ from mptt.managers import TreeManager
 class CategoryManager(TreeManager):
     def of_listing_type(self, listing_type):
         return self.filter(listing_type=ContentType.objects.get_for_model(listing_type))
+
+    def without_parent(self):
+        return self.filter(parent=None)
