@@ -13,6 +13,7 @@ class HomeView(TemplateView):
         context_data.update({
             'top_accommodations': Accommodation.objects
                 # .promoted()
+                .published()
                 .select_subclasses()
                 .only('id', 'slug', 'title', 'promoted',
                       'locality_id', 'locality__title',
