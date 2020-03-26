@@ -16,7 +16,7 @@
 {#    </div>#}
 
     <!-- Content -->
-    <main>
+    <main class="{% block main_class %}{% endblock %}">
         {#    {% include 'layout/content.html' %}#}
         {% block content %}{% endblock %}
     </main>

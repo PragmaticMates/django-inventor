@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 {% load i18n static pragmatic_tags %}
 
+{% block main_class %}bg-gray-100{% endblock %}
+
 {% block top_full_width %}
 {#    <div class="container-fluid" style="background-color:#F9F9F9; border-bottom: 1px solid #D7D7D7;">#}
     <div class="top-full-width container-fluid">
@@ -22,9 +24,11 @@
 {% endblock %}
 {% block content %}
     <div class="container">
-        <div class="row my-5">
+        <div class="row py-5">
             <side class="col-md-3">
-                {% include 'helpers/filter-vertical.html' %}
+                <div class="card p-4">
+                    {% include 'helpers/filter-vertical.html' %}
+                </div>
             </side>
             <div class="col-md-9">
                 <div class="queryset-actions row">
