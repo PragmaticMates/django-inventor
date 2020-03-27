@@ -59,16 +59,14 @@
                                         <a class="nav-link" href="#description"><i class="mr-2 fa fa-pen"></i> {% trans 'Description' %}</a>
                                     </li>
                                 {% endif %}
-                                {% if object.amenities.exists %}
+                                {% if all_amenities %}
                                     <li class="nav-item">
                                         <a class="nav-link" href="#amenities"><i class="mr-2 fa fa-list"></i> {% trans 'Amenities' %}</a>
                                     </li>
                                 {% endif %}
-                                {% if object.features.exists %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#features"><i class="mr-2 fa fa-list"></i> {% trans 'Features' %}</a>
-                                    </li>
-                                {% endif %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#features"><i class="mr-2 fa fa-list"></i> {% trans 'Features' %}</a>
+                                </li>
                                 {% if object.videos.exists %}
                                     <li class="nav-item">
                                         <a class="nav-link" href="#videos"><i class="mr-2 fa fa-video"></i> {% trans 'Video' %}</a>
@@ -144,15 +142,25 @@
 
                 <section class="mb-5" id="features">
                     <h2>{% trans 'Features' %}</h2>
-                    <div class="card bg-white p-4">
+{#                    <div class="card bg-white p-4">#}
                         <div class="row">
                             {% for feature in all_features %}
                                 <div class="col-auto">
-                                    <div class="badge-{% if feature in features %}info{% else %}danger{% endif %} rounded text-white px-3 py-2 mb-3">{{ feature }}</div>
+                                    {% if feature in features %}
+                                        <div class="bg-info card border-info d-block rounded text-white px-3 py-2 mb-3">
+                                            <i class="fas fa-check mr-2"></i>
+                                            {{ feature }}
+                                        </div>
+                                    {% else %}
+                                        <div class="bg-white card d-block rounded text-light px-3 py-2 mb-3">
+                                            <i class="fas fa-times mr-2"></i>
+                                            {{ feature }}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         </div>
-                    </div>
+{#                    </div>#}
                 </section>
 
                 {% if object.videos.exists %}
