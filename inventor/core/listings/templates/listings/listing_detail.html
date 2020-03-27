@@ -122,9 +122,9 @@
                     <section class="mb-5" id="description">
                         <h2>{% trans 'Description' %}</h2>
                         <div class="card bg-white p-4">
-                        <p class="text-light mb-0">
-                            {{ object.description|linebreaksbr }}
-                        </p>
+                            <p class="text-light mb-0">
+                                {{ object.description|linebreaksbr }}
+                            </p>
                         </div>
                     </section>
                 {% endif %}
@@ -132,10 +132,12 @@
                 {% if object.amenities.exists %}
                     <section class="mb-5" id="amenities">
                         <h2>{% trans 'Amenities' %}</h2>
-                        <div class="column-count-xl-4 column-count-lg-3 column-count-sm-2 column-count-1">
-                            {% for amenity in object.amenities.all %}
-                                <div class="mb-2 text-secondary"><i class="fad fa-check-circle fa-lg mr-3 text-success"></i>{{ amenity }}</div>
-                            {% endfor %}
+                        <div class="card bg-white p-4">
+                            <div class="column-count-xl-4 column-count-lg-3 column-count-sm-2 column-count-1">
+                                {% for amenity in object.amenities.all %}
+                                    <div class="mb-2 text-secondary"><i class="fad fa-check-circle fa-lg mr-3 text-success"></i>{{ amenity }}</div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </section>
                 {% endif %}
@@ -143,12 +145,14 @@
                 {% if object.features.exists %}
                     <section class="mb-5" id="features">
                         <h2>{% trans 'Features' %}</h2>
-                        <div class="row">
-                            {% for feature in object.features.all %}
-                                <div class="col-auto">
-                                    <div class="bg-info rounded text-white px-3 py-2 mb-3">{{ feature }}</div>
-                                </div>
-                            {% endfor %}
+                        <div class="card bg-white p-4">
+                            <div class="row">
+                                {% for feature in object.features.all %}
+                                    <div class="col-auto">
+                                        <div class="bg-info rounded text-white px-3 py-2 mb-3">{{ feature }}</div>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </section>
                 {% endif %}
@@ -164,43 +168,52 @@
             </div>
             <div class="col-md-4">
                 {% if object.person or object.phone or object.email or object.website %}
-                    <div class="bg-light-translucent p-4 mb-4">
-                        <h4 class="mb-3">{% trans 'Contact information' %}</h4>
-                        <p class="text-secondary">
-                            <i class="fas fa-fw fa-phone-alt mr-3"></i>{% if object.phone %}<a href="tel:{{ object.phone }}">{{ object.phone }}</a>{% else %}-{% endif %}
-                        </p>
-                        <p class="text-secondary">
-                            <i class="fas fa-fw fa-at mr-3"></i>{% if object.email %}<a href="mailto:{{ object.email }}">{{ object.email }}</a>{% else %}-{% endif %}
-                        </p>
-                        <p class="text-secondary">
-                            <i class="fas fa-fw fa-globe mr-3"></i>{% if object.website %}<a target="_blank" href="{{ object.website }}">{{ object.website }}</a>{% else %}-{% endif %}
-                        </p>
-                        <p class="text-secondary">
-                            <i class="fas fa-fw fa-user mr-3 text"></i>{{ object.person|default:'-' }}
-                        </p>
-                        <p class="text-secondary mb-0 d-flex flex-row">
-                            <i class="fas fa-fw fa-map-marker-alt mr-3 mt-1"></i>
+                    <div class="card bg-white p-4 mb-4">
+                        {% if object.point %}
+                            <div class="card bg-white mb-4">
+        {#                        todo link and img #}
+                                <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4" href="#">
+                                    <img class="" src="https://sirava.sk/wp-content/uploads/2017/11/google_maps_logo.png" alt="" width="168" height="164">
+                                    <p class="text-center text-secondary mb-0"><strong>Referencie a poloha v google mapách</strong></p>
+                                </a>
+                            </div>
+                        {% endif %}
+
+                        <p class="text-secondary d-flex flex-row">
+                            <i class="fas fa-fw fa-map-marker-alt text-primary mr-3 mt-1"></i>
                             <span class="d-block">{{ object.address|linebreaksbr|default:'-' }}</span>
                         </p>
+                        <p class="text-secondary">
+                            <i class="fas fa-fw fa-user text-primary mr-3 text"></i>{{ object.person|default:'-' }}
+                        </p>
+                        <p class="text-secondary">
+                            <i class="fas fa-fw fa-phone-alt text-primary mr-3"></i>{% if object.phone %}<a class="text-secondary" href="tel:{{ object.phone }}">{{ object.phone }}</a>{% else %}-{% endif %}
+                        </p>
+                        <p class="text-secondary">
+                            <i class="fas fa-fw fa-at text-primary mr-3"></i>{% if object.email %}<a class="text-secondary" href="mailto:{{ object.email }}">{{ object.email }}</a>{% else %}-{% endif %}
+                        </p>
+                        <p class="text-secondary mb-0">
+                            <i class="fas fa-fw fa-globe text-primary mr-3"></i>{% if object.website %}<a class="text-secondary" target="_blank" href="{{ object.website }}">{{ object.website }}</a>{% else %}-{% endif %}
+                        </p>
                     </div>
                 {% endif %}
 
-                {% if object.point %}
-                    <div class="bg-light-translucent p-4 mb-4">
-                        <h4 class="mb-3">{% trans 'Location' %}</h4>
+{#                {% if object.point %}#}
+{#                    <div class="card bg-white p-4 mb-4">#}
+{#                        <h4 class="mb-3">{% trans 'Location' %}</h4>#}
 {#                        todo link and img #}
-                        <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4" href="#">
-                            <img class="" src="https://sirava.sk/wp-content/uploads/2017/11/google_maps_logo.png" alt="" width="168" height="164">
-                            <p class="text-center text-secondary mb-0"><strong>Referencie a poloha v google mapách</strong></p>
-                        </a>
-                    </div>
-                {% endif %}
+{#                        <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4" href="#">#}
+{#                            <img class="" src="https://sirava.sk/wp-content/uploads/2017/11/google_maps_logo.png" alt="" width="168" height="164">#}
+{#                            <p class="text-center text-secondary mb-0"><strong>Referencie a poloha v google mapách</strong></p>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                {% endif %}#}
 
                 {% if object.social_networks %}
-                    <div class="bg-light-translucent p-4 mb-4">
+                    <div class="card bg-white p-4 mb-4">
                         <h4 class="mb-3">{% trans 'Social' %}</h4>
                         {% for social, link in object.social_networks.items %}
-                            <p>
+                            <p class="{% if forloop.last %}mb-0{% endif %}">
                                 <a href="{{ link }}" target="_blank" class="social-item">
                                     <i class="fab fa-{{ social }}"></i>
                                     {{ social|capfirst }}
@@ -211,7 +224,7 @@
                 {% endif %}
 
                 {% if object.booking_url %}
-                    <div class="bg-light-translucent p-4 mb-4">
+                    <div class="card bg-white p-4 mb-4">
                         <h4 class="mb-3">{% trans 'Reservation via booking.com' %}</h4>
                         <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4" href="{{ object.booking_url }}">
                             <img class="size-full wp-image-15120 aligncenter" src="https://tatrytravel.sk/wp-content/uploads/2018/08/booking-1.png" alt="" width="300" height="142">
@@ -223,40 +236,40 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row my-5">
-            <div class="col-12">
-                <h2>{{ object.title }}</h2>
-                <div><b>slug</b>: {{ object.slug|default:'-' }}</div>
-                <div><b>description</b>: {{ object.description|default:'-' }}</div>
-                <div><b>author</b>: {{ object.author|default:'-' }}</div>
-                <div><b>published</b>: {{ object.published|default:'-' }}</div>
-                <div><b>promoted</b>: {{ object.promoted|default:'-' }}</div>
-                <div><b>categories</b>: {{ object.categories.all|default:'-' }}</div>
-                <div><b>features</b>: {{ object.features.all|default:'-' }}</div>
-                <div><b>price_starts_at</b>: {{ object.price_starts_at|default:'-' }}</div>
-                <div><b>price</b>: {{ object.price|default:'-' }}</div>
-                <div><b>price_unit</b>: {{ object.price_unit|default:'-' }}</div>
-                <div><b>locality</b>: {{ object.locality|default:'-' }}</div>
-                <div><b>street</b>: {{ object.street|default:'-' }}</div>
-                <div><b>postcode</b>: {{ object.postcode|default:'-' }}</div>
-                <div><b>city</b>: {{ object.city|default:'-' }}</div>
-                <div><b>country</b>: {{ object.country|default:'-' }}</div>
-                <div><b>address</b>: {{ object.address|default:'-' }}</div>
-                <div><b>point</b>: {{ object.point|default:'-' }}</div>
-                <div><b>image</b>: {{ object.image|default:'-' }}</div>
-                <div><b>banner</b>: {{ object.banner|default:'-' }}</div>
-                <div><b>person</b>: {{ object.person|default:'-' }}</div>
-                <div><b>phone</b>: {{ object.phone|default:'-' }}</div>
-                <div><b>email</b>: {{ object.email|default:'-' }}</div>
-                <div><b>website</b>: {{ object.website|default:'-' }}</div>
-                <div><b>social_networks</b>: {{ object.social_networks|default:'-' }}</div>
-                <div><b>comments</b>: {{ object.comments|default:'-' }}</div>
-                <div><b>created</b>: {{ object.created|default:'-' }}</div>
-                <div><b>modified</b>: {{ object.modified|default:'-' }}</div>
-            </div>
-        </div>
-    </div>
+{#    <div class="container">#}
+{#        <div class="row my-5">#}
+{#            <div class="col-12">#}
+{#                <h2>{{ object.title }}</h2>#}
+{#                <div><b>slug</b>: {{ object.slug|default:'-' }}</div>#}
+{#                <div><b>description</b>: {{ object.description|default:'-' }}</div>#}
+{#                <div><b>author</b>: {{ object.author|default:'-' }}</div>#}
+{#                <div><b>published</b>: {{ object.published|default:'-' }}</div>#}
+{#                <div><b>promoted</b>: {{ object.promoted|default:'-' }}</div>#}
+{#                <div><b>categories</b>: {{ object.categories.all|default:'-' }}</div>#}
+{#                <div><b>features</b>: {{ object.features.all|default:'-' }}</div>#}
+{#                <div><b>price_starts_at</b>: {{ object.price_starts_at|default:'-' }}</div>#}
+{#                <div><b>price</b>: {{ object.price|default:'-' }}</div>#}
+{#                <div><b>price_unit</b>: {{ object.price_unit|default:'-' }}</div>#}
+{#                <div><b>locality</b>: {{ object.locality|default:'-' }}</div>#}
+{#                <div><b>street</b>: {{ object.street|default:'-' }}</div>#}
+{#                <div><b>postcode</b>: {{ object.postcode|default:'-' }}</div>#}
+{#                <div><b>city</b>: {{ object.city|default:'-' }}</div>#}
+{#                <div><b>country</b>: {{ object.country|default:'-' }}</div>#}
+{#                <div><b>address</b>: {{ object.address|default:'-' }}</div>#}
+{#                <div><b>point</b>: {{ object.point|default:'-' }}</div>#}
+{#                <div><b>image</b>: {{ object.image|default:'-' }}</div>#}
+{#                <div><b>banner</b>: {{ object.banner|default:'-' }}</div>#}
+{#                <div><b>person</b>: {{ object.person|default:'-' }}</div>#}
+{#                <div><b>phone</b>: {{ object.phone|default:'-' }}</div>#}
+{#                <div><b>email</b>: {{ object.email|default:'-' }}</div>#}
+{#                <div><b>website</b>: {{ object.website|default:'-' }}</div>#}
+{#                <div><b>social_networks</b>: {{ object.social_networks|default:'-' }}</div>#}
+{#                <div><b>comments</b>: {{ object.comments|default:'-' }}</div>#}
+{#                <div><b>created</b>: {{ object.created|default:'-' }}</div>#}
+{#                <div><b>modified</b>: {{ object.modified|default:'-' }}</div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 
     <script>
         jQuery(document).ready(function ($) {
