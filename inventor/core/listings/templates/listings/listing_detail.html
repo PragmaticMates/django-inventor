@@ -114,7 +114,7 @@
                     <section class="mb-5" id="gallery">
                         <h2>{% trans 'Gallery' %}</h2>
 
-                        <div class="card bg-white px-4 pt-4 pb-1">
+                        <div class="card shadow-sm shadow-sm bg-white px-4 pt-4 pb-1">
                         {% for album in object.album_set.all %}
                             <b class="text-secondary">{{ album.title }}</b>
                             {% if album.description %}<p>{{ album.description }}</p>{% endif %}
@@ -133,7 +133,7 @@
                 {% if object.description %}
                     <section class="mb-5" id="description">
                         <h2>{% trans 'Description' %}</h2>
-                        <div class="card bg-white p-4">
+                        <div class="card shadow-sm bg-white p-4">
                             <p class="text-light mb-0">
                                 {{ object.description|linebreaksbr }}
                             </p>
@@ -144,7 +144,7 @@
                 {% if all_amenities %}
                     <section class="mb-5" id="amenities">
                         <h2>{% trans 'Amenities' %}</h2>
-                        <div class="card bg-white p-4">
+                        <div class="card shadow-sm bg-white p-4">
                             <div class="column-count-xl-4 column-count-lg-3 column-count-sm-2 column-count-1">
                                 {% for amenity in all_amenities %}
                                     <div class="mb-2 text-secondary"><i class="fad fa-{% if amenity in amenities %}check-circle text-success{% else %}times-circle text-danger{% endif %} fa-lg mr-3"></i>{{ amenity }}</div>
@@ -156,17 +156,17 @@
 
                 <section class="mb-5" id="features">
                     <h2>{% trans 'Features' %}</h2>
-{#                    <div class="card bg-white p-4">#}
+{#                    <div class="card shadow-sm bg-white p-4">#}
                         <div class="row">
                             {% for feature in all_features %}
                                 <div class="col-auto">
                                     {% if feature in features %}
-                                        <div class="bg-info card border-info d-block rounded text-white px-3 py-2 mb-3">
+                                        <div class="bg-info card shadow-sm border-info d-block rounded text-white px-3 py-2 mb-3">
                                             <i class="fas fa-check mr-2"></i>
                                             {{ feature }}
                                         </div>
                                     {% else %}
-                                        <div class="bg-white card d-block rounded text-light px-3 py-2 mb-3">
+                                        <div class="bg-white card shadow-sm d-block rounded text-light px-3 py-2 mb-3">
                                             <i class="fas fa-times mr-2"></i>
                                             {{ feature }}
                                         </div>
@@ -187,10 +187,11 @@
                 {% endif %}
             </div>
             <div class="col-md-4">
-                {% if object.person or object.phone or object.email or object.website %}
-                    <div class="card bg-white p-4 mb-4">
+                {% if object.person or object.phone or object.email or object.website or object.point or object.address %}
+                    <h4 class=" mt-2">{% trans 'Location' %}</h4>
+                    <div class="card shadow-sm bg-white p-4 mb-5">
                         {% if object.point %}
-                            <div class="card bg-white mb-4">
+                            <div class="card shadow-sm bg-white mb-4">
         {#                        todo link and img #}
                                 <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4" href="#">
                                     <img class="" src="https://sirava.sk/wp-content/uploads/2017/11/google_maps_logo.png" alt="" width="168" height="164">
@@ -219,8 +220,8 @@
                 {% endif %}
 
 {#                {% if object.point %}#}
-{#                    <div class="card bg-white p-4 mb-4">#}
-{#                        <h4 class="mb-3">{% trans 'Location' %}</h4>#}
+{#                    <div class="card shadow-sm bg-white p-4 mb-5">#}
+{#                        <h4 class="">{% trans 'Location' %}</h4>#}
 {#                        todo link and img #}
 {#                        <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4" href="#">#}
 {#                            <img class="" src="https://sirava.sk/wp-content/uploads/2017/11/google_maps_logo.png" alt="" width="168" height="164">#}
@@ -230,8 +231,8 @@
 {#                {% endif %}#}
 
                 {% if object.social_networks %}
-                    <div class="card bg-white p-4 mb-4">
-                        <h4 class="mb-3">{% trans 'Social' %}</h4>
+                    <h4 class="">{% trans 'Social' %}</h4>
+                    <div class="card shadow-sm bg-white p-4 mb-5">
                         {% for social, link in object.social_networks.items %}
                             <p class="{% if forloop.last %}mb-0{% endif %}">
                                 <a href="{{ link }}" target="_blank" class="social-item">
@@ -244,8 +245,8 @@
                 {% endif %}
 
                 {% if object.booking_url %}
-                    <div class="card bg-white p-4 mb-4">
-                        <h4 class="mb-3">{% trans 'Reservation via booking.com' %}</h4>
+                    <h4 class="">{% trans 'Reservation via booking.com' %}</h4>
+                    <div class="card shadow-sm bg-white p-4 mb-5">
                         <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4" href="{{ object.booking_url }}">
                             <img class="size-full wp-image-15120 aligncenter" src="https://tatrytravel.sk/wp-content/uploads/2018/08/booking-1.png" alt="" width="300" height="142">
 {#                            <p class="text-center text-secondary mb-0"><strong>Referencie a poloha v google mapách</strong></p>#}
