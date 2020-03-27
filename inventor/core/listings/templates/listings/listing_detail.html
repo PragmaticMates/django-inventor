@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 {% load i18n static thumbnail %}
 
+{% block main_class %}bg-gray-100 listing-detail{% endblock %}
+
 {% block top_full_width %}
     <div class="top-full-width-detail container-fluid" style="background-image: url('{{ object.image.url }}')">
         <div class="container">
@@ -97,8 +99,10 @@
 {#                    <img class="img-fluid mb-4" src="{% thumbnail object.image '750' as preview %}{{ preview.url }}{% endthumbnail %}">#}
 {#                {% endif %}#}
                 {% if object.album_set.exists %}
-                    <section class="mb-4" id="gallery">
+                    <section class="mb-5" id="gallery">
                         <h2>{% trans 'Gallery' %}</h2>
+
+                        <div class="card bg-white px-4 pt-4 pb-1">
                         {% for album in object.album_set.all %}
                             <b class="text-secondary">{{ album.title }}</b>
                             {% if album.description %}<p>{{ album.description }}</p>{% endif %}
@@ -111,19 +115,22 @@
                             {% endfor %}
                             </div>
                         {% endfor %}
+                        </div>
                     </section>
                 {% endif %}
                 {% if object.description %}
-                    <section class="mb-4" id="description">
+                    <section class="mb-5" id="description">
                         <h2>{% trans 'Description' %}</h2>
-                        <p class="text-light">
+                        <div class="card bg-white p-4">
+                        <p class="text-light mb-0">
                             {{ object.description|linebreaksbr }}
                         </p>
+                        </div>
                     </section>
                 {% endif %}
 
                 {% if object.amenities.exists %}
-                    <section class="mb-4" id="amenities">
+                    <section class="mb-5" id="amenities">
                         <h2>{% trans 'Amenities' %}</h2>
                         <div class="column-count-xl-4 column-count-lg-3 column-count-sm-2 column-count-1">
                             {% for amenity in object.amenities.all %}
@@ -134,7 +141,7 @@
                 {% endif %}
 
                 {% if object.features.exists %}
-                    <section class="mb-4" id="features">
+                    <section class="mb-5" id="features">
                         <h2>{% trans 'Features' %}</h2>
                         <div class="row">
                             {% for feature in object.features.all %}
@@ -147,7 +154,7 @@
                 {% endif %}
 
                 {% if object.videos.exists %}
-                    <section class="mb-4" id="videos">
+                    <section class="mb-5" id="videos">
                         <h2>{% trans 'Videos' %}</h2>
                         {% for video in object.videos.all %}
                             <div>{{ video }}</div>
@@ -160,16 +167,20 @@
                     <div class="bg-light-translucent p-4 mb-4">
                         <h4 class="mb-3">{% trans 'Contact information' %}</h4>
                         <p class="text-secondary">
-                            <i class="fas fa-user mr-3 text"></i>{{ object.person|default:'-' }}
+                            <i class="fas fa-fw fa-phone-alt mr-3"></i>{% if object.phone %}<a href="tel:{{ object.phone }}">{{ object.phone }}</a>{% else %}-{% endif %}
                         </p>
                         <p class="text-secondary">
-                            <i class="fas fa-phone-alt mr-3"></i>{% if object.phone %}<a href="tel:{{ object.phone }}">{{ object.phone }}</a>{% else %}-{% endif %}
+                            <i class="fas fa-fw fa-at mr-3"></i>{% if object.email %}<a href="mailto:{{ object.email }}">{{ object.email }}</a>{% else %}-{% endif %}
                         </p>
                         <p class="text-secondary">
-                            <i class="fas fa-at mr-3"></i>{% if object.email %}<a href="mailto:{{ object.email }}">{{ object.email }}</a>{% else %}-{% endif %}
+                            <i class="fas fa-fw fa-globe mr-3"></i>{% if object.website %}<a target="_blank" href="{{ object.website }}">{{ object.website }}</a>{% else %}-{% endif %}
                         </p>
-                        <p class="text-secondary mb-0">
-                            <i class="fas fa-globe mr-3"></i>{% if object.website %}<a target="_blank" href="{{ object.website }}">{{ object.website }}</a>{% else %}-{% endif %}
+                        <p class="text-secondary">
+                            <i class="fas fa-fw fa-user mr-3 text"></i>{{ object.person|default:'-' }}
+                        </p>
+                        <p class="text-secondary mb-0 d-flex flex-row">
+                            <i class="fas fa-fw fa-map-marker-alt mr-3 mt-1"></i>
+                            <span class="d-block">{{ object.address|linebreaksbr|default:'-' }}</span>
                         </p>
                     </div>
                 {% endif %}
@@ -185,7 +196,21 @@
                     </div>
                 {% endif %}
 
-{#                {% if object.booking_url %}#}
+                {% if object.social_networks %}
+                    <div class="bg-light-translucent p-4 mb-4">
+                        <h4 class="mb-3">{% trans 'Social' %}</h4>
+                        {% for social, link in object.social_networks.items %}
+                            <p>
+                                <a href="{{ link }}" target="_blank" class="social-item">
+                                    <i class="fab fa-{{ social }}"></i>
+                                    {{ social|capfirst }}
+                                </a>
+                            </p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if object.booking_url %}
                     <div class="bg-light-translucent p-4 mb-4">
                         <h4 class="mb-3">{% trans 'Reservation via booking.com' %}</h4>
                         <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4" href="{{ object.booking_url }}">
@@ -193,7 +218,7 @@
 {#                            <p class="text-center text-secondary mb-0"><strong>Referencie a poloha v google mapách</strong></p>#}
                         </a>
                     </div>
-{#                {% endif %}#}
+                {% endif %}
             </div>
         </div>
     </div>
