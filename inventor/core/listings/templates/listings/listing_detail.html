@@ -22,9 +22,23 @@
 {#                    <span class="listing-category d-inline-block mb-3">#}
 {#                        {{ object.get_listing_type_display }}#}
 {#                    </span>#}
-                    <span class="text-secondary d-block mb-1"><i class="fas fa-fw fa-map-marker-alt mr-2 text-light opacity-50p"></i>{{ object.locality }}</span>
+                    <span class="text-secondary d-block mb-1">
+                        <i class="fas fa-fw fa-map-marker-alt mr-2 text-light opacity-50p"></i>
+                        <span>{{ object.locality }}</span>
+                    </span>
                     {% if object.price %}
-                        <span class="text-secondary d-block"><i class="fas fa-fw fa-money-bill mr-2 text-light opacity-50p"></i>{{ object.get_price_display }}</span>
+                        <span class="text-secondary d-block mb-1">
+                            <i class="fas fa-fw fa-money-bill mr-2 text-light opacity-50p"></i>
+                            <span>{{ object.get_price_display|capfirst }}</span>
+                        </span>
+                    {% endif %}
+                    {% if object.categories.exists %}
+                        <span class="text-secondary d-block">
+                            <i class="fas fa-fw fa-folder mr-2 text-light opacity-50p"></i>
+                            {% for category in object.categories.all %}
+                                <a class="text-secondary" href="{{ category.get_absolute_url }}">{{ category }}{% if not forloop.last %}, {% endif %}</a>
+                            {% endfor %}
+                        </span>
                     {% endif %}
                 </div>
 {#                {% if object.price %}#}
