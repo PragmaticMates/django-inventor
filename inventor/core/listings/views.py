@@ -3,6 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 
+from inventor.core.lexicons.models import Feature, AccommodationAmenity
+from inventor.core.listings.models.listing_types import Accommodation
 from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.models.general import Listing
 
@@ -59,3 +61,20 @@ class ListingDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return super().get_object(queryset).get_real_instance()
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+
+        context_data.update({
+            'all_features': Feature.objects.all(),
+            'features': self.object.features.all(),
+        })
+
+        if isinstance(self.object, Accommodation):
+            context_data.update({
+                'all_amenities': AccommodationAmenity.objects.all(),
+                'amenities': self.object.amenities.all(),
+            })
+        return context_data
+
+

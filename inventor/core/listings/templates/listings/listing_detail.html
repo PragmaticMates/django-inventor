@@ -129,33 +129,31 @@
                     </section>
                 {% endif %}
 
-                {% if object.amenities.exists %}
+                {% if all_amenities %}
                     <section class="mb-5" id="amenities">
                         <h2>{% trans 'Amenities' %}</h2>
                         <div class="card bg-white p-4">
                             <div class="column-count-xl-4 column-count-lg-3 column-count-sm-2 column-count-1">
-                                {% for amenity in object.amenities.all %}
-                                    <div class="mb-2 text-secondary"><i class="fad fa-check-circle fa-lg mr-3 text-success"></i>{{ amenity }}</div>
+                                {% for amenity in all_amenities %}
+                                    <div class="mb-2 text-secondary"><i class="fad fa-{% if amenity in amenities %}check-circle text-success{% else %}times-circle text-danger{% endif %} fa-lg mr-3"></i>{{ amenity }}</div>
                                 {% endfor %}
                             </div>
                         </div>
                     </section>
                 {% endif %}
 
-                {% if object.features.exists %}
-                    <section class="mb-5" id="features">
-                        <h2>{% trans 'Features' %}</h2>
-                        <div class="card bg-white p-4">
-                            <div class="row">
-                                {% for feature in object.features.all %}
-                                    <div class="col-auto">
-                                        <div class="bg-info rounded text-white px-3 py-2 mb-3">{{ feature }}</div>
-                                    </div>
-                                {% endfor %}
-                            </div>
+                <section class="mb-5" id="features">
+                    <h2>{% trans 'Features' %}</h2>
+                    <div class="card bg-white p-4">
+                        <div class="row">
+                            {% for feature in all_features %}
+                                <div class="col-auto">
+                                    <div class="badge-{% if feature in features %}info{% else %}danger{% endif %} rounded text-white px-3 py-2 mb-3">{{ feature }}</div>
+                                </div>
+                            {% endfor %}
                         </div>
-                    </section>
-                {% endif %}
+                    </div>
+                </section>
 
                 {% if object.videos.exists %}
                     <section class="mb-5" id="videos">
