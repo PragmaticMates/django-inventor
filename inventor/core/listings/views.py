@@ -1,12 +1,14 @@
 from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, FormView
+from django.views.generic.detail import SingleObjectMixin
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 
 from inventor.core.lexicons.models import Feature, AccommodationAmenity
-from inventor.core.listings.models.listing_types import Accommodation
 from inventor.core.listings.filters import ListingFilter
+from inventor.core.listings.forms import BookingForm
 from inventor.core.listings.models.general import Listing
+from inventor.core.listings.models.listing_types import Accommodation
 
 
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
@@ -49,12 +51,19 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         return context_data
 
 
-class ListingDetailView(DetailView):
+class ListingDetailView(SingleObjectMixin, FormView):
     model = Listing
     template_name = 'listings/listing_detail.html'
+    form_class = BookingForm
 
     # def get_queryset(self):
     #     return super().get_queryset().select_subclasses()
+
+    """A base view for displaying a single object."""
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
     def get_queryset(self):
         return super().get_queryset().published().only('id')  # TODO: not published listings are visible for staff and listing author
@@ -76,5 +85,3 @@ class ListingDetailView(DetailView):
                 'amenities': self.object.amenities.all(),
             })
         return context_data
-
-
