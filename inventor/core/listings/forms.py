@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class BookingForm(forms.Form):
+    # todo decide what is required
     check_in = forms.DateField(label=_('Check-in'), required=True)
     check_out = forms.DateField(label=_('Check-out'), required=True)
     persons = forms.IntegerField(label=_('Persons'), required=True, min_value=1)
@@ -19,8 +20,8 @@ class BookingForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['check_in'].widget.attrs['placeholder'] = 'dd/mm/yyyy'
-        self.fields['check_out'].widget.attrs['placeholder'] = 'dd/mm/yyyy'
+        self.fields['check_in'].widget.attrs['placeholder'] = 'dd.mm.yyyy'
+        self.fields['check_out'].widget.attrs['placeholder'] = 'dd.mm.yyyy'
         self.fields['persons'].widget.attrs['placeholder'] = _('Number of guests')
 
         self.fields['name'].widget.attrs['placeholder'] = _('Contact person')

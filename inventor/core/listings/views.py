@@ -59,11 +59,15 @@ class ListingDetailView(SingleObjectMixin, FormView):
     # def get_queryset(self):
     #     return super().get_queryset().select_subclasses()
 
-    """A base view for displaying a single object."""
-    def get(self, request, *args, **kwargs):
+    # """A base view for displaying a single object."""
+    # def get(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #     context = self.get_context_data(object=self.object)
+    #     return self.render_to_response(context)
+
+    def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
-        context = self.get_context_data(object=self.object)
-        return self.render_to_response(context)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         return super().get_queryset().published().only('id')  # TODO: not published listings are visible for staff and listing author
@@ -85,3 +89,14 @@ class ListingDetailView(SingleObjectMixin, FormView):
                 'amenities': self.object.amenities.all(),
             })
         return context_data
+
+    def form_valid(self, form):
+        # todo send message and inform user
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        # todo inform user
+        return super().form_invalid(form)
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
