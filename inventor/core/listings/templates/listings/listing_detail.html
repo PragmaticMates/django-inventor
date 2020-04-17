@@ -193,7 +193,8 @@
                         {% crispy form %}
                     </div>
                 {% endif %}
-                {% if object.person or object.phone or object.email or object.website or object.point or object.address %}
+
+                {% if object.point or object.address %}
                     <h4 class=" mt-2">{% trans 'Location' %}</h4>
                     <div class="card shadow-sm border-0 bg-white p-4 mb-5">
                         {% if object.point %}
@@ -210,18 +211,27 @@
                             <i class="fas fa-fw fa-map-marker-alt text-primary mr-3 mt-1"></i>
                             <span class="d-block">{{ object.address|linebreaksbr|default:'-' }}</span>
                         </p>
-                        <p class="text-secondary">
-                            <i class="fas fa-fw fa-user text-primary mr-3 text"></i>{{ object.person|default:'-' }}
-                        </p>
-                        <p class="text-secondary">
-                            <i class="fas fa-fw fa-phone-alt text-primary mr-3"></i>{% if object.phone %}<a class="text-secondary" href="tel:{{ object.phone }}">{{ object.phone }}</a>{% else %}-{% endif %}
-                        </p>
-                        <p class="text-secondary">
-                            <i class="fas fa-fw fa-at text-primary mr-3"></i>{% if object.email %}<a class="text-secondary" href="mailto:{{ object.email }}">{{ object.email }}</a>{% else %}-{% endif %}
-                        </p>
-                        <p class="text-secondary mb-0">
-                            <i class="fas fa-fw fa-globe text-primary mr-3"></i>{% if object.website %}<a class="text-secondary" target="_blank" href="{{ object.website }}">{{ object.website }}</a>{% else %}-{% endif %}
-                        </p>
+                    </div>
+                {% endif %}
+
+                {% if object.person or object.phone or object.email or object.website %}
+                    <h4 class=" mt-2">{% trans 'Contact' %}</h4>
+                    <div class="card shadow-sm border-0 bg-white p-4 mb-5 position-relative">
+                        <div class="contact-content">
+                            <p class="text-secondary">
+                                <i class="fas fa-fw fa-user text-primary mr-3 text"></i>{{ object.person|default:'-' }}
+                            </p>
+                            <p class="text-secondary">
+                                <i class="fas fa-fw fa-phone-alt text-primary mr-3"></i>{% if object.phone %}<a class="text-secondary" href="tel:{{ object.phone }}">{{ object.phone }}</a>{% else %}-{% endif %}
+                            </p>
+                            <p class="text-secondary">
+                                <i class="fas fa-fw fa-at text-primary mr-3"></i>{% if object.email %}<a class="text-secondary" href="mailto:{{ object.email }}">{{ object.email }}</a>{% else %}-{% endif %}
+                            </p>
+                            <p class="text-secondary mb-0">
+                                <i class="fas fa-fw fa-globe text-primary mr-3"></i>{% if object.website %}<a class="text-secondary" target="_blank" href="{{ object.website }}">{{ object.website }}</a>{% else %}-{% endif %}
+                            </p>
+                        </div>
+                        <button class="btn btn-primary position-absolute-middle show-contact">{% trans 'Show more' %}</button>
                     </div>
                 {% endif %}
 
@@ -302,11 +312,20 @@
         jQuery(document).ready(function ($) {
             var lightbox = new SimpleLightbox('.gallery a', { /* options */});
 
-            $(".second-navbar .nav-link").click(function(e) {
+            $(".second-navbar .nav-link").click(function (e) {
                 e.preventDefault();
                 const aid = $(this).attr("href");
                 const offset = $(aid).offset().top - $('header').height();
-                $('html,body').animate({scrollTop: offset},'slow');
+                $('html,body').animate({scrollTop: offset}, 'slow');
+            });
+
+            $(".show-contact").click(function (e) {
+                $(this).addClass('hide');
+                $(".contact-content").addClass('show');
+
+                {#setTimeout(function () {#}
+                {#    $(".show-contact").remove();#}
+                {#}, 1500);#}
             });
         });
     </script>
