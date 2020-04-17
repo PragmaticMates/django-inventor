@@ -29,6 +29,7 @@ class BookingForm(forms.Form):
         self.fields['message'].widget.attrs['placeholder'] = _('Send a question or inquiry directly to the accommodation owner without increasing the price')
 
         self.helper = FormHelper()
+        self.helper.form_class = 'booking-form'
         self.helper.layout = Layout(
             Div('check_in', css_class='datetime-picker'),
             Div('check_out', css_class='datetime-picker'),
