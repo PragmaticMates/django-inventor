@@ -199,9 +199,9 @@
                     <div class="card shadow-sm border-0 bg-white p-4 mb-5">
                         {% if object.point %}
                             <div class="card shadow-sm border-0 bg-white mb-4">
-        {#                        todo link and img #}
-                                <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4" href="#">
-                                    <img class="" src="https://sirava.sk/wp-content/uploads/2017/11/google_maps_logo.png" alt="" width="168" height="164">
+                                <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4"
+                                   href="https://www.google.com/maps/search/?api=1&query={{ object.point.y }},{{ object.point.x }}">
+                                    <img class="" src="{% static 'images/google_maps_logo.png' %}" alt="Google Maps logo" width="168" height="164">
                                     <p class="text-center text-secondary mb-0"><strong>Referencie a poloha v google mapách</strong></p>
                                 </a>
                             </div>
