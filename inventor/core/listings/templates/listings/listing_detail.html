@@ -186,7 +186,7 @@
                     </section>
                 {% endif %}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 {% if form %}
                     <h4 class=" mt-2">{% trans 'Booking form' %}</h4>
                     <div class="card shadow-sm border-0 bg-white p-4 mb-5">
@@ -198,7 +198,7 @@
                     <h4 class=" mt-2">{% trans 'Location' %}</h4>
                     <div class="card shadow-sm border-0 bg-white p-4 mb-5">
                         {% if object.point %}
-                            <div class="card shadow-sm border-0 bg-white mb-4">
+                            <div class="card border-0 bg-white mb-4">
                                 <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4"
                                    href="https://www.google.com/maps/search/?api=1&query={{ object.point.y }},{{ object.point.x }}">
                                     <img class="" src="{% static 'images/google_maps_logo.png' %}" alt="Google Maps logo" width="168" height="164">
@@ -207,7 +207,7 @@
                             </div>
                         {% endif %}
 
-                        <p class="text-secondary d-flex flex-row">
+                        <p class="text-secondary d-flex flex-row mb-0">
                             <i class="fas fa-fw fa-map-marker-alt text-primary mr-3 mt-1"></i>
                             <span class="d-block">{{ object.address|linebreaksbr|default:'-' }}</span>
                         </p>
@@ -231,7 +231,7 @@
                                 <i class="fas fa-fw fa-globe text-primary mr-3"></i>{% if object.website %}<a class="text-secondary" target="_blank" href="{{ object.website }}">{{ object.website }}</a>{% else %}-{% endif %}
                             </p>
                         </div>
-                        <button class="btn btn-primary position-absolute-middle show-contact">{% trans 'Show more' %}</button>
+                        <button class="btn btn-primary position-absolute-middle btn-lg show-contact">{% trans 'Show more' %}</button>
                     </div>
                 {% endif %}
 

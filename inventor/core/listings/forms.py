@@ -1,20 +1,19 @@
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div, Submit, Fieldset
+from crispy_forms.layout import Layout, Div, Submit, Fieldset, Row
 from django import forms
 from django.forms import Textarea
 from django.utils.translation import ugettext_lazy as _
 
 
 class BookingForm(forms.Form):
-    # todo decide what is required
     check_in = forms.DateField(label=_('Check-in'), required=True)
     check_out = forms.DateField(label=_('Check-out'), required=True)
     persons = forms.IntegerField(label=_('Persons'), required=True, min_value=1)
     name = forms.CharField(label='', required=True)
     email = forms.EmailField(label='', required=True)
     phone = forms.CharField(label='', required=True)
-    message = forms.CharField(label='', required=True, widget=Textarea(attrs={'rows': 4}))
+    message = forms.CharField(label='', required=False, widget=Textarea(attrs={'rows': 4}))
     agree_processing = forms.BooleanField(label=_('I agree to the processing of my personal data'), required=True)
 
     def __init__(self, *args, **kwargs):
@@ -32,8 +31,10 @@ class BookingForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_class = 'booking-form'
         self.helper.layout = Layout(
-            Div('check_in', css_class='datetime-picker'),
-            Div('check_out', css_class='datetime-picker'),
+            Row(
+                Div(Div('check_in', css_class='datetime-picker'), css_class='col-md-6'),
+                Div(Div('check_out', css_class='datetime-picker'), css_class='col-md-6'),
+            ),
             'persons',
             Fieldset(
                 _('Contact information'),
@@ -44,6 +45,6 @@ class BookingForm(forms.Form):
             ),
             'agree_processing',
             FormActions(
-                Submit('submit', _('Send request'), css_class='w-100')
+                Submit('submit', _('Send request'), css_class='w-100'), css_class='mb-0'
             )
         )
