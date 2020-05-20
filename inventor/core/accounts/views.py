@@ -79,6 +79,7 @@ class UserCreateView(LoginPermissionRequiredMixin, CreateView):
         user.set_password(password)
 
         # send password to user
+        # TODO: change to site name
         user.email_user(_('Welcome to TatryTravel.sk'), _('Your password is {}').format(password), fail_silently=False)
 
         messages.success(self.request, _('User successfully created'))
