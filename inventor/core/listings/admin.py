@@ -7,7 +7,7 @@ from sorl.thumbnail.admin import AdminImageMixin
 
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo, Listing
-from inventor.core.listings.models.listing_types import Accommodation
+from inventor.core.listings.models.listing_types import Accommodation, Race
 
 
 class PhotoInline(NestedStackedInline):
@@ -24,6 +24,7 @@ class AlbumInline(NestedStackedInline):
 class VideoInline(admin.StackedInline):
     model = Video
     extra = 1
+    inlines = []
 
 
 def make_convert_to_type_action(listing_type):
@@ -45,9 +46,9 @@ def make_convert_to_type_action(listing_type):
 class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     date_hierarchy = 'created'
     search_fields = ['id', 'title', 'description']
-    list_display = ('id', 'title', 'slug', 'address', 'locality', 'created')
+    list_display = ('id', 'title', 'slug', 'get_categories', 'address', 'locality', 'get_price_display', 'published', 'created')
     list_display_links = ('title',)
-    # list_filter = ('locality', 'country', )
+    list_filter = ('published', 'promoted')
     autocomplete_fields = ['author', 'locality']
     list_select_related = ['locality']
     inlines = [VideoInline, AlbumInline]  # add comments?
@@ -83,6 +84,16 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
 
         return actions
 
+    def get_categories(self, obj):
+        return ", ".join(obj.categories.values_list('title', flat=True))
+    get_categories.admin_order_field = 'categories'
+    get_categories.short_description = _('Categories')
+
+    def get_price_display(self, obj):
+        return obj.get_price_display()
+    get_price_display.admin_order_field = 'price'
+    get_price_display.short_description = _('Price')
+
 
 class PhotoInline(admin.StackedInline):
     model = Photo
@@ -109,4 +120,14 @@ admin.site.unregister(Accommodation)
 class AccommodationAdmin(ListingAdmin):
     fieldsets = ListingTypeAdmin.fieldsets + BookingMixinAdmin.fieldsets + (
         (_('Specific'), {'fields': ('amenities', 'star_rating', 'rooms')}),
+    )
+
+
+admin.site.unregister(Race)
+@admin.register(Race)
+class RaceAdmin(ListingAdmin):
+    list_display = ListingTypeAdmin.list_display + ('get_distance_display',)
+    list_filter = ListingTypeAdmin.list_filter + ('distance', )
+    fieldsets = ListingTypeAdmin.fieldsets + (
+        (_('Specific'), {'fields': ('distance',)}),
     )

@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-13 17:53+0100\n"
-"PO-Revision-Date: 2020-03-13 17:53+0058\n"
-"Last-Translator: b'  <erik.telepovsky@gmail.com>'\n"
+"POT-Creation-Date: 2020-06-03 11:52+0200\n"
+"PO-Revision-Date: 2020-06-03 11:57+0058\n"
+"Last-Translator: b'  <erik@pragmaticmates.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -74,8 +74,10 @@ msgid "Personal info"
 msgstr "Osobné informácie"
 
 #: core/accounts/admin.py:20
-#: core/listings/templates/listings/listing_detail.html:79
-#: templates/layout/header.html:98
+#: core/listings/templates/listings/listing_detail.html:93
+#: core/listings/templates/listings/listing_detail.html:218
+#: templates/layout/header/three-rows-1.html:100
+#: templates/layout/header/two-rows-1.html:36
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -157,7 +159,7 @@ msgstr "naposledy videný"
 msgid "avatar"
 msgstr "avatar"
 
-#: core/accounts/models.py:41 core/listings/models/general.py:275
+#: core/accounts/models.py:41 core/listings/models/general.py:274
 msgid "photo, image or icon"
 msgstr "fotka, obrázok alebo ikona"
 
@@ -207,23 +209,23 @@ msgstr "Profil úspešne uložený"
 msgid "User successfully saved"
 msgstr "Užívateľ úspešne uložený"
 
-#: core/accounts/views.py:82
+#: core/accounts/views.py:83
 msgid "Welcome to TatryTravel.sk"
 msgstr "Vitajte na TatryTravel.sk"
 
-#: core/accounts/views.py:82
+#: core/accounts/views.py:83
 msgid "Your password is {}"
 msgstr "Vaše heslo je {}"
 
-#: core/accounts/views.py:84
+#: core/accounts/views.py:85
 msgid "User successfully created"
 msgstr "Užívateľ úspešne vytvorený"
 
-#: core/accounts/views.py:96
+#: core/accounts/views.py:97
 msgid "You can't delete your own account"
 msgstr "Nemôžete zmazať svoj vlastný účet"
 
-#: core/accounts/views.py:101
+#: core/accounts/views.py:102
 msgid "User successfully deleted"
 msgstr "Užívateľ úspešne zmazaný"
 
@@ -336,12 +338,12 @@ msgid "person"
 msgstr "osoba"
 
 #: core/bookings/models.py:46 core/listings/models/general.py:100
-#: core/listings/models/general.py:279
+#: core/listings/models/general.py:278
 msgid "created"
 msgstr "vytvorené"
 
 #: core/bookings/models.py:47 core/listings/models/general.py:101
-#: core/listings/models/general.py:280
+#: core/listings/models/general.py:279
 msgid "modified"
 msgstr "upravené"
 
@@ -355,14 +357,14 @@ msgstr "rezervácie"
 
 #: core/lexicons/models.py:15 core/lexicons/models.py:28
 #: core/lexicons/models.py:50 core/lexicons/models.py:66
-#: core/listings/models/general.py:38 core/listings/models/general.py:244
-#: core/listings/models/general.py:259
+#: core/listings/models/general.py:38 core/listings/models/general.py:243
+#: core/listings/models/general.py:258
 msgid "title"
 msgstr "názov"
 
 #: core/lexicons/models.py:17 core/lexicons/models.py:68
-#: core/listings/models/general.py:40 core/listings/models/general.py:245
-#: core/listings/models/general.py:260
+#: core/listings/models/general.py:40 core/listings/models/general.py:244
+#: core/listings/models/general.py:259
 msgid "description"
 msgstr "opis"
 
@@ -386,7 +388,7 @@ msgstr "výhoda"
 msgid "features"
 msgstr "výhody"
 
-#: core/lexicons/models.py:71 core/listings/models/general.py:283
+#: core/lexicons/models.py:71 core/listings/models/general.py:282
 msgid "photo"
 msgstr "fotografia"
 
@@ -406,7 +408,7 @@ msgstr "vybavenie ubytovania"
 msgid "accommodation amenities"
 msgstr "vybavenia ubytovania"
 
-#: core/lexicons/templates/lexicons/widgets/locality.html:13
+#: core/lexicons/templates/lexicons/widgets/locality.html:14
 #, python-format
 msgid "%(num_listings)s listing"
 msgid_plural "%(num_listings)s listings"
@@ -415,47 +417,51 @@ msgstr[1] "%(num_listings)s položky"
 msgstr[2] "%(num_listings)s položky"
 msgstr[3] "%(num_listings)s položiek"
 
-#: core/listings/admin.py:36
+#: core/listings/admin.py:37
 #, python-brace-format
 msgid "Convert to {0}"
 msgstr "Konvertovať na {0}"
 
-#: core/listings/admin.py:56
+#: core/listings/admin.py:57
 msgid "Definition"
 msgstr "Definícia"
 
-#: core/listings/admin.py:57
+#: core/listings/admin.py:58
 msgid "Management"
 msgstr "Manažment"
 
-#: core/listings/admin.py:58
+#: core/listings/admin.py:59
 msgid "Specification"
 msgstr "Špecifikácia"
 
-#: core/listings/admin.py:59 core/listings/filters.py:16
+#: core/listings/admin.py:60 core/listings/admin.py:95
+#: core/listings/filters.py:16
 msgid "Price"
 msgstr "Cena"
 
-#: core/listings/admin.py:60
-#: core/listings/templates/listings/listing_detail.html:76
-#: core/listings/templates/listings/listing_detail.html:179
+#: core/listings/admin.py:61
+#: core/listings/templates/listings/listing_detail.html:90
+#: core/listings/templates/listings/listing_detail.html:198
 msgid "Location"
 msgstr "Poloha"
 
-#: core/listings/admin.py:61
+#: core/listings/admin.py:62
 msgid "Previews"
 msgstr "Náhľady"
 
-#: core/listings/admin.py:62
-#: core/listings/templates/listings/listing_detail.html:161
+#: core/listings/admin.py:63 core/listings/forms.py:40
 msgid "Contact information"
 msgstr "Kontaktné informácie"
 
-#: core/listings/admin.py:63
+#: core/listings/admin.py:64
 msgid "Social connections"
 msgstr "Sociálne siete"
 
-#: core/listings/admin.py:111
+#: core/listings/admin.py:90 core/listings/filters.py:88
+msgid "Categories"
+msgstr "Kategórie"
+
+#: core/listings/admin.py:122 core/listings/admin.py:132
 msgid "Specific"
 msgstr "Špecifické"
 
@@ -463,13 +469,68 @@ msgstr "Špecifické"
 msgid "Keyword"
 msgstr "Kľúčové slovo"
 
-#: core/listings/filters.py:60
+#: core/listings/filters.py:18
+#| msgid "locality"
+msgid "Locality"
+msgstr "Lokalita"
+
+#: core/listings/filters.py:70
 msgid "All localities"
 msgstr "Všetky lokality"
 
-#: core/listings/filters.py:71
-msgid "Categories"
-msgstr "Kategórie"
+#: core/listings/filters.py:95
+#: core/listings/templates/listings/listing_detail.html:82
+#: core/listings/templates/listings/listing_detail.html:158
+msgid "Features"
+msgstr "Výhody"
+
+#: core/listings/forms.py:10
+msgid "Check-in"
+msgstr "Check-in"
+
+#: core/listings/forms.py:11
+msgid "Check-out"
+msgstr "Check-out"
+
+#: core/listings/forms.py:12
+#| msgid "person"
+msgid "Persons"
+msgstr "Osoby"
+
+#: core/listings/forms.py:17
+msgid "I agree to the processing of my personal data"
+msgstr "Súhlasím so spracovaním osobných údajov"
+
+#: core/listings/forms.py:24
+#| msgid "number of persons"
+msgid "Number of guests"
+msgstr "Počet hostí"
+
+#: core/listings/forms.py:26
+#| msgid "Contact details"
+msgid "Contact person"
+msgstr "Kontaktná osoba"
+
+#: core/listings/forms.py:27
+#| msgid "email"
+msgid "E-mail"
+msgstr "E-mail"
+
+#: core/listings/forms.py:28
+#| msgid "phone"
+msgid "Phone"
+msgstr "Telefón"
+
+#: core/listings/forms.py:29
+msgid ""
+"Send a question or inquiry directly to the accommodation owner without "
+"increasing the price"
+msgstr ""
+"Zaslať otázku alebo žiadosť priamo vlastníkovi ubytovania bez navýšenia ceny"
+
+#: core/listings/forms.py:48
+msgid "Send request"
+msgstr "Odoslať požiadavku"
 
 #: core/listings/models/general.py:31
 msgid "entry"
@@ -539,35 +600,35 @@ msgstr "sociálne siete"
 msgid "listings"
 msgstr "položky"
 
-#: core/listings/models/general.py:139
+#: core/listings/models/general.py:138
 msgid "starts at"
 msgstr "od"
 
-#: core/listings/models/general.py:246
+#: core/listings/models/general.py:245
 msgid "URL"
 msgstr "URL"
 
-#: core/listings/models/general.py:249
+#: core/listings/models/general.py:248
 msgid "video"
 msgstr "video"
 
-#: core/listings/models/general.py:250
+#: core/listings/models/general.py:249
 msgid "videos"
 msgstr "videá"
 
-#: core/listings/models/general.py:263
+#: core/listings/models/general.py:262
 msgid "album"
 msgstr "album"
 
-#: core/listings/models/general.py:264
+#: core/listings/models/general.py:263
 msgid "albums"
 msgstr "albumy"
 
-#: core/listings/models/general.py:274
+#: core/listings/models/general.py:273
 msgid "file"
 msgstr "súbor"
 
-#: core/listings/models/general.py:284
+#: core/listings/models/general.py:283
 msgid "photos"
 msgstr "fotografie"
 
@@ -653,148 +714,189 @@ msgid "activities"
 msgstr "aktivity"
 
 #: core/listings/models/listing_types.py:88
+msgid "sport"
+msgstr "šport"
+
+#: core/listings/models/listing_types.py:89
+#: core/listings/models/listing_types.py:111
+msgid "distance"
+msgstr "vzdialenosť"
+
+#: core/listings/models/listing_types.py:92
+msgid "race"
+msgstr "pretek"
+
+#: core/listings/models/listing_types.py:93
+msgid "races"
+msgstr "preteky"
+
+#: core/listings/models/listing_types.py:101
+msgid "health & body"
+msgstr "zdravie & telo"
+
+#: core/listings/models/listing_types.py:104
+msgid "training"
+msgstr "tréning"
+
+#: core/listings/models/listing_types.py:105
+msgid "trainings"
+msgstr "tréningy"
+
+#: core/listings/models/listing_types.py:110
 msgid "tourism"
 msgstr "turizmus"
 
-#: core/listings/models/listing_types.py:91
+#: core/listings/models/listing_types.py:114
 msgid "trip"
 msgstr "výlet"
 
-#: core/listings/models/listing_types.py:92
+#: core/listings/models/listing_types.py:115
 msgid "trips"
 msgstr "výlety"
 
-#: core/listings/models/listing_types.py:97
-#: core/listings/models/listing_types.py:105
+#: core/listings/models/listing_types.py:120
+#: core/listings/models/listing_types.py:128
 msgid "events"
 msgstr "podujatia"
 
-#: core/listings/models/listing_types.py:100
+#: core/listings/models/listing_types.py:123
 msgid "datetime range"
 msgstr "dátumový rozsah"
 
-#: core/listings/models/listing_types.py:104
+#: core/listings/models/listing_types.py:127
 msgid "event"
 msgstr "podujatie"
 
-#: core/listings/models/listing_types.py:110
+#: core/listings/models/listing_types.py:133
 msgid "shopping"
 msgstr "nakupovanie"
 
-#: core/listings/models/listing_types.py:113
+#: core/listings/models/listing_types.py:136
 msgid "shop"
 msgstr "obchod"
 
-#: core/listings/models/listing_types.py:114
+#: core/listings/models/listing_types.py:137
 msgid "shops"
 msgstr "obchody"
 
-#: core/listings/models/listing_types.py:119
+#: core/listings/models/listing_types.py:142
 msgid "automotive"
 msgstr "svet automobilov"
 
-#: core/listings/models/listing_types.py:122
-#: core/listings/models/listing_types.py:123
+#: core/listings/models/listing_types.py:145
+#: core/listings/models/listing_types.py:146
 msgid "vehicle"
 msgstr "vozidlo"
 
-#: core/listings/models/listing_types.py:128
+#: core/listings/models/listing_types.py:151
 msgid "dating"
 msgstr "zoznamka"
 
-#: core/listings/models/listing_types.py:131
+#: core/listings/models/listing_types.py:154
 msgid "profile"
 msgstr "profil"
 
-#: core/listings/models/listing_types.py:132
+#: core/listings/models/listing_types.py:155
 msgid "profiles"
 msgstr "profily"
 
-#: core/listings/models/listing_types.py:137
+#: core/listings/models/listing_types.py:160
 msgid "work"
 msgstr "práca"
 
-#: core/listings/models/listing_types.py:140
+#: core/listings/models/listing_types.py:163
 msgid "job"
 msgstr "pracovná ponuka"
 
-#: core/listings/models/listing_types.py:141
+#: core/listings/models/listing_types.py:164
 msgid "jobs"
 msgstr "pracovná ponuky"
 
-#: core/listings/models/listing_types.py:146
+#: core/listings/models/listing_types.py:169
 msgid "education"
 msgstr "vzdelanie"
 
-#: core/listings/models/listing_types.py:149
+#: core/listings/models/listing_types.py:172
 msgid "course"
 msgstr "kurz"
 
-#: core/listings/models/listing_types.py:150
+#: core/listings/models/listing_types.py:173
 msgid "courses"
 msgstr "kurzy"
 
-#: core/listings/models/listing_types.py:155
+#: core/listings/models/listing_types.py:178
 msgid "flora and fauna"
 msgstr "flóra a fauna"
 
-#: core/listings/models/listing_types.py:159
+#: core/listings/models/listing_types.py:182
 msgid "animal or plant"
 msgstr "zviera alebo rastlina"
 
-#: core/listings/models/listing_types.py:160
+#: core/listings/models/listing_types.py:183
 msgid "animals and plants"
 msgstr "zvieratá a rastliny"
 
-#: core/listings/templates/listings/listing_detail.html:52
-#: core/listings/templates/listings/listing_detail.html:101
-msgid "Gallery"
-msgstr "Galéria"
-
-#: core/listings/templates/listings/listing_detail.html:57
-#: core/listings/templates/listings/listing_detail.html:118
-msgid "Description"
-msgstr "Opis"
-
-#: core/listings/templates/listings/listing_detail.html:62
-#: core/listings/templates/listings/listing_detail.html:127
-msgid "Amenities"
-msgstr "Vybavenie"
-
-#: core/listings/templates/listings/listing_detail.html:67
-#: core/listings/templates/listings/listing_detail.html:138
-msgid "Features"
-msgstr "Výhody"
-
-#: core/listings/templates/listings/listing_detail.html:72
-msgid "Video"
-msgstr "Video"
-
-#: core/listings/templates/listings/listing_detail.html:82
-msgid "Reviews"
-msgstr "Hodnotenia"
-
-#: core/listings/templates/listings/listing_detail.html:151
-msgid "Videos"
-msgstr "Videá"
-
-#: core/listings/templates/listings/listing_detail.html:190
-msgid "Reservation via booking.com"
-msgstr "Rezervácia cez booking.com"
-
-#: core/listings/templates/listings/listing_list.html:13
-#: templates/layout/header.html:89
+#: core/listings/templates/listings/listing_columns.html:15
+#: templates/layout/header/three-rows-1.html:91
+#: templates/layout/header/two-rows-1.html:73
 msgid "Home"
 msgstr "Domov"
 
-#: core/listings/templates/listings/listing_list.html:14
+#: core/listings/templates/listings/listing_columns.html:16
 msgid "Listings"
 msgstr "Položky"
 
-#: core/listings/templates/listings/listing_list.html:36
-#: templates/home.html:56
+#: core/listings/templates/listings/listing_columns.html:29
+msgid "Filter"
+msgstr "Filter"
+
+#: core/listings/templates/listings/listing_columns.html:48
 msgid "No data to display"
 msgstr "Žiadne údaje na zobrazenie"
+
+#: core/listings/templates/listings/listing_detail.html:68
+#: core/listings/templates/listings/listing_detail.html:115
+msgid "Gallery"
+msgstr "Galéria"
+
+#: core/listings/templates/listings/listing_detail.html:73
+#: core/listings/templates/listings/listing_detail.html:135
+msgid "Description"
+msgstr "Opis"
+
+#: core/listings/templates/listings/listing_detail.html:78
+#: core/listings/templates/listings/listing_detail.html:146
+msgid "Amenities"
+msgstr "Vybavenie"
+
+#: core/listings/templates/listings/listing_detail.html:86
+msgid "Video"
+msgstr "Video"
+
+#: core/listings/templates/listings/listing_detail.html:96
+msgid "Reviews"
+msgstr "Hodnotenia"
+
+#: core/listings/templates/listings/listing_detail.html:182
+msgid "Videos"
+msgstr "Videá"
+
+#: core/listings/templates/listings/listing_detail.html:191
+#| msgid "Booking"
+msgid "Booking form"
+msgstr "Rezervačný formulár"
+
+#: core/listings/templates/listings/listing_detail.html:234
+msgid "Show more"
+msgstr "Zobraziť viac"
+
+#: core/listings/templates/listings/listing_detail.html:250
+msgid "Social"
+msgstr "Sociálne"
+
+#: core/listings/templates/listings/listing_detail.html:264
+msgid "Reservation via booking.com"
+msgstr "Rezervácia cez booking.com"
 
 #: core/listings/templates/listings/widgets/listing_item.html:15
 msgid "TOP"
@@ -810,105 +912,110 @@ msgctxt "url"
 msgid "<str:slug>/"
 msgstr "<str:slug>/"
 
-#: templates/helpers/filter-vertical.html:4
-msgid "Filter"
-msgstr "Filter"
+#: core/listings/views.py:21
+msgid "Newest"
+msgstr "Najnovšie"
 
-#: templates/helpers/filter-vertical.html:20 templates/layout/header.html:118
+#: core/listings/views.py:22
+msgid "Oldest"
+msgstr "Najstaršie"
+
+#: core/listings/views.py:24
+msgid "Price (Low to high)"
+msgstr "Cena (od najlacnejšieho)"
+
+#: core/listings/views.py:25
+msgid "Price (High to low)"
+msgstr "Cena (od najdrahšieho)"
+
+#: core/listings/views.py:26
+#| msgid "title"
+msgid "Title"
+msgstr "Názov"
+
+#: templates/helpers/filter-vertical.html:19
+#: templates/layout/header/three-rows-1.html:120
+#: templates/layout/header/two-rows-1.html:60
 msgid "Search"
 msgstr "Hľadať"
 
-#: templates/home.html:15
-msgid "High Tatras and tourism"
-msgstr "Vysoké Tatry a turizmus"
-
-#: templates/home.html:16
-msgid "List of accommodation with direct contact to the owners"
-msgstr "Zoznam ubytovaní s priamym kontaktom na majiteľov"
-
-#: templates/home.html:18 templates/layout/header.html:63
-msgid "Accommodation"
-msgstr "Ubytovanie"
-
-#: templates/home.html:19
-msgid "Gastronomy"
-msgstr "Gastronómia"
-
-#: templates/home.html:20
-msgid "Events"
-msgstr "Podujatia"
-
-#: templates/home.html:21 templates/layout/header.html:59
-msgid "Hiking"
-msgstr "Turistika"
-
-#: templates/home.html:22
-msgid "Relax"
-msgstr "Relax"
-
-#: templates/home.html:24
-msgid "Shopping"
-msgstr "Nakupovanie"
-
-#: templates/home.html:30 templates/home.html:298
-msgid "Previous"
-msgstr "Predchádzajúce"
-
-#: templates/home.html:34 templates/home.html:302
-msgid "Next"
-msgstr "Ďalšie"
-
-#: templates/home.html:46
-msgid "Selected accommodation"
-msgstr "Vybrané ubytovania"
-
-#: templates/home.html:48
-msgid "Random picks from Hight Tatras"
-msgstr "Náhodný výber z Vysokých Tatier"
-
-#: templates/home.html:60
-msgid "Show more"
-msgstr "Zobraziť viac"
-
-#: templates/home.html:72
-msgid "Top wellness, High Tatras and surroundings"
-msgstr "Top wellness, Vysoké Tatry a okolie"
-
-#: templates/home.html:74
-msgid "Other wellness places having sauna and whirlpool"
-msgstr "Iné wellness objekty so saunou a vírivkou"
-
-#: templates/home.html:113
-msgid "Hiking in High Tatras"
-msgstr "Turistika vo Vysokých Tatrách"
-
-#: templates/home.html:115
-msgid "Season is open and welcomes tourists from all over the world."
-msgstr "Sezóna je otvorená a víta turistov z celého sveta"
-
-#: templates/home.html:283
-msgid "Localities"
-msgstr "Lokality"
-
-#: templates/home.html:285
-msgid "in Hight Tatras"
-msgstr "vo Vysokých Tatrách"
-
-#: templates/layout/header.html:36
+#: templates/layout/header/three-rows-1.html:36
 msgid "Sign in"
 msgstr "Prihlásiť sa"
 
-#: templates/layout/header.html:67
+#: templates/layout/header/three-rows-1.html:61
+msgid "Hiking"
+msgstr "Turistika"
+
+#: templates/layout/header/three-rows-1.html:65
+msgid "Accommodation"
+msgstr "Ubytovanie"
+
+#: templates/layout/header/three-rows-1.html:69
 msgid "Attractions"
 msgstr "Atrakcie"
 
-#: templates/layout/header.html:92
+#: templates/layout/header/three-rows-1.html:94
+#: templates/layout/header/two-rows-1.html:76
 msgid "Explore"
 msgstr "Objavuj"
 
-#: templates/layout/header.html:95
+#: templates/layout/header/three-rows-1.html:97
+#: templates/layout/header/two-rows-1.html:79
 msgid "News"
 msgstr "Aktuality"
+
+#: templates/layout/header/two-rows-1.html:93
+msgid "Log in"
+msgstr "Prihlásiť sa"
+
+#~ msgid "High Tatras and tourism"
+#~ msgstr "Vysoké Tatry a turizmus"
+
+#~ msgid "List of accommodation with direct contact to the owners"
+#~ msgstr "Zoznam ubytovaní s priamym kontaktom na majiteľov"
+
+#~ msgid "Gastronomy"
+#~ msgstr "Gastronómia"
+
+#~ msgid "Events"
+#~ msgstr "Podujatia"
+
+#~ msgid "Relax"
+#~ msgstr "Relax"
+
+#~ msgid "Shopping"
+#~ msgstr "Nakupovanie"
+
+#~ msgid "Previous"
+#~ msgstr "Predchádzajúce"
+
+#~ msgid "Next"
+#~ msgstr "Ďalšie"
+
+#~ msgid "Selected accommodation"
+#~ msgstr "Vybrané ubytovania"
+
+#~ msgid "Random picks from Hight Tatras"
+#~ msgstr "Náhodný výber z Vysokých Tatier"
+
+#~ msgid "Top wellness, High Tatras and surroundings"
+#~ msgstr "Top wellness, Vysoké Tatry a okolie"
+
+#~ msgid "Other wellness places having sauna and whirlpool"
+#~ msgstr "Iné wellness objekty so saunou a vírivkou"
+
+#~ msgid "Hiking in High Tatras"
+#~ msgstr "Turistika vo Vysokých Tatrách"
+
+#~ msgid "Season is open and welcomes tourists from all over the world."
+#~ msgstr "Sezóna je otvorená a víta turistov z celého sveta"
+
+#~ msgid "Localities"
+#~ msgstr "Lokality"
+
+#~ msgid "in Hight Tatras"
+#~ msgstr "vo Vysokých Tatrách"
 
 #~ msgid "Address"
 #~ msgstr "Adresa"

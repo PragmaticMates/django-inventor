@@ -1,3 +1,4 @@
+from django.core.validators import EMPTY_VALUES
 from django.utils.text import slugify
 
 
@@ -6,7 +7,7 @@ class SlugMixin(object):
     FORCE_SLUG_REGENERATION = True
 
     def save(self, **kwargs):
-        if self.slug != slugify(self.title) or self.FORCE_SLUG_REGENERATION:
+        if self.slug in EMPTY_VALUES or self.FORCE_SLUG_REGENERATION:
             slug = slugify(self.title)
             self.slug = slug
             index = 1

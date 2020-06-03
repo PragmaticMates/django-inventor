@@ -84,8 +84,31 @@ class Activity(Listing):
         ordering = ('title',)
 
 
+class Race(Listing):
+    section = _('sport')
+    distance = models.PositiveSmallIntegerField(_('distance'), help_text='km', blank=True, null=True, default=None)
+
+    class Meta:
+        verbose_name = _('race')
+        verbose_name_plural = _('races')
+        ordering = ('title',)
+
+    def get_distance_display(self):
+        return f'{self.distance} km' if self.distance else ''
+
+
+class Training(Listing):
+    section = _('health & body')
+
+    class Meta:
+        verbose_name = _('training')
+        verbose_name_plural = _('trainings')
+        ordering = ('title',)
+
+
 class Trip(Listing):
     section = _('tourism')
+    distance = models.PositiveSmallIntegerField(_('distance'), help_text='km', blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = _('trip')

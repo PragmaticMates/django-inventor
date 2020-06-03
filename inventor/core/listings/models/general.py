@@ -120,7 +120,6 @@ class Listing(SlugMixin, models.Model):
     def full_address(self):
         return '{}, {}'.format(self.address, self.country).strip(', ')
 
-    @property
     def get_price_display(self):
         if not self.price:
             return ''
