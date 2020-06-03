@@ -126,8 +126,13 @@ class AccommodationAdmin(ListingAdmin):
 admin.site.unregister(Race)
 @admin.register(Race)
 class RaceAdmin(ListingAdmin):
-    list_display = ListingTypeAdmin.list_display + ('get_distance_display',)
+    list_display = ListingTypeAdmin.list_display + ('distance_display',)
     list_filter = ListingTypeAdmin.list_filter + ('distance', )
     fieldsets = ListingTypeAdmin.fieldsets + (
         (_('Specific'), {'fields': ('distance',)}),
     )
+
+    def distance_display(self, obj):
+        return obj.get_distance_display()
+    distance_display.admin_order_field = 'distance'
+    distance_display.short_description = _('Distance')
