@@ -8,8 +8,8 @@ from inventor.core.lexicons.models import AccommodationAmenity
 @admin.register(Category)
 class CategoryAdmin(DraggableMPTTAdmin):
     search_fields = ['title']
-    list_display = ('tree_actions', 'indented_title', 'slug', 'listing_type')
-    list_display_links = ('indented_title',)
+    list_display = ('tree_actions', 'title_i18n', 'slug_i18n', 'listing_type')
+    list_display_links = ('title_i18n',)
     list_select_related = ['listing_type']
 
 

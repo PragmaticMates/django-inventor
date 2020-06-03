@@ -2,8 +2,10 @@ import os
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
+from django.contrib.postgres.indexes import GinIndex
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from modeltrans.fields import TranslationField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 from sorl import thumbnail
@@ -31,6 +33,7 @@ class Category(SlugMixin, MPTTModel):
         ContentType, verbose_name=_('listing type'), on_delete=models.SET_NULL,
         blank=True, null=True, default=None)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    i18n = TranslationField(fields=('title', 'slug'))
     objects = CategoryManager()
 
     class MPTTMeta:
@@ -41,9 +44,10 @@ class Category(SlugMixin, MPTTModel):
         verbose_name_plural = _('categories')
         ordering = ('title',)
         unique_together = (('title', 'listing_type'),)
+        indexes = [GinIndex(fields=["i18n"]), ]
 
     def __str__(self):
-        return self.title
+        return self.title_i18n
 
 
 class Feature(SlugMixin, models.Model):

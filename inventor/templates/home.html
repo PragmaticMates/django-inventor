@@ -1,1 +1,8 @@
+{% load i18n %}
 TODO: default inventor template [home.html]
+<br>
+<br>
+<strong>{% trans 'Categories' %}:</strong><br>
+{% for category in categories %}
+    {{ category }} [{{ category.slug_i18n }}]<br>
+{% endfor %}

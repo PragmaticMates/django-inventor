@@ -70,7 +70,7 @@ class ListingFilter(django_filters.FilterSet):
         self.form.fields['locality'].empty_label = _('All localities')
 
         # categories and localities searched by slug
-        self.filters['categories'].field_name = 'categories__slug'
+        self.filters['categories'].field_name = 'categories__slug_i18n'
 
         if listing_type:
             # dynamic categories
@@ -86,10 +86,13 @@ class ListingFilter(django_filters.FilterSet):
 
         self.form.fields['categories'] = forms.MultipleChoiceField(
             label=_('Categories'),
-            choices=list(self.form.fields['categories'].queryset.values_list('slug', 'title')),  # TODO: cache?
+            choices=list(self.form.fields['categories'].queryset.values_list('slug_i18n', 'title_i18n')),  # TODO: cache?
             required=False,
             widget=forms.CheckboxSelectMultiple
         )
+
+        # changed filter logic of categories
+        self.filters['categories'].method = 'filter_categories'
 
         self.form.fields['features'] = forms.MultipleChoiceField(
             label=_('Features'),
@@ -106,3 +109,8 @@ class ListingFilter(django_filters.FilterSet):
         for feature in value:
             queryset = queryset.filter(features=feature)
         return queryset
+
+    def filter_categories(self, queryset, name, value):
+        # proxy method to filter listings by translatable category slug
+        categories = Category.objects.filter(slug_i18n__in=value)
+        return queryset.filter(categories__in=categories)
