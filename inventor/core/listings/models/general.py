@@ -15,10 +15,9 @@ from sorl import thumbnail
 from inventor import settings as inventor_settings
 from inventor.core.lexicons.models import Category, Feature, Locality
 from inventor.core.listings.managers import ListingQuerySet
-
+from inventor.core.listings.mixins import SlugMixin
 
 # TODO: opening hours, meals and drinks, street view, faq
-from inventor.core.listings.mixins import SlugMixin
 
 
 class Listing(SlugMixin, models.Model):
@@ -36,7 +35,7 @@ class Listing(SlugMixin, models.Model):
 
     # definition
     title = models.CharField(_('title'), max_length=100)
-    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH)
+    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, blank=True)
     description = models.TextField(_('description'), blank=True)
 
     # management

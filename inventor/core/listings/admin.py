@@ -1,13 +1,16 @@
 from django.contrib import admin, messages
+from django.contrib.admin.sites import NotRegistered
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 
+from inventor import settings
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo, Listing
 from inventor.core.listings.models.listing_types import Accommodation, Race
+from inventor.core.utils.helpers import get_listing_types_classes
 
 
 class PhotoInline(NestedStackedInline):
@@ -51,18 +54,6 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     list_filter = ('published', 'promoted')
     autocomplete_fields = ['author', 'locality']
     list_select_related = ['locality']
-    inlines = [VideoInline, AlbumInline]  # add comments?
-
-    fieldsets = (
-        (_('Definition'), {'fields': ('title', 'slug', 'description',)}),
-        (_('Management'), {'fields': ('author', 'published', 'promoted')}),
-        (_('Specification'), {'fields': (('categories', 'features'),)}),
-        (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person'),)}),
-        (_('Location'), {'fields': ('locality', 'country', 'address', 'point')}),
-        (_('Previews'), {'fields': (('image', 'banner'),)}),
-        (_('Contact information'), {'fields': ('person', 'phone', 'email', 'website')}),
-        (_('Social connections'), {'fields': ('social_networks',)}),
-    )
     filter_vertical = ['categories', 'features']  # TODO: filter categories for selected listing type only
     formfield_overrides = {
         models.PointField: {"widget": GooglePointFieldWidget}
@@ -94,6 +85,37 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     get_price_display.admin_order_field = 'price'
     get_price_display.short_description = _('Price')
 
+    @property
+    def fieldsets(self):
+        fieldsets_definition = {
+            'DEFINITION': (_('Definition'), {'fields': ('title', 'slug', 'description',)}),
+            'MANAGEMENT': (_('Management'), {'fields': ('author', 'published', 'promoted')}),
+            'SPECIFICATION': (_('Specification'), {'fields': (('categories', 'features'),)}),
+            'PRICE': (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person'),)}),
+            'LOCATION': (_('Location'), {'fields': ('locality', 'country', 'address', 'point')}),
+            'PREVIEWS': (_('Previews'), {'fields': (('image', 'banner'),)}),
+            'CONTACT': (_('Contact information'), {'fields': ('person', 'phone', 'email', 'website')}),
+            'SOCIAL': (_('Social connections'), {'fields': ('social_networks',)}),
+        }
+
+        fieldsets = ()
+        sections = settings.SECTIONS or fieldsets_definition.keys()
+
+        for section in sections:
+            fieldsets += fieldsets_definition[section],
+
+        return fieldsets
+
+    @property
+    def inlines(self):
+        inlines = []
+        if settings.VIDEOS_ENABLED:
+            inlines.append(VideoInline)
+        if settings.GALLERY_ENABLED:
+            inlines.append(AlbumInline)
+        # add comments?
+        return inlines
+
 
 class PhotoInline(admin.StackedInline):
     model = Photo
@@ -109,30 +131,38 @@ class AlbumAdmin(admin.ModelAdmin):
 
 
 # Listing types
-
-@admin.register(*Listing.__subclasses__())
+@admin.register(*get_listing_types_classes())
 class ListingTypeAdmin(ListingAdmin):
     pass
 
 
-admin.site.unregister(Accommodation)
-@admin.register(Accommodation)
-class AccommodationAdmin(ListingAdmin):
-    fieldsets = ListingTypeAdmin.fieldsets + BookingMixinAdmin.fieldsets + (
-        (_('Specific'), {'fields': ('amenities', 'star_rating', 'rooms')}),
-    )
+try:
+    admin.site.unregister(Accommodation)
+    @admin.register(Accommodation)
+    class AccommodationAdmin(ListingAdmin):
+        fieldsets = ListingTypeAdmin.fieldsets + BookingMixinAdmin.fieldsets + (
+            (_('Specific'), {'fields': ('amenities', 'star_rating', 'rooms')}),
+        )
+except NotRegistered:
+    pass
 
 
-admin.site.unregister(Race)
-@admin.register(Race)
-class RaceAdmin(ListingAdmin):
-    list_display = ListingTypeAdmin.list_display + ('distance_display',)
-    list_filter = ListingTypeAdmin.list_filter + ('distance', )
-    fieldsets = ListingTypeAdmin.fieldsets + (
-        (_('Specific'), {'fields': ('distance',)}),
-    )
+try:
+    admin.site.unregister(Race)
+    @admin.register(Race)
+    class RaceAdmin(ListingAdmin):
+        list_display = ListingTypeAdmin.list_display + ('distance_display',)
+        list_filter = ListingTypeAdmin.list_filter + ('distance', )
 
-    def distance_display(self, obj):
-        return obj.get_distance_display()
-    distance_display.admin_order_field = 'distance'
-    distance_display.short_description = _('Distance')
+        def distance_display(self, obj):
+            return obj.get_distance_display()
+        distance_display.admin_order_field = 'distance'
+        distance_display.short_description = _('Distance')
+
+        @property
+        def fieldsets(self):
+            return super().fieldsets + (
+                (_('Specific'), {'fields': ('distance',)}),
+            )
+except NotRegistered:
+    pass
