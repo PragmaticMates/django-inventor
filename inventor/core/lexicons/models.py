@@ -1,5 +1,6 @@
 import os
 
+from colorful.fields import RGBColorField
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.contrib.postgres.indexes import GinIndex
@@ -29,6 +30,7 @@ class RegularLexicon(SlugMixin, models.Model):
 class Category(SlugMixin, MPTTModel):
     title = models.CharField(_('title'), max_length=100)
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
+    color = RGBColorField(blank=True, default='')
     listing_type = models.ForeignKey(
         ContentType, verbose_name=_('listing type'), on_delete=models.SET_NULL,
         blank=True, null=True, default=None)

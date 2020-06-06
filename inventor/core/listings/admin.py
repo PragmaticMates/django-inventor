@@ -143,7 +143,7 @@ try:
         fieldsets = ListingTypeAdmin.fieldsets + BookingMixinAdmin.fieldsets + (
             (_('Specific'), {'fields': ('amenities', 'star_rating', 'rooms')}),
         )
-except NotRegistered:
+except (NotRegistered, TypeError):
     pass
 
 
