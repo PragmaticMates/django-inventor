@@ -31,6 +31,7 @@ class Category(SlugMixin, MPTTModel):
     title = models.CharField(_('title'), max_length=100)
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
     color = RGBColorField(blank=True, default='')
+    icon = models.CharField(_('icon'), max_length=100, blank=True, default='')
     listing_type = models.ForeignKey(
         ContentType, verbose_name=_('listing type'), on_delete=models.SET_NULL,
         blank=True, null=True, default=None)
@@ -50,6 +51,9 @@ class Category(SlugMixin, MPTTModel):
 
     def __str__(self):
         return self.title_i18n
+
+    def get_absolute_url(self):
+        return reverse('listings:listing_list') + f'?categories={self.slug_i18n}'
 
 
 class Feature(SlugMixin, models.Model):

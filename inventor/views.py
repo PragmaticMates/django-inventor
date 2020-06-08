@@ -2,6 +2,7 @@ from django.db.models import F
 from django.views.generic import TemplateView
 
 from inventor.core.lexicons.models import Locality, Category
+from inventor.core.listings.models.general import Listing
 from inventor.core.listings.models.listing_types import Accommodation
 
 
@@ -21,6 +22,7 @@ class HomeView(TemplateView):
                 .annotate(locality_title=F('locality__title'))
                 .order_by('?')[:6],
             'localities': Locality.objects.all(),
+            'listings': Listing.objects.published(),
             'categories': Category.objects.without_parent(),
         })
         return context_data

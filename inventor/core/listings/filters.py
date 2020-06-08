@@ -2,6 +2,7 @@ import django_filters
 from crispy_forms.layout import Layout
 from django import forms
 from django.db import models
+from django.forms import HiddenInput
 from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import ModelSelect2Widget
 from pragmatic.filters import SliderFilter
@@ -69,6 +70,12 @@ class ListingFilter(django_filters.FilterSet):
         )
         self.form.fields['locality'].empty_label = _('All localities')
 
+        if not Listing.objects.published().promoted().exists():
+            self.form.fields['promoted'].widget = HiddenInput()
+
+        if not self.form.fields['locality'].queryset.exists():
+            self.form.fields['locality'].widget = HiddenInput()
+
         # categories and localities searched by slug
         self.filters['categories'].field_name = 'categories__slug_i18n'
 
@@ -84,25 +91,31 @@ class ListingFilter(django_filters.FilterSet):
         else:
             self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
 
-        self.form.fields['categories'] = forms.MultipleChoiceField(
-            label=_('Categories'),
-            choices=list(self.form.fields['categories'].queryset.values_list('slug_i18n', 'title_i18n')),  # TODO: cache?
-            required=False,
-            widget=forms.CheckboxSelectMultiple
-        )
+        if not self.form.fields['categories'].queryset.exists():
+            self.form.fields['categories'].widget = HiddenInput()
+        else:
+            self.form.fields['categories'] = forms.MultipleChoiceField(
+                label=_('Categories'),
+                choices=list(self.form.fields['categories'].queryset.values_list('slug_i18n', 'title_i18n')),  # TODO: cache?
+                required=False,
+                widget=forms.CheckboxSelectMultiple
+            )
 
-        # changed filter logic of categories
-        self.filters['categories'].method = 'filter_categories'
+            # changed filter logic of categories
+            self.filters['categories'].method = 'filter_categories'
 
-        self.form.fields['features'] = forms.MultipleChoiceField(
-            label=_('Features'),
-            choices=list(self.form.fields['features'].queryset.values_list('pk', 'title')),  # TODO: cache?
-            required=False,
-            widget=forms.CheckboxSelectMultiple
-        )
+        if not self.form.fields['features'].queryset.exists():
+            self.form.fields['features'].widget = HiddenInput()
+        else:
+            self.form.fields['features'] = forms.MultipleChoiceField(
+                label=_('Features'),
+                choices=list(self.form.fields['features'].queryset.values_list('pk', 'title')),  # TODO: cache?
+                required=False,
+                widget=forms.CheckboxSelectMultiple
+            )
 
-        # changed filter logic of features
-        self.filters['features'].method = 'filter_features'
+            # changed filter logic of features
+            self.filters['features'].method = 'filter_features'
 
     def filter_features(self, queryset, name, value):
         # return listings having ALL features, not AT LEAST one

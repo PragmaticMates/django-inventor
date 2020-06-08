@@ -12,8 +12,9 @@ from inventor.core.utils.helpers import get_listing_types_classes
 @admin.register(Category)
 class CategoryAdmin(DraggableMPTTAdmin):
     search_fields = ['title']
-    list_display = ('tree_actions', 'title_i18n', 'slug_i18n', 'listing_type', 'color_display')
+    list_display = ('tree_actions', 'title_i18n', 'slug_i18n', 'listing_type', 'icon', 'color_display')
     list_display_links = ('title_i18n',)
+    list_editable = ['icon']
     list_select_related = ['listing_type']
 
     def color_display(self, obj):
