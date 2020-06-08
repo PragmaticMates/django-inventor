@@ -2,7 +2,7 @@ from django.core.validators import EMPTY_VALUES
 from django.utils.text import slugify
 
 
-class SlugMixin(object):
+class SlugMixin(object):  # TODO: move to django-pragmatic
     MAX_SLUG_LENGTH = 150
     FORCE_SLUG_REGENERATION = True
 
