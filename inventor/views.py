@@ -25,6 +25,6 @@ class HomeView(TemplateView):
             'localities': Locality.objects.all(),
             'listings': Listing.objects.published(),
             'categories': Category.objects.without_parent(),
-            'articles': Article.objects.all()[:3],
+            'articles': Article.objects.published()[:3],
         })
         return context_data
