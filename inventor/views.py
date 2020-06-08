@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from inventor.core.lexicons.models import Locality, Category
 from inventor.core.listings.models.general import Listing
 from inventor.core.listings.models.listing_types import Accommodation
+from writing.models import Article
 
 
 class HomeView(TemplateView):
@@ -24,5 +25,6 @@ class HomeView(TemplateView):
             'localities': Locality.objects.all(),
             'listings': Listing.objects.published(),
             'categories': Category.objects.without_parent(),
+            'articles': Article.objects.all()[:3],
         })
         return context_data
