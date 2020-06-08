@@ -87,6 +87,7 @@ class Activity(Listing):
 class Race(Listing):
     section = _('sport')
     distance = models.PositiveSmallIntegerField(_('distance'), help_text='km', blank=True, null=True, default=None)
+    # date = models.DateField(_('date'), blank=True, null=True, default=None)  # TODO: range field?
 
     class Meta:
         verbose_name = _('race')

@@ -1,6 +1,7 @@
 from django.conf import settings as django_settings
 
-CURRENCY = getattr(django_settings, 'INVENTOR_CURRENCY', '€')
+CURRENCY = getattr(django_settings, 'INVENTOR_CURRENCY', 'EUR')
+CURRENCY_SYMBOL = getattr(django_settings, 'INVENTOR_CURRENCY_SYMBOL', '€')
 CURRENCY_AFTER_AMOUNT = getattr(django_settings, 'INVENTOR_CURRENCY_AFTER_AMOUNT', True)
 PAGE_TITLE = getattr(django_settings, 'INVENTOR_PAGE_TITLE', 'Inventor')
 PAGE_DESCRIPTION = getattr(django_settings, 'INVENTOR_PAGE_DESCRIPTION', 'Description')

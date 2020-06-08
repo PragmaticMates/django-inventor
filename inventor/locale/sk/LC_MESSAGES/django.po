@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-03 11:52+0200\n"
-"PO-Revision-Date: 2020-06-03 11:57+0058\n"
-"Last-Translator: b'  <erik@pragmaticmates.com>'\n"
+"PO-Revision-Date: 2020-06-08 20:19+0058\n"
+"Last-Translator: b'Erik Telepovsky <erik@pragmaticmates.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -546,7 +546,7 @@ msgstr "publikované"
 
 #: core/listings/models/general.py:45
 msgid "promoted"
-msgstr "sponzorované"
+msgstr "propagované"
 
 #: core/listings/models/general.py:52
 msgid "price starts at"

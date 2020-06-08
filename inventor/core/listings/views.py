@@ -26,6 +26,9 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         'title': _('Title'),
     }
 
+    def get_sorting_options(self):
+        return {**{'-promoted': (_('Promoted'), ['-promoted', 'created'])}, **self.sorting_options}
+
     def dispatch(self, request, *args, **kwargs):
         self.filter = self.filter_class(data=request.GET, queryset=self.get_whole_queryset(), listing_type=None if self.model == Listing else self.model)
         return super().dispatch(request, *args, **kwargs)

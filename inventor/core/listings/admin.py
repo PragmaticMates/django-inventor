@@ -51,7 +51,7 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     search_fields = ['id', 'title', 'description']
     list_display = ('id', 'title', 'slug', 'get_categories', 'address', 'locality', 'get_price_display', 'published', 'created')
     list_display_links = ('title',)
-    list_filter = ('published', 'promoted')
+    list_filter = ('published', 'promoted', 'awaiting')
     autocomplete_fields = ['author', 'locality']
     list_select_related = ['locality']
     filter_vertical = ['categories', 'features']  # TODO: filter categories for selected listing type only
@@ -91,7 +91,7 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
             'DEFINITION': (_('Definition'), {'fields': ('title', 'slug', 'description',)}),
             'MANAGEMENT': (_('Management'), {'fields': ('author', 'published', 'promoted')}),
             'SPECIFICATION': (_('Specification'), {'fields': (('categories', 'features'),)}),
-            'PRICE': (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person'),)}),
+            'PRICE': (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person', 'in_stock', 'awaiting'),)}),
             'LOCATION': (_('Location'), {'fields': ('locality', 'country', 'address', 'point')}),
             'PREVIEWS': (_('Previews'), {'fields': (('image', 'banner'),)}),
             'CONTACT': (_('Contact information'), {'fields': ('person', 'phone', 'email', 'website')}),

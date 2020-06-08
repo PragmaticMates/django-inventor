@@ -23,7 +23,7 @@ class HomeView(TemplateView):
                 .annotate(locality_title=F('locality__title'))
                 .order_by('?')[:6],
             'localities': Locality.objects.all(),
-            'listings': Listing.objects.published(),
+            'listings': Listing.objects.select_subclasses().published().prefetch_related('categories').order_by('-promoted', 'created'),
             'categories': Category.objects.without_parent(),
             'articles': Article.objects.published()[:3],
         })

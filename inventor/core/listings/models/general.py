@@ -12,6 +12,7 @@ from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
 from sorl import thumbnail
 
+from commerce.models import AbstractProduct
 from inventor import settings as inventor_settings
 from inventor.core.lexicons.models import Category, Feature, Locality
 from inventor.core.listings.managers import ListingQuerySet
@@ -20,7 +21,7 @@ from inventor.core.listings.mixins import SlugMixin
 # TODO: opening hours, meals and drinks, street view, faq
 
 
-class Listing(SlugMixin, models.Model):
+class Listing(SlugMixin, AbstractProduct):
     FORCE_SLUG_REGENERATION = False
 
     SOCIAL_NETWORKS = ['Facebook', 'Twitter', 'Google', 'Instagram', 'Vimeo', 'YouTube', 'LinkedIn', 'Dribbble',
@@ -49,8 +50,8 @@ class Listing(SlugMixin, models.Model):
 
     # price
     price_starts_at = models.BooleanField(_('price starts at'), default=False)
-    price = models.DecimalField(_('price'), help_text=inventor_settings.CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0)],
-                                blank=True, null=True, default=None)
+    # price = models.DecimalField(_('price'), help_text=inventor_settings.CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0)],
+    #                             blank=True, null=True, default=None)
     price_unit = models.CharField(_('price unit'), choices=PRICE_UNITS, max_length=5, blank=True)
     price_per_person = models.BooleanField(_('price per person'), default=False)
 
@@ -129,9 +130,9 @@ class Listing(SlugMixin, models.Model):
             price = price[:-3]
 
         if inventor_settings.CURRENCY_AFTER_AMOUNT:
-            price_display = '{}{}'.format(price, inventor_settings.CURRENCY)
+            price_display = '{}{}'.format(price, inventor_settings.CURRENCY_SYMBOL)
         else:
-            price_display = '{}{}'.format(inventor_settings.CURRENCY, price)
+            price_display = '{}{}'.format(inventor_settings.CURRENCY_SYMBOL, price)
 
         if self.price_starts_at:
             price_display = '{} {}'.format(_('starts at'), price_display)
