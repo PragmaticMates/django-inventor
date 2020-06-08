@@ -9,7 +9,7 @@ from sorl.thumbnail.admin import AdminImageMixin
 from inventor import settings
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo, Listing
-from inventor.core.listings.models.listing_types import Accommodation, Race
+from inventor.core.listings.models.listing_types import Accommodation, Race, Exercise
 from inventor.core.utils.helpers import get_listing_types_classes
 
 
@@ -122,12 +122,13 @@ class PhotoInline(admin.StackedInline):
     extra = 1
 
 
-@admin.register(Album)
-class AlbumAdmin(admin.ModelAdmin):
-    search_fields = ['listing__title', 'title', 'description']
-    list_display = ('listing', 'title', 'description')
-    raw_id_fields = ['listing']
-    inlines = [PhotoInline]
+if settings.GALLERY_ENABLED:
+    @admin.register(Album)
+    class AlbumAdmin(admin.ModelAdmin):
+        search_fields = ['listing__title', 'title', 'description']
+        list_display = ('listing', 'title', 'description')
+        raw_id_fields = ['listing']
+        inlines = [PhotoInline]
 
 
 # Listing types
@@ -163,6 +164,27 @@ try:
         def fieldsets(self):
             return super().fieldsets + (
                 (_('Specific'), {'fields': ('distance',)}),
+            )
+except NotRegistered:
+    pass
+
+
+try:
+    admin.site.unregister(Exercise)
+    @admin.register(Exercise)
+    class ExerciseAdmin(ListingAdmin):
+        list_display = ListingTypeAdmin.list_display + ('difficulty', 'duration_display',)
+        list_filter = ListingTypeAdmin.list_filter + ('difficulty', 'duration', )
+
+        def duration_display(self, obj):
+            return obj.get_duration_display()
+        duration_display.admin_order_field = 'duration'
+        duration_display.short_description = _('Duration')
+
+        @property
+        def fieldsets(self):
+            return super().fieldsets + (
+                (_('Specific'), {'fields': ('duration', 'difficulty')}),
             )
 except NotRegistered:
     pass

@@ -106,6 +106,20 @@ class Training(Listing):
         ordering = ('title',)
 
 
+class Exercise(Listing):
+    section = _('health & body')
+    difficulty = models.PositiveSmallIntegerField(_('difficulty'), blank=True, null=True, default=None, validators=[MaxValueValidator(10)])
+    duration = models.PositiveSmallIntegerField(_('duration'), help_text='min', blank=True, null=True, default=None)
+
+    class Meta:
+        verbose_name = _('exercise')
+        verbose_name_plural = _('exercises')
+        ordering = ('title',)
+
+    def get_duration_display(self):
+        return f'{self.duration} min' if self.duration else ''
+
+
 class Trip(Listing):
     section = _('tourism')
     distance = models.PositiveSmallIntegerField(_('distance'), help_text='km', blank=True, null=True, default=None)

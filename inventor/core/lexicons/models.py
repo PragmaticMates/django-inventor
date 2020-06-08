@@ -29,7 +29,7 @@ class RegularLexicon(SlugMixin, models.Model):
 
 class Category(SlugMixin, MPTTModel):
     title = models.CharField(_('title'), max_length=100)
-    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
+    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, blank=True, default='')
     color = RGBColorField(blank=True, default='')
     icon = models.CharField(_('icon'), max_length=100, blank=True, default='')
     listing_type = models.ForeignKey(
