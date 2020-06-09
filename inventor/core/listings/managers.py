@@ -29,3 +29,10 @@ class ListingQuerySet(InheritanceQuerySet):
             Q(title__unaccent__icontains=keyword) |
             Q(description__unaccent__icontains=keyword)
         )
+
+    def select_subclasses(self, *subclasses):
+        if not subclasses:
+            from inventor.core.utils.helpers import get_listing_types_classes
+            subclasses = get_listing_types_classes()
+
+        return super().select_subclasses(*subclasses)
