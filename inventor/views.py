@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db.models import F
 from django.views.generic import TemplateView
 
@@ -26,5 +27,6 @@ class HomeView(TemplateView):
             'listings': Listing.objects.select_subclasses().published().prefetch_related('categories').order_by('-promoted', 'created'),
             'categories': Category.objects.without_parent(),
             'articles': Article.objects.published()[:3],
+            'users_count': get_user_model().objects.active().count()
         })
         return context_data

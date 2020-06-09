@@ -39,11 +39,16 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         return names
 
     def get_queryset(self):
-        queryset = self.filter.qs.only('id', 'slug', 'title', 'locality_id', 'locality__title', 'image', 'price', 'price_unit', 'price_starts_at', 'promoted').annotate(locality_title=F('locality__title'))
+        queryset = self.filter.qs\
+            .annotate(locality_title=F('locality__title'))\
+            .prefetch_related('categories')
         return self.sort_queryset(queryset)
 
     def get_whole_queryset(self):
-        return super().get_queryset().published().select_subclasses().order_by('-promoted', 'modified')
+        return super().get_queryset()\
+            .published()\
+            .select_subclasses()\
+            .order_by('-promoted', 'modified')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
