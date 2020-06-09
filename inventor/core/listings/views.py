@@ -3,12 +3,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, FormView
 from django.views.generic.detail import SingleObjectMixin
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
-
-from inventor.core.lexicons.models import Feature, AccommodationAmenity
+from inventor.core.lexicons.models import Feature
 from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.forms import BookingForm
 from inventor.core.listings.models.general import Listing
-from inventor.core.listings.models.listing_types import Accommodation
 
 
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
@@ -91,11 +89,18 @@ class ListingDetailView(SingleObjectMixin, FormView):
             'features': self.object.features.all(),
         })
 
-        if isinstance(self.object, Accommodation):
-            context_data.update({
-                'all_amenities': AccommodationAmenity.objects.all(),
-                'amenities': self.object.amenities.all(),
-            })
+        try:
+            # TODO: refactor
+            from inventor.core.lexicons.models import AccommodationAmenity
+            from inventor.core.listings.models.listing_types import Accommodation
+            if isinstance(self.object, Accommodation):
+                context_data.update({
+                    'all_amenities': AccommodationAmenity.objects.all(),
+                    'amenities': self.object.amenities.all(),
+                })
+        except ImportError:
+            pass
+
         return context_data
 
     def form_valid(self, form):

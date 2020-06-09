@@ -4,9 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from mptt.admin import DraggableMPTTAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 from inventor.core.lexicons.models import Locality, Category, Feature
-from inventor.core.lexicons.models import AccommodationAmenity
-from inventor.core.listings.models.listing_types import Accommodation
-from inventor.core.utils.helpers import get_listing_types_classes
+from inventor.core.utils.helpers import get_listing_types_classes, is_listing_type_enabled
 
 
 @admin.register(Category)
@@ -38,7 +36,11 @@ class FeatureAdmin(admin.ModelAdmin):
 
 # Regular Lexicons
 regular_lexicons = []
-if Accommodation in get_listing_types_classes():
+
+# from inventor.core.listings.models.listing_types import Accommodation
+# if Accommodation in get_listing_types_classes():
+if is_listing_type_enabled('Accommodation'):
+    from inventor.core.lexicons.models import AccommodationAmenity
     regular_lexicons.append(AccommodationAmenity)
 
 if len(regular_lexicons) > 0:

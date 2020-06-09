@@ -9,7 +9,6 @@ from sorl.thumbnail.admin import AdminImageMixin
 from inventor import settings
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo, Listing
-from inventor.core.listings.models.listing_types import Accommodation, Race, Exercise
 from inventor.core.utils.helpers import get_listing_types_classes
 
 
@@ -138,17 +137,19 @@ class ListingTypeAdmin(ListingAdmin):
 
 
 try:
+    from inventor.core.listings.models.listing_types import Accommodation
     admin.site.unregister(Accommodation)
     @admin.register(Accommodation)
     class AccommodationAdmin(ListingAdmin):
         fieldsets = ListingTypeAdmin.fieldsets + BookingMixinAdmin.fieldsets + (
             (_('Specific'), {'fields': ('amenities', 'star_rating', 'rooms')}),
         )
-except (NotRegistered, TypeError):
+except (NotRegistered, ImportError, TypeError):
     pass
 
 
 try:
+    from inventor.core.listings.models.listing_types import Race
     admin.site.unregister(Race)
     @admin.register(Race)
     class RaceAdmin(ListingAdmin):
@@ -165,11 +166,12 @@ try:
             return super().fieldsets + (
                 (_('Specific'), {'fields': ('distance',)}),
             )
-except NotRegistered:
+except (NotRegistered, ImportError):
     pass
 
 
 try:
+    from inventor.core.listings.models.listing_types import Exercise
     admin.site.unregister(Exercise)
     @admin.register(Exercise)
     class ExerciseAdmin(ListingAdmin):
@@ -186,5 +188,5 @@ try:
             return super().fieldsets + (
                 (_('Specific'), {'fields': ('duration', 'difficulty')}),
             )
-except NotRegistered:
+except (NotRegistered, ImportError):
     pass
