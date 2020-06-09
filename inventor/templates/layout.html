@@ -4,27 +4,26 @@
 {% block body %}
     {% include 'helpers/messages.html' %}
 
-    {#    {% include 'helpers/environment-notice.html' %}#}
+    {#{% include 'helpers/environment-notice.html' %}#}
 
-    <!-- Header -->
+    {# Header #}
     {% include 'layout/header.html' %}
 
-    <!-- Top fullwidth -->
-{#    {% include 'layout/top_fullwidth.html' %}#}
-{#    <div class="container">#}
+    {# Top fullwidth #}
     {% block top_full_width %}{% endblock %}
-{#    </div>#}
 
-    <!-- Content -->
-    <main class="{% block main_class %}{% endblock %}">
-        {#    {% include 'layout/content.html' %}#}
-        {% block content %}{% endblock %}
-    </main>
+    {# Main #}
+    {% block main %}
+        <main class="{% block main_class %}{% endblock %}">
+            {# Content #}
+            {% block content %}{% endblock %}
+        </main>
+    {% endblock %}
 
-    <!-- Bottom -->
+    {# Bottom #}
     {% include 'layout/bottom.html' %}
 
-    <!-- Footer -->
+    {# Footer #}
     {% include 'layout/footer.html' %}
 
 {% endblock %}
