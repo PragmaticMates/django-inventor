@@ -1,0 +1,14 @@
+{% load i18n %}
+
+{% if messages %}
+<div id="messages" class="hidden">
+{% for message in messages %}
+    <p role="alert" data-type="{{ message.tags }}" class="alert alert-{{ message.tags }}">
+        {% autoescape off %}{{ message }}{% endautoescape %}
+        <button type="button" class="close" data-dismiss="alert" aria-label="{% trans 'Close' %}">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </p><!-- /.alert -->
+{% endfor %}
+</div><!-- /#messages -->
+{% endif %}
