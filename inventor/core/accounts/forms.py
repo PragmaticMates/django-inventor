@@ -1,3 +1,5 @@
+from allauth.account.forms import SignupForm as AllAuthSignupForm
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission, Group
 from crispy_forms.bootstrap import FormActions, InlineRadios, PrependedAppendedText, AppendedText, PrependedText
 from crispy_forms.helper import FormHelper
@@ -145,3 +147,23 @@ class UserForm(forms.ModelForm):
                 Submit('submit', _('Submit'), css_class='btn-secondary')
             )
         )
+
+
+class SignupForm(AllAuthSignupForm):
+    first_name = forms.CharField(label=_('first name'), max_length=30)
+    last_name = forms.CharField(label=_('last name'), max_length=30)
+    phone = forms.CharField(label=_('phone'), max_length=30)  # TODO: save
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def custom_signup(self, request, user):
+        field_names = [f.name for f in get_user_model()._meta.get_fields()]
+        attrs_to_save = []
+
+        for attr, value in self.cleaned_data.items():
+            if attr in field_names:
+                setattr(user, attr, value)
+                attrs_to_save.append(attr)
+
+        user.save(update_fields=attrs_to_save)

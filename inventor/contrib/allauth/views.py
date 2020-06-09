@@ -1,12 +1,13 @@
 from allauth.account.forms import LoginForm, SignupForm
+from allauth.account.views import RedirectAuthenticatedUserMixin
 from allauth.utils import get_request_param
+from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
+from django.utils.module_loading import import_string
 from django.views.generic import TemplateView
 
 
-class LoginSignUpView(TemplateView):
-    form_class_login = LoginForm
-    form_class_signup = SignupForm
+class LoginSignUpView(RedirectAuthenticatedUserMixin, TemplateView):
     template_name = 'account/login-signup.html'
     success_url = None
     redirect_field_name = "next"
@@ -37,10 +38,16 @@ class LoginSignUpView(TemplateView):
             })
         return kwargs
 
+    def get_form_class(self, form):
+        return import_string(settings.ACCOUNT_FORMS.get(form))
+
     def get_account_forms(self):
         form_kwargs = self.get_form_kwargs()
 
         return {
-            'login_form': self.form_class_login(**form_kwargs),
-            'signup_form': self.form_class_signup(**form_kwargs),
+            'login_form': self.get_form_class('login')(**form_kwargs),
+            'signup_form': self.get_form_class('signup')(**form_kwargs),
         }
+
+    def get_success_url(self):
+        return settings.LOGIN_REDIRECT_URL
