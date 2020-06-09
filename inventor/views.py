@@ -27,7 +27,6 @@ class HomeView(TemplateView):
                 'top_accommodations': Accommodation.objects
                       # .promoted()
                       .published()
-                      .select_subclasses()
                       .only('id', 'slug', 'title', 'promoted',
                             'locality_id', 'locality__title',
                             'image', 'price', 'price_unit', 'price_starts_at')

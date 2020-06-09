@@ -16,8 +16,11 @@ class UserAdmin(DjangoUserAdmin):
     )
     fieldsets = (
         (None, {'fields': ('password',)}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email', 'avatar')}),
-        (_('Contact'), {'fields': ('phone',)}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'avatar')}),
+        (_('Contact'), {'fields': ('email', 'phone',)}),
+        (_('Address'), {'fields': ('street', 'postcode', 'city', 'country')}),
+        (_('Billing'), {'fields': ('reg_id', 'tax_id', 'vat_id')}),
+        (_('Other'), {'fields': ('date_of_birth', 'gender', 'team')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
         # (_('Notifications'), {'fields': ('notices_settings',)}),

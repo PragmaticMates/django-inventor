@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 # from whistle.mixins import UserNotificationsMixin
+from internationalflavor.countries import CountryField
+from internationalflavor.vat_number import VATNumberField
 from inventor.core.accounts.managers import UserManager, UserQuerySet
 from inventor.core.accounts.utils import avatar_path_handler, avatar_thumbnail_exists, create_avatar_thumbnail
 
@@ -16,10 +18,40 @@ class User(AbstractBaseUser, PermissionsMixin):  # UserNotificationsMixin
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    GENDER_MALE = 'MALE'
+    GENDER_FEMALE = 'FEMALE'
+    GENDERS = [
+        (GENDER_MALE, _('male')),
+        (GENDER_FEMALE, _('female')),
+    ]
+
+    # Name
     first_name = models.CharField(_('first name'), max_length=30, blank=True, db_index=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True, db_index=True)
+    
+    # Contact details
     email = models.EmailField(_('email'), unique=True)
     phone = models.CharField(_('phone'), max_length=30, blank=True)
+
+    # Address
+    street = models.CharField(_('street and number'), max_length=200, blank=True)
+    postcode = models.CharField(_('postcode'), max_length=30, blank=True)
+    city = models.CharField(_('city'), max_length=50, blank=True)
+    country = CountryField(verbose_name=_('Country'), db_index=True, blank=True)
+
+    # Billing
+    reg_id = models.CharField(_('Reg. No'), max_length=30, blank=True)
+    tax_id = models.CharField(verbose_name=_('TAX ID'), max_length=30, blank=True)
+    vat_id = VATNumberField(verbose_name=_('VAT ID'), blank=True)
+
+    # Date of birth
+    date_of_birth = models.DateField(_('date of birth'), blank=True, null=True, default=None)
+
+    # Other
+    gender = models.CharField(_('gender'), choices=GENDERS, max_length=6, blank=True)
+    team = models.CharField(_('team/club'), max_length=50, blank=True)
+
+    # Management
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,

@@ -1,13 +1,14 @@
 from allauth.account.forms import SignupForm as AllAuthSignupForm
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Permission, Group
+from django.contrib.auth.models import Permission
 from crispy_forms.bootstrap import FormActions, InlineRadios, PrependedAppendedText, AppendedText, PrependedText
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, HTML
 from django import forms
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import ModelSelect2Widget, ModelSelect2MultipleWidget
+from internationalflavor.countries import CountryFormField
+from internationalflavor.vat_number import VATNumberFormField
 
 from permissions_widget.forms import PermissionSelectMultipleField
 from permissions_widget.layout import PermissionWidget
@@ -150,12 +151,78 @@ class UserForm(forms.ModelForm):
 
 
 class SignupForm(AllAuthSignupForm):
+    # TODO: settings for required fields
     first_name = forms.CharField(label=_('first name'), max_length=30)
     last_name = forms.CharField(label=_('last name'), max_length=30)
-    phone = forms.CharField(label=_('phone'), max_length=30)  # TODO: save
+    phone = forms.CharField(label=_('phone'), max_length=30)
+    street = forms.CharField(label=_('street and number'), max_length=200)
+    postcode = forms.CharField(label=_('postcode'), max_length=30)
+    city = forms.CharField(label=_('city'), max_length=50)
+    country = CountryFormField(label=_('Country'), initial='SK')
+    reg_id = forms.CharField(label=_('Reg. No'), max_length=30, required=False)
+    tax_id = forms.CharField(label=_('TAX ID'), max_length=30, required=False)
+    vat_id = VATNumberFormField(label=_('VAT ID'), required=False)
+    date_of_birth = forms.DateField(label=_('date of birth'))  # TODO: datepicker / multiwidget
+    gender = forms.ChoiceField(label=_('gender'), choices=get_user_model().GENDERS)
+    team = forms.CharField(label=_('team/club'), max_length=50, required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        # self.fields['is_staff'].disabled = True
+
+        # placeholders
+        USE_PLACEHOLDERS = True
+
+        if USE_PLACEHOLDERS:
+            print(self.fields)
+            for field_name, field in self.fields.items():
+                if isinstance(field, forms.CharField) or \
+                        isinstance(field, forms.ChoiceField) or \
+                        isinstance(field, forms.DateField):
+                    asterisk = '*' if field.required else ''
+                    field.widget.attrs['placeholder'] = f'{field.label.capitalize()}{asterisk}'
+                    field.label = ''
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            # Row(
+                Fieldset(
+                    _('Name and surname'),
+                    Row(
+                        Div('first_name', css_class='col-md-5'),
+                        Div('last_name', css_class='col-md-7'),
+                    ),
+                ),
+                Fieldset(
+                    _('Contact details'),
+                    Row(
+                        Div(PrependedText('email', '<i class="fas fa-at"></i>'), css_class='col-md-7'),
+                        Div(PrependedText('phone', '<i class="far fa-mobile"></i>'), css_class='col-md-5'),
+                    ),
+                ),
+                Fieldset(
+                    _('Address'),
+                    'street',
+                    'postcode',
+                    'city',
+                    'country',
+                ),
+                Fieldset(
+                    _('Date of birth'),
+                    'date_of_birth',
+                ),
+                Fieldset(
+                    _('Other'),
+                    InlineRadios('gender'),
+                    'team',
+                    'password1',
+                ),
+            # ),
+            FormActions(
+                Submit('submit', _('Submit'), css_class='btn-primary')
+            )
+        )
 
     def custom_signup(self, request, user):
         field_names = [f.name for f in get_user_model()._meta.get_fields()]
