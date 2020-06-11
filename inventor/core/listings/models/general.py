@@ -156,6 +156,11 @@ class Listing(SlugMixin, AbstractProduct):
             rating = round(rating, 2)
         return rating
 
+    @cached_property
+    def purchased(self):
+        # TODO: count order items of not cancelled orders
+        return 0
+
     def delete(self, **kwargs):
         """ Deletes file before deleting instance """
         self.delete_banner()
