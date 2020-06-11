@@ -9,7 +9,7 @@ from sorl.thumbnail.admin import AdminImageMixin
 from inventor import settings
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo, Listing
-from inventor.core.utils.helpers import get_listing_types_classes
+from inventor.helpers import get_listing_types_classes
 
 
 class PhotoInline(NestedStackedInline):

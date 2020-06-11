@@ -14,7 +14,6 @@ class HomeView(TemplateView):
         context_data = super().get_context_data(**kwargs)
         context_data.update({
             'localities': Locality.objects.all(),
-            'listings': Listing.objects.select_subclasses().published().prefetch_related('categories').order_by('-promoted', 'created'),
             'categories': Category.objects.without_parent(),
             'articles': Article.objects.published()[:3],
             'users_count': get_user_model().objects.active().count()

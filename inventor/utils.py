@@ -6,7 +6,7 @@ import django_filters
 from crispy_forms.helper import FormHelper
 
 
-def generate_hash(length=16):
+def generate_hash(length=16):  # TODO: move to django-pragmatic
     random_number = str(random.random())
     current_data = str(datetime.now())
     salt = hashlib.sha1(random_number.encode('utf-8')).hexdigest()

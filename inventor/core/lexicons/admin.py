@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from mptt.admin import DraggableMPTTAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 from inventor.core.lexicons.models import Locality, Category, Feature
-from inventor.core.utils.helpers import get_listing_types_classes
+from inventor.helpers import get_listing_types_classes
 
 
 @admin.register(Category)
