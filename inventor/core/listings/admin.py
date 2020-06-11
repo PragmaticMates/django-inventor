@@ -164,7 +164,7 @@ try:
         @property
         def fieldsets(self):
             return super().fieldsets + (
-                (_('Specific'), {'fields': ('distance',)}),
+                (_('Specific'), {'fields': ('distance', 'medal')}),
             )
 except (NotRegistered, ImportError):
     pass

@@ -1,14 +1,15 @@
 {% load i18n %}
 
+{# TODO: move to django-pragmatic #}
 {% if messages %}
 <div id="messages" class="hidden">
 {% for message in messages %}
-    <p role="alert" data-type="{{ message.tags }}" class="alert alert-{{ message.tags }}">
+    <p role="alert" data-type="{{ message.tags }}" class="alert alert-{{ message.tags }} mb-0">
         {% autoescape off %}{{ message }}{% endautoescape %}
         <button type="button" class="close" data-dismiss="alert" aria-label="{% trans 'Close' %}">
             <span aria-hidden="true">&times;</span>
         </button>
-    </p><!-- /.alert -->
+    </p>
 {% endfor %}
-</div><!-- /#messages -->
+</div>
 {% endif %}

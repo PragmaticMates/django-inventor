@@ -2,6 +2,8 @@ from django.contrib.postgres.fields import DateTimeRangeField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from sorl import thumbnail
+
 from inventor.core.bookings.mixins import BookingMixin
 from inventor.core.lexicons.models import AccommodationAmenity
 from inventor.core.listings.models.general import Listing
@@ -88,6 +90,13 @@ class Race(Listing):
     section = _('sport')
     distance = models.PositiveSmallIntegerField(_('distance'), help_text='km', blank=True, null=True, default=None)
     # date = models.DateField(_('date'), blank=True, null=True, default=None)  # TODO: range field?
+    medal = thumbnail.ImageField(
+        verbose_name=_('medal'),
+        help_text=_('photo or image'),
+        max_length=1024,
+        upload_to='images',
+        blank=True
+    )
 
     class Meta:
         verbose_name = _('race')
