@@ -1,9 +1,7 @@
-from django.contrib.auth import get_user_model
 from django.db.models import F
 from django.views.generic import TemplateView
 
 from inventor.core.lexicons.models import Locality, Category
-from inventor.core.listings.models.general import Listing
 from writing.models import Article
 
 
@@ -16,7 +14,6 @@ class HomeView(TemplateView):
             'localities': Locality.objects.all(),
             'categories': Category.objects.without_parent(),
             'articles': Article.objects.published()[:3],
-            'users_count': get_user_model().objects.active().count()
         })
 
         # TODO: refactor to more universal/generic solution

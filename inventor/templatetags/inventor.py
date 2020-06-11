@@ -1,4 +1,7 @@
 from django import template
+from django.contrib.auth import get_user_model
+
+from inventor.core.lexicons.models import Category
 from inventor.core.listings.models.general import Listing
 
 register = template.Library()
@@ -12,3 +15,17 @@ def inventor_listings(**kwargs):
         .select_subclasses()\
         .prefetch_related('categories')\
         .order_by('-promoted', 'created')
+
+
+@register.simple_tag
+def inventor_stats(stat):
+    if stat == 'purchased_listings':
+        return 'TODO'
+    if stat == 'active_users':
+        return get_user_model().objects.active().count()
+    if stat == 'published_listings':
+        return Listing.objects.published().count()
+    if stat == 'categories':
+        return Category.objects.count()
+
+    return None
