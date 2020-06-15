@@ -83,15 +83,16 @@ class ListingFilter(django_filters.FilterSet):
 
         if listing_type:
             # dynamic categories
-            self.form.fields['categories'].queryset = Category.objects.of_listing_type(listing_type).exclude(parent=None)
+            listing_type_categories = Category.objects.of_listing_type(listing_type)
+            self.form.fields['categories'].queryset = listing_type_categories
+
+            if listing_type_categories.exclude(parent=None).exists():
+                self.form.fields['categories'].queryset = listing_type_categories.exclude(parent=None)
 
             # dynamic price segment based on listing type
-            if not Listing.objects.published().with_price().exists():
-                self.form.fields['price'].widget = HiddenInput()
-            else:
-                segment = f'listings.{listing_type.__name__}.price'
-                self.filters['price'].init_segments(segment)
-                self.form.fields['price'] = self.filters['price'].field
+            segment = f'listings.{listing_type.__name__}.price'
+            self.filters['price'].init_segments(segment)
+            self.form.fields['price'] = self.filters['price'].field
 
             # Exercise duration
             try:
@@ -99,7 +100,7 @@ class ListingFilter(django_filters.FilterSet):
                 self._meta.fields.append('duration')
                 segment = f'listings.{listing_type.__name__}.duration'
                 self.filters['duration'] = SliderFilter(
-                    label=_('Duration'), min_value=0, max_value=1000, step=5, appended_text='',
+                    label=_('Duration'), min_value=5, max_value=60, step=5, appended_text='min',
                     has_range=True, show_inputs=False, queryset_method='published', segment=segment, field_name='duration'
                 )
                 self.filters['duration'].init_segments(segment)
@@ -109,6 +110,10 @@ class ListingFilter(django_filters.FilterSet):
 
         else:
             self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
+
+        # dynamic price segment based on listing type
+        if not Listing.objects.published().with_price().exists():
+            self.form.fields['price'].widget = HiddenInput()
 
         if not self.form.fields['categories'].queryset.exists():
             self.form.fields['categories'].widget = HiddenInput()
