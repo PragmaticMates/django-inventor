@@ -94,8 +94,12 @@ class ListingFilter(django_filters.FilterSet):
 
             try:
                 listing_type._meta.get_field('duration')
+                self._meta.fields.append('duration')
                 segment = f'listings.{listing_type.__name__}.duration'
-                self.filters['duration'] = SliderFilter(label=_('Duration'), min_value=0, max_value=1000, step=5, appended_text='', has_range=True, show_inputs=False, queryset_method='published', segment=segment)
+                self.filters['duration'] = SliderFilter(
+                    label=_('Duration'), min_value=0, max_value=1000, step=5, appended_text='',
+                    has_range=True, show_inputs=False, queryset_method='published', segment=segment, field_name='duration'
+                )
                 self.filters['duration'].init_segments(segment)
                 self.form.fields['duration'] = self.filters['duration'].field
             except FieldDoesNotExist:
