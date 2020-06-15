@@ -5,7 +5,6 @@ from inventor import settings
 
 def get_listing_types_classes():
     from inventor.core.listings.models.general import Listing
-
     listing_types = settings.LISTING_TYPES
 
     if listing_types is None:

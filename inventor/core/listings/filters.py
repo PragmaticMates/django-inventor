@@ -16,7 +16,6 @@ from inventor.utils import SingleSubmitFormHelper, PositiveBooleanFilter
 class ListingFilter(django_filters.FilterSet):
     keyword = django_filters.CharFilter(label=_('Keyword'), method=lambda qs, name, value: qs.by_keyword(value))
     price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, show_inputs=False, queryset_method='published', segment='listings.Listing.price')
-    # duration = SliderFilter(label=_('Duration'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, show_inputs=False, queryset_method='published', segment='listings.Listing.duration')
     locality = django_filters.ModelChoiceFilter(
         label=_('Locality'),
         queryset=Locality.objects.all(),
@@ -34,7 +33,6 @@ class ListingFilter(django_filters.FilterSet):
             'promoted',
             'locality',
             'price',
-            # 'duration',
             'categories', 'features'
         ]
         filter_overrides = {
@@ -87,11 +85,15 @@ class ListingFilter(django_filters.FilterSet):
             # dynamic categories
             self.form.fields['categories'].queryset = Category.objects.of_listing_type(listing_type).exclude(parent=None)
 
-            # dynamic segment based on listing type
-            segment = f'listings.{listing_type.__name__}.price'
-            self.filters['price'].init_segments(segment)
-            self.form.fields['price'] = self.filters['price'].field
+            # dynamic price segment based on listing type
+            if not Listing.objects.published().with_price().exists():
+                self.form.fields['price'].widget = HiddenInput()
+            else:
+                segment = f'listings.{listing_type.__name__}.price'
+                self.filters['price'].init_segments(segment)
+                self.form.fields['price'] = self.filters['price'].field
 
+            # Exercise duration
             try:
                 listing_type._meta.get_field('duration')
                 self._meta.fields.append('duration')

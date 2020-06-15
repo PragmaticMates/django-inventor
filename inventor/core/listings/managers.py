@@ -9,6 +9,12 @@ class ListingQuerySet(InheritanceQuerySet):
     def with_points(self):
         return self.exclude(point=None)
 
+    def without_price(self):
+        return self.filter(price=None)
+
+    def with_price(self):
+        return self.exclude(price=None)
+    
     def with_address(self):
         return self.exclude(Q(street='') | Q(city='') | Q(country=''))
 
