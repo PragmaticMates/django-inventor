@@ -1,6 +1,7 @@
 import django_filters
 from crispy_forms.layout import Layout
 from django import forms
+from django.core.exceptions import FieldDoesNotExist
 from django.db import models
 from django.forms import HiddenInput
 from django.utils.translation import ugettext_lazy as _
@@ -15,6 +16,7 @@ from inventor.utils import SingleSubmitFormHelper, PositiveBooleanFilter
 class ListingFilter(django_filters.FilterSet):
     keyword = django_filters.CharFilter(label=_('Keyword'), method=lambda qs, name, value: qs.by_keyword(value))
     price = SliderFilter(label=_('Price'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, show_inputs=False, queryset_method='published', segment='listings.Listing.price')
+    # duration = SliderFilter(label=_('Duration'), min_value=0, max_value=1000, step=10, appended_text=' €', has_range=True, show_inputs=False, queryset_method='published', segment='listings.Listing.duration')
     locality = django_filters.ModelChoiceFilter(
         label=_('Locality'),
         queryset=Locality.objects.all(),
@@ -32,6 +34,7 @@ class ListingFilter(django_filters.FilterSet):
             'promoted',
             'locality',
             'price',
+            # 'duration',
             'categories', 'features'
         ]
         filter_overrides = {
@@ -66,6 +69,7 @@ class ListingFilter(django_filters.FilterSet):
             'promoted',
             'locality',
             'price',
+            'duration',
             'categories', 'features'
         )
         self.form.fields['locality'].empty_label = _('All localities')
@@ -87,6 +91,15 @@ class ListingFilter(django_filters.FilterSet):
             segment = f'listings.{listing_type.__name__}.price'
             self.filters['price'].init_segments(segment)
             self.form.fields['price'] = self.filters['price'].field
+
+            try:
+                listing_type._meta.get_field('duration')
+                segment = f'listings.{listing_type.__name__}.duration'
+                self.filters['duration'] = SliderFilter(label=_('Duration'), min_value=0, max_value=1000, step=5, appended_text='', has_range=True, show_inputs=False, queryset_method='published', segment=segment)
+                self.filters['duration'].init_segments(segment)
+                self.form.fields['duration'] = self.filters['duration'].field
+            except FieldDoesNotExist:
+                pass  # do not add duration if it does not exist
 
         else:
             self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
