@@ -156,7 +156,8 @@ class ListingFilter(django_filters.FilterSet):
 
             if listing_types is None or \
                 (listing_type and listing_type.__name__ in listing_types):
-                self.form.fields[field_name].widget = HiddenInput()
+                del self.form.fields[field_name]
+                # self.form.fields[field_name].widget = HiddenInput()
 
     def filter_features(self, queryset, name, value):
         # return listings having ALL features, not AT LEAST one

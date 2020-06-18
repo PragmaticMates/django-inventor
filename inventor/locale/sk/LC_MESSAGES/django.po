@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-18 19:39+0200\n"
-"PO-Revision-Date: 2020-06-18 19:39+0058\n"
+"PO-Revision-Date: 2020-06-18 20:30+0058\n"
 "Last-Translator: b'Erik Telepovsky <erik.telepovsky@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -317,11 +317,11 @@ msgstr "užívatelia"
 
 #: core/accounts/templates/accounts/user_dashboard.html:5
 msgid "Dashboard"
-msgstr ""
+msgstr "Nástenka"
 
 #: core/accounts/templates/accounts/user_dashboard.html:11
 msgid "My dashboard"
-msgstr ""
+msgstr "Moja nástenka"
 
 #: core/accounts/templates/accounts/user_profile_form.html:5
 #, fuzzy
@@ -338,7 +338,7 @@ msgstr "profil"
 #: core/accounts/urls.py:8
 msgctxt "url"
 msgid "dashboard/"
-msgstr ""
+msgstr "nastenka/"
 
 #: core/accounts/urls.py:9
 #, fuzzy

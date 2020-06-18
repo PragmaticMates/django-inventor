@@ -56,9 +56,8 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         fields = (
             'first_name', 'last_name', 'email', 'phone',
-            # 'avatar',
+            'avatar',
             'street', 'postcode', 'city', 'country',
-            'reg_id', 'tax_id', 'vat_id',
             'date_of_birth', 'gender', 'team'
         )
         model = User
@@ -67,7 +66,6 @@ class ProfileForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         for required_field_name in inventor_settings.USER_REQUIRED_FIELDS:
-            print(required_field_name)
             self.fields[required_field_name].required = True
 
         # placeholders
@@ -95,27 +93,21 @@ class ProfileForm(forms.ModelForm):
                     ),
                     Fieldset(
                         _('Contact details'),
-                        Row(
-                            Div(PrependedText('email', '<i class="fas fa-at"></i>'), css_class='col-md-7'),
-                            Div(PrependedText('phone', '<i class="far fa-mobile"></i>'), css_class='col-md-5'),
-                        ),
+                        PrependedText('email', '<i class="fas fa-at"></i>'),
+                        PrependedText('phone', '<i class="far fa-mobile"></i>')
                     ),
                     Fieldset(
                         _('Address'),
                         'street',
-                        'postcode',
-                        'city',
+                        Row(
+                            Div('postcode', css_class='col-md-5'),
+                            Div('city', css_class='col-md-7'),
+                        ),
                         'country',
                     ),
-                    css_class='col-md-7'
+                    css_class='col-md-6'
                 ),
                 Div(
-                    Fieldset(
-                        _('Billing details'),
-                        'reg_id',
-                        'tax_id',
-                        'vat_id',
-                    ),
                     Fieldset(
                         _('Date of birth'),
                         'date_of_birth',
@@ -124,8 +116,9 @@ class ProfileForm(forms.ModelForm):
                         _('Other'),
                         InlineRadios('gender'),
                         'team',
+                        'avatar'
                     ),
-                    css_class='col-md-5'
+                    css_class='col-md-5 offset-1'
                 )
             ),
             FormActions(

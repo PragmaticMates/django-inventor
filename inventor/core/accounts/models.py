@@ -39,12 +39,6 @@ class User(AbstractBaseUser, PermissionsMixin):  # UserNotificationsMixin
     city = models.CharField(_('city'), max_length=50, blank=True)
     country = CountryField(verbose_name=_('Country'), db_index=True, blank=True)
 
-    # Billing
-    # TODO: billing_name and billing_address
-    reg_id = models.CharField(_('Reg. No'), max_length=30, blank=True)
-    tax_id = models.CharField(verbose_name=_('TAX ID'), max_length=30, blank=True)
-    vat_id = VATNumberField(verbose_name=_('VAT ID'), blank=True)
-
     # Date of birth
     date_of_birth = models.DateField(_('date of birth'), blank=True, null=True, default=None)
 
