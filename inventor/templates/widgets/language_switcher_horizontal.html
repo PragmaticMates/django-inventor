@@ -1,0 +1,13 @@
+{% load static i18n %}
+
+<div id="language-switcher">
+    {% get_current_language as LANGUAGE_CODE %}
+
+    <ul class="nav">
+        {% for language in settings.LANGUAGES %}
+            <li class="nav-item {{ language.0 }}">
+                <a class="nav-link {% if language.0 == LANGUAGE_CODE %}active{% endif %}" href="/{{ language.0 }}/{{ url }}">{{ language.0|upper }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

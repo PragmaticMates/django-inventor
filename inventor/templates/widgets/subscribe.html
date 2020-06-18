@@ -1,0 +1,14 @@
+{% load i18n crispy_forms_tags %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>{% trans 'Join our newsletter' %}</h2>
+                <p>{% trans 'Subscribe our newsletter to receive the latest news and exclusive offers.' %}</p>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-end">
+                {% crispy newsletter_form %}
+            </div>
+        </div>
+    </div>
+</section>

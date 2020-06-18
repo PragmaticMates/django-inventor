@@ -1,0 +1,14 @@
+{% load static i18n %}
+
+<div class="btn-group ml-4 language-switcher">
+    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ LANGUAGE_CODE|upper }}
+    </button>
+    <div class="dropdown-menu">
+        {% for language in settings.LANGUAGES %}
+            {% if language.0 != LANGUAGE_CODE %}
+                <a class="dropdown-item" href="/{{ language.0 }}/{{ url }}">{{ language.0|upper }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
