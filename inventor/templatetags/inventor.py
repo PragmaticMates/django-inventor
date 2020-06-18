@@ -1,6 +1,7 @@
 from django import template
 from django.contrib.auth import get_user_model
 
+from inventor.core.faqs.models import FAQ
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.models.general import Listing
 
@@ -15,6 +16,11 @@ def inventor_listings(**kwargs):
         .select_subclasses()\
         .prefetch_related('categories')\
         .order_by('-promoted', 'created')
+
+
+@register.simple_tag
+def inventor_faqs(**kwargs):
+    return FAQ.objects.all()
 
 
 @register.simple_tag

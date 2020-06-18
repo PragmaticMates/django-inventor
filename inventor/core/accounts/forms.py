@@ -69,9 +69,7 @@ class ProfileForm(forms.ModelForm):
             self.fields[required_field_name].required = True
 
         # placeholders
-        USE_PLACEHOLDERS = True  # TODO: move to settings
-
-        if USE_PLACEHOLDERS:
+        if inventor_settings.USE_PLACEHOLDERS:
             for field_name, field in self.fields.items():
                 if isinstance(field, forms.CharField) or \
                         isinstance(field, forms.ChoiceField) or \
@@ -119,7 +117,7 @@ class ProfileForm(forms.ModelForm):
                         'avatar'
                     ),
                     css_class='col-md-5 offset-1'
-                )
+                ),
             ),
             FormActions(
                 Submit('submit', _('Submit'), css_class='btn-lg btn-primary'),
@@ -216,9 +214,7 @@ class SignupForm(AllAuthSignupForm):
             self.fields[required_field_name].required = True
 
         # placeholders
-        USE_PLACEHOLDERS = True  # TODO: move to settings
-
-        if USE_PLACEHOLDERS:
+        if inventor_settings.USE_PLACEHOLDERS:
             for field_name, field in self.fields.items():
                 if isinstance(field, forms.CharField) or \
                         isinstance(field, forms.ChoiceField) or \
