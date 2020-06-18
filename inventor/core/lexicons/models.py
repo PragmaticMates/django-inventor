@@ -30,13 +30,14 @@ class RegularLexicon(SlugMixin, models.Model):
 class Category(SlugMixin, MPTTModel):
     title = models.CharField(_('title'), max_length=100)
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, blank=True, default='')
+    description = models.TextField(_('description'), blank=True)
     color = RGBColorField(blank=True, default='')
     icon = models.CharField(_('icon'), max_length=100, blank=True, default='')
     listing_type = models.ForeignKey(
         ContentType, verbose_name=_('listing type'), on_delete=models.SET_NULL,
         blank=True, null=True, default=None)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-    i18n = TranslationField(fields=('title', 'slug'))
+    i18n = TranslationField(fields=('title', 'slug', 'description'))
     objects = CategoryManager()
 
     class MPTTMeta:

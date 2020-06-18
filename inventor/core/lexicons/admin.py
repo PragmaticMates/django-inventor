@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from modeltrans.admin import ActiveLanguageMixin
 from mptt.admin import DraggableMPTTAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 from inventor.core.lexicons.models import Locality, Category, Feature
@@ -8,8 +9,8 @@ from inventor.helpers import get_listing_types_classes
 
 
 @admin.register(Category)
-class CategoryAdmin(DraggableMPTTAdmin):
-    search_fields = ['title']
+class CategoryAdmin(ActiveLanguageMixin, DraggableMPTTAdmin):
+    search_fields = ['title_i18n']
     list_display = ('tree_actions', 'title_i18n', 'slug_i18n', 'listing_type', 'icon', 'color_display')
     list_display_links = ('title_i18n',)
     list_editable = ['icon']

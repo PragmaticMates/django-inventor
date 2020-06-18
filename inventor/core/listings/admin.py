@@ -3,6 +3,7 @@ from django.contrib.admin.sites import NotRegistered
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
+from modeltrans.admin import ActiveLanguageMixin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 
@@ -47,9 +48,9 @@ def make_convert_to_type_action(listing_type):
 
 class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     date_hierarchy = 'created'
-    search_fields = ['id', 'title', 'description']
-    list_display = ('id', 'title', 'slug', 'get_categories', 'address', 'locality', 'get_price_display', 'published', 'created')
-    list_display_links = ('title',)
+    search_fields = ['id', 'title_i18n', 'description']
+    list_display = ('id', 'title_i18n', 'slug', 'get_categories', 'address', 'locality', 'get_price_display', 'published', 'created')
+    list_display_links = ('title_i18n',)
     list_filter = ('published', 'promoted', 'awaiting')
     autocomplete_fields = ['author', 'locality']
     list_select_related = ['locality']
@@ -87,7 +88,7 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     @property
     def fieldsets(self):
         fieldsets_definition = {
-            'DEFINITION': (_('Definition'), {'fields': ('title', 'slug', 'description',)}),
+            'DEFINITION': (_('Definition'), {'fields': ('title_i18n', 'slug_i18n', 'description_i18n',)}),
             'MANAGEMENT': (_('Management'), {'fields': ('author', 'published', 'promoted')}),
             'SPECIFICATION': (_('Specification'), {'fields': (('categories', 'features'),)}),
             'PRICE': (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person', 'in_stock', 'awaiting'),)}),

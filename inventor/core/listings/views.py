@@ -61,6 +61,7 @@ class ListingDetailView(SingleObjectMixin, FormView):
     model = Listing
     template_name = 'listings/listing_detail.html'
     form_class = BookingForm
+    slug_field = 'slug_i18n'
 
     # def get_queryset(self):
     #     return super().get_queryset().select_subclasses()

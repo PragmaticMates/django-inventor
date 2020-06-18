@@ -4,12 +4,14 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.postgres.fields import HStoreField
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Avg
+from django.contrib.postgres.indexes import GinIndex
 from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
+from modeltrans.fields import TranslationField
 from sorl import thumbnail
 
 from commerce.models import AbstractProduct
@@ -99,6 +101,7 @@ class Listing(SlugMixin, AbstractProduct):
 
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
+    i18n = TranslationField(fields=('title', 'slug', 'description'))
     objects = ListingQuerySet.as_manager()
 
     class Meta:
@@ -106,12 +109,13 @@ class Listing(SlugMixin, AbstractProduct):
         verbose_name_plural = _('listings')
         ordering = ('title',)
         db_table = 'listings_general'
+        indexes = [GinIndex(fields=["i18n"]), ]
 
     def __str__(self):
-        return self.title
+        return self.title_i18n
 
     def get_absolute_url(self):
-        return reverse('listings:listing_detail', args=(self.slug,))
+        return reverse('listings:listing_detail', args=(self.slug_i18n,))
 
     def get_update_url(self):
         return reverse('listings:listing_update', args=(self.pk,))
