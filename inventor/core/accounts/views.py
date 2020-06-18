@@ -1,13 +1,23 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
+from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView, ListView, CreateView, DetailView, DeleteView
 from pragmatic.mixins import LoginPermissionRequiredMixin, DeleteObjectMixin
 # from inventor.core.accounts.filters import UserFilter
-from inventor.core.accounts.forms import UpdateProfileForm, UserForm
+from inventor.core.accounts.forms import UserForm
 from inventor.core.accounts.models import User
+
+
+class UserDashboardView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'accounts/user_dashboard.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 class UserDetailView(LoginPermissionRequiredMixin, DetailView):
@@ -17,18 +27,20 @@ class UserDetailView(LoginPermissionRequiredMixin, DetailView):
 
 class UpdateProfileView(LoginRequiredMixin, UpdateView):
     model = User
-    form_class = UpdateProfileForm
     template_name = 'accounts/user_profile_form.html'
 
     def get_object(self, queryset=None):
         return self.request.user
 
+    def get_form_class(self):
+        return import_string(settings.ACCOUNT_FORMS.get('profile'))
+
     def form_valid(self, form):
         messages.success(self.request, _('Profile successfully saved'))
-        return super(UpdateProfileView, self).form_valid(form)
+        return super().form_valid(form)
 
     def get_success_url(self):
-        return self.request.user.get_absolute_url()
+        return reverse('inventor:accounts:user_dashboard')
 
 
 class UserUpdateView(LoginPermissionRequiredMixin, UpdateView):

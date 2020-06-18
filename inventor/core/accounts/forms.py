@@ -13,6 +13,7 @@ from internationalflavor.vat_number import VATNumberFormField
 from permissions_widget.forms import PermissionSelectMultipleField
 from permissions_widget.layout import PermissionWidget
 from inventor.core.accounts.models import User
+from inventor import settings as inventor_settings
 
 
 class UserWidget(ModelSelect2Widget):
@@ -51,36 +52,85 @@ class UsersWidget(ModelSelect2MultipleWidget):
         return super().filter_queryset(term, queryset, **dependent_fields)
 
 
-class UpdateProfileForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
         fields = (
-            'first_name', 'last_name', 'email', 'phone', 'avatar'
+            'first_name', 'last_name', 'email', 'phone',
+            # 'avatar',
+            'street', 'postcode', 'city', 'country',
+            'reg_id', 'tax_id', 'vat_id',
+            'date_of_birth', 'gender', 'team'
         )
         model = User
 
     def __init__(self, *args, **kwargs):
-        super(UpdateProfileForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+
+        for required_field_name in inventor_settings.USER_REQUIRED_FIELDS:
+            print(required_field_name)
+            self.fields[required_field_name].required = True
+
+        # placeholders
+        USE_PLACEHOLDERS = True  # TODO: move to settings
+
+        if USE_PLACEHOLDERS:
+            for field_name, field in self.fields.items():
+                if isinstance(field, forms.CharField) or \
+                        isinstance(field, forms.ChoiceField) or \
+                        isinstance(field, forms.DateField):
+                    asterisk = '*' if field.required else ''
+                    field.widget.attrs['placeholder'] = f'{field.label.capitalize()}{asterisk}'
+                    field.label = ''
+
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
-                Fieldset(
-                    _('Personal details'),
-                    Row(
-                        Div('first_name', css_class='col-md-5'),
-                        Div('last_name', css_class='col-md-7'),
+                Div(
+                    Fieldset(
+                        _('Name and surname'),
+                        Row(
+                            Div('first_name', css_class='col-md-5'),
+                            Div('last_name', css_class='col-md-7'),
+                        ),
                     ),
-                    'avatar',
+                    Fieldset(
+                        _('Contact details'),
+                        Row(
+                            Div(PrependedText('email', '<i class="fas fa-at"></i>'), css_class='col-md-7'),
+                            Div(PrependedText('phone', '<i class="far fa-mobile"></i>'), css_class='col-md-5'),
+                        ),
+                    ),
+                    Fieldset(
+                        _('Address'),
+                        'street',
+                        'postcode',
+                        'city',
+                        'country',
+                    ),
                     css_class='col-md-7'
                 ),
-                Fieldset(
-                    _('Contact details'),
-                    PrependedText('email', '<i class="fas fa-at"></i>'),
-                    PrependedText('phone', '<i class="far fa-mobile"></i>'),
+                Div(
+                    Fieldset(
+                        _('Billing details'),
+                        'reg_id',
+                        'tax_id',
+                        'vat_id',
+                    ),
+                    Fieldset(
+                        _('Date of birth'),
+                        'date_of_birth',
+                    ),
+                    Fieldset(
+                        _('Other'),
+                        InlineRadios('gender'),
+                        'team',
+                    ),
                     css_class='col-md-5'
-                ),
+                )
             ),
             FormActions(
-                Submit('submit', _('Submit'), css_class='btn-secondary')
+                Submit('submit', _('Submit'), css_class='btn-lg btn-primary'),
+                css_class='text-center'
             )
         )
 
@@ -151,7 +201,7 @@ class UserForm(forms.ModelForm):
 
 
 class SignupForm(AllAuthSignupForm):
-    # TODO: settings for required fields
+    # TODO: settings for required and visible fields
     first_name = forms.CharField(label=_('first name'), max_length=30)
     last_name = forms.CharField(label=_('last name'), max_length=30)
     phone = forms.CharField(label=_('phone'), max_length=30)
@@ -169,13 +219,13 @@ class SignupForm(AllAuthSignupForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # self.fields['is_staff'].disabled = True
+        for required_field_name in inventor_settings.USER_REQUIRED_FIELDS:
+            self.fields[required_field_name].required = True
 
         # placeholders
-        USE_PLACEHOLDERS = True
+        USE_PLACEHOLDERS = True  # TODO: move to settings
 
         if USE_PLACEHOLDERS:
-            print(self.fields)
             for field_name, field in self.fields.items():
                 if isinstance(field, forms.CharField) or \
                         isinstance(field, forms.ChoiceField) or \

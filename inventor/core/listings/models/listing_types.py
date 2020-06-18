@@ -206,3 +206,14 @@ class Nature(Listing):
         verbose_name = _('animal or plant')
         verbose_name_plural = _('animals and plants')
         ordering = ('title',)
+
+
+class Product(Listing):  # e-shop
+    section = _('shopping')
+    # TODO: size [lexicon]
+    # TODO: color [lexicon]
+
+    class Meta:
+        verbose_name = _('product')
+        verbose_name_plural = _('products')
+        ordering = ('title',)

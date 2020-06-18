@@ -6,6 +6,8 @@ from django.db import models
 from django.forms import HiddenInput
 from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import ModelSelect2Widget
+
+from inventor import settings
 from pragmatic.filters import SliderFilter
 
 from inventor.core.lexicons.models import Category, Locality
@@ -84,7 +86,9 @@ class ListingFilter(django_filters.FilterSet):
         if listing_type:
             # dynamic categories
             listing_type_categories = Category.objects.of_listing_type(listing_type)
-            self.form.fields['categories'].queryset = listing_type_categories
+
+            if listing_type_categories.exists():
+                self.form.fields['categories'].queryset = listing_type_categories
 
             if listing_type_categories.exclude(parent=None).exists():
                 self.form.fields['categories'].queryset = listing_type_categories.exclude(parent=None)
@@ -93,6 +97,10 @@ class ListingFilter(django_filters.FilterSet):
             segment = f'listings.{listing_type.__name__}.price'
             self.filters['price'].init_segments(segment)
             self.form.fields['price'] = self.filters['price'].field
+
+            # hide price if not required
+            if not Listing.objects.published().with_price().exists():
+                self.form.fields['price'].widget = HiddenInput()
 
             # Exercise duration
             try:
@@ -110,10 +118,6 @@ class ListingFilter(django_filters.FilterSet):
 
         else:
             self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
-
-        # dynamic price segment based on listing type
-        if not Listing.objects.published().with_price().exists():
-            self.form.fields['price'].widget = HiddenInput()
 
         if not self.form.fields['categories'].queryset.exists():
             self.form.fields['categories'].widget = HiddenInput()
@@ -140,6 +144,19 @@ class ListingFilter(django_filters.FilterSet):
 
             # changed filter logic of features
             self.filters['features'].method = 'filter_features'
+
+        self.hide_fields_by_settings(listing_type)
+
+    def hide_fields_by_settings(self, listing_type):
+        hidden_fields = settings.LISTING_FILTER.get('hidden_fields', {})
+
+        for field_name, listing_types in hidden_fields.items():
+            if field_name not in self.form.fields:
+                continue
+
+            if listing_types is None or \
+                (listing_type and listing_type.__name__ in listing_types):
+                self.form.fields[field_name].widget = HiddenInput()
 
     def filter_features(self, queryset, name, value):
         # return listings having ALL features, not AT LEAST one

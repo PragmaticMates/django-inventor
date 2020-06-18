@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <main class="account-forms {% block main_class %}{% endblock %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-7 col-lg-9 col-md-11 mx-auto py-5">
+                {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

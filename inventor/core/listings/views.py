@@ -43,10 +43,14 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         return self.sort_queryset(queryset)
 
     def get_whole_queryset(self):
-        return super().get_queryset()\
+        qs = super().get_queryset()\
             .published()\
-            .select_subclasses()\
             .order_by('-promoted', 'modified')
+
+        if self.model == Listing:
+            qs = qs.select_subclasses()
+
+        return qs
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)

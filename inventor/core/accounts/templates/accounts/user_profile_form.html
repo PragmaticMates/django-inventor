@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% load i18n account crispy_forms_tags %}
+
+{% block head_title %}{% trans "Profile" %}{% endblock %}
+
+{% block content %}
+    <div class="container-fluid border-bottom">
+        <div class="container">
+            <div class="row py-5 my-3">
+                <div class="col-lg-10 mx-auto">
+                    <h1>{% trans "My profile" %}</h1>
+                    <p>TODO: billing_name, billing_address</p>
+                    <form method="post">
+                        {% crispy form %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

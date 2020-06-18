@@ -1,4 +1,3 @@
-from allauth.account.forms import LoginForm, SignupForm
 from allauth.account.views import RedirectAuthenticatedUserMixin
 from allauth.utils import get_request_param
 from django.conf import settings

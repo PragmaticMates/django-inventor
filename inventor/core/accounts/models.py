@@ -40,6 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):  # UserNotificationsMixin
     country = CountryField(verbose_name=_('Country'), db_index=True, blank=True)
 
     # Billing
+    # TODO: billing_name and billing_address
     reg_id = models.CharField(_('Reg. No'), max_length=30, blank=True)
     tax_id = models.CharField(verbose_name=_('TAX ID'), max_length=30, blank=True)
     vat_id = VATNumberField(verbose_name=_('VAT ID'), blank=True)
@@ -88,7 +89,7 @@ class User(AbstractBaseUser, PermissionsMixin):  # UserNotificationsMixin
         return self.get_full_name() or self.email
 
     def get_absolute_url(self):
-        return reverse('accounts:user_detail', kwargs={'pk': self.pk})
+        return reverse('inventor:accounts:user_detail', kwargs={'pk': self.pk})
 
     def get_full_name(self):
         """
