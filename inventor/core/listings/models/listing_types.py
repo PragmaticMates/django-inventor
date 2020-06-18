@@ -1,7 +1,7 @@
 from django.contrib.postgres.fields import DateTimeRangeField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from sorl import thumbnail
 
 from inventor.core.bookings.mixins import BookingMixin
@@ -37,6 +37,9 @@ class Accommodation(BookingMixin, Listing):
         verbose_name_plural = _('accommodations')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'accommodations/')
+
 
 class Property(Listing):
     section = _('real estate')
@@ -46,6 +49,9 @@ class Property(Listing):
         verbose_name = _('property')
         verbose_name_plural = _('properties')
         ordering = ('title',)
+
+    class URL:
+        slug = pgettext_lazy('url', 'properties/')
 
 
 class EatAndDrink(BookingMixin, Listing):  # TODO
@@ -57,6 +63,9 @@ class EatAndDrink(BookingMixin, Listing):  # TODO
         verbose_name_plural = _('eat & drinks')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'eat-and-drinks/')
+
 
 class Service(Listing):
     section = _('services')
@@ -67,6 +76,9 @@ class Service(Listing):
         verbose_name_plural = _('services')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'services/')
+
 
 class Vacation(Listing):
     section = _('holiday')
@@ -75,6 +87,9 @@ class Vacation(Listing):
         verbose_name = _('vacation')
         verbose_name_plural = _('vacations')
         ordering = ('title',)
+
+    class URL:
+        slug = pgettext_lazy('url', 'vacations/')
 
 
 class Activity(Listing):
@@ -85,6 +100,9 @@ class Activity(Listing):
         verbose_name_plural = _('activities')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'activities/')
+        
 
 class Race(Listing):
     section = _('sport')
@@ -103,6 +121,9 @@ class Race(Listing):
         verbose_name_plural = _('races')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'races/')
+
     def get_distance_display(self):
         return f'{self.distance} km' if self.distance else ''
 
@@ -115,6 +136,9 @@ class Training(Listing):
         verbose_name_plural = _('trainings')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'trainings/')
+
 
 class Exercise(Listing):
     section = _('health & body')
@@ -125,6 +149,9 @@ class Exercise(Listing):
         verbose_name = _('exercise')
         verbose_name_plural = _('exercises')
         ordering = ('title',)
+
+    class URL:
+        slug = pgettext_lazy('url', 'exercises/')
 
     def get_duration_display(self):
         return f'{self.duration} min' if self.duration else ''
@@ -139,6 +166,9 @@ class Trip(Listing):
         verbose_name_plural = _('trips')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'trips/')
+
 
 class Event(Listing):
     section = _('events')
@@ -152,6 +182,9 @@ class Event(Listing):
         verbose_name_plural = _('events')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'events/')
+
 
 class Shop(Listing):  # Store
     section = _('shopping')
@@ -160,6 +193,9 @@ class Shop(Listing):  # Store
         verbose_name = _('shop')
         verbose_name_plural = _('shops')
         ordering = ('title',)
+
+    class URL:
+        slug = pgettext_lazy('url', 'shops/')
 
 
 class Vehicle(Listing):
@@ -170,6 +206,9 @@ class Vehicle(Listing):
         verbose_name_plural = _('vehicle')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'vehicles/')
+
 
 class Profile(Listing):
     section = _('dating')
@@ -178,6 +217,9 @@ class Profile(Listing):
         verbose_name = _('profile')
         verbose_name_plural = _('profiles')
         ordering = ('title',)
+
+    class URL:
+        slug = pgettext_lazy('url', 'profiles/')
 
 
 class Job(Listing):
@@ -188,6 +230,9 @@ class Job(Listing):
         verbose_name_plural = _('jobs')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'jobs/')
+
 
 class Course(Listing):
     section = _('education')
@@ -196,6 +241,9 @@ class Course(Listing):
         verbose_name = _('course')
         verbose_name_plural = _('courses')
         ordering = ('title',)
+
+    class URL:
+        slug = pgettext_lazy('url', 'courses/')
 
 
 class Nature(Listing):
@@ -207,6 +255,9 @@ class Nature(Listing):
         verbose_name_plural = _('animals and plants')
         ordering = ('title',)
 
+    class URL:
+        slug = pgettext_lazy('url', 'animals-and-plants/')
+
 
 class Product(Listing):  # e-shop
     section = _('shopping')
@@ -217,3 +268,6 @@ class Product(Listing):  # e-shop
         verbose_name = _('product')
         verbose_name_plural = _('products')
         ordering = ('title',)
+
+    class URL:
+        slug = pgettext_lazy('url', 'products/')

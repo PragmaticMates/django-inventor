@@ -14,8 +14,7 @@ urlpatterns = [
 # lists
 for listing_type in Listing.__subclasses__():
     url_name = listing_type.get_list_url_name()
-    verbose_name_plural = ugettext_lazy(listing_type._meta.verbose_name_plural)
-    url_path = slugify(verbose_name_plural) + '/'
+    url_path = listing_type.URL.slug
     urlpatterns.append(path(url_path, ListingListView.as_view(template_name='listings/listing_list.html', model=listing_type), name=url_name))
 
 # listing detail
