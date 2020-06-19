@@ -1,9 +1,9 @@
 from django import template
 from django.contrib.auth import get_user_model
 
-from inventor.core.faqs.models import FAQ
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.models.general import Listing
+
 
 register = template.Library()
 
@@ -20,7 +20,14 @@ def inventor_listings(**kwargs):
 
 @register.simple_tag
 def inventor_faqs(**kwargs):
+    from inventor.core.faqs.models import FAQ
     return FAQ.objects.all()
+
+
+@register.simple_tag
+def inventor_partners(**kwargs):
+    from inventor.core.partners.models import Partner
+    return Partner.objects.all()
 
 
 @register.simple_tag
