@@ -20,7 +20,7 @@ class NewsletterForm(forms.Form):
 
         self.helper = FormHelper()
         self.helper.form_action = reverse('inventor:newsletter')
-        self.helper.form_class = 'form-inline justify-content-end'
+        self.helper.form_class = 'form-inline justify-content-md-end justify-content-center'
         self.helper.layout = Layout(
             'email',
             Submit('submit', _('Subscribe'), css_class='ml-3 btn-primary'),
