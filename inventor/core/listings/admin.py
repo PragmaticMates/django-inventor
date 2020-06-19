@@ -3,7 +3,6 @@ from django.contrib.admin.sites import NotRegistered
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
-from modeltrans.admin import ActiveLanguageMixin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 
