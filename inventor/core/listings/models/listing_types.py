@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import DateTimeRangeField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.template.defaultfilters import floatformat
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from sorl import thumbnail
 
@@ -126,7 +127,8 @@ class Race(Listing):
         slug = pgettext_lazy('url', 'races/')
 
     def get_distance_display(self):
-        return f'{self.distance} km' if self.distance else ''
+        # TODO: settings for DECIMAL PLACES
+        return f'{floatformat(self.distance, -1)} km' if self.distance else ''
 
 
 class Training(Listing):
