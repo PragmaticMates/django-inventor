@@ -106,7 +106,8 @@ class Activity(Listing):
 
 class Race(Listing):
     section = _('sport')
-    distance = models.PositiveSmallIntegerField(_('distance'), help_text='km', blank=True, null=True, default=None)
+    distance = models.DecimalField(_('distance'), help_text='km', max_digits=6, decimal_places=2, validators=[MinValueValidator(0)],
+        blank=True, null=True, default=None)
     # date = models.DateField(_('date'), blank=True, null=True, default=None)  # TODO: range field?
     medal = thumbnail.ImageField(
         verbose_name=_('medal'),
