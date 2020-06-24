@@ -23,7 +23,7 @@ class NewsletterForm(forms.Form):
         self.helper.form_class = 'form-inline justify-content-md-end justify-content-center'
         self.helper.layout = Layout(
             'email',
-            Submit('submit', _('Subscribe'), css_class='ml-3 btn-primary'),
+            Submit('submit', _('Subscribe'), css_class='ml-sm-3 btn-primary'),
         )
 
         if not settings.DEBUG:
