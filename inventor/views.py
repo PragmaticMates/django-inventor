@@ -1,6 +1,6 @@
 from django.db.models import F
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
-
 from inventor.core.lexicons.models import Locality, Category
 from writing.models import Article
 
@@ -16,7 +16,7 @@ class HomeView(TemplateView):
             'articles': Article.objects.published()[:3],
         })
 
-        # TODO: refactor to more universal/generic solution
+        # TODO: refactor to more universal/generic solution: move to template tag?
         try:
             from inventor.core.listings.models.listing_types import Accommodation
             context_data.update({
