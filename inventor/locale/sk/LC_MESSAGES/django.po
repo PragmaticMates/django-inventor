@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-19 15:44+0200\n"
-"PO-Revision-Date: 2020-06-19 20:34+0058\n"
+"PO-Revision-Date: 2020-06-24 17:41+0058\n"
 "Last-Translator: b'Erik Telepovsky <erik.telepovsky@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -1333,7 +1333,7 @@ msgstr "Prihlásiť sa"
 
 #: templates/widgets/subscribe.html:6
 msgid "Join our newsletter"
-msgstr "Prihláste sa na odber."
+msgstr "Prihláste sa na odber noviniek"
 
 #: templates/widgets/subscribe.html:7
 msgid ""
