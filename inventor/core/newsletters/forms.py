@@ -1,7 +1,7 @@
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV3
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit
+from crispy_forms.layout import Layout, Submit, Row, Div
 from django import forms
 from django.conf import settings
 from django.urls import reverse
@@ -22,8 +22,10 @@ class NewsletterForm(forms.Form):
         self.helper.form_action = reverse('inventor:newsletter')
         self.helper.form_class = 'form-inline justify-content-md-end justify-content-center'
         self.helper.layout = Layout(
-            'email',
-            Submit('submit', _('Subscribe'), css_class='ml-sm-3 btn-primary'),
+            Row(
+                Div('email', css_class='col-sm'),
+                Div(Submit('submit', _('Subscribe'), css_class='btn-primary'), css_class='col-sm-auto d-flex justify-content-center')
+            )
         )
 
         if not settings.DEBUG:
