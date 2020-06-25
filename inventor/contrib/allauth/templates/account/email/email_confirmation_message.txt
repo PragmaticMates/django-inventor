@@ -1,0 +1,10 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}
+{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hello {{ user_display }}!
+
+Thank you for registering at {{ site_name }}!
+
+To activate your e-mail address, go to {{ activate_url }}.
+{% endblocktrans %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}{{ site_name }} team!{% endblocktrans %}
+{{ site_domain }}
+{% endautoescape %}
