@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-24 21:31+0200\n"
-"PO-Revision-Date: 2020-06-24 21:34+0058\n"
+"POT-Creation-Date: 2020-06-26 21:32+0200\n"
+"PO-Revision-Date: 2020-06-26 21:40+0058\n"
 "Last-Translator: b'Erik Telepovsky <erik.telepovsky@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 "X-Translated-Using: django-rosetta 0.9.4\n"
+
+#: contrib/allauth/templates/account/email/email_confirmation_message.txt:2
+#, python-format
+msgid ""
+"Hello %(user_display)s!\n"
+"\n"
+"Thank you for registering at %(site_name)s!\n"
+"\n"
+"To activate your e-mail address, go to %(activate_url)s.\n"
+msgstr ""
+"Dobrý deň %(user_display)s!\n"
+"\n"
+"Ďakujeme, že ste sa registrovali na %(site_name)s!\n"
+"\n"
+"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: %(activate_url)s.\n"
+
+#: contrib/allauth/templates/account/email/email_confirmation_message.txt:8
+#: contrib/allauth/templates/account/email/password_reset_key_message.txt:11
+#, python-format
+msgid "%(site_name)s team!"
+msgstr "Tím %(site_name)s"
+
+#: contrib/allauth/templates/account/email/email_confirmation_subject.txt:3
+msgid "Please Confirm Your E-mail Address"
+msgstr "Prosím potvrďte svoju e-mailovú adresu"
+
+#: contrib/allauth/templates/account/email/password_reset_key_message.txt:2
+#, python-format
+msgid ""
+"Hello %(user_display)s!\n"
+"\n"
+"You're receiving this e-mail because you or someone else has requested a password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
+msgstr ""
+"Dobrý deň %(user_display)s!\n"
+"\n"
+"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla Vášho užívateľského účtu.\n"
+"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla kliknite na odkaz nižšie."
+
+#: contrib/allauth/templates/account/email/password_reset_key_message.txt:9
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr "Ak by ste zabudli, Vaše prihlasovacie meno je %(username)s."
+
+#: contrib/allauth/templates/account/email/password_reset_key_subject.txt:3
+#| msgid "Password Reset"
+msgid "Password Reset E-mail"
+msgstr "E-mail na obnovu hesla"
 
 #: contrib/allauth/templates/account/login-signup.html:5
 #: contrib/allauth/templates/account/login-signup.html:11
@@ -35,7 +83,7 @@ msgstr "Už máte účet? Prihláste sa nižšie:"
 #: contrib/allauth/templates/account/login-signup.html:20
 #: contrib/allauth/templates/account/login.html:42
 msgid "Forgot Password?"
-msgstr "Zabudol si heslo?"
+msgstr "Zabudli ste heslo?"
 
 #: contrib/allauth/templates/account/login-signup.html:26
 #: contrib/allauth/templates/account/signup.html:8
@@ -74,7 +122,6 @@ msgstr ""
 #: contrib/allauth/templates/account/password_change.html:13
 #: contrib/allauth/templates/account/password_reset_from_key.html:4
 #: contrib/allauth/templates/account/password_reset_from_key.html:7
-#| msgid "Password"
 msgid "Change Password"
 msgstr "Zmeniť heslo"
 
@@ -82,7 +129,6 @@ msgstr "Zmeniť heslo"
 #: contrib/allauth/templates/account/password_reset.html:8
 #: contrib/allauth/templates/account/password_reset_done.html:5
 #: contrib/allauth/templates/account/password_reset_done.html:8
-#| msgid "Password"
 msgid "Password Reset"
 msgstr "Obnova hesla"
 
@@ -95,7 +141,6 @@ msgstr ""
 "jeho obnovu."
 
 #: contrib/allauth/templates/account/password_reset.html:18
-#| msgid "Password"
 msgid "Reset My Password"
 msgstr "Obnoviť moje heslo"
 
@@ -127,19 +172,16 @@ msgstr ""
 " o opatovnú <a href=\"%(passwd_reset_url)s\">obnovu hesla</a>."
 
 #: contrib/allauth/templates/account/password_reset_from_key.html:17
-#| msgid "Password"
 msgid "Change password"
 msgstr "Zmeniť heslo"
 
 #: contrib/allauth/templates/account/password_reset_from_key.html:20
-#| msgid "Your password is {}"
 msgid "Your password is now changed."
 msgstr "Vaše heslo bolo zmenené"
 
 #: contrib/allauth/templates/account/password_set.html:5
 #: contrib/allauth/templates/account/password_set.html:8
 #: contrib/allauth/templates/account/password_set.html:13
-#| msgid "Password"
 msgid "Set Password"
 msgstr "Nastaviť heslo"
 
@@ -263,32 +305,32 @@ msgstr "Klasifikácia"
 msgid "Status"
 msgstr "Stav"
 
-#: core/accounts/forms.py:196 core/accounts/models.py:29
+#: core/accounts/forms.py:196 core/accounts/models.py:28
 msgid "first name"
 msgstr "krstné meno"
 
-#: core/accounts/forms.py:197 core/accounts/models.py:30
+#: core/accounts/forms.py:197 core/accounts/models.py:29
 msgid "last name"
 msgstr "priezvisko"
 
-#: core/accounts/forms.py:198 core/accounts/models.py:34
+#: core/accounts/forms.py:198 core/accounts/models.py:33
 #: core/bookings/models.py:43 core/listings/models/general.py:91
 msgid "phone"
 msgstr "telefón"
 
-#: core/accounts/forms.py:199 core/accounts/models.py:37
+#: core/accounts/forms.py:199 core/accounts/models.py:36
 msgid "street and number"
 msgstr "ulica a číslo"
 
-#: core/accounts/forms.py:200 core/accounts/models.py:38
+#: core/accounts/forms.py:200 core/accounts/models.py:37
 msgid "postcode"
 msgstr "PSČ"
 
-#: core/accounts/forms.py:201 core/accounts/models.py:39
+#: core/accounts/forms.py:201 core/accounts/models.py:38
 msgid "city"
 msgstr "mesto"
 
-#: core/accounts/forms.py:202 core/accounts/models.py:40
+#: core/accounts/forms.py:202 core/accounts/models.py:39
 msgid "Country"
 msgstr "Krajina"
 
@@ -304,44 +346,44 @@ msgstr "DIČ"
 msgid "VAT ID"
 msgstr "IČ DPH"
 
-#: core/accounts/forms.py:206 core/accounts/models.py:43
+#: core/accounts/forms.py:206 core/accounts/models.py:42
 msgid "date of birth"
 msgstr "dátum narodenia"
 
-#: core/accounts/forms.py:207 core/accounts/models.py:46
+#: core/accounts/forms.py:207 core/accounts/models.py:45
 msgid "gender"
 msgstr "pohlavie"
 
-#: core/accounts/forms.py:208 core/accounts/models.py:47
+#: core/accounts/forms.py:208 core/accounts/models.py:46
 msgid "team/club"
 msgstr "tím/klub"
 
-#: core/accounts/models.py:24
+#: core/accounts/models.py:23
 msgid "male"
 msgstr "muž"
 
-#: core/accounts/models.py:25
+#: core/accounts/models.py:24
 msgid "female"
 msgstr "žena"
 
-#: core/accounts/models.py:33 core/bookings/models.py:44
+#: core/accounts/models.py:32 core/bookings/models.py:44
 #: core/listings/models/general.py:92
 msgid "email"
 msgstr "email"
 
-#: core/accounts/models.py:51
+#: core/accounts/models.py:50
 msgid "staff status"
 msgstr "status zamestnanca"
 
-#: core/accounts/models.py:53
+#: core/accounts/models.py:52
 msgid "Designates whether the user can log into this admin site."
 msgstr "Určuje, či sa užívateľ môže prihlásiť do administrácie"
 
-#: core/accounts/models.py:56
+#: core/accounts/models.py:55
 msgid "active"
 msgstr "aktívny"
 
-#: core/accounts/models.py:59
+#: core/accounts/models.py:58
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
@@ -349,27 +391,27 @@ msgstr ""
 "Určuje, či sa má užívateľ považovať za aktívneho. Namiesto mazania účtu "
 "nastavte na neaktívne."
 
-#: core/accounts/models.py:63
+#: core/accounts/models.py:62
 msgid "date joined"
 msgstr "dátum registrácie"
 
-#: core/accounts/models.py:64
+#: core/accounts/models.py:63
 msgid "last seen"
 msgstr "naposledy videný"
 
-#: core/accounts/models.py:67
+#: core/accounts/models.py:66
 msgid "avatar"
 msgstr "avatar"
 
-#: core/accounts/models.py:68 core/listings/models/general.py:283
+#: core/accounts/models.py:67 core/listings/models/general.py:283
 msgid "photo, image or icon"
 msgstr "fotka, obrázok alebo ikona"
 
-#: core/accounts/models.py:77
+#: core/accounts/models.py:76
 msgid "user"
 msgstr "užívateľ"
 
-#: core/accounts/models.py:78
+#: core/accounts/models.py:77
 msgid "users"
 msgstr "užívatelia"
 
@@ -380,6 +422,10 @@ msgstr "Nástenka"
 #: core/accounts/templates/accounts/user_dashboard.html:11
 msgid "My dashboard"
 msgstr "Moja nástenka"
+
+#: core/accounts/templates/accounts/user_dashboard.html:24
+msgid "Beat a challenge"
+msgstr "Zdolať výzvu"
 
 #: core/accounts/templates/accounts/user_profile_form.html:5
 msgid "Profile"
@@ -1292,7 +1338,7 @@ msgstr "Propagované"
 msgid "Enter your e-mail"
 msgstr "Zadajte svoj e-mail"
 
-#: core/newsletters/forms.py:26
+#: core/newsletters/forms.py:27
 msgid "Subscribe"
 msgstr "Prihlásiť"
 

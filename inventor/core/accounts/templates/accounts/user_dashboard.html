@@ -7,10 +7,23 @@
 {% block content %}
     <div class="container">
         <div class="row py-5 my-3">
-            <div class="col-lg-5 mx-auto">
-                <h1>{% trans "My dashboard" %}</h1>
-                <p>TODO: challenges, orders, payments, invoices...</p>
+            <div class="col mx-auto">
+                <h1 class="text-center">{% trans "My dashboard" %}</h1>
             </div>
+        </div>
+        <div class="row">
+            {% for order in request.user.order_set.paid_not_cancelled_nor_refunded %}
+                {% for purchased_item in order.purchaseditem_set.all %}
+                    <div class="col-md-4">
+                        <strong>{{ purchased_item.product }}</strong>
+                        {{ purchased_item.product.medal }}
+                    </div>
+                {% endfor %}
+            {% empty %}
+                <div class="col text-center">
+                    <a href="{% url 'listings:race_list' %}" class="btn btn-lg btn-primary">{% trans 'Beat a challenge' %}</a>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
