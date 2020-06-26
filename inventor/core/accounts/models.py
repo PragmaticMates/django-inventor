@@ -8,7 +8,6 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 # from whistle.mixins import UserNotificationsMixin
 from internationalflavor.countries import CountryField
-from internationalflavor.vat_number import VATNumberField
 from inventor.core.accounts.managers import UserManager, UserQuerySet
 from inventor.core.accounts.utils import avatar_path_handler, avatar_thumbnail_exists, create_avatar_thumbnail
 
