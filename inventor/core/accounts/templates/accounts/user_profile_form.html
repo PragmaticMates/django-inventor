@@ -14,4 +14,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            const avatarElement = $('#div_id_avatar a');
+
+            if (avatarElement) {
+                const imgLink = avatarElement.attr('href');
+                avatarElement.html('<img class="img-fluid" src="'+ imgLink +'" alt="avatar">');
+            }
+        });
+    </script>
 {% endblock %}
