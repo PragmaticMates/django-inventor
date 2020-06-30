@@ -5,5 +5,8 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', '{{ settings.GOOGLE_TRACKING_ID }}');
+  {% if request.user.id %}
+    gtag('set', {'user_id': '{{ request.user.id }}'}); // Set the user ID using signed-in user_id.
+  {% endif %}
 </script>
 {% endif %}
