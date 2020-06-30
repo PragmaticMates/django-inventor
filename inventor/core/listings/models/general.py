@@ -284,6 +284,7 @@ class Photo(models.Model):
         max_length=1024 * 5,
         upload_to='photos',  # TODO: listing folder
     )
+    # TODO: SEO: alt (translatable description)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
 

@@ -3,6 +3,8 @@
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE }}">
     <head>
+        {% include 'helpers/google_tag_manager.html' %}
+
         <title>{{ settings.PAGE_TITLE }}{% if view.title %} | {{ view.title }}{% elif view.object %} | {{ view.object }}{% endif %}</title>
         <meta charset="utf-8">
         <meta name="description" content="{{ view.description|default:settings.PAGE_DESCRIPTION }}">
