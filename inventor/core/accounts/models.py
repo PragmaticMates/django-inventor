@@ -69,6 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):  # UserNotificationsMixin
         upload_to=avatar_path_handler,
         blank=True,
     )
+    preferred_language = models.CharField(_(u'language'), max_length=5, choices=settings.LANGUAGES)
     objects = UserManager()
     qs = UserQuerySet.as_manager()
 
