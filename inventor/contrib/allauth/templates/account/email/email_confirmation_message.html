@@ -1,0 +1,22 @@
+{% extends 'emails/email_layout.html' %}
+
+{% load account %}{% user_display user as user_display %}{% load i18n %}
+
+{% block email_body %}
+<mj-section background-color="#ffffff" padding="0 34px">
+    <mj-column vertical-align="middle" width="90%" padding-top="15px">
+        <mj-text align="left" color="#313133" font-size="16px" font-weight="400" padding-bottom="20px" padding-top="3px">
+            {% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hello {{ user_display }}!
+            <br><br>
+            Thank you for registering at {{ site_name }}!
+            <br><br>
+            To activate your e-mail address, go to {{ activate_url }}.
+            <br><br>
+            {% endblocktrans %}
+            {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}{{ site_name }} team!{% endblocktrans %}<br>
+            {{ site_domain }}
+            {% endautoescape %}
+        </mj-text>
+    </mj-column>
+</mj-section>
+{% endblock %}
