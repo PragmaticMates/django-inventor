@@ -4,6 +4,6 @@ from inventor.core.partners.models import Partner
 
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
-    list_display = ('title', 'image')
+    list_display = ('title', 'image', 'website')
     search_fields = ('title',)
     readonly_fields = ('created', 'modified')
