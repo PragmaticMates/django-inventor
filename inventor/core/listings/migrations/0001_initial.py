@@ -8,7 +8,7 @@ import django.core.validators
 from django.db import migrations, models
 import django.db.models.deletion
 import internationalflavor.countries.models
-import inventor.core.listings.mixins
+import pragmatic
 import sorl.thumbnail.fields
 
 
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
                 'db_table': 'listings_general',
                 'ordering': ('title',),
             },
-            bases=(inventor.core.listings.mixins.SlugMixin, models.Model),
+            bases=(pragmatic.mixins.SlugMixin, models.Model),
         ),
         migrations.CreateModel(
             name='Activity',

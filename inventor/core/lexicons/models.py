@@ -10,7 +10,7 @@ from modeltrans.fields import TranslationField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 from sorl import thumbnail
-from inventor.core.listings.mixins import SlugMixin
+from pragmatic.mixins import SlugMixin
 from inventor.core.lexicons.querysets import CategoryManager
 
 

@@ -2,8 +2,8 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import inventor.core.listings.mixins
 import mptt.fields
+import pragmatic
 import sorl.thumbnail.fields
 
 
@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'accommodation amenities',
                 'ordering': ('title',),
             },
-            bases=(inventor.core.listings.mixins.SlugMixin, models.Model),
+            bases=(pragmatic.mixins.SlugMixin, models.Model),
         ),
         migrations.CreateModel(
             name='Feature',
@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'features',
                 'ordering': ('title',),
             },
-            bases=(inventor.core.listings.mixins.SlugMixin, models.Model),
+            bases=(pragmatic.mixins.SlugMixin, models.Model),
         ),
         migrations.CreateModel(
             name='Locality',
@@ -64,7 +64,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'localities',
                 'ordering': ('title',),
             },
-            bases=(inventor.core.listings.mixins.SlugMixin, models.Model),
+            bases=(pragmatic.mixins.SlugMixin, models.Model),
         ),
         migrations.CreateModel(
             name='Category',
@@ -85,6 +85,6 @@ class Migration(migrations.Migration):
                 'ordering': ('title',),
                 'unique_together': {('title', 'listing_type')},
             },
-            bases=(inventor.core.listings.mixins.SlugMixin, models.Model),
+            bases=(pragmatic.mixins.SlugMixin, models.Model),
         ),
     ]
