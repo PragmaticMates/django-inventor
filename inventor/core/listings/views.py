@@ -118,3 +118,10 @@ class ListingDetailView(SingleObjectMixin, FormView):
 
     def get_success_url(self):
         return self.object.get_absolute_url()
+
+    def get_template_names(self):
+        names = super().get_template_names()
+        obj = self.get_object()
+        names.append(f"listings/{obj.__class__.__name__.lower()}_detail.html")
+        print(names)
+        return [f"listings/{obj.__class__.__name__.lower()}_detail.html"] + names

@@ -190,3 +190,24 @@ try:
             )
 except (NotRegistered, ImportError):
     pass
+
+
+try:
+    from inventor.core.listings.models.listing_types import Product
+    admin.site.unregister(Product)
+    @admin.register(Product)
+    class ProductAdmin(ListingAdmin):
+        list_display = ListingTypeAdmin.list_display + ('options_display',)
+        list_filter = ListingTypeAdmin.list_filter + ('options', )
+
+        def options_display(self, obj):
+            return ', '.join([str(option) for option in obj.options.all()])
+        options_display.short_description = _('Options')
+
+        @property
+        def fieldsets(self):
+            return super().fieldsets + (
+                (_('Specific'), {'fields': ('options',)}),
+            )
+except (NotRegistered, ImportError):
+    pass
