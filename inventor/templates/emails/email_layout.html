@@ -1,0 +1,20 @@
+{% load i18n static mjml inventor %}
+
+{% mjml %}
+<mjml>
+    {% include 'emails/helpers/head.html' %}
+    <mj-body background-color="#d7dde5" width="500px">
+
+        {% include 'emails/helpers/header_top.html' %}
+
+        {% include 'emails/helpers/header.html' %}
+
+        {% block email_body %}{% endblock %}
+
+        {% include 'emails/helpers/footer.html' %}
+
+        {% include 'emails/helpers/footer_bottom.html' %}
+
+    </mj-body>
+</mjml>
+{% endmjml %}
