@@ -5,7 +5,6 @@ from django.contrib.postgres.fields import HStoreField
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Avg
 from django.contrib.postgres.indexes import GinIndex
-from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
@@ -18,7 +17,7 @@ from commerce.models import AbstractProduct
 from inventor import settings as inventor_settings
 from inventor.core.lexicons.models import Category, Feature, Locality
 from inventor.core.listings.managers import ListingQuerySet
-from inventor.core.listings.mixins import SlugMixin
+from pragmatic.mixins import SlugMixin
 
 # TODO: opening hours, meals and drinks, street view, faq
 

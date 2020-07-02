@@ -264,8 +264,6 @@ class Nature(Listing):
 
 class Product(Listing):  # e-shop
     section = _('shopping')
-    # TODO: size [lexicon]
-    # TODO: color [lexicon]
 
     class Meta:
         verbose_name = _('product')
