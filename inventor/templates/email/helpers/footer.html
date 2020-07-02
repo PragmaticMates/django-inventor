@@ -1,0 +1,37 @@
+{% load i18n static inventor %}
+
+<mj-section background-color="#F7F8F9">
+    <mj-column vertical-align="middle" width="30%">
+        {% static 'images/logo.png' as path_to_logo_simple %}
+        <mj-image width="83px" src="{% uri path_to_logo_simple %}" width="110px" align="left" css-class="im-mobile-center" alt="logo"></mj-image>
+    </mj-column>
+
+    <mj-column vertical-align="middle" width="40%">
+        <mj-text color="#313133" align="left" css-class="im-mobile-center">
+            <b>Virtual Challenge</b><br>
+            <a href="https://virtualchallenge.sk/" style="color:#434343; text-decoration: none;">www.virtualchallenge.sk</a>
+        </mj-text>
+    </mj-column>
+
+    <mj-column vertical-align="middle" width="30%">
+        <mj-text align="right" css-class="im-mobile-center">
+            {% if settings.FACEBOOK_URL %}
+                {% static 'images/emails/facebook.png' as path_to_facebook %}
+                <a href="{{ settings.FACEBOOK_URL }}" class="text-light" target="_blank"><img src="{% uri path_to_facebook %}" style="width: 24px;" alt="facebook icon"></a>
+            {% endif %}
+            {% if settings.INSTAGRAM_URL %}
+                <a href="{{ settings.INSTAGRAM_URL }}" class="text-light"><i class="fab fa-instagram"></i></a>
+                {% static 'images/emails/instagram.png' as path_to_instagram %}
+                <a href="{{ settings.INSTAGRAM_URL }}" target="_blank"><img src="{% uri path_to_instagram %}" style="padding-left: 13px; width: 24px;" alt="instagram icon"></a>
+            {% endif %}
+            {% if settings.TWITTER_URL %}
+                {% static 'images/emails/twitter.png' as path_to_twitter %}
+                <a href="{{ settings.TWITTER_URL }}" target="_blank"><img src="{% uri path_to_twitter %}" style="padding-left: 13px; width: 24px;" alt="twitter icon"></a>
+            {% endif %}
+            {% if settings.YOUTUBE_URL %}
+                {% static 'images/emails/linkedin.png' as path_to_youtube %}
+                <a href="{{ settings.YOUTUBE_URL }}" target="_blank"><img src="{% uri path_to_youtube %}" style="padding-left: 13px; width: 24px;" alt="youtube icon"></a>
+            {% endif %}
+        </mj-text>
+    </mj-column>
+</mj-section>

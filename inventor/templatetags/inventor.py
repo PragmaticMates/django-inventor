@@ -1,5 +1,7 @@
+from allauth.utils import build_absolute_uri
 from django import template
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
 
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.models.general import Listing
@@ -42,3 +44,11 @@ def inventor_stats(stat):
         return Category.objects.count()
 
     return None
+
+
+@register.simple_tag(takes_context=True)
+def uri(context, location):
+    try:
+        return build_absolute_uri(context.get('request', None), location)
+    except ObjectDoesNotExist:
+        return location
