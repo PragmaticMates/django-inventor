@@ -58,7 +58,7 @@ class ProfileForm(forms.ModelForm):
             'first_name', 'last_name', 'email', 'phone',
             'avatar',
             'street', 'postcode', 'city', 'country',
-            'date_of_birth', 'gender', 'team'
+            'date_of_birth', 'gender', 'team', 'preferred_language'
         )
         model = User
 
@@ -103,18 +103,22 @@ class ProfileForm(forms.ModelForm):
                         ),
                         'country',
                     ),
-                    css_class='col-md-6'
-                ),
-                Div(
                     Fieldset(
                         _('Date of birth'),
                         'date_of_birth',
                     ),
+                    css_class='col-md-6'
+                ),
+                Div(
                     Fieldset(
                         _('Other'),
                         InlineRadios('gender'),
                         'team',
-                        'avatar'
+                        'avatar',
+                    ),
+                    Fieldset(
+                        _('Preferred language'),
+                        'preferred_language'
                     ),
                     css_class='col-md-5 offset-1'
                 ),

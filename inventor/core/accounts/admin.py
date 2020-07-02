@@ -19,7 +19,7 @@ class UserAdmin(DjangoUserAdmin):
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'avatar')}),
         (_('Contact'), {'fields': ('email', 'phone',)}),
         (_('Address'), {'fields': ('street', 'postcode', 'city', 'country')}),
-        (_('Other'), {'fields': ('date_of_birth', 'gender', 'team')}),
+        (_('Other'), {'fields': ('date_of_birth', 'gender', 'team', 'preferred_language')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
         # (_('Notifications'), {'fields': ('notices_settings',)}),
