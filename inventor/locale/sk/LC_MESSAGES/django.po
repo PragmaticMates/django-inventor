@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-02 22:32+0200\n"
-"PO-Revision-Date: 2020-07-02 22:33+0058\n"
+"POT-Creation-Date: 2020-07-03 11:10+0200\n"
+"PO-Revision-Date: 2020-07-03 11:12+0058\n"
 "Last-Translator: b'Erik Telepovsky <erik@pragmaticmates.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 "X-Translated-Using: django-rosetta 0.9.4\n"
+
+#: contrib/allauth/templates/account/email/email_confirmation_message.html:9
+#, python-format
+#| msgid ""
+#| "Hello %(user_display)s!\n"
+#| "\n"
+#| "Thank you for registering at %(site_name)s!\n"
+#| "\n"
+#| "To activate your e-mail address, go to %(activate_url)s.\n"
+msgid ""
+"Hello %(user_display)s!\n"
+"            <br><br>\n"
+"            Thank you for registering at %(site_name)s!\n"
+"            <br><br>\n"
+"            To activate your e-mail address, go to %(activate_url)s.\n"
+"            <br><br>\n"
+"            "
+msgstr ""
+"Dobrý deň %(user_display)s!\n"
+"<br><br>\n"
+"Ďakujeme, že ste sa registrovali na %(site_name)s!\n"
+"<br><br>\n"
+"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: %(activate_url)s.\n"
+"<br><br>"
+
+#: contrib/allauth/templates/account/email/email_confirmation_message.html:16
+#: contrib/allauth/templates/account/email/email_confirmation_message.txt:8
+#: contrib/allauth/templates/account/email/password_reset_key_message.html:19
+#: contrib/allauth/templates/account/email/password_reset_key_message.txt:11
+#, python-format
+msgid "%(site_name)s team!"
+msgstr "Tím %(site_name)s"
 
 #: contrib/allauth/templates/account/email/email_confirmation_message.txt:2
 #, python-format
@@ -34,15 +66,33 @@ msgstr ""
 "\n"
 "Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: %(activate_url)s.\n"
 
-#: contrib/allauth/templates/account/email/email_confirmation_message.txt:8
-#: contrib/allauth/templates/account/email/password_reset_key_message.txt:11
-#, python-format
-msgid "%(site_name)s team!"
-msgstr "Tím %(site_name)s"
-
 #: contrib/allauth/templates/account/email/email_confirmation_subject.txt:3
 msgid "Please Confirm Your E-mail Address"
 msgstr "Prosím potvrďte svoju e-mailovú adresu"
+
+#: contrib/allauth/templates/account/email/password_reset_key_message.html:10
+#, python-format
+#| msgid ""
+#| "Hello %(user_display)s!\n"
+#| "\n"
+#| "You're receiving this e-mail because you or someone else has requested a password for your user account.\n"
+#| "It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
+msgid ""
+"Hello %(user_display)s!\n"
+"            <br><br>\n"
+"            You're receiving this e-mail because you or someone else has requested a password for your user account.<br>\n"
+"            It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
+msgstr ""
+"Dobrý deň %(user_display)s!\n"
+"<br><br>\n"
+"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla Vášho užívateľského účtu.<br>\n"
+"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla kliknite na odkaz nižšie."
+
+#: contrib/allauth/templates/account/email/password_reset_key_message.html:17
+#: contrib/allauth/templates/account/email/password_reset_key_message.txt:9
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr "Ak by ste zabudli, Vaše prihlasovacie meno je %(username)s."
 
 #: contrib/allauth/templates/account/email/password_reset_key_message.txt:2
 #, python-format
@@ -56,11 +106,6 @@ msgstr ""
 "\n"
 "Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla Vášho užívateľského účtu.\n"
 "Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla kliknite na odkaz nižšie."
-
-#: contrib/allauth/templates/account/email/password_reset_key_message.txt:9
-#, python-format
-msgid "In case you forgot, your username is %(username)s."
-msgstr "Ak by ste zabudli, Vaše prihlasovacie meno je %(username)s."
 
 #: contrib/allauth/templates/account/email/password_reset_key_subject.txt:3
 msgid "Password Reset E-mail"
@@ -489,31 +534,31 @@ msgctxt "url"
 msgid "profile/"
 msgstr "profil/"
 
-#: core/accounts/views.py:39
+#: core/accounts/views.py:36
 msgid "Profile successfully saved"
 msgstr "Profil úspešne uložený"
 
-#: core/accounts/views.py:52
+#: core/accounts/views.py:49
 msgid "User successfully saved"
 msgstr "Užívateľ úspešne uložený"
 
-#: core/accounts/views.py:95
+#: core/accounts/views.py:92
 msgid "Welcome to TatryTravel.sk"
 msgstr "Vitajte na TatryTravel.sk"
 
-#: core/accounts/views.py:95
+#: core/accounts/views.py:92
 msgid "Your password is {}"
 msgstr "Vaše heslo je {}"
 
-#: core/accounts/views.py:97
+#: core/accounts/views.py:94
 msgid "User successfully created"
 msgstr "Užívateľ úspešne vytvorený"
 
-#: core/accounts/views.py:109
+#: core/accounts/views.py:106
 msgid "You can't delete your own account"
 msgstr "Nemôžete zmazať svoj vlastný účet"
 
-#: core/accounts/views.py:114
+#: core/accounts/views.py:111
 msgid "User successfully deleted"
 msgstr "Užívateľ úspešne zmazaný"
 
@@ -627,13 +672,13 @@ msgstr "osoba"
 
 #: core/bookings/models.py:46 core/faqs/models.py:10
 #: core/listings/models/general.py:101 core/listings/models/general.py:287
-#: core/partners/models.py:16
+#: core/partners/models.py:17
 msgid "created"
 msgstr "vytvorené"
 
 #: core/bookings/models.py:47 core/faqs/models.py:11
 #: core/listings/models/general.py:102 core/listings/models/general.py:288
-#: core/partners/models.py:17
+#: core/partners/models.py:18
 msgid "modified"
 msgstr "upravené"
 
@@ -776,8 +821,8 @@ msgstr "Kontaktné informácie"
 msgid "Social connections"
 msgstr "Sociálne siete"
 
-#: core/listings/admin.py:145 core/listings/admin.py:167
-#: core/listings/admin.py:189 core/listings/admin.py:210
+#: core/listings/admin.py:145 core/listings/admin.py:172
+#: core/listings/admin.py:194 core/listings/admin.py:215
 msgid "Specific"
 msgstr "Špecifické"
 
@@ -785,11 +830,16 @@ msgstr "Špecifické"
 msgid "Distance"
 msgstr "vzdialenosť"
 
-#: core/listings/admin.py:184 core/listings/filters.py:111
+#: core/listings/admin.py:167
+#| msgid "vacation"
+msgid "Elevation"
+msgstr "Prevýšenie"
+
+#: core/listings/admin.py:189 core/listings/filters.py:111
 msgid "Duration"
 msgstr "Trvanie"
 
-#: core/listings/admin.py:205
+#: core/listings/admin.py:210
 msgid "Options"
 msgstr "Možnosti"
 
@@ -903,7 +953,7 @@ msgid "image"
 msgstr "obrázok"
 
 #: core/listings/models/general.py:74 core/listings/models/general.py:82
-#: core/listings/models/listing_types.py:115
+#: core/listings/models/listing_types.py:117
 msgid "photo or image"
 msgstr "fotka alebo obrázok"
 
@@ -911,7 +961,7 @@ msgstr "fotka alebo obrázok"
 msgid "banner"
 msgstr "baner"
 
-#: core/listings/models/general.py:92
+#: core/listings/models/general.py:92 core/partners/models.py:16
 msgid "website"
 msgstr "webstránka"
 
@@ -1071,210 +1121,215 @@ msgid "sport"
 msgstr "šport"
 
 #: core/listings/models/listing_types.py:110
-#: core/listings/models/listing_types.py:165
+#: core/listings/models/listing_types.py:170
 msgid "distance"
 msgstr "vzdialenosť"
 
-#: core/listings/models/listing_types.py:114
+#: core/listings/models/listing_types.py:112
+#| msgid "vacation"
+msgid "elevation"
+msgstr "prevýšenie"
+
+#: core/listings/models/listing_types.py:116
 msgid "medal"
 msgstr "medaila"
 
-#: core/listings/models/listing_types.py:122
+#: core/listings/models/listing_types.py:124
 msgid "race"
 msgstr "pretek"
 
-#: core/listings/models/listing_types.py:123
+#: core/listings/models/listing_types.py:125
 msgid "races"
 msgstr "preteky"
 
-#: core/listings/models/listing_types.py:127
+#: core/listings/models/listing_types.py:129
 msgctxt "url"
 msgid "races/"
 msgstr "preteky/"
 
-#: core/listings/models/listing_types.py:135
-#: core/listings/models/listing_types.py:147
+#: core/listings/models/listing_types.py:140
+#: core/listings/models/listing_types.py:152
 msgid "health & body"
 msgstr "zdravie & telo"
 
-#: core/listings/models/listing_types.py:138
+#: core/listings/models/listing_types.py:143
 msgid "training"
 msgstr "tréning"
 
-#: core/listings/models/listing_types.py:139
+#: core/listings/models/listing_types.py:144
 msgid "trainings"
 msgstr "tréningy"
 
-#: core/listings/models/listing_types.py:143
+#: core/listings/models/listing_types.py:148
 msgctxt "url"
 msgid "trainings/"
 msgstr "treningy/"
 
-#: core/listings/models/listing_types.py:148
+#: core/listings/models/listing_types.py:153
 msgid "difficulty"
 msgstr "náročnosť"
 
-#: core/listings/models/listing_types.py:149
+#: core/listings/models/listing_types.py:154
 msgid "duration"
 msgstr "trvanie"
 
-#: core/listings/models/listing_types.py:152
+#: core/listings/models/listing_types.py:157
 msgid "exercise"
 msgstr "cvičenie"
 
-#: core/listings/models/listing_types.py:153
+#: core/listings/models/listing_types.py:158
 msgid "exercises"
 msgstr "cvičenia"
 
-#: core/listings/models/listing_types.py:157
+#: core/listings/models/listing_types.py:162
 msgctxt "url"
 msgid "exercises/"
 msgstr "cvicenia/"
 
-#: core/listings/models/listing_types.py:164
+#: core/listings/models/listing_types.py:169
 msgid "tourism"
 msgstr "turizmus"
 
-#: core/listings/models/listing_types.py:168
+#: core/listings/models/listing_types.py:173
 msgid "trip"
 msgstr "výlet"
 
-#: core/listings/models/listing_types.py:169
+#: core/listings/models/listing_types.py:174
 msgid "trips"
 msgstr "výlety"
 
-#: core/listings/models/listing_types.py:173
+#: core/listings/models/listing_types.py:178
 msgctxt "url"
 msgid "trips/"
 msgstr "vylety/"
 
-#: core/listings/models/listing_types.py:177
-#: core/listings/models/listing_types.py:185
+#: core/listings/models/listing_types.py:182
+#: core/listings/models/listing_types.py:190
 msgid "events"
 msgstr "podujatia"
 
-#: core/listings/models/listing_types.py:180
+#: core/listings/models/listing_types.py:185
 msgid "datetime range"
 msgstr "dátumový rozsah"
 
-#: core/listings/models/listing_types.py:184
+#: core/listings/models/listing_types.py:189
 msgid "event"
 msgstr "podujatie"
 
-#: core/listings/models/listing_types.py:189
+#: core/listings/models/listing_types.py:194
 msgctxt "url"
 msgid "events/"
 msgstr "podujatia/"
 
-#: core/listings/models/listing_types.py:193
-#: core/listings/models/listing_types.py:266
+#: core/listings/models/listing_types.py:198
+#: core/listings/models/listing_types.py:271
 msgid "shopping"
 msgstr "nakupovanie"
 
-#: core/listings/models/listing_types.py:196
+#: core/listings/models/listing_types.py:201
 msgid "shop"
 msgstr "obchod"
 
-#: core/listings/models/listing_types.py:197
+#: core/listings/models/listing_types.py:202
 msgid "shops"
 msgstr "obchody"
 
-#: core/listings/models/listing_types.py:201
+#: core/listings/models/listing_types.py:206
 msgctxt "url"
 msgid "shops/"
 msgstr "obchody/"
 
-#: core/listings/models/listing_types.py:205
+#: core/listings/models/listing_types.py:210
 msgid "automotive"
 msgstr "svet automobilov"
 
-#: core/listings/models/listing_types.py:208
-#: core/listings/models/listing_types.py:209
+#: core/listings/models/listing_types.py:213
+#: core/listings/models/listing_types.py:214
 msgid "vehicle"
 msgstr "vozidlo"
 
-#: core/listings/models/listing_types.py:213
+#: core/listings/models/listing_types.py:218
 msgctxt "url"
 msgid "vehicles/"
 msgstr "vozidla/"
 
-#: core/listings/models/listing_types.py:217
+#: core/listings/models/listing_types.py:222
 msgid "dating"
 msgstr "zoznamka"
 
-#: core/listings/models/listing_types.py:220
+#: core/listings/models/listing_types.py:225
 msgid "profile"
 msgstr "profil"
 
-#: core/listings/models/listing_types.py:221
+#: core/listings/models/listing_types.py:226
 msgid "profiles"
 msgstr "profily"
 
-#: core/listings/models/listing_types.py:225
+#: core/listings/models/listing_types.py:230
 msgctxt "url"
 msgid "profiles/"
 msgstr "profily/"
 
-#: core/listings/models/listing_types.py:229
+#: core/listings/models/listing_types.py:234
 msgid "work"
 msgstr "práca"
 
-#: core/listings/models/listing_types.py:232
+#: core/listings/models/listing_types.py:237
 msgid "job"
 msgstr "pracovná ponuka"
 
-#: core/listings/models/listing_types.py:233
+#: core/listings/models/listing_types.py:238
 msgid "jobs"
 msgstr "pracovné ponuky"
 
-#: core/listings/models/listing_types.py:237
+#: core/listings/models/listing_types.py:242
 msgctxt "url"
 msgid "jobs/"
 msgstr "pracovne-ponuky/"
 
-#: core/listings/models/listing_types.py:241
+#: core/listings/models/listing_types.py:246
 msgid "education"
 msgstr "vzdelanie"
 
-#: core/listings/models/listing_types.py:244
+#: core/listings/models/listing_types.py:249
 msgid "course"
 msgstr "kurz"
 
-#: core/listings/models/listing_types.py:245
+#: core/listings/models/listing_types.py:250
 msgid "courses"
 msgstr "kurzy"
 
-#: core/listings/models/listing_types.py:249
+#: core/listings/models/listing_types.py:254
 msgctxt "url"
 msgid "courses/"
 msgstr "kurzy/"
 
-#: core/listings/models/listing_types.py:253
+#: core/listings/models/listing_types.py:258
 msgid "flora and fauna"
 msgstr "flóra a fauna"
 
-#: core/listings/models/listing_types.py:257
+#: core/listings/models/listing_types.py:262
 msgid "animal or plant"
 msgstr "zviera alebo rastlina"
 
-#: core/listings/models/listing_types.py:258
+#: core/listings/models/listing_types.py:263
 msgid "animals and plants"
 msgstr "zvieratá a rastliny"
 
-#: core/listings/models/listing_types.py:262
+#: core/listings/models/listing_types.py:267
 msgctxt "url"
 msgid "animals-and-plants/"
 msgstr "zvierata-a-rastliny/"
 
-#: core/listings/models/listing_types.py:269
+#: core/listings/models/listing_types.py:274
 msgid "product"
 msgstr "produkt"
 
-#: core/listings/models/listing_types.py:270
+#: core/listings/models/listing_types.py:275
 msgid "products"
 msgstr "produkty"
 
-#: core/listings/models/listing_types.py:274
+#: core/listings/models/listing_types.py:279
 msgctxt "url"
 msgid "products/"
 msgstr "produkty/"
@@ -1427,11 +1482,11 @@ msgstr "Správu sa nepodarilo odoslať. Skúste znova."
 msgid "logo or image"
 msgstr "logo alebo obrázok"
 
-#: core/partners/models.py:20
+#: core/partners/models.py:21
 msgid "partner"
 msgstr "partner"
 
-#: core/partners/models.py:21
+#: core/partners/models.py:22
 msgid "partners"
 msgstr "partneri"
 
