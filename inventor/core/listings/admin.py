@@ -153,18 +153,23 @@ try:
     admin.site.unregister(Race)
     @admin.register(Race)
     class RaceAdmin(ListingAdmin):
-        list_display = ListingTypeAdmin.list_display + ('distance_display',)
-        list_filter = ListingTypeAdmin.list_filter + ('distance', )
+        list_display = ListingTypeAdmin.list_display + ('distance_display', 'elevation_display')
+        list_filter = ListingTypeAdmin.list_filter + ('distance', 'elevation')
 
         def distance_display(self, obj):
             return obj.get_distance_display()
         distance_display.admin_order_field = 'distance'
         distance_display.short_description = _('Distance')
 
+        def elevation_display(self, obj):
+            return obj.get_elevation_display()
+        elevation_display.admin_order_field = 'elevation'
+        elevation_display.short_description = _('Elevation')
+
         @property
         def fieldsets(self):
             return super().fieldsets + (
-                (_('Specific'), {'fields': ('distance', 'medal')}),
+                (_('Specific'), {'fields': ('distance', 'elevation', 'medal')}),
             )
 except (NotRegistered, ImportError):
     pass

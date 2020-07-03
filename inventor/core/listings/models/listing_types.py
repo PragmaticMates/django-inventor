@@ -109,6 +109,8 @@ class Race(Listing):
     section = _('sport')
     distance = models.DecimalField(_('distance'), help_text='km', max_digits=6, decimal_places=2, validators=[MinValueValidator(0)],
         blank=True, null=True, default=None)
+    elevation = models.PositiveSmallIntegerField(_('elevation'), help_text='m',
+        blank=True, null=True, default=None)
     # date = models.DateField(_('date'), blank=True, null=True, default=None)  # TODO: range field?
     medal = thumbnail.ImageField(
         verbose_name=_('medal'),
@@ -129,6 +131,9 @@ class Race(Listing):
     def get_distance_display(self):
         # TODO: settings for DECIMAL PLACES
         return f'{floatformat(self.distance, -1)} km' if self.distance else ''
+
+    def get_elevation_display(self):
+        return f'{self.elevation} m' if self.elevation else ''
 
 
 class Training(Listing):
