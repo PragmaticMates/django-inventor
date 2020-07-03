@@ -83,7 +83,7 @@ class User(AbstractBaseUser, PermissionsMixin):  # UserNotificationsMixin
         return self.get_full_name() or self.email
 
     def get_absolute_url(self):
-        return reverse('inventor:accounts:user_detail', kwargs={'pk': self.pk})
+        return reverse('inventor:accounts:user_update_profile')
 
     def get_full_name(self):
         """

@@ -5,19 +5,16 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import UpdateView, ListView, CreateView, DetailView, DeleteView
+from django.views import View
+from django.views.generic import UpdateView, ListView, CreateView, DetailView, DeleteView, TemplateView
 from pragmatic.mixins import LoginPermissionRequiredMixin, DeleteObjectMixin
 # from inventor.core.accounts.filters import UserFilter
 from inventor.core.accounts.forms import UserForm
 from inventor.core.accounts.models import User
 
 
-class UserDashboardView(LoginRequiredMixin, DetailView):
-    model = User
+class UserDashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'accounts/user_dashboard.html'
-
-    def get_object(self, queryset=None):
-        return self.request.user
 
 
 class UserDetailView(LoginPermissionRequiredMixin, DetailView):
