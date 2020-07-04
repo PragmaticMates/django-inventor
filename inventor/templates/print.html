@@ -1,0 +1,48 @@
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        {% include 'helpers/google_tag_manager.html' %}
+
+        <title>{{ settings.PAGE_TITLE }}{% if view.title %} | {{ view.title }}{% elif view.object %} | {{ view.object }}{% endif %}</title>
+        <meta charset="utf-8">
+{#        <meta name="description" content="{{ view.description|default:settings.PAGE_DESCRIPTION }}">#}
+{#        <meta name="keywords" content="{{ view.keywords|default:settings.PAGE_KEYWORDS }}">#}
+{#        <meta name="author" content="{{ view.author|default:settings.PAGE_AUTHOR }}">#}
+{#        <meta name="apple-mobile-web-app-title" content="{{ settings.PAGE_APPLE_MOBILE_WEB_APP_TITLE }}">#}
+{#        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">#}
+
+        {% block meta %}{% endblock %}
+
+        <link rel="icon" href="{% static 'images/logo.svg' %}">
+        <link rel="apple-touch-icon" href="{% static 'images/logo.svg' %}">
+{#        <link href="{% static 'node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">#}
+{#        <link href="{% static 'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">#}
+        <link href="{% static 'css/inventor.css' %}?v={{ deployment_timestamp }}" rel="stylesheet" type="text/css">
+{#        <link href="{% static 'node_modules/simplelightbox/dist/simple-lightbox.min.css' %}" rel="stylesheet" type="text/css">#}
+
+        {% block css %}{% endblock %}
+
+{#        <script src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>#}
+{#        <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>#}
+
+        {% block priority_js %}{% endblock %}
+        <script src="{% url 'javascript-catalog' %}"></script>
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}{% if content_only %} content-only{% endif %}">
+        {% block body %}
+        {% endblock %}
+
+{#        <script defer src="{% static 'bower_components/moment/min/moment.min.js' %}"></script>#}
+{#        <script defer src="{% static 'node_modules/simplelightbox/dist/simple-lightbox.min.js' %}"></script>#}
+{#        <script defer src="{% static 'node_modules/bootstrap-slider/dist/bootstrap-slider.min.js' %}"></script>#}
+{#        <script defer src="{% static 'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>#}
+{#        <script defer src="{% static 'pragmatic/js/sliders.js' %}?v={{ deployment_timestamp }}"></script> {# django-pragmatic #}
+{#        <script defer src="{% static 'pragmatic/js/forms.js' %}?v={{ deployment_timestamp }}"></script> {# django-pragmatic #}
+{#        <script defer src="{% static 'pragmatic/js/date-and-time-picker.js' %}?v={{ deployment_timestamp }}"></script> {# django-pragmatic #}
+
+        {% block js %}{% endblock %}
+    </body>
+</html>
