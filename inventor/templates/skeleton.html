@@ -7,9 +7,9 @@
 
         <title>{{ settings.PAGE_TITLE }}{% if view.title %} | {{ view.title }}{% elif view.object %} | {{ view.object }}{% endif %}</title>
         <meta charset="utf-8">
-        <meta name="description" content="{{ view.description|default:settings.PAGE_DESCRIPTION }}">
-        <meta name="keywords" content="{{ view.keywords|default:settings.PAGE_KEYWORDS }}">
-        <meta name="author" content="{{ view.author|default:settings.PAGE_AUTHOR }}">
+        <meta name="description" content="{% if view.description %}{{ view.description }}{% else %}{{ settings.PAGE_DESCRIPTION }}{% endif %}">
+        <meta name="keywords" content="{% if view.keywords %}{{ view.keywords }}{% else %}{{ settings.PAGE_KEYWORDS }}{% endif %}">
+        <meta name="author" content="{% if view.author %}{{ view.author }}{% else %}{{ settings.PAGE_AUTHOR }}{% endif %}">
         <meta name="apple-mobile-web-app-title" content="{{ settings.PAGE_APPLE_MOBILE_WEB_APP_TITLE }}">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 

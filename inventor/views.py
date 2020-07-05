@@ -1,5 +1,4 @@
 from django.db.models import F
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 from inventor.core.lexicons.models import Locality, Category
 from writing.models import Article
