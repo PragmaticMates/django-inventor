@@ -283,14 +283,16 @@ class Photo(models.Model):
         max_length=1024 * 5,
         upload_to='photos',  # TODO: listing folder
     )
-    # TODO: SEO: alt (translatable description)
+    description = models.CharField(_('description'), max_length=50, blank=True)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
+    i18n = TranslationField(fields=('description',))
 
     class Meta:
         verbose_name = _(u'photo')
         verbose_name_plural = _(u'photos')
         ordering = ('created',)
+        indexes = [GinIndex(fields=["i18n"]), ]
 
     def __unicode__(self):
         return self.file.name
