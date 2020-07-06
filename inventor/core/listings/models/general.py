@@ -184,6 +184,10 @@ class Listing(SlugMixin, AbstractProduct):
     def listing_class(self):
         return self.__class__
 
+    @property
+    def listing_class_name(self):
+        return self.__class__.__name__
+
     def get_listing_type_display(self):
         return self.listing_class._meta.verbose_name
 

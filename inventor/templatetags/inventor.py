@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.models.general import Listing
-
+from inventor.core.listings.models.listing_types import Race
 
 register = template.Library()
 
@@ -40,6 +40,8 @@ def inventor_stats(stat):
         return get_user_model().objects.active().count()
     if stat == 'published_listings':
         return Listing.objects.published().count()
+    if stat == 'published_races':  # TODO: filter listings by argument
+        return Race.objects.published().count()
     if stat == 'categories':
         return Category.objects.count()
 
