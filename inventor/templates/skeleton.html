@@ -1,15 +1,15 @@
-{% load static i18n %}
+{% load static i18n seo inventor %}
 {% get_current_language as LANGUAGE_CODE %}
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE }}">
     <head>
         {% include 'helpers/google_tag_manager.html' %}
-
-        <title>{{ settings.PAGE_TITLE }}{% if view.title %} | {{ view.title }}{% elif view.object %} | {{ view.object }}{% endif %}</title>
+        {% seo as seo %}
+        <title>{{ settings.PAGE_TITLE }}{% if seo.title %} | {{ seo.title }}{% endif %}</title>
         <meta charset="utf-8">
-        <meta name="description" content="{% if view.description %}{{ view.description }}{% else %}{{ settings.PAGE_DESCRIPTION }}{% endif %}">
-        <meta name="keywords" content="{% if view.keywords %}{{ view.keywords }}{% else %}{{ settings.PAGE_KEYWORDS }}{% endif %}">
-        <meta name="author" content="{% if view.author %}{{ view.author }}{% else %}{{ settings.PAGE_AUTHOR }}{% endif %}">
+        <meta name="description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ settings.PAGE_DESCRIPTION }}{% endif %}">
+        <meta name="keywords" content="{% if seo.keywords %}{{ seo.keywords }}{% else %}{{ settings.PAGE_KEYWORDS }}{% endif %}">
+        <meta name="author" content="{% if seo.author %}{{ seo.author }}{% else %}{{ settings.PAGE_AUTHOR }}{% endif %}">
         <meta name="apple-mobile-web-app-title" content="{{ settings.PAGE_APPLE_MOBILE_WEB_APP_TITLE }}">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 
@@ -17,6 +17,7 @@
 
         <link rel="icon" href="{% static 'images/logo.svg' %}">
         <link rel="apple-touch-icon" href="{% static 'images/logo.svg' %}">
+        <link rel="canonical" href="{% uri request.path %}">
         <link href="{% static 'node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css' %}" rel="stylesheet">
         <link href="{% static 'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/inventor.css' %}?v={{ deployment_timestamp }}" rel="stylesheet" type="text/css">

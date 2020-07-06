@@ -105,15 +105,15 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
 
         return fieldsets
 
-    @property
-    def inlines(self):
-        inlines = []
-        if settings.VIDEOS_ENABLED:
-            inlines.append(VideoInline)
-        if settings.GALLERY_ENABLED:
-            inlines.append(AlbumInline)
-        # add comments?
-        return inlines
+    # @property
+    # def inlines(self):
+    #     inlines = []
+    #     if settings.VIDEOS_ENABLED:
+    #         inlines.append(VideoInline)
+    #     if settings.GALLERY_ENABLED:
+    #         inlines.append(AlbumInline)
+    #     # add comments?
+    #     return inlines
 
 
 class PhotoInline(admin.StackedInline):
@@ -216,3 +216,15 @@ try:
             )
 except (NotRegistered, ImportError):
     pass
+
+
+for model in get_listing_types_classes():
+    model_admin = admin.site._registry[model].__class__
+    admin.site.unregister(model)
+
+    if settings.VIDEOS_ENABLED and not VideoInline in model_admin.inlines:
+        model_admin.inlines = list(model_admin.inlines)[:] + [VideoInline]
+    if settings.GALLERY_ENABLED and not AlbumInline in model_admin.inlines:
+        model_admin.inlines = list(model_admin.inlines)[:] + [AlbumInline]
+
+    admin.site.register(model, model_admin)
