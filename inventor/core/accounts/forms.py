@@ -222,10 +222,10 @@ class SignupForm(AllAuthSignupForm):
     date_of_birth = forms.DateField(label=_('date of birth'))  # TODO: datepicker / multiwidget
     gender = forms.ChoiceField(label=_('gender'), choices=get_user_model().GENDERS)
     team = forms.CharField(label=_('team/club'), max_length=50, required=False)
-    agree_terms_and_conditions = forms.BooleanField(label=_('I agree terms and conditions'), required=True, initial=True)
-    agree_privacy_policy = forms.BooleanField(label=_('I agree privacy policy'), required=True, initial=True)
-    dont_agree_marketing_purposes = forms.BooleanField(label=_("I do not agree with marketing purposes"), required=False)
-    dont_agree_social_networks_sharing = forms.BooleanField(label=_("I do not want my photos to be published on social media channels of the organizer"), required=False)
+    agree_terms_and_conditions = forms.BooleanField(label=_('I agree terms and conditions'), required=True, initial=False)
+    agree_privacy_policy = forms.BooleanField(label=_('I agree privacy policy'), required=True, initial=False)
+    agree_marketing_purposes = forms.BooleanField(label=_("I agree with marketing purposes"), required=False, initial=True)
+    agree_social_networks_sharing = forms.BooleanField(label=_("I agree with publishing of my photos on social media channels of the organizer"), required=False, initial=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -294,8 +294,8 @@ class SignupForm(AllAuthSignupForm):
                     _('Agreements'),
                     'agree_terms_and_conditions',
                     'agree_privacy_policy',
-                    'dont_agree_marketing_purposes',
-                    'dont_agree_social_networks_sharing',
+                    'agree_marketing_purposes',
+                    'agree_social_networks_sharing',
                 ),
             # ),
             FormActions(
@@ -308,12 +308,10 @@ class SignupForm(AllAuthSignupForm):
         attrs_to_save = []
 
         for attr, value in self.cleaned_data.items():
-            print(attr, value)
             if attr.startswith('dont_'):
                 attr = attr.replace('dont_', '')
                 value = not value
 
-            print(attr, value)
             if attr in field_names:
                 setattr(user, attr, value)
                 attrs_to_save.append(attr)

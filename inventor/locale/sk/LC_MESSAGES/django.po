@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-07 15:36+0200\n"
-"PO-Revision-Date: 2020-07-07 15:40+0058\n"
+"POT-Creation-Date: 2020-07-07 15:56+0200\n"
+"PO-Revision-Date: 2020-07-07 16:01+0058\n"
 "Last-Translator: b'Erik Telepovsky <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -324,7 +324,6 @@ msgid "Maximum image file is %(size)s MB."
 msgstr "Maximálna povolená veľkosť súboru je %(size)s MB."
 
 #: contrib/martor/views.py:124 contrib/martor/views.py:125
-#| msgid "Send request"
 msgid "Invalid request!"
 msgstr "Nesprávna požiadavka!"
 
@@ -348,17 +347,17 @@ msgstr "Osobné informácie"
 msgid "Contact"
 msgstr "Kontakt"
 
-#: core/accounts/admin.py:21 core/accounts/forms.py:101
-#: core/accounts/forms.py:268
+#: core/accounts/admin.py:21 core/accounts/forms.py:102
+#: core/accounts/forms.py:277
 msgid "Address"
 msgstr "Adresa"
 
-#: core/accounts/admin.py:22 core/accounts/forms.py:117
-#: core/accounts/forms.py:279
+#: core/accounts/admin.py:22 core/accounts/forms.py:118
+#: core/accounts/forms.py:288
 msgid "Other"
 msgstr "Iné"
 
-#: core/accounts/admin.py:23 core/accounts/forms.py:190
+#: core/accounts/admin.py:23 core/accounts/forms.py:199
 msgid "Permissions"
 msgstr "Oprávnenia"
 
@@ -366,129 +365,131 @@ msgstr "Oprávnenia"
 msgid "Important dates"
 msgstr "Dôležité dátumy"
 
-#: core/accounts/forms.py:89 core/accounts/forms.py:254
+#: core/accounts/forms.py:90 core/accounts/forms.py:263
 msgid "Name and surname"
 msgstr "Meno a priezvisko"
 
-#: core/accounts/forms.py:96 core/accounts/forms.py:170
-#: core/accounts/forms.py:261
+#: core/accounts/forms.py:97 core/accounts/forms.py:179
+#: core/accounts/forms.py:270
 msgid "Contact details"
 msgstr "Kontaktné informácie"
 
-#: core/accounts/forms.py:110 core/accounts/forms.py:275
+#: core/accounts/forms.py:111 core/accounts/forms.py:284
 msgid "Date of birth"
 msgstr "Dátum narodenia"
 
-#: core/accounts/forms.py:123
+#: core/accounts/forms.py:124
 msgid "Preferred language"
 msgstr "Preferovaný jazyk"
 
-#: core/accounts/forms.py:130 core/accounts/forms.py:196
+#: core/accounts/forms.py:128 core/accounts/forms.py:294
+msgid "Agreements"
+msgstr "Súhlasy"
+
+#: core/accounts/forms.py:139 core/accounts/forms.py:205
 msgid "Submit"
 msgstr "Potvrdiť"
 
-#: core/accounts/forms.py:161
+#: core/accounts/forms.py:170
 msgid "Personal details"
 msgstr "Osobné detaily"
 
-#: core/accounts/forms.py:176
+#: core/accounts/forms.py:185
 msgid "Classification"
 msgstr "Klasifikácia"
 
-#: core/accounts/forms.py:181
+#: core/accounts/forms.py:190
 msgid "Status"
 msgstr "Stav"
 
-#: core/accounts/forms.py:203 core/accounts/models.py:28
+#: core/accounts/forms.py:212 core/accounts/models.py:28
 msgid "first name"
 msgstr "krstné meno"
 
-#: core/accounts/forms.py:204 core/accounts/models.py:29
+#: core/accounts/forms.py:213 core/accounts/models.py:29
 msgid "last name"
 msgstr "priezvisko"
 
-#: core/accounts/forms.py:205 core/accounts/models.py:33
+#: core/accounts/forms.py:214 core/accounts/models.py:33
 #: core/bookings/models.py:43 core/listings/models/general.py:90
 msgid "phone"
 msgstr "telefón"
 
-#: core/accounts/forms.py:206 core/accounts/models.py:36
+#: core/accounts/forms.py:215 core/accounts/models.py:36
 msgid "street and number"
 msgstr "ulica a číslo"
 
-#: core/accounts/forms.py:207 core/accounts/models.py:37
+#: core/accounts/forms.py:216 core/accounts/models.py:37
 msgid "postcode"
 msgstr "PSČ"
 
-#: core/accounts/forms.py:208 core/accounts/models.py:38
+#: core/accounts/forms.py:217 core/accounts/models.py:38
 msgid "city"
 msgstr "mesto"
 
-#: core/accounts/forms.py:209 core/accounts/models.py:39
+#: core/accounts/forms.py:218 core/accounts/models.py:39
 msgid "Country"
 msgstr "Krajina"
 
-#: core/accounts/forms.py:210
+#: core/accounts/forms.py:219
 msgid "Reg. No"
 msgstr "IČO"
 
-#: core/accounts/forms.py:211
+#: core/accounts/forms.py:220
 msgid "TAX ID"
 msgstr "DIČ"
 
-#: core/accounts/forms.py:212
+#: core/accounts/forms.py:221
 msgid "VAT ID"
 msgstr "IČ DPH"
 
-#: core/accounts/forms.py:213 core/accounts/models.py:42
+#: core/accounts/forms.py:222 core/accounts/models.py:42
 msgid "date of birth"
 msgstr "dátum narodenia"
 
-#: core/accounts/forms.py:214 core/accounts/models.py:45
+#: core/accounts/forms.py:223 core/accounts/models.py:45
 msgid "gender"
 msgstr "pohlavie"
 
-#: core/accounts/forms.py:215 core/accounts/models.py:46
+#: core/accounts/forms.py:224 core/accounts/models.py:46
 msgid "team/club"
 msgstr "tím/klub"
 
-#: core/accounts/forms.py:216
+#: core/accounts/forms.py:225
 msgid "I agree terms and conditions"
 msgstr "Súhlasím s obchodnými podmienkami"
 
-#: core/accounts/forms.py:217
+#: core/accounts/forms.py:226
 msgid "I agree privacy policy"
 msgstr "Súhlasím so spracovaním osobných údajov"
 
-#: core/accounts/forms.py:218
-msgid "I do not agree with marketing purposes"
-msgstr "Nesúhlasím s využitím údajov na marketingové účely"
+#: core/accounts/forms.py:227
+#| msgid "I do not agree with marketing purposes"
+msgid "I agree with marketing purposes"
+msgstr "Súhlasím s využitím údajov na marketingové účely"
 
-#: core/accounts/forms.py:219
+#: core/accounts/forms.py:228
+#| msgid ""
+#| "I do not want my photos to be published on social media channels of the "
+#| "organizer"
 msgid ""
-"I do not want my photos to be published on social media channels of the "
+"I agree with publishing of my photos on social media channels of the "
 "organizer"
 msgstr ""
-"Nesúhlasím s uverejňovaním mojich fotografií \n"
+"Súhlasím s uverejňovaním mojich fotografií \n"
 "na sociálnych sieťach usporiadateľa"
 
-#: core/accounts/forms.py:240
+#: core/accounts/forms.py:249
 #, python-format
 msgid "I agree <a href=\"%s\" target=\"_blank\">terms and conditions</a>"
 msgstr "Súhlasím s <a href=\"%s\" target=\"_blank\">obchodnými podmienkami</a>"
 
-#: core/accounts/forms.py:246
+#: core/accounts/forms.py:255
 #, python-format
 msgid "I agree <a href=\"%s\" target=\"_blank\">privacy policy</a>"
 msgstr "Súhlasím so <a href=\"%s\" target=\"_blank\">spracovaním osobných údajov</a>"
 
-#: core/accounts/forms.py:285
-#| msgid "events"
-msgid "Agreements"
-msgstr "Súhlasy"
-
-#: core/accounts/forms.py:293
-#| msgid "Signup"
+#: core/accounts/forms.py:302
 msgid "Sign up"
 msgstr "Registrovať sa"
 
@@ -558,7 +559,6 @@ msgid "Marketing purposes"
 msgstr "Marketingové účely"
 
 #: core/accounts/models.py:78
-#| msgid "social networks"
 msgid "Sharing on social networks"
 msgstr "Zdieľanie na sociálnych sieťach"
 
@@ -1561,7 +1561,6 @@ msgid "partners"
 msgstr "partneri"
 
 #: core/seo/models.py:14
-#| msgid "Keyword"
 msgid "keywords"
 msgstr "kľúčové slová"
 
