@@ -69,7 +69,14 @@ class User(AbstractBaseUser, PermissionsMixin):  # UserNotificationsMixin
         upload_to=avatar_path_handler,
         blank=True,
     )
-    preferred_language = models.CharField(_(u'language'), max_length=5, choices=settings.LANGUAGES)
+    preferred_language = models.CharField(_('language'), max_length=5, choices=settings.LANGUAGES)
+
+    # agreements / GDPR
+    agree_terms_and_conditions = models.BooleanField(_('Terms and conditions'), default=True)
+    agree_privacy_policy = models.BooleanField(_('Privacy policy'), default=True)
+    agree_marketing_purposes = models.BooleanField(_('Marketing purposes'), default=True)
+    agree_social_networks_sharing = models.BooleanField(_('Sharing on social networks'), default=True)
+
     objects = UserManager()
     qs = UserQuerySet.as_manager()
 

@@ -5,6 +5,7 @@ from crispy_forms.bootstrap import FormActions, InlineRadios, PrependedAppendedT
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, HTML
 from django import forms
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import ModelSelect2Widget, ModelSelect2MultipleWidget
 from internationalflavor.countries import CountryFormField
@@ -12,6 +13,8 @@ from internationalflavor.vat_number import VATNumberFormField
 
 from permissions_widget.forms import PermissionSelectMultipleField
 from permissions_widget.layout import PermissionWidget
+
+from flatpages_i18n.models import FlatPage_i18n
 from inventor.core.accounts.models import User
 from inventor import settings as inventor_settings
 
@@ -58,7 +61,8 @@ class ProfileForm(forms.ModelForm):
             'first_name', 'last_name', 'email', 'phone',
             'avatar',
             'street', 'postcode', 'city', 'country',
-            'date_of_birth', 'gender', 'team', 'preferred_language'
+            'date_of_birth', 'gender', 'team', 'preferred_language',
+            'agree_terms_and_conditions', 'agree_privacy_policy', 'agree_marketing_purposes', 'agree_social_networks_sharing',
         )
         model = User
 
@@ -119,6 +123,14 @@ class ProfileForm(forms.ModelForm):
                     Fieldset(
                         _('Preferred language'),
                         'preferred_language'
+                    ),
+                    Fieldset(
+                        _('Agreements'),
+                        # agreements / GDPR
+                        'agree_terms_and_conditions',
+                        'agree_privacy_policy',
+                        'agree_marketing_purposes',
+                        'agree_social_networks_sharing',
                     ),
                     css_class='col-md-5 offset-1'
                 ),
@@ -210,6 +222,10 @@ class SignupForm(AllAuthSignupForm):
     date_of_birth = forms.DateField(label=_('date of birth'))  # TODO: datepicker / multiwidget
     gender = forms.ChoiceField(label=_('gender'), choices=get_user_model().GENDERS)
     team = forms.CharField(label=_('team/club'), max_length=50, required=False)
+    agree_terms_and_conditions = forms.BooleanField(label=_('I agree terms and conditions'), required=True, initial=True)
+    agree_privacy_policy = forms.BooleanField(label=_('I agree privacy policy'), required=True, initial=True)
+    dont_agree_marketing_purposes = forms.BooleanField(label=_("I do not agree with marketing purposes"), required=False)
+    dont_agree_social_networks_sharing = forms.BooleanField(label=_("I do not want my photos to be published on social media channels of the organizer"), required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -226,6 +242,19 @@ class SignupForm(AllAuthSignupForm):
                     asterisk = '*' if field.required else ''
                     field.widget.attrs['placeholder'] = f'{field.label.capitalize()}{asterisk}'
                     field.label = ''
+
+        # agreements
+        try:
+            terms = FlatPage_i18n.objects.get(machine_name='terms')
+            self.fields['agree_terms_and_conditions'].label = _('I agree <a href="%s" target="_blank">terms and conditions</a>') % terms.get_absolute_url()
+        except ObjectDoesNotExist:
+            pass
+
+        try:
+            privacy = FlatPage_i18n.objects.get(machine_name='privacy')
+            self.fields['agree_privacy_policy'].label = _('I agree <a href="%s" target="_blank">privacy policy</a>') % privacy.get_absolute_url()
+        except ObjectDoesNotExist:
+            pass
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
@@ -261,9 +290,16 @@ class SignupForm(AllAuthSignupForm):
                     'team',
                     'password1',
                 ),
+                Fieldset(
+                    _('Agreements'),
+                    'agree_terms_and_conditions',
+                    'agree_privacy_policy',
+                    'dont_agree_marketing_purposes',
+                    'dont_agree_social_networks_sharing',
+                ),
             # ),
             FormActions(
-                Submit('submit', _('Submit'), css_class='btn-primary')
+                Submit('submit', _('Sign up'), css_class='btn-primary')
             )
         )
 
@@ -272,6 +308,12 @@ class SignupForm(AllAuthSignupForm):
         attrs_to_save = []
 
         for attr, value in self.cleaned_data.items():
+            print(attr, value)
+            if attr.startswith('dont_'):
+                attr = attr.replace('dont_', '')
+                value = not value
+
+            print(attr, value)
             if attr in field_names:
                 setattr(user, attr, value)
                 attrs_to_save.append(attr)
