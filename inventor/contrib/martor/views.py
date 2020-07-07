@@ -107,7 +107,8 @@ def markdown_image_uploader(request):
             if image.content_type in image_jpeg_types:
                 image = rotate_jpeg_by_exif(image)
 
-            image = scale_down_image(image)
+            # TODO: settings: use downscaling
+            # image = scale_down_image(image)
 
             img_uuid = "{0}-{1}".format(uuid.uuid4().hex[:10], image.name.replace(' ', '-'))
             tmp_file = os.path.join(settings.MARTOR_UPLOAD_PATH, img_uuid)
