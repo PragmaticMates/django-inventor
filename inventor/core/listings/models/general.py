@@ -1,10 +1,12 @@
 import os
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import HStoreField
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models import Avg
 from django.contrib.postgres.indexes import GinIndex
+from django.db.models import Sum
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
@@ -13,11 +15,12 @@ from internationalflavor.countries import CountryField
 from modeltrans.fields import TranslationField
 from sorl import thumbnail
 
-from commerce.models import AbstractProduct
+from commerce.models import AbstractProduct, PurchasedItem
 from inventor import settings as inventor_settings
 from inventor.core.lexicons.models import Category, Feature, Locality
 from inventor.core.listings.managers import ListingQuerySet
 from pragmatic.mixins import SlugMixin
+
 
 # TODO: opening hours, meals and drinks, street view, faq
 
@@ -29,10 +32,10 @@ class Listing(SlugMixin, AbstractProduct):
                        'Skype', 'Foursquare', 'Behance']  # TODO: move to settings
 
     PRICE_UNITS = [
-        ('ENTRY', _('entry')),                    # tickets
-        ('HOUR', _('hour')),                      # parking
-        ('DAY', _('day')),                        # vehicle per day
-        ('NIGHT', _('night')),                    # room unit per night
+        ('ENTRY', _('entry')),  # tickets
+        ('HOUR', _('hour')),  # parking
+        ('DAY', _('day')),  # vehicle per day
+        ('NIGHT', _('night')),  # room unit per night
     ]
 
     # definition
@@ -98,6 +101,9 @@ class Listing(SlugMixin, AbstractProduct):
     comments = GenericRelation(get_comment_model(), content_type_field='content_type', object_id_field='object_pk',
                                related_query_name='comment')
 
+    supplies = GenericRelation('commerce.Supply', content_type_field='content_type', object_id_field='object_id',
+                               related_query_name='product')
+
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
     i18n = TranslationField(fields=('title', 'slug', 'description'))
@@ -158,11 +164,6 @@ class Listing(SlugMixin, AbstractProduct):
         if rating:
             rating = round(rating, 2)
         return rating
-
-    @cached_property
-    def purchased(self):
-        # TODO: count order items of not cancelled orders
-        return 0
 
     def delete(self, **kwargs):
         """ Deletes file before deleting instance """
@@ -259,7 +260,7 @@ class Video(models.Model):
     class Meta:
         verbose_name = _('video')
         verbose_name_plural = _('videos')
-        ordering = ('title', )
+        ordering = ('title',)
 
     def __str__(self):
         return self.title if self.title else self.url

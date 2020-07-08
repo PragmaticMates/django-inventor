@@ -6,6 +6,7 @@ from mapwidgets import GooglePointFieldWidget
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 
+from commerce.admin import SupplyInline
 from inventor import settings
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.models.general import Album, Video, Photo, Listing
@@ -57,6 +58,7 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     formfield_overrides = {
         models.PointField: {"widget": GooglePointFieldWidget}
     }
+    inlines = [SupplyInline]
 
     class Media:
         js = (
@@ -90,7 +92,7 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
             'DEFINITION': (_('Definition'), {'fields': ('title_i18n', 'slug_i18n', 'description_i18n',)}),
             'MANAGEMENT': (_('Management'), {'fields': ('author', 'published', 'promoted')}),
             'SPECIFICATION': (_('Specification'), {'fields': (('categories', 'features'),)}),
-            'PRICE': (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person', 'in_stock', 'awaiting'),)}),
+            'PRICE': (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person', 'availability', 'awaiting'),)}),
             'LOCATION': (_('Location'), {'fields': ('locality', 'country', 'address', 'point')}),
             'PREVIEWS': (_('Previews'), {'fields': (('image', 'banner'),)}),
             'CONTACT': (_('Contact information'), {'fields': ('person', 'phone', 'email', 'website')}),
