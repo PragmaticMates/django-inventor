@@ -84,7 +84,7 @@ class ProfileForm(forms.ModelForm):
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Row(
+            Div(
                 Div(
                     Fieldset(
                         _('Name and surname'),
@@ -132,9 +132,9 @@ class ProfileForm(forms.ModelForm):
                         'agree_marketing_purposes',
                         'agree_social_networks_sharing',
                     ),
-                    css_class='col-md-5 offset-1'
+                    css_class='col-md-6'
                 ),
-            ),
+            css_class='row'),
             FormActions(
                 Submit('submit', _('Submit'), css_class='btn-lg btn-primary'),
                 css_class='text-center'
