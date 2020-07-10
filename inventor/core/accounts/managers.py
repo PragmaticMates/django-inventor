@@ -7,6 +7,9 @@ class UserQuerySet(models.QuerySet):
     def active(self):
         return self.filter(is_active=True)
 
+    def superusers(self):
+        return self.filter(is_superuser=True)
+
     def with_perm(self, perm_name):
         return self.filter(
             Q(is_superuser=True) |
