@@ -11,7 +11,14 @@ class PaymentManager(CommercePaymentManager):
     def render_payment_button(self):
         if self.order.payment_method.method == Payment.METHOD_WIRE_TRANSFER:
             template = get_template('commerce/payment_button_wire_transfer.html')
-            return template.render({'order': self.order, 'iban': commerce_settings.IBAN })
+            return template.render({'order': self.order})
 
         label = _('Pay')
         return mark_safe(f'<a href="{self.order.get_payment_url()}">{label}</a>')
+
+    def render_payment_information(self):
+        if self.order.payment_method.method == Payment.METHOD_WIRE_TRANSFER:
+            template = get_template('commerce/payment_information_wire_transfer.html')
+            return template.render({'order': self.order, 'iban': commerce_settings.IBAN})
+
+        return ''
