@@ -17,7 +17,7 @@ def inventor_listings(**kwargs):
         .published()\
         .select_subclasses()\
         .prefetch_related('categories')\
-        .order_by('-promoted', 'created')
+        .order_by('-promoted', 'awaiting', 'created')
 
 
 @register.simple_tag
