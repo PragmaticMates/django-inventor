@@ -4,7 +4,7 @@
 
 {% block email_body %}
 <mj-section background-color="#ffffff" padding="0 34px">
-    <mj-column vertical-align="middle" width="90%" padding-top="15px">
+    <mj-column vertical-align="middle" width="100%" padding-top="15px">
         <mj-text align="left" color="#313133" font-size="16px" font-weight="400" padding-bottom="20px" padding-top="3px">
             {% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hello {{ user_display }}!
             <br><br>
