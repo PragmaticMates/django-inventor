@@ -2,6 +2,6 @@
 <strong>{% trans 'IBAN' %}:</strong> {{ iban }}<br>
 <strong>{% trans 'Amount' %}:</strong> {{ order.get_total_display }}<br>
 <strong>{% trans 'Note' %}:</strong> {{ order.user }}<br>
-<strong>{% trans 'Variable symbol' %}:</strong> <span class="text-danger">{{ order.number }}</span><br>
+<strong>{% trans 'Variable symbol' %}:</strong> <span class="text-info">{{ order.number }}</span><br>
 <br>
-<span class="text-warning">{% trans 'It is important to use variable symbol above to correctly pair your payment with the order!' %}</span>
+<span class="text-danger">{% trans 'It is important to use variable symbol above to correctly pair your payment with the order!' %}</span>

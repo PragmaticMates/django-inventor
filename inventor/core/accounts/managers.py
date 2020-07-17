@@ -10,12 +10,20 @@ class UserQuerySet(models.QuerySet):
     def superusers(self):
         return self.filter(is_superuser=True)
 
-    def with_perm(self, perm_name):
-        return self.filter(
-            Q(is_superuser=True) |
-            Q(user_permissions__codename=perm_name) |
-            Q(groups__permissions__codename=perm_name)
-        ).distinct()
+    def with_perm(self, perm_name):  # TODO: this is already since Django 3.0.
+        if '.' in perm_name:
+            app_label, codename = perm_name.split('.', maxsplit=1)
+            return self.filter(
+                Q(is_superuser=True) |
+                Q(user_permissions__content_type__app_label=app_label, user_permissions__codename=codename) |
+                Q(groups__permissions__content_type__app_label=app_label, groups__permissions__codename=codename)
+            ).distinct()
+        else:
+            return self.filter(
+                Q(is_superuser=True) |
+                Q(user_permissions__codename=perm_name) |
+                Q(groups__permissions__codename=perm_name)
+            ).distinct()
 
 
 class UserManager(DjangoUserManager):

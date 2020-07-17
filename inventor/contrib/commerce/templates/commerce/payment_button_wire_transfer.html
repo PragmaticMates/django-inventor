@@ -1,24 +1,28 @@
 {% load i18n %}
 
-<a href="#" data-toggle="modal" data-target="#payment-modal-{{ order.id }}">
-    {% trans 'Payment information' %}
-</a>
+{% if show_modal %}
+    <a href="#" data-toggle="modal" data-target="#payment-modal-{{ order.id }}">
+        {% trans 'Payment information' %}
+    </a>
 
-<div class="modal fade" id="payment-modal-{{ order.id }}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="payment-modal-{{ order.id }}-label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="payment-modal-{{ order.id }}-label">{% trans 'Payment information' %}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{ order.render_payment_information }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
+    <div class="modal fade" id="payment-modal-{{ order.id }}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="payment-modal-{{ order.id }}-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="payment-modal-{{ order.id }}-label">{% trans 'Payment information' %}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {{ order.render_payment_information }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+{% else %}
+    {{ order.render_payment_information }}
+{% endif %}
