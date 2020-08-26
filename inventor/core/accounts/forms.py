@@ -219,7 +219,7 @@ class SignupForm(AllAuthSignupForm):
     reg_id = forms.CharField(label=_('Reg. No'), max_length=30, required=False)
     tax_id = forms.CharField(label=_('TAX ID'), max_length=30, required=False)
     vat_id = VATNumberFormField(label=_('VAT ID'), required=False)
-    date_of_birth = forms.DateField(label=_('date of birth'))  # TODO: datepicker / multiwidget
+    date_of_birth = forms.DateField(label=_('date of birth'), required=False)  # TODO: datepicker / multiwidget
     gender = forms.ChoiceField(label=_('gender'), choices=get_user_model().GENDERS)
     team = forms.CharField(label=_('team/club'), max_length=50, required=False)
     agree_terms_and_conditions = forms.BooleanField(label=_('I agree terms and conditions'), required=True, initial=False)
@@ -230,6 +230,7 @@ class SignupForm(AllAuthSignupForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        print(inventor_settings.USER_REQUIRED_FIELDS)
         for required_field_name in inventor_settings.USER_REQUIRED_FIELDS:
             self.fields[required_field_name].required = True
 
