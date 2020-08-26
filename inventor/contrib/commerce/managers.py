@@ -41,8 +41,9 @@ class PaymentManager(CommercePaymentManager):
             'AMOUNT': order.total_in_cents,
             'CURRENCY': '',  # empty value is default value of payment gateway merchant eshop
             'DEPOSITFLAG': 1,
+            'MERORDERNUM': order.number,
             'URL': uri({}, order.get_payment_return_url()),  # absolute URL
-            'REFERENCENUMBER': order.number
+            'REFERENCENUMBER': order.id
         }
 
         digest = self.get_digest(payment_data)
@@ -59,8 +60,8 @@ class PaymentManager(CommercePaymentManager):
 
         d = payment_data
 
-        # MERCHANTNUMBER + | + OPERATION + | + ORDERNUMBER + | + AMOUNT + | + CURRENCY + | + DEPOSITFLAG + | + URL + | + REFERENCENUMBER
-        digest_input = f'{d["MERCHANTNUMBER"]}|{d["OPERATION"]}|{d["ORDERNUMBER"]}|{d["AMOUNT"]}|{d["CURRENCY"]}|{d["DEPOSITFLAG"]}|{d["URL"]}|{d["REFERENCENUMBER"]}'
+        # MERCHANTNUMBER + | + OPERATION + | + ORDERNUMBER + | + AMOUNT + | + CURRENCY + | + DEPOSITFLAG + | + MERORDERNUM + | + URL + | + REFERENCENUMBER
+        digest_input = f'{d["MERCHANTNUMBER"]}|{d["OPERATION"]}|{d["ORDERNUMBER"]}|{d["AMOUNT"]}|{d["CURRENCY"]}|{d["DEPOSITFLAG"]}|{d["MERORDERNUM"]}|{d["URL"]}|{d["REFERENCENUMBER"]}'
 
         private_key = {
             'path': commerce_settings.GATEWAY_GP_PRIVATE_KEY_PATH,
