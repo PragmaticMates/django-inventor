@@ -195,6 +195,10 @@ class Listing(SlugMixin, AbstractProduct):
     def get_listing_type_display_plural(self):
         return self.listing_class._meta.verbose_name_plural
 
+    @cached_property
+    def all_images(self):
+        return Photo.objects.filter(album__listing__pk=self.pk)
+
     @classmethod
     def get_list_url_name(cls):
         url_name = f'{cls.__name__.lower()}_list'
