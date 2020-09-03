@@ -9,4 +9,5 @@ urlpatterns = (
     path('', HomeView.as_view(), name='home'),
     path('newsletter/', NewsletterView.as_view(), name='newsletter'),
     path('accounts/', include('inventor.core.accounts.urls', namespace='accounts')),
+    path('subscriptions/', include('inventor.core.subscriptions.urls', namespace='subscriptions')),
 )

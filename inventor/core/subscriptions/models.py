@@ -1,11 +1,15 @@
 import logging
 from datetime import date, timedelta
+
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.conf import settings
 from django.core.validators import MinValueValidator
+from django.urls import reverse
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
+from inventor.core.subscriptions.querysets import PlanQuerySet
 
 accounts_logger = logging.getLogger('accounts')
 
@@ -32,6 +36,7 @@ class Plan(models.Model):
     quotas = models.ManyToManyField('Quota', through='PlanQuota')
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
+    objects = PlanQuerySet.as_manager()
 
     class Meta:
         verbose_name = _(u'pricing plan')
@@ -40,6 +45,16 @@ class Plan(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_price_display(self):
+        return f'{self.price} {settings.INVENTOR_CURRENCY}'
+
+    def get_add_to_cart_url(self):  # TODO: move to ProductMixin
+        content_type = ContentType.objects.get_for_model(self)
+        return reverse('commerce:add_to_cart', args=(content_type.id, self.id))
+
+    def get_absolute_url(self):
+        return reverse('inventor:subscriptions:plans')
 
     @classmethod
     def get_default_plan(cls):
@@ -61,7 +76,7 @@ class Plan(models.Model):
             # return default_plan
         return user.userplan.plan
 
-    def get_quota_dict(self):
+    def get_quotas(self):
         quota_dic = {}
         for plan_quota in PlanQuota.objects.filter(plan=self).select_related('quota'):
             quota_dic[plan_quota.quota.codename] = plan_quota.value

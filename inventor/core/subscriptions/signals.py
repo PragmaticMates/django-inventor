@@ -2,7 +2,9 @@ from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
 from django.dispatch import Signal, receiver
 
-from inventor.core.subscriptions.models import UserPlan
+from commerce.models import Cart
+from commerce.signals import cart_updated
+from inventor.core.subscriptions.models import UserPlan, Plan
 
 User = get_user_model()
 
@@ -73,3 +75,11 @@ def initialize_plan_generic(sender, user, **kwargs):
         user.userplan.initialize()
     except UserPlan.DoesNotExist:
         return
+
+
+@receiver(cart_updated, sender=Cart)
+# @apm_custom_context('signals')
+def new_item_in_cart(sender, item, **kwargs):
+    # if new plan added into cart, delete all other items
+    if isinstance(item.product, Plan):
+        item.cart.item_set.exclude(id=item.id).delete()

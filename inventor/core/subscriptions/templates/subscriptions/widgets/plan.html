@@ -1,0 +1,5 @@
+{% load i18n %}
+{{ plan.name }}<br>
+{{ plan.get_price_display }}<br>
+{{ plan.period }} {% trans 'days' %}<br>
+<a href="{{ plan.get_add_to_cart_url }}" class="btn btn-lg btn-primary {% if not plan.is_available %}disabled{% endif %}">{% trans 'Choose' %}</a>
