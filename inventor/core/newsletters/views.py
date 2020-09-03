@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import BaseFormView
 
 from inventor.core.newsletters.forms import NewsletterForm
-from inventor.core.newsletters.models import Subscription
+from inventor.core.newsletters.models import Subscriber
 
 
 class NewsletterView(BaseFormView):
@@ -51,4 +51,4 @@ class NewsletterView(BaseFormView):
         return self.request.META.get('HTTP_REFERER', reverse('inventor:home'))
 
     def save_email(self, email):
-        return Subscription.objects.get_or_create(email=email)
+        return Subscriber.objects.get_or_create(email=email)

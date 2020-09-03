@@ -2,13 +2,13 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
-class Subscription(models.Model):
+class Subscriber(models.Model):
     email = models.EmailField(unique=True)
     subscribed = models.DateTimeField(_(u'subscribed'), auto_now_add=True)
 
     class Meta:
-        verbose_name = _(u'subscription')
-        verbose_name_plural = _(u'subscriptions')
+        verbose_name = _(u'subscriber')
+        verbose_name_plural = _(u'subscribers')
         ordering = ['email']
 
     def __str__(self):

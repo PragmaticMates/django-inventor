@@ -24,6 +24,7 @@ class SeoInlines(GenericStackedInline):
     # form = SeoForm
     extra = 1
     max_num = 1
+    inlines = None
 
 
 # for model_name in getattr(settings, 'SEO_FOR_MODELS', []):
