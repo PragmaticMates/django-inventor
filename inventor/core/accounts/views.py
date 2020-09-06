@@ -37,7 +37,7 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('inventor:accounts:user_dashboard')
+        return settings.LOGIN_REDIRECT_URL
 
 
 class UserUpdateView(LoginPermissionRequiredMixin, UpdateView):

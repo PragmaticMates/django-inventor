@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import path, include
 
 from inventor.core.newsletters.views import NewsletterView
@@ -9,5 +10,9 @@ urlpatterns = (
     path('', HomeView.as_view(), name='home'),
     path('newsletter/', NewsletterView.as_view(), name='newsletter'),
     path('accounts/', include('inventor.core.accounts.urls', namespace='accounts')),
-    path('subscriptions/', include('inventor.core.subscriptions.urls', namespace='subscriptions')),
 )
+
+if 'inventor.core.subscriptions' in settings.INSTALLED_APPS:
+    urlpatterns += (
+        path('subscriptions/', include('inventor.core.subscriptions.urls', namespace='subscriptions')),
+    )

@@ -1,6 +1,7 @@
 import logging
 from datetime import date, timedelta
 
+from dateutil.relativedelta import relativedelta
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.conf import settings
@@ -15,11 +16,21 @@ accounts_logger = logging.getLogger('accounts')
 
 
 class Plan(models.Model):
+    PERIOD_DAY = 'DAY'
+    PERIOD_MONTH = 'MONTH'
+    PERIOD_YEAR = 'YEAR'
+    PERIODS = [
+        (PERIOD_DAY, _('day')),
+        (PERIOD_MONTH, _('month')),
+        (PERIOD_YEAR, _('year')),
+    ]
+
     title = models.CharField(unique=True, max_length=50)
+    period = models.CharField(_('period'), choices=PERIODS, max_length=5, blank=True)
+    duration = models.PositiveSmallIntegerField(verbose_name=_('duration'), help_text=_('in period'),
+                                           blank=True, null=True, default=None)
     price = models.DecimalField(_('price'), help_text=settings.INVENTOR_CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0)],
                                 blank=True, null=True, default=None)
-    period = models.PositiveIntegerField(_('period'), default=30, help_text=_('days'),
-                                         null=True, blank=True, db_index=True)
     is_default = models.BooleanField(
         help_text=_('Default plan for user'),
         default=False,
@@ -49,6 +60,31 @@ class Plan(models.Model):
     def get_price_display(self):
         return f'{self.price} {settings.INVENTOR_CURRENCY}'
 
+    @property
+    def price_per_month(self):
+        if self.period == self.PERIOD_DAY:
+            return self.price * 30 / self.duration  # approximately
+
+        if self.period == self.PERIOD_MONTH:
+            return self.price / self.duration
+
+        if self.period == self.PERIOD_YEAR:
+            return self.price / 12 / self.duration
+
+    def get_price_per_month_display(self):
+        return f'{self.price_per_month} {settings.INVENTOR_CURRENCY}'
+
+    @property
+    def timedelta(self):
+        if self.period == self.PERIOD_DAY:
+            return timedelta(days=self.duration)
+
+        if self.period == self.PERIOD_MONTH:
+            return relativedelta(months=self.duration)
+
+        if self.period == self.PERIOD_YEAR:
+            return relativedelta(years=self.duration)
+
     def get_add_to_cart_url(self):  # TODO: move to ProductMixin
         content_type = ContentType.objects.get_for_model(self)
         return reverse('commerce:add_to_cart', args=(content_type.id, self.id))
@@ -59,7 +95,7 @@ class Plan(models.Model):
     @classmethod
     def get_default_plan(cls):
         try:
-            return_value = cls.objects.get(default=True)
+            return_value = cls.objects.get(is_default=True)
         except cls.DoesNotExist:
             return_value = None
         return return_value
@@ -166,9 +202,11 @@ class UserPlan(models.Model):
             return None
         if not self.plan.is_free() and self.expiration is None:
             return None
-        if pricing is None:
-            return self.expiration
-        return self.get_plan_extended_from(plan) + timedelta(days=pricing.period)
+        # if pricing is None:
+        #     return self.expiration
+        # return self.get_plan_extended_from(plan) + timedelta(days=pricing.period)
+        from_date = self.get_plan_extended_from(plan)
+        return from_date + self.plan.timedelta
 
     def plan_autorenew_at(self):
         """
@@ -207,25 +245,30 @@ class UserPlan(models.Model):
         """
 
         status = False  # flag; if extending account was successful?
-        expire = self.get_plan_extended_until(plan, pricing)
+        new_expiration = self.get_plan_extended_until(plan, pricing)
+
+        print('new_expiration', new_expiration)
         if pricing is None:
             # Process a plan change request (downgrade or upgrade)
             # No account activation or extending at this point
             self.plan = plan
 
-            if self.expiration is not None and not plan.planpricing_set.count():
-                # Assume no expiry date for plans without pricing.
-                self.expiration = None
+            # if self.expiration is not None and not plan.planpricing_set.count():
+            #     # Assume no expiry date for plans without pricing.
+            #     self.expiration = None
 
+            self.expiration = new_expiration
             self.save()
+
             account_change_plan.send(sender=self, user=self.user)
-            if getattr(settings, 'PLANS_SEND_EMAILS_PLAN_CHANGED', True):
-                mail_context = {'user': self.user, 'userplan': self, 'plan': plan}
-                send_template_email([self.user.email], 'mail/change_plan_title.txt', 'mail/change_plan_body.txt',
-                                    mail_context, get_user_language(self.user))
+            # if getattr(settings, 'PLANS_SEND_EMAILS_PLAN_CHANGED', True):
+            #     mail_context = {'user': self.user, 'userplan': self, 'plan': plan}
+            #     send_template_email([self.user.email], 'mail/change_plan_title.txt', 'mail/change_plan_body.txt',
+            #                         mail_context, get_user_language(self.user))
             accounts_logger.info(
                 "Account '%s' [id=%d] plan changed to '%s' [id=%d]" % (self.user, self.user.pk, plan, plan.pk))
             status = True
+
         else:
             # Processing standard account extending procedure
             if self.plan == plan:
@@ -245,10 +288,10 @@ class UserPlan(models.Model):
                     self.plan = plan
 
             if status:
-                self.expiration = expire
+                self.expiration = new_expiration
                 self.save()
                 accounts_logger.info("Account '%s' [id=%d] has been extended by %d days using plan '%s' [id=%d]" % (
-                    self.user, self.user.pk, pricing.period, plan, plan.pk))
+                    self.user, self.user.pk, pricing.timedelta.days, plan, plan.pk))
                 if getattr(settings, 'PLANS_SEND_EMAILS_PLAN_EXTENDED', True):
                     mail_context = {'user': self.user,
                                     'userplan': self,
@@ -258,8 +301,8 @@ class UserPlan(models.Model):
                                         'mail/extend_account_body.txt',
                                         mail_context, get_user_language(self.user))
 
-        if status:
-            self.clean_activation()
+        # if status:
+        #     self.clean_activation()
 
         return status
 
@@ -289,15 +332,16 @@ class UserPlan(models.Model):
                             mail_context, get_user_language(self.user))
 
     @classmethod
-    def create_for_user(cls, user):
-        default_plan = Plan.get_default_plan()
-        if default_plan is not None:
+    def create_for_user(cls, user, plan=None):
+        plan = plan or Plan.get_default_plan()
+
+        if plan is not None:
             return UserPlan.objects.create(
                 user=user,
-                plan=default_plan,
+                plan=plan,
                 # active=False,
-                # expire=None,
-                expire=now() + timedelta(days=default_plan.period),
+                # expiration=None,
+                expiration=now() + plan.timedelta,
             )
 
     @classmethod

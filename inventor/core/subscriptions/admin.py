@@ -72,15 +72,15 @@ class PlanAdmin(admin.ModelAdmin):
     list_filter = ('is_available', 'is_visible')
     list_display = [
         'title',
+        'duration', 'period',
+        'timedelta',
         # 'description',
         # 'customized',
         'is_default', 'is_available',
         'price',
-        'is_free',
         'created',
         # 'move_up_down_links'
     ]
-    list_display_links = list_display
     inlines = (
         # PlanPricingInline,
         PlanQuotaInline,

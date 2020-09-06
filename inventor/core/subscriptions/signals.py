@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import Signal, receiver
 
-from commerce.models import Cart
+from commerce.models import Cart, Order
 from commerce.signals import cart_updated
 from inventor.core.subscriptions.models import UserPlan, Plan
+from pragmatic.signals import apm_custom_context, SignalsHelper
 
 User = get_user_model()
 
@@ -78,8 +79,31 @@ def initialize_plan_generic(sender, user, **kwargs):
 
 
 @receiver(cart_updated, sender=Cart)
-# @apm_custom_context('signals')
+@apm_custom_context('signals')
 def new_item_in_cart(sender, item, **kwargs):
     # if new plan added into cart, delete all other items
     if isinstance(item.product, Plan):
         item.cart.item_set.exclude(id=item.id).delete()
+
+
+@receiver(pre_save, sender=Order)
+@apm_custom_context('signals')
+def order_status_changed(sender, instance, **kwargs):
+    if instance.pk and SignalsHelper.attribute_changed(instance, ['status']) and instance.status == Order.STATUS_PAYMENT_RECEIVED:
+        if instance.has_item_of_type(Plan):
+            purchased_plans = instance.items_of_type(Plan)
+
+            if purchased_plans.count() > 1:
+                raise ValueError(f'Order {instance.number} contains multiple subscription plans!')
+
+            purchased_plan = purchased_plans.first()  # order should have single plan only actually
+
+            user = instance.user
+            plan = purchased_plan.product
+
+            if user.userplan:
+                # extend (and upgrade if necessary) plan
+                user.userplan.extend_account(plan, pricing=None)
+            else:
+                # create new plan
+                UserPlan.create_for_user(instance.user, plan)
