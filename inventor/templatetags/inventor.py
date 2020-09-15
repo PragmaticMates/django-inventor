@@ -2,7 +2,7 @@ from allauth.utils import build_absolute_uri
 from django import template
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
-
+from filer.models import File
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.models.general import Listing
 from inventor.core.listings.models.listing_types import Race
@@ -34,8 +34,8 @@ def inventor_partners(**kwargs):
 
 @register.simple_tag
 def inventor_stats(stat):
-    if stat == 'purchased_listings':
-        return 'TODO'
+    if stat == 'approved_files':
+        return File.objects.filter(folder__name='approved').count()  # TODO: move to settings
     if stat == 'active_users':
         return get_user_model().objects.active().count()
     if stat == 'published_listings':
