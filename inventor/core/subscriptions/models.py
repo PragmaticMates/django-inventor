@@ -60,7 +60,7 @@ class Plan(models.Model):
     def get_current_plan(cls, user):
         """ Get current plan for user. If userplan is expired, return None """
         # We need to handle both default plan (new user -> TRIAL) and expired plan -> None
-        if not user or user.is_anonymous or not hasattr(user, 'userplan') or user.subscription.is_expired():
+        if not user or user.is_anonymous or not hasattr(user, 'subscription') or user.subscription.is_expired():
             return None
             # default_plan = Plan.get_default_plan()
             # if default_plan is None or not default_plan.is_free():
