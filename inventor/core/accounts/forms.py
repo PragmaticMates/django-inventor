@@ -70,8 +70,20 @@ class ProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        print('USER_REQUIRED_FIELDS', inventor_settings.USER_REQUIRED_FIELDS)
         for required_field_name in inventor_settings.USER_REQUIRED_FIELDS:
             self.fields[required_field_name].required = True
+
+        print('USER_HIDDEN_FIELDS', inventor_settings.USER_HIDDEN_FIELDS)
+        for hidden_field_name in inventor_settings.USER_HIDDEN_FIELDS:
+            if self.fields[hidden_field_name].required:
+                raise ValueError(f'Field {hidden_field_name} can not be hidden, because it is required')
+            self.fields[hidden_field_name].widget = HiddenInput()
+
+        address_fields = ['street', 'postcode', 'city', 'country']
+        address_label = '' if set(address_fields) <= set(inventor_settings.USER_HIDDEN_FIELDS) else _('Address')
+        dob_fields = ['date_of_birth']
+        dob_label = '' if set(dob_fields) <= set(inventor_settings.USER_HIDDEN_FIELDS) else _('Date of birth')
 
         # placeholders
         if inventor_settings.USE_PLACEHOLDERS:
@@ -84,6 +96,13 @@ class ProfileForm(forms.ModelForm):
                     field.label = ''
 
         self.helper = FormHelper()
+
+        split_into_columns = False  # TODO: settings
+        if split_into_columns:
+            column_class = 'col-md-6'
+        else:
+            column_class = 'col-md-6 offset-md-3'
+
         self.helper.layout = Layout(
             Div(
                 Div(
@@ -99,20 +118,22 @@ class ProfileForm(forms.ModelForm):
                         PrependedText('email', '<i class="fas fa-at"></i>'),
                         PrependedText('phone', '<i class="far fa-mobile"></i>')
                     ),
-                    Fieldset(
-                        _('Address'),
-                        'street',
-                        Row(
-                            Div('postcode', css_class='col-md-5'),
-                            Div('city', css_class='col-md-7'),
-                        ),
-                        'country',
-                    ),
-                    Fieldset(
-                        _('Date of birth'),
-                        'date_of_birth',
-                    ),
-                    css_class='col-md-6'
+                    Fieldset(address_label, *address_fields),
+                    Fieldset(dob_label, *dob_fields),
+                    # Fieldset(
+                    #     _('Address'),
+                    #     'street',
+                    #     Row(
+                    #         Div('postcode', css_class='col-md-5'),
+                    #         Div('city', css_class='col-md-7'),
+                    #     ),
+                    #     'country',
+                    # ),
+                    # Fieldset(
+                    #     _('Date of birth'),
+                    #     'date_of_birth',
+                    # ),
+                    css_class=column_class
                 ),
                 Div(
                     Fieldset(
@@ -133,7 +154,7 @@ class ProfileForm(forms.ModelForm):
                         'agree_marketing_purposes',
                         'agree_social_networks_sharing',
                     ),
-                    css_class='col-md-6'
+                    css_class=column_class
                 ),
             css_class='row'),
             FormActions(
