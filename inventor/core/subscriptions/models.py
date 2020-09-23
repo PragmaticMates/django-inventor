@@ -223,7 +223,7 @@ class UserPlan(models.Model):
     #     """
     #     if not self.is_active():
     #         # Plans without pricings don't need to expire
-    #         if self.expiration is None and self.plan.planpricing_set.count():
+    #         if self.expiration is None and self.plan.pricing_set.count():
     #             self.expiration = now() + timedelta(
     #                 days=getattr(settings, 'PLANS_DEFAULT_GRACE_PERIOD', 30))
     #         self.activate()  # this will call self.save()
@@ -294,7 +294,7 @@ class UserPlan(models.Model):
             # No account activation or extending at this point
             self.plan = plan
 
-            # if self.expiration is not None and not plan.planpricing_set.count():
+            # if self.expiration is not None and not plan.pricing_set.count():
             #     # Assume no expiry date for plans without pricing.
             #     self.expiration = None
 
@@ -332,14 +332,14 @@ class UserPlan(models.Model):
                 self.save()
                 accounts_logger.info("Account '%s' [id=%d] has been extended by %d days using plan '%s' [id=%d]" % (
                     self.user, self.user.pk, pricing.timedelta.days, plan, plan.pk))
-                if getattr(settings, 'PLANS_SEND_EMAILS_PLAN_EXTENDED', True):
-                    mail_context = {'user': self.user,
-                                    'userplan': self,
-                                    'plan': plan,
-                                    'pricing': pricing}
-                    send_template_email([self.user.email], 'mail/extend_account_title.txt',
-                                        'mail/extend_account_body.txt',
-                                        mail_context, get_user_language(self.user))
+                # if getattr(settings, 'PLANS_SEND_EMAILS_PLAN_EXTENDED', True):
+                    # mail_context = {'user': self.user,
+                    #                 'userplan': self,
+                    #                 'plan': plan,
+                    #                 'pricing': pricing}
+                    # send_template_email([self.user.email], 'mail/extend_account_title.txt',
+                    #                     'mail/extend_account_body.txt',
+                    #                     mail_context, get_user_language(self.user))
 
         # if status:
         #     self.clean_activation()
