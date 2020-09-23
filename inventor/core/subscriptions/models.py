@@ -60,13 +60,13 @@ class Plan(models.Model):
     def get_current_plan(cls, user):
         """ Get current plan for user. If userplan is expired, return None """
         # We need to handle both default plan (new user -> TRIAL) and expired plan -> None
-        if not user or user.is_anonymous or not hasattr(user, 'userplan') or user.userplan.is_expired():
+        if not user or user.is_anonymous or not hasattr(user, 'userplan') or user.subscription.is_expired():
             return None
             # default_plan = Plan.get_default_plan()
             # if default_plan is None or not default_plan.is_free():
             #     raise ValidationError(_('User plan has expired'))
             # return default_plan
-        return user.userplan.plan
+        return user.subscription.plan
 
     def get_quotas(self):
         quota_dic = {}
@@ -75,11 +75,11 @@ class Plan(models.Model):
         return quota_dic
 
     def is_free(self):
-        return not self.pricingplan_set.exists()
+        return not self.pricing_set.exists()
     is_free.boolean = True
 
 
-class PricingPlan(models.Model):
+class Pricing(models.Model):
     PERIOD_DAY = 'DAY'
     PERIOD_MONTH = 'MONTH'
     PERIOD_YEAR = 'YEAR'
@@ -164,11 +164,15 @@ class UserPlan(models.Model):
     """
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, verbose_name=_('user'),
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, related_name='subscription', related_query_name='subscription'
     )
     plan = models.ForeignKey('Plan', verbose_name=_('plan'), on_delete=models.CASCADE)
+    pricing = models.ForeignKey('Pricing', help_text=_('pricing'), default=None,
+                                null=True, blank=True, on_delete=models.CASCADE)
     expiration = models.DateField(_('Expires'), default=None, blank=True, null=True, db_index=True)
     # is_active = models.BooleanField(_('active'), default=True, db_index=True)
+    # is_recurring = models.BooleanField(_('active'), default=True, db_index=True)  # TODO: can be turned on/turned off
+    modified = models.DateTimeField(_('modified'), auto_now=True)
 
     class Meta:
         verbose_name = _("User plan")
@@ -368,25 +372,30 @@ class UserPlan(models.Model):
                             mail_context, get_user_language(self.user))
 
     @classmethod
-    def create_for_user(cls, user, pricing_plan=None):
-        if pricing_plan:
-            plan = pricing_plan.plan
-            expiration = now() + pricing_plan.timedelta
+    def create_for_user(cls, user, pricing=None):
+        if pricing:
+            plan = pricing.plan
+            expiration = now() + pricing.timedelta
         else:
             plan = Plan.get_default_plan()
+
+            # check if default plan is available
+            if not plan:
+                return
+    
             expiration = None if plan.is_free() else now() + timedelta(days=plan.trial_duration)
 
-        if plan is not None:
-            return UserPlan.objects.create(
-                user=user,
-                plan=plan,
-                # active=False,
-                expiration=expiration,
-            )
+        return UserPlan.objects.create(
+            user=user,
+            plan=plan,
+            pricing=pricing,
+            # active=False,
+            expiration=expiration,
+        )
 
     @classmethod
     def create_for_users_without_plan(cls):
-        userplans = get_user_model().objects.filter(userplan=None)
+        userplans = get_user_model().objects.filter(subscription=None)
         for user in userplans:
             UserPlan.create_for_user(user)
         return userplans

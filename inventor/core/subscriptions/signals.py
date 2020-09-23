@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import Signal, receiver
 
 from commerce.models import Cart, Order
 from commerce.signals import cart_updated
-from inventor.core.subscriptions.models import UserPlan, PricingPlan
+from inventor.core.subscriptions.models import UserPlan, Pricing
 from pragmatic.signals import apm_custom_context, SignalsHelper
 
 User = get_user_model()
@@ -73,7 +74,7 @@ def set_default_user_plan(sender, instance, created, **kwargs):
 @receiver(activate_user_plan)
 def initialize_plan_generic(sender, user, **kwargs):
     try:
-        user.userplan.initialize()
+        user.subscription.initialize()
     except UserPlan.DoesNotExist:
         return
 
@@ -82,7 +83,7 @@ def initialize_plan_generic(sender, user, **kwargs):
 @apm_custom_context('signals')
 def new_item_in_cart(sender, item, **kwargs):
     # if new plan added into cart, delete all other items
-    if isinstance(item.product, PricingPlan):
+    if isinstance(item.product, Pricing):
         item.cart.item_set.exclude(id=item.id).delete()
 
 
@@ -90,8 +91,8 @@ def new_item_in_cart(sender, item, **kwargs):
 @apm_custom_context('signals')
 def order_status_changed(sender, instance, **kwargs):
     if instance.pk and SignalsHelper.attribute_changed(instance, ['status']) and instance.status == Order.STATUS_PAYMENT_RECEIVED:
-        if instance.has_item_of_type(PricingPlan):
-            purchased_pricings = instance.items_of_type(PricingPlan)
+        if instance.has_item_of_type(Pricing):
+            purchased_pricings = instance.items_of_type(Pricing)
 
             if purchased_pricings.count() > 1:
                 raise ValueError(f'Order {instance.number} contains multiple subscription pricing plans!')
@@ -102,9 +103,9 @@ def order_status_changed(sender, instance, **kwargs):
             pricing = purchased_pricing.product
             plan = pricing.plan
 
-            if user.userplan:
+            try:
                 # extend (and upgrade if necessary) plan
-                user.userplan.extend_account(plan, pricing=pricing)
-            else:
+                user.subscription.extend_account(plan, pricing)
+            except ObjectDoesNotExist:
                 # create new plan
                 UserPlan.create_for_user(instance.user, pricing)

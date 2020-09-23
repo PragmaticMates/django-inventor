@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
 
-from inventor.core.subscriptions.models import UserPlan, Plan, PlanQuota, Quota, PricingPlan
+from inventor.core.subscriptions.models import UserPlan, Plan, PlanQuota, Quota, Pricing
 
 
 class UserLinkMixin(object):
@@ -25,8 +25,8 @@ class PlanQuotaInline(admin.TabularInline):
     model = PlanQuota
 
 
-class PricingPlanInline(admin.TabularInline):
-    model = PricingPlan
+class PricingInline(admin.TabularInline):
+    model = Pricing
 
 
 class QuotaAdmin(admin.ModelAdmin):
@@ -52,7 +52,7 @@ def copy_plan(modeladmin, request, queryset):
         plan_copy.created = None
         plan_copy.save(force_insert=True)
 
-        for pricing in plan.pricingplan_set.all():
+        for pricing in plan.pricing_set.all():
             pricing.id = None
             pricing.plan = plan_copy
             pricing.save(force_insert=True)
@@ -81,7 +81,7 @@ class PlanAdmin(admin.ModelAdmin):
         # 'move_up_down_links'
     ]
     inlines = (
-        PricingPlanInline,
+        PricingInline,
         PlanQuotaInline,
     )
     list_select_related = True
@@ -99,7 +99,7 @@ class PlanAdmin(admin.ModelAdmin):
 #     extra = 0
 
 
-class PricingPlanAdmin(admin.ModelAdmin):
+class PricingAdmin(admin.ModelAdmin):
     list_select_related = ['plan']
     list_display = [
         'id',
@@ -113,12 +113,11 @@ class PricingPlanAdmin(admin.ModelAdmin):
 class UserPlanAdmin(UserLinkMixin, admin.ModelAdmin):
     list_filter = (
         #'is_active',
-        'expiration', 'plan__title', 'plan__is_available', 'plan__is_visible',)
+        'expiration', 'plan__title', 'plan__is_available', 'plan__is_visible', 'modified')
     search_fields = ('user__email', 'plan__title',)
-    list_display = ('user', 'plan', 'expiration',  # 'is_active',
+    list_display = ('id', 'user', 'plan', 'expiration',  # 'is_active',
                     # 'recurring__automatic_renewal', 'recurring__pricing'
-                    )
-    list_display_links = list_display
+                    'modified')
     list_select_related = True
     readonly_fields = ['user_link', ]
     # inlines = (RecurringPlanInline,)
@@ -137,5 +136,5 @@ class UserPlanAdmin(UserLinkMixin, admin.ModelAdmin):
 
 admin.site.register(Quota, QuotaAdmin)
 admin.site.register(Plan, PlanAdmin)
-admin.site.register(PricingPlan, PricingPlanAdmin)
+admin.site.register(Pricing, PricingAdmin)
 admin.site.register(UserPlan, UserPlanAdmin)
