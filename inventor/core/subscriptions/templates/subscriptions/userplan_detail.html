@@ -1,0 +1,9 @@
+{% load i18n %}
+<strong>{% trans 'Plan' %}:</strong> {{ object.plan }}<br>
+{% if object.pricing %}
+    <strong>{% trans 'Pricing' %}:</strong> {{ object.pricing }}<br>
+{% endif %}
+{% if object.expiration %}
+    <strong>{% trans 'Expires' %}:</strong> {{ object.expiration }} ({% trans 'in' %} {{ object.days_left }} {% trans 'days' %})<br>
+{% endif %}
+<a href="{% url 'inventor:subscriptions:plans' %}" class="btn btn-primary">{% trans 'Pricing' %}</a>

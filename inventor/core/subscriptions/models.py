@@ -326,6 +326,7 @@ class UserPlan(models.Model):
                     status = True
                     account_change_plan.send(sender=self, user=self.user)
                     self.plan = plan
+                    self.pricing = pricing
 
             if status:
                 self.expiration = new_expiration
@@ -457,25 +458,6 @@ class UserPlan(models.Model):
     #     )
 
 
-# class Pricing(models.Model):
-#     """
-#     Type of plan period that could be purchased (e.g. 10 days, month, year, etc)
-#     """
-#     name = models.CharField(_('name'), max_length=100)
-#     period = models.PositiveIntegerField(
-#         _('period'), default=30, null=True, blank=True, db_index=True)
-#     url = models.URLField(max_length=200, blank=True, help_text=_(
-#         'Optional link to page with more information (for clickable pricing table headers)'))
-#
-#     class Meta:
-#         ordering = ('period',)
-#         verbose_name = _("Pricing")
-#         verbose_name_plural = _("Pricings")
-#
-#     def __str__(self):
-#         return "%s (%d " % (self.name, self.period) + "%s)" % _("days")
-#
-#
 class Quota(models.Model):
     """
     Single countable or boolean property of system (limitation).
