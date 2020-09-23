@@ -4,7 +4,7 @@ from django.dispatch import Signal, receiver
 
 from commerce.models import Cart, Order
 from commerce.signals import cart_updated
-from inventor.core.subscriptions.models import UserPlan, Plan
+from inventor.core.subscriptions.models import UserPlan, PricingPlan
 from pragmatic.signals import apm_custom_context, SignalsHelper
 
 User = get_user_model()
@@ -82,7 +82,7 @@ def initialize_plan_generic(sender, user, **kwargs):
 @apm_custom_context('signals')
 def new_item_in_cart(sender, item, **kwargs):
     # if new plan added into cart, delete all other items
-    if isinstance(item.product, Plan):
+    if isinstance(item.product, PricingPlan):
         item.cart.item_set.exclude(id=item.id).delete()
 
 
@@ -90,20 +90,21 @@ def new_item_in_cart(sender, item, **kwargs):
 @apm_custom_context('signals')
 def order_status_changed(sender, instance, **kwargs):
     if instance.pk and SignalsHelper.attribute_changed(instance, ['status']) and instance.status == Order.STATUS_PAYMENT_RECEIVED:
-        if instance.has_item_of_type(Plan):
-            purchased_plans = instance.items_of_type(Plan)
+        if instance.has_item_of_type(PricingPlan):
+            purchased_pricings = instance.items_of_type(PricingPlan)
 
-            if purchased_plans.count() > 1:
-                raise ValueError(f'Order {instance.number} contains multiple subscription plans!')
+            if purchased_pricings.count() > 1:
+                raise ValueError(f'Order {instance.number} contains multiple subscription pricing plans!')
 
-            purchased_plan = purchased_plans.first()  # order should have single plan only actually
+            purchased_pricing = purchased_pricings.first()  # order should have single pricing plan only actually
 
             user = instance.user
-            plan = purchased_plan.product
+            pricing = purchased_pricing.product
+            plan = pricing.plan
 
             if user.userplan:
                 # extend (and upgrade if necessary) plan
-                user.userplan.extend_account(plan, pricing=None)
+                user.userplan.extend_account(plan, pricing=pricing)
             else:
                 # create new plan
-                UserPlan.create_for_user(instance.user, plan)
+                UserPlan.create_for_user(instance.user, pricing)

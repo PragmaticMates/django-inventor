@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
 
-from inventor.core.subscriptions.models import UserPlan, Plan, PlanQuota, Quota
+from inventor.core.subscriptions.models import UserPlan, Plan, PlanQuota, Quota, PricingPlan
 
 
 class UserLinkMixin(object):
@@ -25,8 +25,8 @@ class PlanQuotaInline(admin.TabularInline):
     model = PlanQuota
 
 
-# class PlanPricingInline(admin.TabularInline):
-#     model = PlanPricing
+class PricingPlanInline(admin.TabularInline):
+    model = PricingPlan
 
 
 class QuotaAdmin(admin.ModelAdmin):
@@ -48,10 +48,11 @@ def copy_plan(modeladmin, request, queryset):
         plan_copy.id = None
         plan_copy.is_available = False
         plan_copy.is_default = False
+        plan_copy.trial_duration = 0
         plan_copy.created = None
         plan_copy.save(force_insert=True)
 
-        for pricing in plan.planpricing_set.all():
+        for pricing in plan.pricingplan_set.all():
             pricing.id = None
             pricing.plan = plan_copy
             pricing.save(force_insert=True)
@@ -72,17 +73,15 @@ class PlanAdmin(admin.ModelAdmin):
     list_filter = ('is_available', 'is_visible')
     list_display = [
         'title',
-        'duration', 'period',
-        'timedelta',
         # 'description',
         # 'customized',
+        'trial_duration',
         'is_default', 'is_available',
-        'price',
         'created',
         # 'move_up_down_links'
     ]
     inlines = (
-        # PlanPricingInline,
+        PricingPlanInline,
         PlanQuotaInline,
     )
     list_select_related = True
@@ -98,6 +97,17 @@ class PlanAdmin(admin.ModelAdmin):
 # class RecurringPlanInline(admin.StackedInline):
 #     model = RecurringUserPlan
 #     extra = 0
+
+
+class PricingPlanAdmin(admin.ModelAdmin):
+    list_select_related = ['plan']
+    list_display = [
+        'id',
+        'plan',
+        'duration', 'period',
+        'price',
+        'timedelta',
+    ]
 
 
 class UserPlanAdmin(UserLinkMixin, admin.ModelAdmin):
@@ -127,5 +137,5 @@ class UserPlanAdmin(UserLinkMixin, admin.ModelAdmin):
 
 admin.site.register(Quota, QuotaAdmin)
 admin.site.register(Plan, PlanAdmin)
+admin.site.register(PricingPlan, PricingPlanAdmin)
 admin.site.register(UserPlan, UserPlanAdmin)
-# admin.site.register(Pricing)

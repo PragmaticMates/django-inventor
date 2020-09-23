@@ -16,21 +16,9 @@ accounts_logger = logging.getLogger('accounts')
 
 
 class Plan(models.Model):
-    PERIOD_DAY = 'DAY'
-    PERIOD_MONTH = 'MONTH'
-    PERIOD_YEAR = 'YEAR'
-    PERIODS = [
-        (PERIOD_DAY, _('day')),
-        (PERIOD_MONTH, _('month')),
-        (PERIOD_YEAR, _('year')),
-    ]
-
     title = models.CharField(unique=True, max_length=50)
-    period = models.CharField(_('period'), choices=PERIODS, max_length=5, blank=True)
-    duration = models.PositiveSmallIntegerField(verbose_name=_('duration'), help_text=_('in period'),
-                                           blank=True, null=True, default=None)
-    price = models.DecimalField(_('price'), help_text=settings.INVENTOR_CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0)],
-                                blank=True, null=True, default=None)
+    order = models.PositiveSmallIntegerField(verbose_name=_('ordering'), help_text=_('to set order in pricing'), unique=True, default=1)
+    trial_duration = models.PositiveSmallIntegerField(verbose_name=_('trial duration'), help_text=_('in days'), default=0)
     is_default = models.BooleanField(
         help_text=_('Default plan for user'),
         default=False,
@@ -50,44 +38,12 @@ class Plan(models.Model):
     objects = PlanQuerySet.as_manager()
 
     class Meta:
-        verbose_name = _(u'pricing plan')
-        verbose_name_plural = _(u'pricing plans')
-        ordering = ['price']
+        verbose_name = _(u'plan')
+        verbose_name_plural = _(u'plans')
+        ordering = ['order']
 
     def __str__(self):
         return self.title
-
-    def get_price_display(self):
-        return f'{self.price} {settings.INVENTOR_CURRENCY}'
-
-    @property
-    def price_per_month(self):
-        if self.period == self.PERIOD_DAY:
-            return self.price * 30 / self.duration  # approximately
-
-        if self.period == self.PERIOD_MONTH:
-            return self.price / self.duration
-
-        if self.period == self.PERIOD_YEAR:
-            return self.price / 12 / self.duration
-
-    def get_price_per_month_display(self):
-        return f'{self.price_per_month} {settings.INVENTOR_CURRENCY}'
-
-    @property
-    def timedelta(self):
-        if self.period == self.PERIOD_DAY:
-            return timedelta(days=self.duration)
-
-        if self.period == self.PERIOD_MONTH:
-            return relativedelta(months=self.duration)
-
-        if self.period == self.PERIOD_YEAR:
-            return relativedelta(years=self.duration)
-
-    def get_add_to_cart_url(self):  # TODO: move to ProductMixin
-        content_type = ContentType.objects.get_for_model(self)
-        return reverse('commerce:add_to_cart', args=(content_type.id, self.id))
 
     def get_absolute_url(self):
         return reverse('inventor:subscriptions:plans')
@@ -119,9 +75,87 @@ class Plan(models.Model):
         return quota_dic
 
     def is_free(self):
-        # return self.planpricing_set.count() == 0
-        return self.price == 0
+        return not self.pricingplan_set.exists()
     is_free.boolean = True
+
+
+class PricingPlan(models.Model):
+    PERIOD_DAY = 'DAY'
+    PERIOD_MONTH = 'MONTH'
+    PERIOD_YEAR = 'YEAR'
+    PERIODS = [
+        (PERIOD_DAY, _('day')),
+        (PERIOD_MONTH, _('month')),
+        (PERIOD_YEAR, _('year')),
+    ]
+    PERIODS_PLURALIZE = [
+        (PERIOD_DAY, (_('day'), _('days'))),
+        (PERIOD_MONTH, (_('month'), _('months'))),
+        (PERIOD_YEAR, (_('year'), _('years'))),
+    ]
+
+    plan = models.ForeignKey('Plan', on_delete=models.CASCADE)
+    period = models.CharField(_('period'), choices=PERIODS, max_length=5, blank=True)
+    duration = models.PositiveSmallIntegerField(verbose_name=_('duration'), help_text=_('in period'),
+                                           blank=True, null=True, default=None)
+    price = models.DecimalField(_('price'), help_text=settings.INVENTOR_CURRENCY, max_digits=10, decimal_places=2, db_index=True, validators=[MinValueValidator(0.01)],
+                                blank=True, null=True, default=None)
+    # is_default = models.BooleanField(
+    #     help_text=_('Default plan for user'),
+    #     default=False,
+    #     db_index=True,
+    # )
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    modified = models.DateTimeField(_('modified'), auto_now=True)
+    objects = PlanQuerySet.as_manager()
+
+    class Meta:
+        verbose_name = _(u'pricing plan')
+        verbose_name_plural = _(u'pricing plans')
+        ordering = ['price']
+
+    def __str__(self):
+        return f'{self.plan} ({self.get_duration_display()})'
+
+    def get_absolute_url(self):
+        return reverse('inventor:subscriptions:plans')
+
+    def get_duration_display(self):
+        period_localize = dict(self.PERIODS_PLURALIZE).get(self.period)
+        preiod_display = period_localize[0] if self.duration == 1 else period_localize[1]  # TODO: i18n
+        return f'{self.duration} {preiod_display}'
+
+    def get_price_display(self):
+        return f'{self.price} {settings.INVENTOR_CURRENCY}'
+
+    def get_add_to_cart_url(self):  # TODO: move to ProductMixin
+        content_type = ContentType.objects.get_for_model(self)
+        return reverse('commerce:add_to_cart', args=(content_type.id, self.id))
+
+    @property
+    def price_per_month(self):
+        if self.period == self.PERIOD_DAY:
+            return self.price * 30 / self.duration  # approximately
+
+        if self.period == self.PERIOD_MONTH:
+            return self.price / self.duration
+
+        if self.period == self.PERIOD_YEAR:
+            return self.price / 12 / self.duration
+
+    def get_price_per_month_display(self):
+        return f'{self.price_per_month} {settings.INVENTOR_CURRENCY}'
+
+    @property
+    def timedelta(self):
+        if self.period == self.PERIOD_DAY:
+            return timedelta(days=self.duration)
+
+        if self.period == self.PERIOD_MONTH:
+            return relativedelta(months=self.duration)
+
+        if self.period == self.PERIOD_YEAR:
+            return relativedelta(years=self.duration)
 
 
 class UserPlan(models.Model):
@@ -202,11 +236,11 @@ class UserPlan(models.Model):
             return None
         if not self.plan.is_free() and self.expiration is None:
             return None
-        # if pricing is None:
-        #     return self.expiration
-        # return self.get_plan_extended_from(plan) + timedelta(days=pricing.period)
-        from_date = self.get_plan_extended_from(plan)
-        return from_date + self.plan.timedelta
+        if pricing is None:
+            return self.expiration
+        return self.get_plan_extended_from(plan) + pricing.timedelta
+        # from_date = self.get_plan_extended_from(plan)
+        # return from_date + self.plan.timedelta
 
     def plan_autorenew_at(self):
         """
@@ -244,6 +278,9 @@ class UserPlan(models.Model):
         :return:
         """
 
+        if pricing and pricing.plan != plan:
+            raise ValueError(f'Extending by plan {plan} by invalid pricing {pricing}!')
+
         status = False  # flag; if extending account was successful?
         new_expiration = self.get_plan_extended_until(plan, pricing)
 
@@ -265,8 +302,7 @@ class UserPlan(models.Model):
             #     mail_context = {'user': self.user, 'userplan': self, 'plan': plan}
             #     send_template_email([self.user.email], 'mail/change_plan_title.txt', 'mail/change_plan_body.txt',
             #                         mail_context, get_user_language(self.user))
-            accounts_logger.info(
-                "Account '%s' [id=%d] plan changed to '%s' [id=%d]" % (self.user, self.user.pk, plan, plan.pk))
+            accounts_logger.info("Account '%s' [id=%d] plan changed to '%s' [id=%d]" % (self.user, self.user.pk, plan, plan.pk))
             status = True
 
         else:
@@ -332,16 +368,20 @@ class UserPlan(models.Model):
                             mail_context, get_user_language(self.user))
 
     @classmethod
-    def create_for_user(cls, user, plan=None):
-        plan = plan or Plan.get_default_plan()
+    def create_for_user(cls, user, pricing_plan=None):
+        if pricing_plan:
+            plan = pricing_plan.plan
+            expiration = now() + pricing_plan.timedelta
+        else:
+            plan = Plan.get_default_plan()
+            expiration = None if plan.is_free() else now() + timedelta(days=plan.trial_duration)
 
         if plan is not None:
             return UserPlan.objects.create(
                 user=user,
                 plan=plan,
                 # active=False,
-                # expiration=None,
-                expiration=now() + plan.timedelta,
+                expiration=expiration,
             )
 
     @classmethod
