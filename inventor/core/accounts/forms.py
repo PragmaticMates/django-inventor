@@ -6,6 +6,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, HTML
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
+from django.forms import HiddenInput
 from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import ModelSelect2Widget, ModelSelect2MultipleWidget
 from internationalflavor.countries import CountryFormField
@@ -211,16 +212,16 @@ class SignupForm(AllAuthSignupForm):
     # TODO: settings for required and visible fields
     first_name = forms.CharField(label=_('first name'), max_length=30)
     last_name = forms.CharField(label=_('last name'), max_length=30)
-    phone = forms.CharField(label=_('phone'), max_length=30)
-    street = forms.CharField(label=_('street and number'), max_length=200)
-    postcode = forms.CharField(label=_('postcode'), max_length=30)
-    city = forms.CharField(label=_('city'), max_length=50)
-    country = CountryFormField(label=_('Country'), initial='SK')
+    phone = forms.CharField(label=_('phone'), max_length=30, required=False)
+    street = forms.CharField(label=_('street and number'), max_length=200, required=False)
+    postcode = forms.CharField(label=_('postcode'), max_length=30, required=False)
+    city = forms.CharField(label=_('city'), max_length=50, required=False)
+    country = CountryFormField(label=_('Country'), required=False)  # TODO: initial country
     reg_id = forms.CharField(label=_('Reg. No'), max_length=30, required=False)
     tax_id = forms.CharField(label=_('TAX ID'), max_length=30, required=False)
     vat_id = VATNumberFormField(label=_('VAT ID'), required=False)
     date_of_birth = forms.DateField(label=_('date of birth'), required=False)  # TODO: datepicker / multiwidget
-    gender = forms.ChoiceField(label=_('gender'), choices=get_user_model().GENDERS)
+    gender = forms.ChoiceField(label=_('gender'), choices=get_user_model().GENDERS, required=False)
     team = forms.CharField(label=_('team/club'), max_length=50, required=False)
     agree_terms_and_conditions = forms.BooleanField(label=_('I agree terms and conditions'), required=True, initial=False)
     agree_privacy_policy = forms.BooleanField(label=_('I agree privacy policy'), required=True, initial=False)
@@ -230,9 +231,20 @@ class SignupForm(AllAuthSignupForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        print(inventor_settings.USER_REQUIRED_FIELDS)
+        print('USER_REQUIRED_FIELDS', inventor_settings.USER_REQUIRED_FIELDS)
         for required_field_name in inventor_settings.USER_REQUIRED_FIELDS:
             self.fields[required_field_name].required = True
+
+        print('USER_HIDDEN_FIELDS', inventor_settings.USER_HIDDEN_FIELDS)
+        for hidden_field_name in inventor_settings.USER_HIDDEN_FIELDS:
+            if self.fields[hidden_field_name].required:
+                raise ValueError(f'Field {hidden_field_name} can not be hidden, because it is required')
+            self.fields[hidden_field_name].widget = HiddenInput()
+
+        address_fields = ['street', 'postcode', 'city', 'country']
+        address_label = '' if set(address_fields) <= set(inventor_settings.USER_HIDDEN_FIELDS) else _('Address')
+        dob_fields = ['date_of_birth']
+        dob_label = '' if set(dob_fields) <= set(inventor_settings.USER_HIDDEN_FIELDS) else _('Date of birth')
 
         # placeholders
         if inventor_settings.USE_PLACEHOLDERS:
@@ -274,17 +286,8 @@ class SignupForm(AllAuthSignupForm):
                         Div(PrependedText('phone', '<i class="far fa-mobile"></i>'), css_class='col-md-5'),
                     ),
                 ),
-                Fieldset(
-                    _('Address'),
-                    'street',
-                    'postcode',
-                    'city',
-                    'country',
-                ),
-                Fieldset(
-                    _('Date of birth'),
-                    'date_of_birth',
-                ),
+                Fieldset(address_label, *address_fields),
+                Fieldset(dob_label, *dob_fields),
                 Fieldset(
                     _('Other'),
                     InlineRadios('gender'),
