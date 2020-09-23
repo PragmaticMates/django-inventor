@@ -113,15 +113,15 @@ class PricingAdmin(admin.ModelAdmin):
 class UserPlanAdmin(UserLinkMixin, admin.ModelAdmin):
     list_filter = (
         #'is_active',
-        'expiration', 'plan__title', 'plan__is_available', 'plan__is_visible', 'modified')
+        'expiration', 'plan__title', 'plan__is_available', 'plan__is_visible', 'modified', 'pricing')
     search_fields = ('user__email', 'plan__title',)
-    list_display = ('id', 'user', 'plan', 'expiration',  # 'is_active',
+    list_display = ('id', 'user', 'plan', 'pricing', 'expiration',  # 'is_active',
                     # 'recurring__automatic_renewal', 'recurring__pricing'
                     'modified')
     list_select_related = True
     readonly_fields = ['user_link', ]
     # inlines = (RecurringPlanInline,)
-    fields = ('user', 'user_link', 'plan', 'expiration', )  #'is_active')
+    fields = ('user', 'user_link', 'plan', 'pricing', 'expiration', )  #'is_active')
     autocomplete_fields = ['user', 'plan', ]
 
     def recurring__automatic_renewal(self, obj):
