@@ -97,8 +97,7 @@ class ProfileForm(forms.ModelForm):
 
         self.helper = FormHelper()
 
-        split_into_columns = False  # TODO: settings
-        if split_into_columns:
+        if inventor_settings.USER_FORM_COLUMNS:
             column_class = 'col-md-6'
         else:
             column_class = 'col-md-6 offset-md-3'
