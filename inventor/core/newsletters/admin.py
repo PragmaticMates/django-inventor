@@ -13,8 +13,25 @@ class SubscriptionModel(admin.ModelAdmin):
     actions = ['sync_with_accounts', 'export']
 
     def sync_with_accounts(self, request, queryset):
-        for user in get_user_model().objects.active():
+        unsubscribed_emails = get_user_model().objects.filter(agree_marketing_purposes=False).values_list('email', flat=True)
+        unsubscribed_subscribers = Subscriber.objects.filter(email__in=list(unsubscribed_emails))
+        unsubscribed_subscribers_count = unsubscribed_subscribers.count()
+        unsubscribed_subscribers.delete()
+
+        already_subscribed_subscribers = Subscriber.objects.all()
+        already_subscribed_subscribers_count_before = already_subscribed_subscribers.count()
+
+        for user in get_user_model().objects\
+                .active()\
+                .filter(agree_marketing_purposes=True)\
+                .exclude(email__in=already_subscribed_subscribers.values_list('email', flat=True)):
+
             Subscriber.objects.get_or_create(email=user.email)
+
+        already_subscribed_subscribers_count_after = Subscriber.objects.all().count()
+        new_subscribers = already_subscribed_subscribers_count_after - already_subscribed_subscribers_count_before
+        
+        messages.info(request, _('Deleted subscribers: %d. New subscribers: %s') % (unsubscribed_subscribers_count, new_subscribers))
 
     def export(self, request, queryset):
         # emails = list(queryset.values('email'))
