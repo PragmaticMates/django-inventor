@@ -1,5 +1,6 @@
 from django.contrib import admin, messages
 from django.contrib.auth import get_user_model
+from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 
 from inventor.core.newsletters.exporters import SubscriberXlsxListExporter
@@ -10,7 +11,7 @@ from inventor.core.newsletters.models import Subscriber
 class SubscriptionModel(admin.ModelAdmin):
     date_hierarchy = 'subscribed'
     list_display = ['email', 'subscribed']
-    actions = ['sync_with_accounts', 'export']
+    actions = ['sync_with_accounts', 'export_to_xls', 'export_to_list']
 
     def sync_with_accounts(self, request, queryset):
         unsubscribed_emails = get_user_model().objects.filter(agree_marketing_purposes=False).values_list('email', flat=True)
@@ -33,7 +34,7 @@ class SubscriptionModel(admin.ModelAdmin):
         
         messages.info(request, _('Deleted subscribers: %d. New subscribers: %s') % (unsubscribed_subscribers_count, new_subscribers))
 
-    def export(self, request, queryset):
+    def export_to_xls(self, request, queryset):
         # emails = list(queryset.values('email'))
         # from pprint import pprint
         # pprint(emails)
@@ -42,3 +43,6 @@ class SubscriptionModel(admin.ModelAdmin):
         # messages.info(request, _('Export has been sent to your e-mail address'))
         exporter = SubscriberXlsxListExporter(queryset=queryset, user=request.user, recipients=[request.user], selected_fields=['email'])
         return exporter.export_to_response()
+
+    def export_to_list(self, request, queryset):
+        return HttpResponse('<br>'.join(queryset.values_list('email', flat=True)))
