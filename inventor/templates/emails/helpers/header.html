@@ -1,7 +1,7 @@
 {% load i18n static inventor %}
 
-<mj-section background-color="#ffffff" padding="0">
-    <mj-column width="100%" vertical-align="middle" padding="0">
+<mj-section background-color="#ffffff" padding-top="35px">
+    <mj-column width="100%" vertical-align="middle">
         {% static 'images/logo.png' as path_to_logo %}
         <mj-image width="167px" src="{% uri path_to_logo %}" alt="{{ settings.PAGE_TITLE }}{% if view.title %} | {{ view.title }}{% elif view.object %} | {{ view.object }}{% endif %}" padding="0"></mj-image>
     </mj-column>
