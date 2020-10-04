@@ -4,6 +4,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
     <head>
         {% include 'helpers/google_tag_manager.html' %}
+        {% include 'helpers/hotjar.html' %}
         {% seo as seo %}
         <title>{{ settings.PAGE_TITLE }}{% if seo.title %} | {{ seo.title }}{% endif %}</title>
         <meta charset="utf-8">
