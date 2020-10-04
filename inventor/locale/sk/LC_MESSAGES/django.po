@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 11:24+0200\n"
-"PO-Revision-Date: 2020-08-23 13:30+0058\n"
+"POT-Creation-Date: 2020-10-04 18:36+0200\n"
+"PO-Revision-Date: 2020-10-04 18:42+0058\n"
 "Last-Translator: b'Erik Telepovsky <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n "
-">= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 "X-Generator: Poedit 2.3\n"
 "X-Translated-Using: django-rosetta 0.9.4\n"
 
@@ -35,8 +34,7 @@ msgstr ""
 "<br><br>\n"
 "Ďakujeme, že ste sa registrovali na %(site_name)s!\n"
 "<br><br>\n"
-"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: "
-"%(activate_url)s.\n"
+"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: %(activate_url)s.\n"
 "<br><br>"
 
 #: contrib/allauth/templates/account/email/email_confirmation_message.html:16
@@ -60,8 +58,7 @@ msgstr ""
 "\n"
 "Ďakujeme, že ste sa registrovali na %(site_name)s!\n"
 "\n"
-"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: "
-"%(activate_url)s.\n"
+"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: %(activate_url)s.\n"
 
 #: contrib/allauth/templates/account/email/email_confirmation_subject.txt:3
 msgid "Please Confirm Your E-mail Address"
@@ -72,17 +69,13 @@ msgstr "Prosím potvrďte svoju e-mailovú adresu"
 msgid ""
 "Hello %(user_display)s!\n"
 "            <br><br>\n"
-"            You're receiving this e-mail because you or someone else has "
-"requested a password for your user account.<br>\n"
-"            It can be safely ignored if you did not request a password "
-"reset. Click the link below to reset your password."
+"            You're receiving this e-mail because you or someone else has requested a password for your user account.<br>\n"
+"            It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
 msgstr ""
 "Dobrý deň %(user_display)s!\n"
 "<br><br>\n"
-"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla "
-"Vášho užívateľského účtu.<br>\n"
-"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla "
-"kliknite na odkaz nižšie."
+"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla Vášho užívateľského účtu.<br>\n"
+"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla kliknite na odkaz nižšie."
 
 #: contrib/allauth/templates/account/email/password_reset_key_message.html:17
 #: contrib/allauth/templates/account/email/password_reset_key_message.txt:9
@@ -95,17 +88,13 @@ msgstr "Ak by ste zabudli, Vaše prihlasovacie meno je %(username)s."
 msgid ""
 "Hello %(user_display)s!\n"
 "\n"
-"You're receiving this e-mail because you or someone else has requested a "
-"password for your user account.\n"
-"It can be safely ignored if you did not request a password reset. Click the "
-"link below to reset your password."
+"You're receiving this e-mail because you or someone else has requested a password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
 msgstr ""
 "Dobrý deň %(user_display)s!\n"
 "\n"
-"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla "
-"Vášho užívateľského účtu.\n"
-"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla "
-"kliknite na odkaz nižšie."
+"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla Vášho užívateľského účtu.\n"
+"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla kliknite na odkaz nižšie."
 
 #: contrib/allauth/templates/account/email/password_reset_key_subject.txt:3
 msgid "Password Reset E-mail"
@@ -142,12 +131,10 @@ msgstr "Ste tu prvýkrát? Vytvorte si nový účet:"
 #, python-format
 msgid ""
 "Please sign in with one\n"
-"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign "
-"up</a>\n"
+"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign up</a>\n"
 "for a %(site_name)s account and sign in below:"
 msgstr ""
-"Prihláste sa prosím jedným z vašich existujúcich účtov alebo <a href="
-"\"%(signup_url)s\">sa zaregistrujte</a>\n"
+"Prihláste sa prosím jedným z vašich existujúcich účtov alebo <a href=\"%(signup_url)s\">sa zaregistrujte</a>\n"
 "pre nový účet na %(site_name)s:"
 
 #: contrib/allauth/templates/account/login.html:25
@@ -180,8 +167,8 @@ msgstr "Obnova hesla"
 
 #: contrib/allauth/templates/account/password_reset.html:13
 msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll send you "
-"an e-mail allowing you to reset it."
+"Forgotten your password? Enter your e-mail address below, and we'll send you"
+" an e-mail allowing you to reset it."
 msgstr ""
 "Zabudli ste heslo? Zadajte svoju e-mailovú adresu a zašleme Vám odkaz na "
 "jeho obnovu."
@@ -211,11 +198,11 @@ msgstr "Nesprávny token."
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
-"a>."
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password "
+"reset</a>."
 msgstr ""
-"Odkaz na obnovu hesla je nesprávny, pravdepodobne bol už použitý. Požiadajte "
-"o opatovnú <a href=\"%(passwd_reset_url)s\">obnovu hesla</a>."
+"Odkaz na obnovu hesla je nesprávny, pravdepodobne bol už použitý. Požiadajte"
+" o opatovnú <a href=\"%(passwd_reset_url)s\">obnovu hesla</a>."
 
 #: contrib/allauth/templates/account/password_reset_from_key.html:17
 msgid "Change password"
@@ -326,8 +313,8 @@ msgid "Recipient"
 msgstr "Príjemca"
 
 #: contrib/commerce/templates/commerce/payment_information_wire_transfer.html:13
-#: core/accounts/admin.py:21 core/accounts/forms.py:102
-#: core/accounts/forms.py:278
+#: core/accounts/admin.py:21 core/accounts/forms.py:84
+#: core/accounts/forms.py:265
 msgid "Address"
 msgstr "Adresa"
 
@@ -351,7 +338,8 @@ msgstr ""
 #, python-format
 msgid "No users registered as `%(username)s` or user is unactived."
 msgstr ""
-"Užívateľ s prihlasovacím menom `%(username)s` sa nenašiel alebo je neaktívny."
+"Užívateľ s prihlasovacím menom `%(username)s` sa nenašiel alebo je "
+"neaktívny."
 
 #: contrib/martor/views.py:65
 msgid "Validation Failed for field `username`"
@@ -388,17 +376,17 @@ msgstr "Osobné informácie"
 msgid "Contact"
 msgstr "Kontakt"
 
-#: core/accounts/admin.py:22 core/accounts/forms.py:118
-#: core/accounts/forms.py:289
+#: core/accounts/admin.py:22 core/accounts/forms.py:139
+#: core/accounts/forms.py:312
 msgid "Other"
 msgstr "Iné"
 
-#: core/accounts/admin.py:23 core/accounts/forms.py:128
-#: core/accounts/forms.py:295
+#: core/accounts/admin.py:23 core/accounts/forms.py:149
+#: core/accounts/forms.py:318
 msgid "Agreements"
 msgstr "Súhlasy"
 
-#: core/accounts/admin.py:24 core/accounts/forms.py:199
+#: core/accounts/admin.py:24 core/accounts/forms.py:220
 msgid "Permissions"
 msgstr "Oprávnenia"
 
@@ -406,105 +394,105 @@ msgstr "Oprávnenia"
 msgid "Important dates"
 msgstr "Dôležité dátumy"
 
-#: core/accounts/forms.py:90 core/accounts/forms.py:264
-msgid "Name and surname"
-msgstr "Meno a priezvisko"
-
-#: core/accounts/forms.py:97 core/accounts/forms.py:179
-#: core/accounts/forms.py:271
-msgid "Contact details"
-msgstr "Kontaktné informácie"
-
-#: core/accounts/forms.py:111 core/accounts/forms.py:285
+#: core/accounts/forms.py:86 core/accounts/forms.py:267
 msgid "Date of birth"
 msgstr "Dátum narodenia"
 
-#: core/accounts/forms.py:124
+#: core/accounts/forms.py:109 core/accounts/forms.py:296
+msgid "Name and surname"
+msgstr "Meno a priezvisko"
+
+#: core/accounts/forms.py:116 core/accounts/forms.py:200
+#: core/accounts/forms.py:303
+msgid "Contact details"
+msgstr "Kontaktné informácie"
+
+#: core/accounts/forms.py:145
 msgid "Preferred language"
 msgstr "Preferovaný jazyk"
 
-#: core/accounts/forms.py:139 core/accounts/forms.py:205
+#: core/accounts/forms.py:160 core/accounts/forms.py:226
 msgid "Submit"
 msgstr "Potvrdiť"
 
-#: core/accounts/forms.py:170
+#: core/accounts/forms.py:191
 msgid "Personal details"
 msgstr "Osobné detaily"
 
-#: core/accounts/forms.py:185
+#: core/accounts/forms.py:206
 msgid "Classification"
 msgstr "Klasifikácia"
 
-#: core/accounts/forms.py:190
+#: core/accounts/forms.py:211
 msgid "Status"
 msgstr "Stav"
 
-#: core/accounts/forms.py:212 core/accounts/models.py:28
+#: core/accounts/forms.py:233 core/accounts/models.py:28
 msgid "first name"
 msgstr "krstné meno"
 
-#: core/accounts/forms.py:213 core/accounts/models.py:29
+#: core/accounts/forms.py:234 core/accounts/models.py:29
 msgid "last name"
 msgstr "priezvisko"
 
-#: core/accounts/forms.py:214 core/accounts/models.py:33
-#: core/bookings/models.py:43 core/listings/models/general.py:93
+#: core/accounts/forms.py:235 core/accounts/models.py:33
+#: core/bookings/models.py:43 core/listings/models/general.py:94
 msgid "phone"
 msgstr "telefón"
 
-#: core/accounts/forms.py:215 core/accounts/models.py:36
+#: core/accounts/forms.py:236 core/accounts/models.py:36
 msgid "street and number"
 msgstr "ulica a číslo"
 
-#: core/accounts/forms.py:216 core/accounts/models.py:37
+#: core/accounts/forms.py:237 core/accounts/models.py:37
 msgid "postcode"
 msgstr "PSČ"
 
-#: core/accounts/forms.py:217 core/accounts/models.py:38
+#: core/accounts/forms.py:238 core/accounts/models.py:38
 msgid "city"
 msgstr "mesto"
 
-#: core/accounts/forms.py:218 core/accounts/models.py:39
+#: core/accounts/forms.py:239 core/accounts/models.py:39
 msgid "Country"
 msgstr "Krajina"
 
-#: core/accounts/forms.py:219
+#: core/accounts/forms.py:240
 msgid "Reg. No"
 msgstr "IČO"
 
-#: core/accounts/forms.py:220
+#: core/accounts/forms.py:241
 msgid "TAX ID"
 msgstr "DIČ"
 
-#: core/accounts/forms.py:221
+#: core/accounts/forms.py:242
 msgid "VAT ID"
 msgstr "IČ DPH"
 
-#: core/accounts/forms.py:222 core/accounts/models.py:42
+#: core/accounts/forms.py:243 core/accounts/models.py:42
 msgid "date of birth"
 msgstr "dátum narodenia"
 
-#: core/accounts/forms.py:223 core/accounts/models.py:45
+#: core/accounts/forms.py:244 core/accounts/models.py:45
 msgid "gender"
 msgstr "pohlavie"
 
-#: core/accounts/forms.py:224 core/accounts/models.py:46
+#: core/accounts/forms.py:245 core/accounts/models.py:46
 msgid "team/club"
 msgstr "tím/klub"
 
-#: core/accounts/forms.py:225
+#: core/accounts/forms.py:246
 msgid "I agree terms and conditions"
 msgstr "Súhlasím s obchodnými podmienkami"
 
-#: core/accounts/forms.py:226
+#: core/accounts/forms.py:247
 msgid "I agree privacy policy"
 msgstr "Súhlasím so spracovaním osobných údajov"
 
-#: core/accounts/forms.py:227
+#: core/accounts/forms.py:248
 msgid "I agree with marketing purposes"
 msgstr "Súhlasím s využitím údajov na marketingové účely"
 
-#: core/accounts/forms.py:228
+#: core/accounts/forms.py:249
 msgid ""
 "I agree with publishing of my photos on social media channels of the "
 "organizer"
@@ -512,18 +500,17 @@ msgstr ""
 "Súhlasím s uverejňovaním mojich fotografií \n"
 "na sociálnych sieťach usporiadateľa"
 
-#: core/accounts/forms.py:250
+#: core/accounts/forms.py:282
 #, python-format
 msgid "I agree <a href=\"%s\" target=\"_blank\">terms and conditions</a>"
 msgstr "Súhlasím s <a href=\"%s\" target=\"_blank\">obchodnými podmienkami</a>"
 
-#: core/accounts/forms.py:256
+#: core/accounts/forms.py:288
 #, python-format
 msgid "I agree <a href=\"%s\" target=\"_blank\">privacy policy</a>"
-msgstr ""
-"Súhlasím so <a href=\"%s\" target=\"_blank\">spracovaním osobných údajov</a>"
+msgstr "Súhlasím so <a href=\"%s\" target=\"_blank\">spracovaním osobných údajov</a>"
 
-#: core/accounts/forms.py:303
+#: core/accounts/forms.py:326
 msgid "Sign up"
 msgstr "Registrovať sa"
 
@@ -536,7 +523,7 @@ msgid "female"
 msgstr "žena"
 
 #: core/accounts/models.py:32 core/bookings/models.py:44
-#: core/listings/models/general.py:94
+#: core/listings/models/general.py:95
 msgid "email"
 msgstr "email"
 
@@ -572,7 +559,7 @@ msgstr "naposledy videný"
 msgid "avatar"
 msgstr "avatar"
 
-#: core/accounts/models.py:67 core/listings/models/general.py:287
+#: core/accounts/models.py:67 core/listings/models/general.py:292
 msgid "photo, image or icon"
 msgstr "fotka, obrázok alebo ikona"
 
@@ -596,7 +583,7 @@ msgstr "Marketingové účely"
 msgid "Sharing on social networks"
 msgstr "Zdieľanie na sociálnych sieťach"
 
-#: core/accounts/models.py:84
+#: core/accounts/models.py:84 core/subscriptions/models.py:166
 msgid "user"
 msgstr "užívateľ"
 
@@ -675,6 +662,7 @@ msgid "hour"
 msgstr "hodina"
 
 #: core/bookings/mixins.py:8 core/listings/models/general.py:37
+#: core/subscriptions/models.py:87 core/subscriptions/models.py:92
 msgid "day"
 msgstr "deň"
 
@@ -742,7 +730,7 @@ msgstr "stav"
 msgid "traveler"
 msgstr "cestovateľ"
 
-#: core/bookings/models.py:32 core/listings/models/general.py:113
+#: core/bookings/models.py:32 core/listings/models/general.py:114
 msgid "listing"
 msgstr "položka"
 
@@ -762,7 +750,7 @@ msgstr "rezervácia do"
 msgid "number of persons"
 msgstr "počet osôb"
 
-#: core/bookings/models.py:37
+#: core/bookings/models.py:37 core/subscriptions/models.py:101
 msgid "price"
 msgstr "cena"
 
@@ -770,19 +758,21 @@ msgstr "cena"
 msgid "message"
 msgstr "správa"
 
-#: core/bookings/models.py:42 core/listings/models/general.py:92
+#: core/bookings/models.py:42 core/listings/models/general.py:93
 msgid "person"
 msgstr "osoba"
 
 #: core/bookings/models.py:46 core/faqs/models.py:10
-#: core/listings/models/general.py:107 core/listings/models/general.py:292
-#: core/partners/models.py:17
+#: core/listings/models/general.py:108 core/listings/models/general.py:297
+#: core/partners/models.py:17 core/subscriptions/models.py:36
+#: core/subscriptions/models.py:108
 msgid "created"
 msgstr "vytvorené"
 
 #: core/bookings/models.py:47 core/faqs/models.py:11
-#: core/listings/models/general.py:108 core/listings/models/general.py:293
-#: core/partners/models.py:18
+#: core/listings/models/general.py:109 core/listings/models/general.py:298
+#: core/partners/models.py:18 core/subscriptions/models.py:37
+#: core/subscriptions/models.py:109 core/subscriptions/models.py:175
 msgid "modified"
 msgstr "upravené"
 
@@ -816,16 +806,17 @@ msgstr "Farba"
 
 #: core/lexicons/models.py:18 core/lexicons/models.py:31
 #: core/lexicons/models.py:61 core/lexicons/models.py:77
-#: core/listings/models/general.py:42 core/listings/models/general.py:256
-#: core/listings/models/general.py:271 core/partners/models.py:8
+#: core/listings/models/general.py:42 core/listings/models/general.py:261
+#: core/listings/models/general.py:276 core/partners/models.py:8
 #: core/seo/models.py:12
 msgid "title"
 msgstr "názov"
 
 #: core/lexicons/models.py:20 core/lexicons/models.py:33
 #: core/lexicons/models.py:79 core/listings/models/general.py:44
-#: core/listings/models/general.py:257 core/listings/models/general.py:272
-#: core/listings/models/general.py:291 core/seo/models.py:13
+#: core/listings/models/general.py:262 core/listings/models/general.py:277
+#: core/listings/models/general.py:296 core/seo/models.py:13
+#: core/subscriptions/models.py:468
 msgid "description"
 msgstr "opis"
 
@@ -841,7 +832,7 @@ msgstr "typ položky"
 msgid "category"
 msgstr "kategória"
 
-#: core/lexicons/models.py:48 core/listings/models/general.py:52
+#: core/lexicons/models.py:48 core/listings/models/general.py:53
 msgid "categories"
 msgstr "kategórie"
 
@@ -849,11 +840,11 @@ msgstr "kategórie"
 msgid "feature"
 msgstr "výhoda"
 
-#: core/lexicons/models.py:69 core/listings/models/general.py:53
+#: core/lexicons/models.py:69 core/listings/models/general.py:54
 msgid "features"
 msgstr "výhody"
 
-#: core/lexicons/models.py:82 core/listings/models/general.py:297
+#: core/lexicons/models.py:82 core/listings/models/general.py:302
 msgid "photo"
 msgstr "fotografia"
 
@@ -887,7 +878,8 @@ msgstr[3] "%(num_listings)s položiek"
 msgid "Convert to {0}"
 msgstr "Konvertovať na {0}"
 
-#: core/listings/admin.py:82 core/listings/filters.py:126 templates/home.html:5
+#: core/listings/admin.py:82 core/listings/filters.py:126
+#: templates/home.html:5
 msgid "Categories"
 msgstr "Kategórie"
 
@@ -989,7 +981,7 @@ msgstr "Počet hostí"
 msgid "Contact person"
 msgstr "Kontaktná osoba"
 
-#: core/listings/forms.py:27
+#: core/listings/forms.py:27 core/newsletters/exporters.py:16
 msgid "E-mail"
 msgstr "E-mail"
 
@@ -1021,91 +1013,95 @@ msgid "published"
 msgstr "publikované"
 
 #: core/listings/models/general.py:49
+msgid "hidden"
+msgstr "skryté"
+
+#: core/listings/models/general.py:50
 msgid "promoted"
 msgstr "propagované"
 
-#: core/listings/models/general.py:56
+#: core/listings/models/general.py:57
 msgid "price starts at"
 msgstr "cena začína od"
 
-#: core/listings/models/general.py:59
+#: core/listings/models/general.py:60
 msgid "price unit"
 msgstr "jednotka ceny"
 
-#: core/listings/models/general.py:60
+#: core/listings/models/general.py:61
 msgid "price per person"
 msgstr "cena za osobu"
 
-#: core/listings/models/general.py:66
+#: core/listings/models/general.py:67
 msgid "address"
 msgstr "adresa"
 
-#: core/listings/models/general.py:66
+#: core/listings/models/general.py:67
 msgid "street, postcode, city"
 msgstr "ulica, PSČ, mesto"
 
-#: core/listings/models/general.py:71
+#: core/listings/models/general.py:72
 msgid "country"
 msgstr "krajina"
 
-#: core/listings/models/general.py:72
+#: core/listings/models/general.py:73
 msgid "point"
 msgstr "bod"
 
-#: core/listings/models/general.py:76 core/partners/models.py:10
+#: core/listings/models/general.py:77 core/partners/models.py:10
 msgid "image"
 msgstr "obrázok"
 
-#: core/listings/models/general.py:77 core/listings/models/general.py:85
+#: core/listings/models/general.py:78 core/listings/models/general.py:86
 #: core/listings/models/listing_types.py:117
 msgid "photo or image"
 msgstr "fotka alebo obrázok"
 
-#: core/listings/models/general.py:84
+#: core/listings/models/general.py:85
 msgid "banner"
 msgstr "baner"
 
-#: core/listings/models/general.py:95 core/partners/models.py:16
+#: core/listings/models/general.py:96 core/partners/models.py:16
 msgid "website"
 msgstr "webstránka"
 
-#: core/listings/models/general.py:98
+#: core/listings/models/general.py:99
 msgid "social networks"
 msgstr "sociálne siete"
 
-#: core/listings/models/general.py:114
+#: core/listings/models/general.py:115
 msgid "listings"
 msgstr "položky"
 
-#: core/listings/models/general.py:147
+#: core/listings/models/general.py:148
 msgid "starts at"
 msgstr "od"
 
-#: core/listings/models/general.py:258
+#: core/listings/models/general.py:263
 msgid "URL"
 msgstr "URL"
 
-#: core/listings/models/general.py:261
+#: core/listings/models/general.py:266
 msgid "video"
 msgstr "video"
 
-#: core/listings/models/general.py:262
+#: core/listings/models/general.py:267
 msgid "videos"
 msgstr "videá"
 
-#: core/listings/models/general.py:275
+#: core/listings/models/general.py:280
 msgid "album"
 msgstr "album"
 
-#: core/listings/models/general.py:276
+#: core/listings/models/general.py:281
 msgid "albums"
 msgstr "albumy"
 
-#: core/listings/models/general.py:286
+#: core/listings/models/general.py:291
 msgid "file"
 msgstr "súbor"
 
-#: core/listings/models/general.py:298
+#: core/listings/models/general.py:303
 msgid "photos"
 msgstr "fotografie"
 
@@ -1272,7 +1268,7 @@ msgstr "treningy/"
 msgid "difficulty"
 msgstr "náročnosť"
 
-#: core/listings/models/listing_types.py:154
+#: core/listings/models/listing_types.py:154 core/subscriptions/models.py:99
 msgid "duration"
 msgstr "trvanie"
 
@@ -1535,6 +1531,26 @@ msgstr "Názov"
 msgid "Promoted"
 msgstr "Propagované"
 
+#: core/newsletters/admin.py:35
+#, python-format
+msgid "Deleted subscribers: %d. New subscribers: %s"
+msgstr "Zmazaní odberatelia: %d. Noví odberatelia: %s"
+
+#: core/newsletters/exporters.py:9
+#| msgid "subscribed"
+msgid "subscribers.xlsx"
+msgstr "odberatelia.xlsx"
+
+#: core/newsletters/exporters.py:15
+#| msgid "Detail"
+msgid "Details"
+msgstr "Detaily"
+
+#: core/newsletters/exporters.py:26
+#| msgid "Subscribe"
+msgid "Subscribers"
+msgstr "Odberatelia"
+
 #: core/newsletters/forms.py:12
 msgid "Enter your e-mail"
 msgstr "Zadajte svoj e-mail"
@@ -1548,12 +1564,14 @@ msgid "subscribed"
 msgstr "prihlásený"
 
 #: core/newsletters/models.py:10
-msgid "subscription"
-msgstr "odber"
+#| msgid "subscribed"
+msgid "subscriber"
+msgstr "odberateľ"
 
 #: core/newsletters/models.py:11
-msgid "subscriptions"
-msgstr "odbery"
+#| msgid "subscribed"
+msgid "subscribers"
+msgstr "odberatelia"
 
 #: core/newsletters/views.py:24
 #, python-format
@@ -1600,6 +1618,175 @@ msgstr "kľúčové slová"
 msgid "SEO fields"
 msgstr "SEO polia"
 
+#: core/subscriptions/admin.py:66
+msgid "Make a plan copy"
+msgstr "Vytvoriť kópiu predplatného"
+
+#: core/subscriptions/models.py:20
+msgid "ordering"
+msgstr "zoradenie"
+
+#: core/subscriptions/models.py:20
+msgid "to set order in pricing"
+msgstr "na nastavenie poradia v cenníku"
+
+#: core/subscriptions/models.py:21
+#| msgid "duration"
+msgid "trial duration"
+msgstr "skúšobná doba"
+
+#: core/subscriptions/models.py:21
+msgid "in days"
+msgstr "v dňoch"
+
+#: core/subscriptions/models.py:23
+msgid "Default plan for user"
+msgstr "Prednastavený plán pre používateľa"
+
+#: core/subscriptions/models.py:28
+msgid "available"
+msgstr "dostupné"
+
+#: core/subscriptions/models.py:29
+msgid "Is still available for purchase"
+msgstr "Je stále dostupné na predaj"
+
+#: core/subscriptions/models.py:32
+msgid "visible"
+msgstr "viditeľné"
+
+#: core/subscriptions/models.py:33
+msgid "Is visible in current offer"
+msgstr "Je viditeľné v súčasnej ponuke"
+
+#: core/subscriptions/models.py:41 core/subscriptions/models.py:169
+msgid "plan"
+msgstr "plán"
+
+#: core/subscriptions/models.py:42
+msgid "plans"
+msgstr "plány"
+
+#: core/subscriptions/models.py:88 core/subscriptions/models.py:93
+msgid "month"
+msgstr "mesiac"
+
+#: core/subscriptions/models.py:89 core/subscriptions/models.py:94
+msgid "year"
+msgstr "rok"
+
+#: core/subscriptions/models.py:92
+#: core/subscriptions/templates/subscriptions/userplan_detail.html:7
+#: core/subscriptions/templates/subscriptions/widgets/plan.html:4
+msgid "days"
+msgstr "dní"
+
+#: core/subscriptions/models.py:93
+msgid "months"
+msgstr "mesiacov"
+
+#: core/subscriptions/models.py:94
+msgid "years"
+msgstr "rokov"
+
+#: core/subscriptions/models.py:98
+#| msgid "min period"
+msgid "period"
+msgstr "perióda"
+
+#: core/subscriptions/models.py:99
+#| msgid "min period"
+msgid "in period"
+msgstr "v perióde"
+
+#: core/subscriptions/models.py:113
+msgid "pricing plan"
+msgstr "cenníkový plán"
+
+#: core/subscriptions/models.py:114
+msgid "pricing plans"
+msgstr "cenníkové plány"
+
+#: core/subscriptions/models.py:170
+#| msgid "price"
+msgid "pricing"
+msgstr "cenník"
+
+#: core/subscriptions/models.py:172
+#: core/subscriptions/templates/subscriptions/userplan_detail.html:7
+msgid "Expires"
+msgstr "Expiruje"
+
+#: core/subscriptions/models.py:178
+msgid "User plan"
+msgstr "Plán používateľa"
+
+#: core/subscriptions/models.py:179
+msgid "Users plans"
+msgstr "Plány používateľov"
+
+#: core/subscriptions/models.py:465
+msgid "codename"
+msgstr "kódové meno"
+
+#: core/subscriptions/models.py:466
+#| msgid "Bank name"
+msgid "name"
+msgstr "názov"
+
+#: core/subscriptions/models.py:467
+msgid "unit"
+msgstr "jednotka"
+
+#: core/subscriptions/models.py:469
+msgid "is boolean"
+msgstr "je pravda/nepravda"
+
+#: core/subscriptions/models.py:473
+msgid "Quota"
+msgstr "Kvóta"
+
+#: core/subscriptions/models.py:474
+msgid "Quotas"
+msgstr "Kvóty"
+
+#: core/subscriptions/models.py:519
+msgid "Plan quota"
+msgstr "Kvóta plánu"
+
+#: core/subscriptions/models.py:520
+msgid "Plans quotas"
+msgstr "Kvóty plánov"
+
+#: core/subscriptions/templates/subscriptions/userplan_detail.html:2
+msgid "Plan"
+msgstr "Plán"
+
+#: core/subscriptions/templates/subscriptions/userplan_detail.html:4
+#: core/subscriptions/templates/subscriptions/userplan_detail.html:9
+#| msgid "Price"
+msgid "Pricing"
+msgstr "Cenník"
+
+#: core/subscriptions/templates/subscriptions/userplan_detail.html:7
+#| msgid "icon"
+msgid "in"
+msgstr "o"
+
+#: core/subscriptions/templates/subscriptions/widgets/plan.html:5
+msgid "Choose"
+msgstr "Zvoliť"
+
+#: core/subscriptions/urls.py:8
+msgctxt "url"
+msgid "plans/"
+msgstr "plany/"
+
+#: core/subscriptions/urls.py:9
+msgctxt "url"
+msgid "my-plan/"
+msgstr "moj-plan/"
+
 #: templates/helpers/filter-vertical.html:20
 msgid "Search"
 msgstr "Hľadať"
@@ -1612,6 +1799,18 @@ msgstr "Prihláste sa na odber noviniek"
 msgid ""
 "Subscribe to our newsletter to receive the latest news and exclusive offers."
 msgstr "Nenechajte si újsť naše novinky a exkluzívne ponuky."
+
+#: urls.py:13
+#| msgid "country"
+msgctxt "url"
+msgid "accounts/"
+msgstr "ucty/"
+
+#~ msgid "subscription"
+#~ msgstr "odber"
+
+#~ msgid "subscriptions"
+#~ msgstr "odbery"
 
 #~ msgid "Pay"
 #~ msgstr "Uhradiť"
@@ -1717,9 +1916,6 @@ msgstr "Nenechajte si újsť naše novinky a exkluzívne ponuky."
 
 #~ msgid "€"
 #~ msgstr "€"
-
-#~ msgid "Detail"
-#~ msgstr "Detail"
 
 #~ msgid "Holiday"
 #~ msgstr "Prázdniny"
