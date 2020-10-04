@@ -49,9 +49,9 @@ def make_convert_to_type_action(listing_type):
 class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     date_hierarchy = 'created'
     search_fields = ['id', 'title_i18n', 'description']
-    list_display = ('id', 'title_i18n', 'slug_i18n', 'get_categories', 'address', 'locality', 'get_price_display', 'published', 'created')
+    list_display = ('id', 'title_i18n', 'slug_i18n', 'get_categories', 'address', 'locality', 'get_price_display', 'published', 'hidden', 'promoted', 'created')
     list_display_links = ('title_i18n',)
-    list_filter = ('published', 'promoted', 'awaiting')
+    list_filter = ('published', 'hidden', 'promoted', 'awaiting')
     autocomplete_fields = ['author', 'locality']
     list_select_related = ['locality']
     filter_vertical = ['categories', 'features']  # TODO: filter categories for selected listing type only
@@ -90,7 +90,7 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     def fieldsets(self):
         fieldsets_definition = {
             'DEFINITION': (_('Definition'), {'fields': ('title_i18n', 'slug_i18n', 'description_i18n',)}),
-            'MANAGEMENT': (_('Management'), {'fields': ('author', 'published', 'promoted')}),
+            'MANAGEMENT': (_('Management'), {'fields': ('author', 'published', 'hidden', 'promoted')}),
             'SPECIFICATION': (_('Specification'), {'fields': (('categories', 'features'),)}),
             'PRICE': (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person', 'availability', 'awaiting'),)}),
             'LOCATION': (_('Location'), {'fields': ('locality', 'country', 'address', 'point')}),

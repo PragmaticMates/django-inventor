@@ -46,6 +46,7 @@ class Listing(SlugMixin, AbstractProduct):
     # management
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('author'))
     published = models.BooleanField(_('published'), default=True)
+    hidden = models.BooleanField(_('hidden'), default=False)
     promoted = models.BooleanField(_('promoted'), default=False)
 
     # specification

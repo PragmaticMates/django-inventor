@@ -45,6 +45,7 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     def get_whole_queryset(self):
         qs = super().get_queryset()\
             .published()\
+            .not_hidden()\
             .order_by('-promoted', 'modified')
 
         if self.model == Listing:

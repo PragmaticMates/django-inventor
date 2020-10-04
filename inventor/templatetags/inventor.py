@@ -15,6 +15,7 @@ def inventor_listings(**kwargs):
     return Listing\
         .objects\
         .published()\
+        .not_hidden()\
         .select_subclasses()\
         .prefetch_related('categories')\
         .order_by('-promoted', 'awaiting', 'created')
@@ -39,9 +40,9 @@ def inventor_stats(stat):
     if stat == 'active_users':
         return get_user_model().objects.active().count()
     if stat == 'published_listings':
-        return Listing.objects.published().count()
+        return Listing.objects.published().not_hidden().count()
     if stat == 'published_races':  # TODO: filter listings by argument
-        return Race.objects.published().count()
+        return Race.objects.published().not_hidden().count()
     if stat == 'categories':
         return Category.objects.count()
 

@@ -24,6 +24,12 @@ class ListingQuerySet(InheritanceQuerySet):
     def not_published(self):
         return self.filter(published=False)
 
+    def hidden(self):
+        return self.filter(hidden=True)
+
+    def not_hidden(self):
+        return self.filter(hidden=False)
+
     def promoted(self):
         return self.filter(promoted=True)
 
