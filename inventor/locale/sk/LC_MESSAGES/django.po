@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-04 18:36+0200\n"
-"PO-Revision-Date: 2020-10-04 18:42+0058\n"
+"POT-Creation-Date: 2020-10-04 21:29+0200\n"
+"PO-Revision-Date: 2020-10-04 21:30+0058\n"
 "Last-Translator: b'Erik Telepovsky <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -764,14 +764,14 @@ msgstr "osoba"
 
 #: core/bookings/models.py:46 core/faqs/models.py:10
 #: core/listings/models/general.py:108 core/listings/models/general.py:297
-#: core/partners/models.py:17 core/subscriptions/models.py:36
+#: core/partners/models.py:19 core/subscriptions/models.py:36
 #: core/subscriptions/models.py:108
 msgid "created"
 msgstr "vytvorené"
 
 #: core/bookings/models.py:47 core/faqs/models.py:11
 #: core/listings/models/general.py:109 core/listings/models/general.py:298
-#: core/partners/models.py:18 core/subscriptions/models.py:37
+#: core/partners/models.py:20 core/subscriptions/models.py:37
 #: core/subscriptions/models.py:109 core/subscriptions/models.py:175
 msgid "modified"
 msgstr "upravené"
@@ -815,8 +815,8 @@ msgstr "názov"
 #: core/lexicons/models.py:20 core/lexicons/models.py:33
 #: core/lexicons/models.py:79 core/listings/models/general.py:44
 #: core/listings/models/general.py:262 core/listings/models/general.py:277
-#: core/listings/models/general.py:296 core/seo/models.py:13
-#: core/subscriptions/models.py:468
+#: core/listings/models/general.py:296 core/partners/models.py:18
+#: core/seo/models.py:13 core/subscriptions/models.py:468
 msgid "description"
 msgstr "opis"
 
@@ -1061,7 +1061,7 @@ msgstr "fotka alebo obrázok"
 msgid "banner"
 msgstr "baner"
 
-#: core/listings/models/general.py:96 core/partners/models.py:16
+#: core/listings/models/general.py:96 core/partners/models.py:17
 msgid "website"
 msgstr "webstránka"
 
@@ -1537,17 +1537,14 @@ msgid "Deleted subscribers: %d. New subscribers: %s"
 msgstr "Zmazaní odberatelia: %d. Noví odberatelia: %s"
 
 #: core/newsletters/exporters.py:9
-#| msgid "subscribed"
 msgid "subscribers.xlsx"
 msgstr "odberatelia.xlsx"
 
 #: core/newsletters/exporters.py:15
-#| msgid "Detail"
 msgid "Details"
 msgstr "Detaily"
 
 #: core/newsletters/exporters.py:26
-#| msgid "Subscribe"
 msgid "Subscribers"
 msgstr "Odberatelia"
 
@@ -1564,12 +1561,10 @@ msgid "subscribed"
 msgstr "prihlásený"
 
 #: core/newsletters/models.py:10
-#| msgid "subscribed"
 msgid "subscriber"
 msgstr "odberateľ"
 
 #: core/newsletters/models.py:11
-#| msgid "subscribed"
 msgid "subscribers"
 msgstr "odberatelia"
 
@@ -1602,11 +1597,16 @@ msgstr "Správu sa nepodarilo odoslať. Skúste znova."
 msgid "logo or image"
 msgstr "logo alebo obrázok"
 
-#: core/partners/models.py:21
+#: core/partners/models.py:16
+#| msgid "partner"
+msgid "main partner"
+msgstr "hlavný partner"
+
+#: core/partners/models.py:23
 msgid "partner"
 msgstr "partner"
 
-#: core/partners/models.py:22
+#: core/partners/models.py:24
 msgid "partners"
 msgstr "partneri"
 
@@ -1631,7 +1631,6 @@ msgid "to set order in pricing"
 msgstr "na nastavenie poradia v cenníku"
 
 #: core/subscriptions/models.py:21
-#| msgid "duration"
 msgid "trial duration"
 msgstr "skúšobná doba"
 
@@ -1690,12 +1689,10 @@ msgid "years"
 msgstr "rokov"
 
 #: core/subscriptions/models.py:98
-#| msgid "min period"
 msgid "period"
 msgstr "perióda"
 
 #: core/subscriptions/models.py:99
-#| msgid "min period"
 msgid "in period"
 msgstr "v perióde"
 
@@ -1708,7 +1705,6 @@ msgid "pricing plans"
 msgstr "cenníkové plány"
 
 #: core/subscriptions/models.py:170
-#| msgid "price"
 msgid "pricing"
 msgstr "cenník"
 
@@ -1730,7 +1726,6 @@ msgid "codename"
 msgstr "kódové meno"
 
 #: core/subscriptions/models.py:466
-#| msgid "Bank name"
 msgid "name"
 msgstr "názov"
 
@@ -1764,12 +1759,10 @@ msgstr "Plán"
 
 #: core/subscriptions/templates/subscriptions/userplan_detail.html:4
 #: core/subscriptions/templates/subscriptions/userplan_detail.html:9
-#| msgid "Price"
 msgid "Pricing"
 msgstr "Cenník"
 
 #: core/subscriptions/templates/subscriptions/userplan_detail.html:7
-#| msgid "icon"
 msgid "in"
 msgstr "o"
 
@@ -1800,8 +1793,13 @@ msgid ""
 "Subscribe to our newsletter to receive the latest news and exclusive offers."
 msgstr "Nenechajte si újsť naše novinky a exkluzívne ponuky."
 
-#: urls.py:13
-#| msgid "country"
+#: urls.py:14
+#| msgid "partners"
+msgctxt "url"
+msgid "partners/"
+msgstr "partneri/"
+
+#: urls.py:15
 msgctxt "url"
 msgid "accounts/"
 msgstr "ucty/"

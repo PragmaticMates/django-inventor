@@ -13,14 +13,16 @@ class Partner(models.Model):
         upload_to='images',
         blank=True
     )
+    is_main = models.BooleanField(_('main partner'), default=False)
     website = models.URLField(_('website'), help_text='URL', blank=True)
+    description = models.TextField(_('description'), blank=True)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
 
     class Meta:
         verbose_name = _('partner')
         verbose_name_plural = _('partners')
-        ordering = ('title',)
+        ordering = ('-is_main', 'title',)
 
     def __str__(self):
         return self.title
