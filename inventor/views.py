@@ -1,6 +1,11 @@
 from django.db.models import F
+from django.http import HttpResponse
+from django.urls import reverse
+from django.views.decorators.http import require_GET
 from django.views.generic import TemplateView
 from inventor.core.lexicons.models import Locality, Category
+from inventor.core.listings.models.general import Listing
+from inventor.templatetags.inventor import uri
 from writing.models import Article
 
 
@@ -32,3 +37,17 @@ class HomeView(TemplateView):
             pass
 
         return context_data
+
+
+@require_GET
+def robots_txt(request):
+    lines = [
+        "User-Agent: *",
+        # "Disallow: /private/",
+        f"Sitemap: {uri({'request': request}, reverse('sitemap'))}",
+    ]
+
+    # for hidden_listing in Listing.objects.hidden():
+    #     lines.append(f"Disallow: {hidden_listing.get_absolute_url()}")
+
+    return HttpResponse("\n".join(lines), content_type="text/plain")
