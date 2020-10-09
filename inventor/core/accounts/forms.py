@@ -290,6 +290,7 @@ class SignupForm(AllAuthSignupForm):
             pass
 
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             # Row(
                 Fieldset(

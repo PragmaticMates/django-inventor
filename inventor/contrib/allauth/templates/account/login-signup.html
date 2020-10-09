@@ -28,7 +28,7 @@
                 <h1>{% trans "Sign Up" %}</h1>
                 <p>{% trans 'Are you first time here? Create a new account:' %}</p>
 
-                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}{% if redirect_field_value %}?{{ redirect_field_name }}={{ redirect_field_value }}{% endif %}">
     {#                {% csrf_token %}#}
     {#                {{ signup_form|crispy }}#}
                     {% crispy signup_form %}
