@@ -26,6 +26,7 @@
         <link href="{% static 'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/inventor.css' %}?v={{ deployment_timestamp }}" rel="stylesheet" type="text/css">
         <link href="{% static 'node_modules/simplelightbox/dist/simple-lightbox.min.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'node_modules/owl.carousel/dist/assets/owl.carousel.min.css' %}" rel="stylesheet" type="text/css">
 
         {% block css %}{% endblock %}
 
@@ -44,6 +45,7 @@
         <script defer src="{% static 'node_modules/simplelightbox/dist/simple-lightbox.min.js' %}"></script>
         <script defer src="{% static 'node_modules/bootstrap-slider/dist/bootstrap-slider.min.js' %}"></script>
         <script defer src="{% static 'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+        <script defer src="{% static 'node_modules/owl.carousel/dist/owl.carousel.min.js' %}"></script>
         <script defer src="{% static 'pragmatic/js/sliders.js' %}?v={{ deployment_timestamp }}"></script> {# django-pragmatic #}
         <script defer src="{% static 'pragmatic/js/forms.js' %}?v={{ deployment_timestamp }}"></script> {# django-pragmatic #}
         <script defer src="{% static 'pragmatic/js/date-and-time-picker.js' %}?v={{ deployment_timestamp }}"></script> {# django-pragmatic #}
