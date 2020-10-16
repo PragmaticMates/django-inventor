@@ -8,9 +8,10 @@ from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, override as override_language
 
-from inventor.core.subscriptions.querysets import PlanQuerySet
+from inventor.core.subscriptions.querysets import PlanQuerySet, UserPlanQuerySet
+from pragmatic.managers import EmailManager
 
 accounts_logger = logging.getLogger('accounts')
 
@@ -173,6 +174,8 @@ class UserPlan(models.Model):
     # is_active = models.BooleanField(_('active'), default=True, db_index=True)
     # is_recurring = models.BooleanField(_('active'), default=True, db_index=True)  # TODO: can be turned on/turned off
     modified = models.DateTimeField(_('modified'), auto_now=True)
+
+    objects = UserPlanQuerySet.as_manager()
 
     class Meta:
         verbose_name = _("User plan")
@@ -361,16 +364,23 @@ class UserPlan(models.Model):
 
         account_expired.send(sender=self, user=self.user)
 
-    def remind_expire_soon(self):
-        """reminds about soon account expiration"""
+    def send_reminder(self):
+        if self.is_expired():
+            return
 
-        mail_context = {
-            'user': self.user,
-            'userplan': self,
-            'days': self.days_left()
-        }
-        send_template_email([self.user.email], 'mail/remind_expire_title.txt', 'mail/remind_expire_body.txt',
-                            mail_context, get_user_language(self.user))
+        with override_language(self.user.preferred_language):
+            EmailManager.send_mail(self.user, 'subscriptions/mails/subscription_reminder', _('Your subscription is going to expire soon'), data={'userplan': self}, request=None)
+
+    # def remind_expire_soon(self):
+    #     """reminds about soon account expiration"""
+    #
+    #     mail_context = {
+    #         'user': self.user,
+    #         'userplan': self,
+    #         'days': self.days_left()
+    #     }
+    #     send_template_email([self.user.email], 'mail/remind_expire_title.txt', 'mail/remind_expire_body.txt',
+    #                         mail_context, get_user_language(self.user))
 
     @classmethod
     def create_for_user(cls, user, pricing=None):

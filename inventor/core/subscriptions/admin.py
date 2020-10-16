@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -111,6 +111,7 @@ class PricingAdmin(admin.ModelAdmin):
 
 
 class UserPlanAdmin(UserLinkMixin, admin.ModelAdmin):
+    actions = ['send_reminder']
     list_filter = (
         #'is_active',
         'expiration', 'plan__title', 'plan__is_available', 'plan__is_visible', 'modified', 'pricing')
@@ -132,6 +133,15 @@ class UserPlanAdmin(UserLinkMixin, admin.ModelAdmin):
     def recurring__pricing(self, obj):
         return obj.recurring.pricing
     recurring__automatic_renewal.admin_order_field = 'recurring__pricing'
+
+    def send_reminder(self, request, queryset):
+        for obj in queryset:
+            if obj.is_expired():
+                messages.error(request, _('Userplan %s already expired') % obj)
+            else:
+                messages.success(request, _('Reminder sent (%s)') % obj)
+                obj.send_reminder()
+    send_reminder.short_description = _('Send reminder')
 
 
 admin.site.register(Quota, QuotaAdmin)

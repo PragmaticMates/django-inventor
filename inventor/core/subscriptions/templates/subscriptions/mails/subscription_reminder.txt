@@ -1,0 +1,14 @@
+{% load i18n inventor %}{% autoescape off %}{% blocktrans with user=recipient %}Hello {{ user }}!{% endblocktrans %}
+
+{% trans 'We would like to inform you that your subscription is going to expire soon.' %}
+
+{% trans 'Plan' %}: {{ userplan.pricing|default:userplan.plan }}
+{% if userplan.expiration %}{% trans 'Expires' %}: {{ userplan.expiration }} ({% trans 'in' %} {{ userplan.days_left }} {% trans 'days' %}){% endif %}
+
+{% trans 'You can extend your subscription at following URL:' %}
+{% url 'inventor:subscriptions:plans' as pricing_url %}{% uri pricing_url %}
+
+{% blocktrans with site_name=site.name site_domain=site.domain %}{{ site_name }} team!
+{{ site_domain }}
+{% endblocktrans %}
+{% endautoescape %}
