@@ -17,5 +17,5 @@ urlpatterns = (
 
 if 'inventor.core.subscriptions' in settings.INSTALLED_APPS:
     urlpatterns += (
-        path('subscriptions/', include('inventor.core.subscriptions.urls', namespace='subscriptions')),
+        path(pgettext_lazy('url', 'subscriptions/'), include('inventor.core.subscriptions.urls', namespace='subscriptions')),
     )

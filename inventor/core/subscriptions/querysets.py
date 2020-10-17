@@ -11,5 +11,5 @@ class PlanQuerySet(models.QuerySet):
 
 class UserPlanQuerySet(models.QuerySet):
     def expires_in(self, days=7):
-        threshold = now() - timedelta(days=days)
+        threshold = now() + timedelta(days=days)
         return self.filter(expiration=threshold.date())

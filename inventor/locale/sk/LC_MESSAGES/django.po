@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-04 21:29+0200\n"
-"PO-Revision-Date: 2020-10-04 21:30+0058\n"
-"Last-Translator: b'Erik Telepovsky <erik@pragmaticmates.com>'\n"
+"POT-Creation-Date: 2020-10-17 12:40+0200\n"
+"PO-Revision-Date: 2020-10-17 12:40+0058\n"
+"Last-Translator: b'Erik PRAGMATIC <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 "X-Generator: Poedit 2.3\n"
-"X-Translated-Using: django-rosetta 0.9.4\n"
+"X-Translated-Using: django-rosetta 0.9.5\n"
 
 #: contrib/allauth/templates/account/email/email_confirmation_message.html:9
 #, python-format
@@ -377,12 +377,12 @@ msgid "Contact"
 msgstr "Kontakt"
 
 #: core/accounts/admin.py:22 core/accounts/forms.py:139
-#: core/accounts/forms.py:312
+#: core/accounts/forms.py:313
 msgid "Other"
 msgstr "Iné"
 
 #: core/accounts/admin.py:23 core/accounts/forms.py:149
-#: core/accounts/forms.py:318
+#: core/accounts/forms.py:319
 msgid "Agreements"
 msgstr "Súhlasy"
 
@@ -398,12 +398,12 @@ msgstr "Dôležité dátumy"
 msgid "Date of birth"
 msgstr "Dátum narodenia"
 
-#: core/accounts/forms.py:109 core/accounts/forms.py:296
+#: core/accounts/forms.py:109 core/accounts/forms.py:297
 msgid "Name and surname"
 msgstr "Meno a priezvisko"
 
 #: core/accounts/forms.py:116 core/accounts/forms.py:200
-#: core/accounts/forms.py:303
+#: core/accounts/forms.py:304
 msgid "Contact details"
 msgstr "Kontaktné informácie"
 
@@ -510,7 +510,7 @@ msgstr "Súhlasím s <a href=\"%s\" target=\"_blank\">obchodnými podmienkami</a
 msgid "I agree <a href=\"%s\" target=\"_blank\">privacy policy</a>"
 msgstr "Súhlasím so <a href=\"%s\" target=\"_blank\">spracovaním osobných údajov</a>"
 
-#: core/accounts/forms.py:326
+#: core/accounts/forms.py:327
 msgid "Sign up"
 msgstr "Registrovať sa"
 
@@ -583,7 +583,7 @@ msgstr "Marketingové účely"
 msgid "Sharing on social networks"
 msgstr "Zdieľanie na sociálnych sieťach"
 
-#: core/accounts/models.py:84 core/subscriptions/models.py:166
+#: core/accounts/models.py:84 core/subscriptions/models.py:167
 msgid "user"
 msgstr "užívateľ"
 
@@ -662,7 +662,7 @@ msgid "hour"
 msgstr "hodina"
 
 #: core/bookings/mixins.py:8 core/listings/models/general.py:37
-#: core/subscriptions/models.py:87 core/subscriptions/models.py:92
+#: core/subscriptions/models.py:88 core/subscriptions/models.py:93
 msgid "day"
 msgstr "deň"
 
@@ -750,7 +750,7 @@ msgstr "rezervácia do"
 msgid "number of persons"
 msgstr "počet osôb"
 
-#: core/bookings/models.py:37 core/subscriptions/models.py:101
+#: core/bookings/models.py:37 core/subscriptions/models.py:102
 msgid "price"
 msgstr "cena"
 
@@ -764,15 +764,15 @@ msgstr "osoba"
 
 #: core/bookings/models.py:46 core/faqs/models.py:10
 #: core/listings/models/general.py:108 core/listings/models/general.py:297
-#: core/partners/models.py:19 core/subscriptions/models.py:36
-#: core/subscriptions/models.py:108
+#: core/partners/models.py:19 core/subscriptions/models.py:37
+#: core/subscriptions/models.py:109
 msgid "created"
 msgstr "vytvorené"
 
 #: core/bookings/models.py:47 core/faqs/models.py:11
 #: core/listings/models/general.py:109 core/listings/models/general.py:298
-#: core/partners/models.py:20 core/subscriptions/models.py:37
-#: core/subscriptions/models.py:109 core/subscriptions/models.py:175
+#: core/partners/models.py:20 core/subscriptions/models.py:38
+#: core/subscriptions/models.py:110 core/subscriptions/models.py:176
 msgid "modified"
 msgstr "upravené"
 
@@ -816,7 +816,7 @@ msgstr "názov"
 #: core/lexicons/models.py:79 core/listings/models/general.py:44
 #: core/listings/models/general.py:262 core/listings/models/general.py:277
 #: core/listings/models/general.py:296 core/partners/models.py:18
-#: core/seo/models.py:13 core/subscriptions/models.py:468
+#: core/seo/models.py:13 core/subscriptions/models.py:478
 msgid "description"
 msgstr "opis"
 
@@ -1268,7 +1268,7 @@ msgstr "treningy/"
 msgid "difficulty"
 msgstr "náročnosť"
 
-#: core/listings/models/listing_types.py:154 core/subscriptions/models.py:99
+#: core/listings/models/listing_types.py:154 core/subscriptions/models.py:100
 msgid "duration"
 msgstr "trvanie"
 
@@ -1598,7 +1598,6 @@ msgid "logo or image"
 msgstr "logo alebo obrázok"
 
 #: core/partners/models.py:16
-#| msgid "partner"
 msgid "main partner"
 msgstr "hlavný partner"
 
@@ -1622,149 +1621,198 @@ msgstr "SEO polia"
 msgid "Make a plan copy"
 msgstr "Vytvoriť kópiu predplatného"
 
-#: core/subscriptions/models.py:20
+#: core/subscriptions/admin.py:140
+#, python-format
+msgid "Userplan %s already expired"
+msgstr "Predplatné používateľa %s už expirovalo"
+
+#: core/subscriptions/admin.py:142
+#, python-format
+msgid "Reminder sent (%s)"
+msgstr "Pripomienka zaslaná (%s)"
+
+#: core/subscriptions/admin.py:144
+msgid "Send reminder"
+msgstr "Odoslať pripomienku"
+
+#: core/subscriptions/apps.py:11
+msgid "Subscriptions"
+msgstr "Predplatné"
+
+#: core/subscriptions/models.py:21
 msgid "ordering"
 msgstr "zoradenie"
 
-#: core/subscriptions/models.py:20
+#: core/subscriptions/models.py:21
 msgid "to set order in pricing"
 msgstr "na nastavenie poradia v cenníku"
 
-#: core/subscriptions/models.py:21
+#: core/subscriptions/models.py:22
 msgid "trial duration"
 msgstr "skúšobná doba"
 
-#: core/subscriptions/models.py:21
+#: core/subscriptions/models.py:22
 msgid "in days"
 msgstr "v dňoch"
 
-#: core/subscriptions/models.py:23
+#: core/subscriptions/models.py:24
 msgid "Default plan for user"
 msgstr "Prednastavený plán pre používateľa"
 
-#: core/subscriptions/models.py:28
+#: core/subscriptions/models.py:29
 msgid "available"
 msgstr "dostupné"
 
-#: core/subscriptions/models.py:29
+#: core/subscriptions/models.py:30
 msgid "Is still available for purchase"
 msgstr "Je stále dostupné na predaj"
 
-#: core/subscriptions/models.py:32
+#: core/subscriptions/models.py:33
 msgid "visible"
 msgstr "viditeľné"
 
-#: core/subscriptions/models.py:33
+#: core/subscriptions/models.py:34
 msgid "Is visible in current offer"
 msgstr "Je viditeľné v súčasnej ponuke"
 
-#: core/subscriptions/models.py:41 core/subscriptions/models.py:169
+#: core/subscriptions/models.py:42 core/subscriptions/models.py:170
 msgid "plan"
 msgstr "plán"
 
-#: core/subscriptions/models.py:42
+#: core/subscriptions/models.py:43
 msgid "plans"
 msgstr "plány"
 
-#: core/subscriptions/models.py:88 core/subscriptions/models.py:93
+#: core/subscriptions/models.py:89 core/subscriptions/models.py:94
 msgid "month"
 msgstr "mesiac"
 
-#: core/subscriptions/models.py:89 core/subscriptions/models.py:94
+#: core/subscriptions/models.py:90 core/subscriptions/models.py:95
 msgid "year"
 msgstr "rok"
 
-#: core/subscriptions/models.py:92
+#: core/subscriptions/models.py:93
+#: core/subscriptions/templates/subscriptions/mails/subscription_reminder.txt:6
 #: core/subscriptions/templates/subscriptions/userplan_detail.html:7
 #: core/subscriptions/templates/subscriptions/widgets/plan.html:4
 msgid "days"
 msgstr "dní"
 
-#: core/subscriptions/models.py:93
+#: core/subscriptions/models.py:94
 msgid "months"
 msgstr "mesiacov"
 
-#: core/subscriptions/models.py:94
+#: core/subscriptions/models.py:95
 msgid "years"
 msgstr "rokov"
 
-#: core/subscriptions/models.py:98
+#: core/subscriptions/models.py:99
 msgid "period"
 msgstr "perióda"
 
-#: core/subscriptions/models.py:99
+#: core/subscriptions/models.py:100
 msgid "in period"
 msgstr "v perióde"
 
-#: core/subscriptions/models.py:113
+#: core/subscriptions/models.py:114
 msgid "pricing plan"
 msgstr "cenníkový plán"
 
-#: core/subscriptions/models.py:114
+#: core/subscriptions/models.py:115
 msgid "pricing plans"
 msgstr "cenníkové plány"
 
-#: core/subscriptions/models.py:170
+#: core/subscriptions/models.py:171
 msgid "pricing"
 msgstr "cenník"
 
-#: core/subscriptions/models.py:172
+#: core/subscriptions/models.py:173
+#: core/subscriptions/templates/subscriptions/mails/subscription_reminder.txt:6
 #: core/subscriptions/templates/subscriptions/userplan_detail.html:7
 msgid "Expires"
 msgstr "Expiruje"
 
-#: core/subscriptions/models.py:178
+#: core/subscriptions/models.py:181
 msgid "User plan"
 msgstr "Plán používateľa"
 
-#: core/subscriptions/models.py:179
+#: core/subscriptions/models.py:182
 msgid "Users plans"
 msgstr "Plány používateľov"
 
-#: core/subscriptions/models.py:465
+#: core/subscriptions/models.py:372
+msgid "Your subscription is going to expire soon"
+msgstr "Vaše predplatné čoskoro vyprší"
+
+#: core/subscriptions/models.py:475
 msgid "codename"
 msgstr "kódové meno"
 
-#: core/subscriptions/models.py:466
+#: core/subscriptions/models.py:476
 msgid "name"
 msgstr "názov"
 
-#: core/subscriptions/models.py:467
+#: core/subscriptions/models.py:477
 msgid "unit"
 msgstr "jednotka"
 
-#: core/subscriptions/models.py:469
+#: core/subscriptions/models.py:479
 msgid "is boolean"
 msgstr "je pravda/nepravda"
 
-#: core/subscriptions/models.py:473
+#: core/subscriptions/models.py:483
 msgid "Quota"
 msgstr "Kvóta"
 
-#: core/subscriptions/models.py:474
+#: core/subscriptions/models.py:484
 msgid "Quotas"
 msgstr "Kvóty"
 
-#: core/subscriptions/models.py:519
+#: core/subscriptions/models.py:529
 msgid "Plan quota"
 msgstr "Kvóta plánu"
 
-#: core/subscriptions/models.py:520
+#: core/subscriptions/models.py:530
 msgid "Plans quotas"
 msgstr "Kvóty plánov"
 
+#: core/subscriptions/templates/subscriptions/mails/subscription_reminder.txt:1
+#, python-format
+msgid "Hello %(user)s!"
+msgstr "Dobrý deň %(user)s!"
+
+#: core/subscriptions/templates/subscriptions/mails/subscription_reminder.txt:3
+msgid ""
+"We would like to inform you that your subscription is going to expire soon."
+msgstr "Radi by sme Vás upozornili, že Vaše predplatné čoskoro vyprší."
+
+#: core/subscriptions/templates/subscriptions/mails/subscription_reminder.txt:5
 #: core/subscriptions/templates/subscriptions/userplan_detail.html:2
 msgid "Plan"
 msgstr "Plán"
+
+#: core/subscriptions/templates/subscriptions/mails/subscription_reminder.txt:6
+#: core/subscriptions/templates/subscriptions/userplan_detail.html:7
+msgid "in"
+msgstr "o"
+
+#: core/subscriptions/templates/subscriptions/mails/subscription_reminder.txt:8
+msgid "You can extend your subscription at following URL:"
+msgstr "Svoje predplatné si môžete predĺžiť na nasledovnej adrese:"
+
+#: core/subscriptions/templates/subscriptions/mails/subscription_reminder.txt:11
+#, python-format
+msgid ""
+"%(site_name)s team!\n"
+"%(site_domain)s\n"
+msgstr ""
+"Tím %(site_name)s!\n"
+"%(site_domain)s\n"
 
 #: core/subscriptions/templates/subscriptions/userplan_detail.html:4
 #: core/subscriptions/templates/subscriptions/userplan_detail.html:9
 msgid "Pricing"
 msgstr "Cenník"
-
-#: core/subscriptions/templates/subscriptions/userplan_detail.html:7
-msgid "in"
-msgstr "o"
 
 #: core/subscriptions/templates/subscriptions/widgets/plan.html:5
 msgid "Choose"
@@ -1794,7 +1842,6 @@ msgid ""
 msgstr "Nenechajte si újsť naše novinky a exkluzívne ponuky."
 
 #: urls.py:14
-#| msgid "partners"
 msgctxt "url"
 msgid "partners/"
 msgstr "partneri/"
@@ -1804,11 +1851,11 @@ msgctxt "url"
 msgid "accounts/"
 msgstr "ucty/"
 
-#~ msgid "subscription"
-#~ msgstr "odber"
-
-#~ msgid "subscriptions"
-#~ msgstr "odbery"
+#: urls.py:20
+#| msgid "subscription"
+msgctxt "url"
+msgid "subscriptions/"
+msgstr "predplatne/"
 
 #~ msgid "Pay"
 #~ msgstr "Uhradiť"
