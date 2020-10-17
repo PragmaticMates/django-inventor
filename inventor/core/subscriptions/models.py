@@ -291,7 +291,6 @@ class UserPlan(models.Model):
         status = False  # flag; if extending account was successful?
         new_expiration = self.get_plan_extended_until(plan, pricing)
 
-        print('new_expiration', new_expiration)
         if pricing is None:
             # Process a plan change request (downgrade or upgrade)
             # No account activation or extending at this point
@@ -316,6 +315,8 @@ class UserPlan(models.Model):
             # Processing standard account extending procedure
             if self.plan == plan:
                 status = True
+                if self.pricing != pricing:
+                    self.pricing = pricing
             else:
                 # This should not ever happen (as this case should be managed by plan change request)
                 # but just in case we consider a case when user has a different plan
