@@ -134,6 +134,11 @@ class Pricing(models.Model):
         return reverse('commerce:add_to_cart', args=(content_type.id, self.id))
 
     @property
+    def availability(self):
+        from commerce.models import AbstractProduct
+        return AbstractProduct.AVAILABILITY_DIGITAL_GOODS
+
+    @property
     def price_per_month(self):
         if self.period == self.PERIOD_DAY:
             return self.price * 30 / self.duration  # approximately
