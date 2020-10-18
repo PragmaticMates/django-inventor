@@ -13,7 +13,7 @@
             <input type="hidden" name="paginate_by" value="{{ request.GET.paginate_by }}">
         {% endif %}
         <div class="row">
-            <div class="col-sm-12">
+            <div class="filter-items col-sm-12">
                 {% crispy filter.form filter.helper %}
             </div>
             <div class="form-actions col-sm-12">
