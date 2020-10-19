@@ -129,9 +129,6 @@ class ListingFilter(django_filters.FilterSet):
                 widget=forms.CheckboxSelectMultiple
             )
 
-            # changed filter logic of categories
-            self.filters['categories'].method = 'filter_categories'
-
         if not self.form.fields['features'].queryset.exists():
             self.form.fields['features'].widget = HiddenInput()
         else:
@@ -164,8 +161,3 @@ class ListingFilter(django_filters.FilterSet):
         for feature in value:
             queryset = queryset.filter(features=feature)
         return queryset
-
-    def filter_categories(self, queryset, name, value):
-        # proxy method to filter listings by translatable category slug
-        categories = Category.objects.filter(slug_i18n__in=value)
-        return queryset.filter(categories__in=categories)

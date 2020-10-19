@@ -13,9 +13,10 @@ from django.utils.translation import ugettext_lazy as _
 from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
 from modeltrans.fields import TranslationField
+from modeltrans.manager import MultilingualManager
 from sorl import thumbnail
 
-from commerce.models import AbstractProduct, PurchasedItem
+from commerce.models import AbstractProduct
 from inventor import settings as inventor_settings
 from inventor.core.lexicons.models import Category, Feature, Locality
 from inventor.core.listings.managers import ListingQuerySet
@@ -108,7 +109,7 @@ class Listing(SlugMixin, AbstractProduct):
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
     i18n = TranslationField(fields=('title', 'slug', 'description'))
-    objects = ListingQuerySet.as_manager()
+    objects = MultilingualManager.from_queryset(ListingQuerySet)()
 
     class Meta:
         verbose_name = _('listing')
