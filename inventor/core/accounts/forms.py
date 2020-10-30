@@ -7,7 +7,7 @@ from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, HTML
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import HiddenInput
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext
 from django_select2.forms import ModelSelect2Widget, ModelSelect2MultipleWidget
 from internationalflavor.countries import CountryFormField
 from internationalflavor.vat_number import VATNumberFormField
@@ -310,7 +310,7 @@ class SignupForm(AllAuthSignupForm):
                 Fieldset(address_label, *address_fields),
                 Fieldset(dob_label, *dob_fields),
                 Fieldset(
-                    _('Other'),
+                    pgettext('signup form', 'Other'),
                     InlineRadios('gender'),
                     'team',
                     'password1',
