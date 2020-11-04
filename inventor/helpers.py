@@ -1,5 +1,4 @@
 from django.apps import apps
-from django.utils.module_loading import import_string
 
 from inventor import settings
 
@@ -14,7 +13,6 @@ def get_listing_types_classes():
 
     listing_types_classes = []
     for listing_type in listing_types:
-        # listing_type_class = import_string(f'inventor.core.listings.models.listing_types.{listing_type}')
         listing_type_class = apps.get_model(f'listings.{listing_type}')
         listing_types_classes.append(listing_type_class)
 
