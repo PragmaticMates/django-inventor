@@ -33,7 +33,7 @@ class Seo(models.Model):
     class Meta:
         verbose_name = _('SEO fields')
         verbose_name_plural = _('SEO fields')
-        unique_together = ('content_type', 'object_id')
+        unique_together = ('content_type', 'object_id', 'path')
         indexes = [GinIndex(fields=["i18n"]), ]
 
     def __str__(self):
