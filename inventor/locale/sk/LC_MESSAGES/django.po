@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-02 18:45+0100\n"
-"PO-Revision-Date: 2020-10-29 13:37+0058\n"
-"Last-Translator: b'Erik PRAGMATIC <erik@pragmaticmates.com>'\n"
+"POT-Creation-Date: 2020-11-04 16:58+0100\n"
+"PO-Revision-Date: 2020-11-04 17:00+0058\n"
+"Last-Translator: b'Erik Telepovsky <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n "
-">= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 "X-Generator: Poedit 2.3\n"
 "X-Translated-Using: django-rosetta 0.9.5\n"
 
@@ -35,8 +34,7 @@ msgstr ""
 "<br><br>\n"
 "Ďakujeme, že ste sa registrovali na %(site_name)s!\n"
 "<br><br>\n"
-"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: "
-"%(activate_url)s.\n"
+"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: %(activate_url)s.\n"
 "<br><br>"
 
 #: contrib/allauth/templates/account/email/email_confirmation_message.html:16
@@ -60,8 +58,7 @@ msgstr ""
 "\n"
 "Ďakujeme, že ste sa registrovali na %(site_name)s!\n"
 "\n"
-"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: "
-"%(activate_url)s.\n"
+"Na aktiváciu svojho účtu prosím kliknite na nasledujúci odkaz: %(activate_url)s.\n"
 
 #: contrib/allauth/templates/account/email/email_confirmation_subject.txt:3
 msgid "Please Confirm Your E-mail Address"
@@ -72,17 +69,13 @@ msgstr "Prosím potvrďte svoju e-mailovú adresu"
 msgid ""
 "Hello %(user_display)s!\n"
 "            <br><br>\n"
-"            You're receiving this e-mail because you or someone else has "
-"requested a password for your user account.<br>\n"
-"            It can be safely ignored if you did not request a password "
-"reset. Click the link below to reset your password."
+"            You're receiving this e-mail because you or someone else has requested a password for your user account.<br>\n"
+"            It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
 msgstr ""
 "Dobrý deň %(user_display)s!\n"
 "<br><br>\n"
-"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla "
-"Vášho užívateľského účtu.<br>\n"
-"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla "
-"kliknite na odkaz nižšie."
+"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla Vášho užívateľského účtu.<br>\n"
+"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla kliknite na odkaz nižšie."
 
 #: contrib/allauth/templates/account/email/password_reset_key_message.html:17
 #: contrib/allauth/templates/account/email/password_reset_key_message.txt:9
@@ -95,17 +88,13 @@ msgstr "Ak by ste zabudli, Vaše prihlasovacie meno je %(username)s."
 msgid ""
 "Hello %(user_display)s!\n"
 "\n"
-"You're receiving this e-mail because you or someone else has requested a "
-"password for your user account.\n"
-"It can be safely ignored if you did not request a password reset. Click the "
-"link below to reset your password."
+"You're receiving this e-mail because you or someone else has requested a password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the link below to reset your password."
 msgstr ""
 "Dobrý deň %(user_display)s!\n"
 "\n"
-"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla "
-"Vášho užívateľského účtu.\n"
-"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla "
-"kliknite na odkaz nižšie."
+"Tento email ste dostali, pretože Vy alebo niekto iný požiadal o obnovu hesla Vášho užívateľského účtu.\n"
+"Ak ste o obnovu nepožiadali, môžte túto správu ignorovať. Na obnovu hesla kliknite na odkaz nižšie."
 
 #: contrib/allauth/templates/account/email/password_reset_key_subject.txt:3
 msgid "Password Reset E-mail"
@@ -142,12 +131,10 @@ msgstr "Ste tu prvýkrát? Vytvorte si nový účet:"
 #, python-format
 msgid ""
 "Please sign in with one\n"
-"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign "
-"up</a>\n"
+"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign up</a>\n"
 "for a %(site_name)s account and sign in below:"
 msgstr ""
-"Prihláste sa prosím jedným z vašich existujúcich účtov alebo <a href="
-"\"%(signup_url)s\">sa zaregistrujte</a>\n"
+"Prihláste sa prosím jedným z vašich existujúcich účtov alebo <a href=\"%(signup_url)s\">sa zaregistrujte</a>\n"
 "pre nový účet na %(site_name)s:"
 
 #: contrib/allauth/templates/account/login.html:25
@@ -180,8 +167,8 @@ msgstr "Obnova hesla"
 
 #: contrib/allauth/templates/account/password_reset.html:13
 msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll send you "
-"an e-mail allowing you to reset it."
+"Forgotten your password? Enter your e-mail address below, and we'll send you"
+" an e-mail allowing you to reset it."
 msgstr ""
 "Zabudli ste heslo? Zadajte svoju e-mailovú adresu a zašleme Vám odkaz na "
 "jeho obnovu."
@@ -211,11 +198,11 @@ msgstr "Nesprávny token."
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
-"a>."
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password "
+"reset</a>."
 msgstr ""
-"Odkaz na obnovu hesla je nesprávny, pravdepodobne bol už použitý. Požiadajte "
-"o opatovnú <a href=\"%(passwd_reset_url)s\">obnovu hesla</a>."
+"Odkaz na obnovu hesla je nesprávny, pravdepodobne bol už použitý. Požiadajte"
+" o opatovnú <a href=\"%(passwd_reset_url)s\">obnovu hesla</a>."
 
 #: contrib/allauth/templates/account/password_reset_from_key.html:17
 msgid "Change password"
@@ -351,7 +338,8 @@ msgstr ""
 #, python-format
 msgid "No users registered as `%(username)s` or user is unactived."
 msgstr ""
-"Užívateľ s prihlasovacím menom `%(username)s` sa nenašiel alebo je neaktívny."
+"Užívateľ s prihlasovacím menom `%(username)s` sa nenašiel alebo je "
+"neaktívny."
 
 #: contrib/martor/views.py:65
 msgid "Validation Failed for field `username`"
@@ -519,8 +507,7 @@ msgstr "Súhlasím s <a href=\"%s\" target=\"_blank\">obchodnými podmienkami</a
 #: core/accounts/forms.py:288
 #, python-format
 msgid "I agree <a href=\"%s\" target=\"_blank\">privacy policy</a>"
-msgstr ""
-"Súhlasím so <a href=\"%s\" target=\"_blank\">spracovaním osobných údajov</a>"
+msgstr "Súhlasím so <a href=\"%s\" target=\"_blank\">spracovaním osobných údajov</a>"
 
 #: core/accounts/forms.py:313
 msgctxt "signup form"
@@ -822,18 +809,18 @@ msgid "Color"
 msgstr "Farba"
 
 #: core/lexicons/models.py:18 core/lexicons/models.py:31
-#: core/lexicons/models.py:61 core/lexicons/models.py:77
+#: core/lexicons/models.py:62 core/lexicons/models.py:78
 #: core/listings/models/general.py:43 core/listings/models/general.py:262
 #: core/listings/models/general.py:277 core/partners/models.py:8
-#: core/seo/models.py:12
+#: core/seo/models.py:21
 msgid "title"
 msgstr "názov"
 
 #: core/lexicons/models.py:20 core/lexicons/models.py:33
-#: core/lexicons/models.py:79 core/listings/models/general.py:45
+#: core/lexicons/models.py:80 core/listings/models/general.py:45
 #: core/listings/models/general.py:263 core/listings/models/general.py:278
 #: core/listings/models/general.py:297 core/partners/models.py:18
-#: core/seo/models.py:13 core/subscriptions/models.py:484
+#: core/seo/models.py:22 core/subscriptions/models.py:484
 msgid "description"
 msgstr "opis"
 
@@ -853,31 +840,31 @@ msgstr "kategória"
 msgid "categories"
 msgstr "kategórie"
 
-#: core/lexicons/models.py:68
+#: core/lexicons/models.py:69
 msgid "feature"
 msgstr "výhoda"
 
-#: core/lexicons/models.py:69 core/listings/models/general.py:55
+#: core/lexicons/models.py:70 core/listings/models/general.py:55
 msgid "features"
 msgstr "výhody"
 
-#: core/lexicons/models.py:82 core/listings/models/general.py:303
+#: core/lexicons/models.py:83 core/listings/models/general.py:303
 msgid "photo"
 msgstr "fotografia"
 
-#: core/lexicons/models.py:92
+#: core/lexicons/models.py:93
 msgid "locality"
 msgstr "lokalita"
 
-#: core/lexicons/models.py:93
+#: core/lexicons/models.py:94
 msgid "localities"
 msgstr "lokality"
 
-#: core/lexicons/models.py:125
+#: core/lexicons/models.py:126
 msgid "accommodation amenity"
 msgstr "vybavenie ubytovania"
 
-#: core/lexicons/models.py:126
+#: core/lexicons/models.py:127
 msgid "accommodation amenities"
 msgstr "vybavenia ubytovania"
 
@@ -890,68 +877,76 @@ msgstr[1] "%(num_listings)s položky"
 msgstr[2] "%(num_listings)s položky"
 msgstr[3] "%(num_listings)s položiek"
 
-#: core/listings/admin.py:40
+#: core/lexicons/urls.py:11
+#| msgctxt "url"
+#| msgid "<str:slug>/"
+msgctxt "url"
+msgid "category/<str:slug>/"
+msgstr "kategoria/<str:slug>/"
+
+#: core/listings/admin.py:42
 #, python-brace-format
 msgid "Convert to {0}"
 msgstr "Konvertovať na {0}"
 
-#: core/listings/admin.py:82 core/listings/filters.py:126 templates/home.html:5
+#: core/listings/admin.py:84 core/listings/filters.py:126
+#: templates/home.html:5
 msgid "Categories"
 msgstr "Kategórie"
 
-#: core/listings/admin.py:87 core/listings/admin.py:95
+#: core/listings/admin.py:89 core/listings/admin.py:97
 #: core/listings/filters.py:20
 msgid "Price"
 msgstr "Cena"
 
-#: core/listings/admin.py:92
+#: core/listings/admin.py:94 core/seo/admin.py:22
 msgid "Definition"
 msgstr "Definícia"
 
-#: core/listings/admin.py:93
+#: core/listings/admin.py:95
 msgid "Management"
 msgstr "Manažment"
 
-#: core/listings/admin.py:94
+#: core/listings/admin.py:96
 msgid "Specification"
 msgstr "Špecifikácia"
 
-#: core/listings/admin.py:96
+#: core/listings/admin.py:98
 #: core/listings/templates/listings/listing_detail.html:92
 #: core/listings/templates/listings/listing_detail.html:200
 msgid "Location"
 msgstr "Poloha"
 
-#: core/listings/admin.py:97
+#: core/listings/admin.py:99
 msgid "Previews"
 msgstr "Náhľady"
 
-#: core/listings/admin.py:98 core/listings/forms.py:40
+#: core/listings/admin.py:100 core/listings/forms.py:42
 msgid "Contact information"
 msgstr "Kontaktné informácie"
 
-#: core/listings/admin.py:99
+#: core/listings/admin.py:101
 msgid "Social connections"
 msgstr "Sociálne siete"
 
-#: core/listings/admin.py:147 core/listings/admin.py:174
-#: core/listings/admin.py:196 core/listings/admin.py:217
+#: core/listings/admin.py:149 core/listings/admin.py:176
+#: core/listings/admin.py:198 core/listings/admin.py:219
 msgid "Specific"
 msgstr "Špecifické"
 
-#: core/listings/admin.py:164
+#: core/listings/admin.py:166
 msgid "Distance"
 msgstr "vzdialenosť"
 
-#: core/listings/admin.py:169
+#: core/listings/admin.py:171
 msgid "Elevation"
 msgstr "Prevýšenie"
 
-#: core/listings/admin.py:191 core/listings/filters.py:111
+#: core/listings/admin.py:193 core/listings/filters.py:111
 msgid "Duration"
 msgstr "Trvanie"
 
-#: core/listings/admin.py:212
+#: core/listings/admin.py:214
 msgid "Options"
 msgstr "Možnosti"
 
@@ -973,46 +968,46 @@ msgstr "Všetky lokality"
 msgid "Features"
 msgstr "Výhody"
 
-#: core/listings/forms.py:10
+#: core/listings/forms.py:12
 msgid "Check-in"
 msgstr "Check-in"
 
-#: core/listings/forms.py:11
+#: core/listings/forms.py:13
 msgid "Check-out"
 msgstr "Check-out"
 
-#: core/listings/forms.py:12
+#: core/listings/forms.py:14
 msgid "Persons"
 msgstr "Osoby"
 
-#: core/listings/forms.py:17
+#: core/listings/forms.py:19
 msgid "I agree to the processing of my personal data"
 msgstr "Súhlasím so spracovaním osobných údajov"
 
-#: core/listings/forms.py:24
+#: core/listings/forms.py:26
 msgid "Number of guests"
 msgstr "Počet hostí"
 
-#: core/listings/forms.py:26
+#: core/listings/forms.py:28
 msgid "Contact person"
 msgstr "Kontaktná osoba"
 
-#: core/listings/forms.py:27 core/newsletters/exporters.py:16
+#: core/listings/forms.py:29 core/newsletters/exporters.py:16
 msgid "E-mail"
 msgstr "E-mail"
 
-#: core/listings/forms.py:28
+#: core/listings/forms.py:30
 msgid "Phone"
 msgstr "Telefón"
 
-#: core/listings/forms.py:29
+#: core/listings/forms.py:31
 msgid ""
 "Send a question or inquiry directly to the accommodation owner without "
 "increasing the price"
 msgstr ""
 "Zaslať otázku alebo žiadosť priamo vlastníkovi ubytovania bez navýšenia ceny"
 
-#: core/listings/forms.py:48
+#: core/listings/forms.py:50
 msgid "Send request"
 msgstr "Odoslať požiadavku"
 
@@ -1523,27 +1518,27 @@ msgctxt "url"
 msgid "<str:slug>/"
 msgstr "<str:slug>/"
 
-#: core/listings/views.py:19
+#: core/listings/views.py:22
 msgid "Newest"
 msgstr "Najnovšie"
 
-#: core/listings/views.py:20
+#: core/listings/views.py:23
 msgid "Oldest"
 msgstr "Najstaršie"
 
-#: core/listings/views.py:22
+#: core/listings/views.py:25
 msgid "Price (Low to high)"
 msgstr "Cena (od najlacnejšieho)"
 
-#: core/listings/views.py:23
+#: core/listings/views.py:26
 msgid "Price (High to low)"
 msgstr "Cena (od najdrahšieho)"
 
-#: core/listings/views.py:24
+#: core/listings/views.py:27
 msgid "Title"
 msgstr "Názov"
 
-#: core/listings/views.py:28
+#: core/listings/views.py:31
 msgid "Promoted"
 msgstr "Propagované"
 
@@ -1625,11 +1620,40 @@ msgstr "partner"
 msgid "partners"
 msgstr "partneri"
 
-#: core/seo/models.py:14
+#: core/seo/forms.py:39
+msgid "Either path or content type is required"
+msgstr "Musí byť zadaná buď cesta alebo typ obsahu"
+
+#: core/seo/forms.py:42
+msgid "Content type can not be set if path is specified"
+msgstr "Typ obsahu nemôže byť nastavený ak je určená cesta "
+
+#: core/seo/forms.py:56
+msgid "Object id has to be set if content type is specified"
+msgstr "ID objektu musí byť nastavené ak je určený typ obsahu"
+
+#: core/seo/forms.py:62
+#, python-brace-format
+msgid "Object of type {content_type} with ID {object_id} does not exist"
+msgstr "Objekt typu {content_type} s ID {object_id} neexistuje"
+
+#: core/seo/models.py:23
 msgid "keywords"
 msgstr "kľúčové slová"
 
-#: core/seo/models.py:22 core/seo/models.py:23
+#: core/seo/models.py:24
+msgid "robots"
+msgstr "roboti"
+
+#: core/seo/models.py:25
+msgid "Default (empty) = index, follow"
+msgstr "Prednastavené (prázdne) = index, follow"
+
+#: core/seo/models.py:26
+msgid "request path"
+msgstr "URL cesta"
+
+#: core/seo/models.py:34 core/seo/models.py:35
 msgid "SEO fields"
 msgstr "SEO polia"
 
@@ -1857,17 +1881,17 @@ msgid ""
 "Subscribe to our newsletter to receive the latest news and exclusive offers."
 msgstr "Nenechajte si újsť naše novinky a exkluzívne ponuky."
 
-#: urls.py:14
+#: urls.py:15
 msgctxt "url"
 msgid "partners/"
 msgstr "partneri/"
 
-#: urls.py:15
+#: urls.py:16
 msgctxt "url"
 msgid "accounts/"
 msgstr "ucty/"
 
-#: urls.py:20
+#: urls.py:21
 msgctxt "url"
 msgid "subscriptions/"
 msgstr "predplatne/"
