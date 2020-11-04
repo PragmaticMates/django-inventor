@@ -36,6 +36,9 @@ class ListingQuerySet(InheritanceQuerySet):
     def not_promoted(self):
         return self.filter(promoted=False)
 
+    def of_category(self, category):
+        return self.filter(categories=category)
+
     def by_keyword(self, keyword):
         return self.filter(
             Q(title__unaccent__icontains=keyword) |

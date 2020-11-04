@@ -11,6 +11,7 @@ from inventor.core.listings.models.general import Listing
 
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     model = Listing
+    template_name = 'listings/listing_list.html'
     filter_class = ListingFilter
     paginate_by = 12
     displays = ['columns']
@@ -28,8 +29,15 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         return {**{'-promoted': (_('Promoted'), ['-promoted', 'awaiting', 'created'])}, **self.sorting_options}
 
     def dispatch(self, request, *args, **kwargs):
-        self.filter = self.filter_class(data=request.GET, queryset=self.get_whole_queryset(), listing_type=None if self.model == Listing else self.model)
+        self.filter = self.filter_class(**self.get_filter_kwargs())
         return super().dispatch(request, *args, **kwargs)
+
+    def get_filter_kwargs(self):
+        return {
+            'data': self.request.GET,
+            'queryset': self.get_whole_queryset(),
+            'listing_type': None if self.model == Listing else self.model,
+        }
 
     def get_template_names(self):
         names = super().get_template_names()

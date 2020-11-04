@@ -54,7 +54,8 @@ class Category(SlugMixin, MPTTModel):
         return self.title_i18n
 
     def get_absolute_url(self):
-        return reverse('listings:listing_list') + f'?categories={self.slug_i18n}'
+        # return reverse('listings:listing_list') + f'?categories={self.slug_i18n}'
+        return reverse('inventor:lexicons:category_detail', args=(self.slug_i18n,))
 
 
 class Feature(SlugMixin, models.Model):

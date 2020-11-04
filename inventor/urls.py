@@ -10,6 +10,7 @@ app_name = 'inventor'
 
 urlpatterns = (
     path('', HomeView.as_view(), name='home'),
+    path('', include('inventor.core.lexicons.urls', namespace='lexicons')),
     path('newsletter/', NewsletterView.as_view(), name='newsletter'),
     path(pgettext_lazy('url', 'partners/'), PartnerListView.as_view(), name='partners'),
     path(pgettext_lazy('url', 'accounts/'), include('inventor.core.accounts.urls', namespace='accounts')),

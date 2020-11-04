@@ -2,6 +2,7 @@ from allauth.utils import build_absolute_uri
 from django import template
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
+from django.template import TemplateDoesNotExist
 from filer.models import File
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.models.general import Listing
@@ -55,3 +56,16 @@ def uri(context, location):
         return build_absolute_uri(context.get('request', None), location)
     except ObjectDoesNotExist:
         return location
+
+
+@register.filter()
+def listing_template(obj):
+    prefix = obj.__class__.__name__.lower()
+    suffix = '_item'
+    template_name = f'listings/widgets/{prefix}{suffix}.html'
+
+    try:
+        template.loader.get_template(template_name)
+        return template_name
+    except TemplateDoesNotExist:
+        return f'listings/widgets/listing{suffix}.html'

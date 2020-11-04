@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% load i18n static pragmatic_tags %}
+{% load i18n static pragmatic_tags inventor %}
 
 {% block main_class %}bg-gray-100{% endblock %}
 
@@ -42,7 +42,7 @@
                 <div class="row">
                     {% for object in object_list %}
                         <div class="col-md-4">
-                            {% include 'listings/widgets/listing_item.html' %}
+                            {% include object|listing_template %}
                         </div>
                     {% empty %}
                         {% trans 'No data to display' %}

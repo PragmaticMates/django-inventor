@@ -58,7 +58,7 @@ class ListingFilter(django_filters.FilterSet):
             },
         }
 
-    def __init__(self, listing_type=None, *args, **kwargs):
+    def __init__(self, listing_type=None, lexicon=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.helper = SingleSubmitFormHelper()
@@ -142,19 +142,31 @@ class ListingFilter(django_filters.FilterSet):
             # changed filter logic of features
             self.filters['features'].method = 'filter_features'
 
-        self.hide_fields_by_settings(listing_type)
+        self.hide_fields_by_settings(listing_type, lexicon)
 
-    def hide_fields_by_settings(self, listing_type):
+    def hide_fields_by_settings(self, listing_type, lexicon):
         hidden_fields = settings.LISTING_FILTER.get('hidden_fields', {})
 
-        for field_name, listing_types in hidden_fields.items():
+        for field_name, subjects in hidden_fields.items():
             if field_name not in self.form.fields:
                 continue
+
+            subjects = subjects or {}
+
+            listing_types = subjects.get('listing_types')
+            lexicons = subjects.get('lexicons')
 
             if listing_types is None or \
                 (listing_type and listing_type.__name__ in listing_types):
                 del self.form.fields[field_name]
                 # self.form.fields[field_name].widget = HiddenInput()
+                continue
+
+            if lexicons is None or \
+                (lexicon and lexicon.__name__ in lexicons):
+                del self.form.fields[field_name]
+                # self.form.fields[field_name].widget = HiddenInput()
+                continue
 
     def filter_features(self, queryset, name, value):
         # return listings having ALL features, not AT LEAST one
