@@ -8,10 +8,10 @@
         {% seo as seo %}
         <title>{{ settings.PAGE_TITLE }}{% if seo.title %} | {{ seo.title }}{% endif %}</title>
         <meta charset="utf-8">
-        {% if object.hidden %}<meta name="robots" content="noindex">{% endif %}
         <meta name="description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ settings.PAGE_DESCRIPTION }}{% endif %}">
         <meta name="keywords" content="{% if seo.keywords %}{{ seo.keywords }}{% else %}{{ settings.PAGE_KEYWORDS }}{% endif %}">
         <meta name="author" content="{% if seo.author %}{{ seo.author }}{% else %}{{ settings.PAGE_AUTHOR }}{% endif %}">
+        {% if object.hidden %}<meta name="robots" content="noindex">{% endif %}
         <meta name="apple-mobile-web-app-title" content="{{ settings.PAGE_APPLE_MOBILE_WEB_APP_TITLE }}">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 

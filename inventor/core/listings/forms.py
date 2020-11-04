@@ -5,6 +5,8 @@ from django import forms
 from django.forms import Textarea
 from django.utils.translation import ugettext_lazy as _
 
+from inventor.core.listings.models.general import Photo
+
 
 class BookingForm(forms.Form):
     check_in = forms.DateField(label=_('Check-in'), required=True)
@@ -48,3 +50,16 @@ class BookingForm(forms.Form):
                 Submit('submit', _('Send request'), css_class='w-100'), css_class='mb-0'
             )
         )
+
+
+class PhotoForm(forms.ModelForm):
+    class Meta:
+        model = Photo
+        fields = ['file', 'description_i18n']
+        widgets = {
+            'description_i18n': forms.Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['description_i18n'].required = True

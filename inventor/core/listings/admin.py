@@ -9,12 +9,14 @@ from sorl.thumbnail.admin import AdminImageMixin
 from commerce.admin import SupplyInline
 from inventor import settings
 from inventor.core.bookings.admin import BookingMixinAdmin
+from inventor.core.listings.forms import PhotoForm
 from inventor.core.listings.models.general import Album, Video, Photo, Listing
 from inventor.helpers import get_listing_types_classes
 
 
 class PhotoInline(NestedStackedInline):
     model = Photo
+    form = PhotoForm
     extra = 1
 
 
