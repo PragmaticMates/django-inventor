@@ -2,28 +2,44 @@ from django.apps import apps
 from django.contrib import admin
 from django.contrib.contenttypes.admin import GenericStackedInline
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.translation import ugettext_lazy as _
 
 from modeltrans.admin import ActiveLanguageMixin
 
-from inventor.core.seo.forms import SeoForm
+from inventor.core.seo.forms import SeoInlineForm, SeoForm
 from inventor.core.seo.models import Seo
 from inventor.helpers import get_listing_types_classes
 from inventor import settings
 
 
-class SeoAdmin(ActiveLanguageMixin, admin.ModelAdmin):
-    list_display = ['content_object', 'title_i18n', 'description_i18n', 'keywords_i18n']
-    list_editable = ['title_i18n', 'description_i18n', 'keywords_i18n']
+@admin.register(Seo)
+class SeoAdmin(admin.ModelAdmin):
+    search_fields = ['path_i18n', 'title_i18n', 'description_i18n', 'keywords_i18n']
+    list_display = ['content_object', 'path_i18n', 'title_i18n', 'description_i18n', 'keywords_i18n']
+    list_editable = ['path_i18n', 'title_i18n', 'description_i18n', 'keywords_i18n']
+    form = SeoForm
+    fieldsets = (
+        (_(u'Definition'), {
+            'fields': (
+                ('content_type', 'object_id'), 'path_i18n',
+            )
+        }),
+        ('SEO', {
+            'fields': (
+                'title_i18n', 'description_i18n', 'keywords_i18n'
+            )
+        }),
+    )
 
-try:
-    admin.site.register(Seo, SeoAdmin)
-except admin.sites.AlreadyRegistered:
-    pass
+# try:
+#     admin.site.register(Seo, SeoAdmin)
+# except admin.sites.AlreadyRegistered:
+#     pass
 
 
 class SeoInlines(GenericStackedInline):
     model = Seo
-    form = SeoForm
+    form = SeoInlineForm
     extra = 1
     max_num = 1
     inlines = None

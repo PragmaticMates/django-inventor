@@ -18,16 +18,17 @@ class Seo(models.Model):
         ('noindex, nofollow', 'noindex, nofollow'),
     ]
 
-    title = models.CharField(verbose_name=_('title'), max_length=200, default='', blank=True)
-    description = models.CharField(verbose_name=_('description'), max_length=200, default='', blank=True)
-    keywords = models.CharField(verbose_name=_('keywords'), max_length=1000, default='', blank=True)
+    title = models.CharField(verbose_name=_('title'), max_length=200)
+    description = models.CharField(verbose_name=_('description'), max_length=200)
+    keywords = models.CharField(verbose_name=_('keywords'), max_length=1000)
     robots = models.CharField(verbose_name=_('robots'), choices=ROBOTS, max_length=17, blank=True, default='',
         help_text=_('Default (empty) = index, follow'))
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    path = models.CharField(verbose_name=_('request path'), max_length=100, blank=True, default='')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, blank=True, null=True, default=None)
+    object_id = models.PositiveIntegerField(blank=True, null=True, default=None)
     content_object = GenericForeignKey('content_type', 'object_id')
     objects = SeoQuerySet.as_manager()
-    i18n = TranslationField(fields=('title', 'description', 'keywords'))
+    i18n = TranslationField(fields=('title', 'description', 'keywords', 'path'))
 
     class Meta:
         verbose_name = _('SEO fields')

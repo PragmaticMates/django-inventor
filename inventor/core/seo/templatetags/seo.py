@@ -8,21 +8,23 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def seo(context):
-    view = context.get('view', None)
+    request = context['request'].path
     obj = context.get('object', None)
+    view = context.get('view', None)
 
+    subjects = [request, obj, view]
     s = {}
     look = []
 
-    if view:
-        look.append(view)
+    for subject in subjects:
+        if subject:
+            if not isinstance(subject, str):
+                look.append(subject)
 
-    if obj:
-        look = [obj] + look
-        seo = Seo.objects.for_object(obj)
+            seo = Seo.objects.for_subject(subject)
 
-        if seo:
-            look = [seo] + look
+            if seo:
+                look.append(seo)
 
     for meta in ['title', 'description', 'keywords', 'robots']:
         for l in look:
@@ -34,4 +36,5 @@ def seo(context):
             elif attr_name == 'robots' and getattr(l, 'hidden', False):
                 s[meta] = 'noindex'
 
+    # TODO: cache
     return s
