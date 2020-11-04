@@ -16,7 +16,7 @@ from inventor import settings
 class SeoAdmin(admin.ModelAdmin):
     search_fields = ['path_i18n', 'title_i18n', 'description_i18n', 'keywords_i18n']
     list_display = ['content_object', 'path_i18n', 'title_i18n', 'description_i18n', 'keywords_i18n']
-    list_editable = ['path_i18n', 'title_i18n', 'description_i18n', 'keywords_i18n']
+    list_editable = ['title_i18n', 'description_i18n', 'keywords_i18n']
     form = SeoForm
     fieldsets = (
         (_(u'Definition'), {
