@@ -6,7 +6,7 @@ from .models import Seo
 class SeoForm(forms.ModelForm):
     class Meta:
         model = Seo
-        fields = ['title_i18n', 'description_i18n', 'keywords_i18n']
+        fields = ['title_i18n', 'description_i18n', 'keywords_i18n', 'robots']
         widgets = {
             'title_i18n': forms.Textarea(attrs={'cols': 50, 'rows': 1}),
             'description_i18n': forms.Textarea(attrs={'cols': 50, 'rows': 2}),

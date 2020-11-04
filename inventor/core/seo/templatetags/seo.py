@@ -1,5 +1,4 @@
 from django import template
-from django.conf import settings
 from django.core.validators import EMPTY_VALUES
 
 from inventor.core.seo.models import Seo
@@ -25,12 +24,14 @@ def seo(context):
         if seo:
             look = [seo] + look
 
-    for meta in ['title', 'description', 'keywords']:
+    for meta in ['title', 'description', 'keywords', 'robots']:
         for l in look:
-            attr_name = f'{meta}_i18n' if isinstance(l, Seo) else meta
+            attr_name = f'{meta}_i18n' if isinstance(l, Seo) and meta != 'robots' else meta
             attr = getattr(l, attr_name, '')
             if attr not in EMPTY_VALUES:
                 s[meta] = attr
                 break
+            elif attr_name == 'robots' and getattr(l, 'hidden', False):
+                s[meta] = 'noindex'
 
     return s
