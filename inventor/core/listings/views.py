@@ -1,9 +1,11 @@
+from django.core.validators import EMPTY_VALUES
 from django.db.models import F
+from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, FormView
 from django.views.generic.detail import SingleObjectMixin
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
-from inventor.core.lexicons.models import Feature
+from inventor.core.lexicons.models import Feature, Category
 from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.forms import BookingForm
 from inventor.core.listings.models.general import Listing
@@ -29,6 +31,16 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         return {**{'-promoted': (_('Promoted'), ['-promoted', 'awaiting', 'created'])}, **self.sorting_options}
 
     def dispatch(self, request, *args, **kwargs):
+        # redirect to category detail view if single category requested
+        requested_categories = request.GET.getlist('categories')
+        if len(requested_categories) == 1:
+            category = Category.objects.get(slug_i18n=requested_categories[0])
+            params = request.GET.copy()
+            del params['categories']
+            params = f'?{params.urlencode()}' if params not in EMPTY_VALUES else ''
+            url = f"{category.get_absolute_url()}{params}"
+            return redirect(url)
+
         self.filter = self.filter_class(**self.get_filter_kwargs())
         return super().dispatch(request, *args, **kwargs)
 
