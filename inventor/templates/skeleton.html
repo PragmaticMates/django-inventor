@@ -12,6 +12,10 @@
         <meta name="keywords" content="{% if seo.keywords %}{{ seo.keywords }}{% else %}{{ settings.PAGE_KEYWORDS }}{% endif %}">
         <meta name="author" content="{% if seo.author %}{{ seo.author }}{% else %}{{ settings.PAGE_AUTHOR }}{% endif %}">
         {% if seo.robots %}<meta name="robots" content="{{ seo.robots }}">{% endif %}
+        {% if seo.image %}<meta name="og:image" content="{% uri seo.image %}">{% endif %}
+        {% if seo.image_width %}<meta name="og:image:width" content="{{ seo.image_width }}">{% endif %}
+        {% if seo.image_height %}<meta name="og:image:height" content="{{ seo.image_height }}">{% endif %}
+        {% if seo.locale %}<meta name="og:locale" content="{{ seo.locale }}">{% endif %}
         <meta name="apple-mobile-web-app-title" content="{{ settings.PAGE_APPLE_MOBILE_WEB_APP_TITLE }}">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 
