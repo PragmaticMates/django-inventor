@@ -11,8 +11,12 @@
         <meta name="description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ settings.PAGE_DESCRIPTION }}{% endif %}">
         <meta name="keywords" content="{% if seo.keywords %}{{ seo.keywords }}{% else %}{{ settings.PAGE_KEYWORDS }}{% endif %}">
         <meta name="author" content="{% if seo.author %}{{ seo.author }}{% else %}{{ settings.PAGE_AUTHOR }}{% endif %}">
+        <meta property="og:title" content="{{ settings.PAGE_TITLE }}{% if seo.title %} | {{ seo.title }}{% endif %}">
+        <meta property="og:description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ settings.PAGE_DESCRIPTION }}{% endif %}">
+        <meta property="og:url" content="{% uri request.path %}">
+        <meta property="og:type" content="website">
         {% if seo.robots %}<meta name="robots" content="{{ seo.robots }}">{% endif %}
-        {% if seo.image %}<meta name="og:image" content="{% uri seo.image %}">{% endif %}
+        {% if seo.image %}<meta property="og:image" content="{% uri seo.image %}">{% endif %}
         {% if seo.image_width %}<meta name="og:image:width" content="{{ seo.image_width }}">{% endif %}
         {% if seo.image_height %}<meta name="og:image:height" content="{{ seo.image_height }}">{% endif %}
         {% if seo.locale %}<meta name="og:locale" content="{{ seo.locale }}">{% endif %}

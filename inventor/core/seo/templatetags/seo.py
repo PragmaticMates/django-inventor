@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 from django.core.validators import EMPTY_VALUES
 from django.db.models.fields.files import ImageFieldFile
 
@@ -46,6 +47,10 @@ def seo(context):
             'image': image.url,
             'image_width': image.width,
             'image_height': image.height
+        })
+    elif not image and getattr(settings, 'PAGE_IMAGE', None):
+        s.update({
+            'image': settings.PAGE_IMAGE,
         })
 
     # locale
