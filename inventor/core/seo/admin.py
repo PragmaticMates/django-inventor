@@ -26,7 +26,7 @@ class SeoAdmin(admin.ModelAdmin):
         }),
         ('SEO', {
             'fields': (
-                'title_i18n', 'description_i18n', 'keywords_i18n'
+                'title_i18n', 'description_i18n', 'keywords_i18n', 'robots', 'image'
             )
         }),
     )
