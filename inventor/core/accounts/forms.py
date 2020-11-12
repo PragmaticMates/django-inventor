@@ -303,8 +303,8 @@ class SignupForm(AllAuthSignupForm):
                 Fieldset(
                     _('Contact details'),
                     Row(
-                        Div(PrependedText('email', '<i class="fas fa-at"></i>'), css_class='col-md-7'),
-                        Div(PrependedText('phone', '<i class="far fa-mobile"></i>'), css_class='col-md-5'),
+                        Div(PrependedText('email', '<i class="fas fa-at"></i>'), css_class='col-md-7' if 'phone' not in inventor_settings.USER_HIDDEN_FIELDS else 'col-md-12'),
+                        Div(PrependedText('phone', '<i class="far fa-mobile"></i>'), css_class='col-md-5' if 'phone' not in inventor_settings.USER_HIDDEN_FIELDS else ''),
                     ),
                 ),
                 Fieldset(address_label, *address_fields),
