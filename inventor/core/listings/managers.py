@@ -41,8 +41,8 @@ class ListingQuerySet(InheritanceQuerySet):
 
     def by_keyword(self, keyword):
         return self.filter(
-            Q(title__unaccent__icontains=keyword) |
-            Q(description__unaccent__icontains=keyword)
+            Q(title_i18n__unaccent__icontains=keyword) |
+            Q(description_i18n__unaccent__icontains=keyword)
         )
 
     def select_subclasses(self, *subclasses):
