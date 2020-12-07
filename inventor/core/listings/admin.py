@@ -3,7 +3,7 @@ from django.contrib.admin.sites import NotRegistered
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
-from nested_inline.admin import NestedStackedInline, NestedModelAdmin
+from nested_inline.admin import NestedStackedInline, NestedModelAdmin, NestedTabularInline
 from sorl.thumbnail.admin import AdminImageMixin
 
 from commerce.admin import SupplyInline
@@ -14,7 +14,7 @@ from inventor.core.listings.models.general import Album, Video, Photo, Listing
 from inventor.helpers import get_listing_types_classes
 
 
-class PhotoInline(NestedStackedInline):
+class PhotoInline(NestedTabularInline):
     model = Photo
     form = PhotoForm
     extra = 1
