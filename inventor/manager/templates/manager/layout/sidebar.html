@@ -27,43 +27,43 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link {% if url_name == 'admin_alfa' %}active{% endif %}" href="{% url 'tatrytravel:admin_alfa' %}">
+                <a class="nav-link {% if url_name == 'dashboard' %}active{% endif %}" href="{% url 'inventor:manager:dashboard' %}">
                     <i class="material-icons">edit</i>
                     <span>Blog Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if url_name == 'admin_components_blog_posts' %}active{% endif %}" href="{% url 'tatrytravel:admin_components_blog_posts' %}">
+                <a class="nav-link {% if url_name == 'components_blog_posts' %}active{% endif %}" href="{% url 'inventor:manager:components_blog_posts' %}">
                     <i class="material-icons">vertical_split</i>
                     <span>Blog Posts</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if url_name == 'admin_add_new_post' %}active{% endif %}" href="{% url 'tatrytravel:admin_add_new_post' %}">
+                <a class="nav-link {% if url_name == 'add_new_post' %}active{% endif %}" href="{% url 'inventor:manager:add_new_post' %}">
                     <i class="material-icons">note_add</i>
                     <span>Add New Post</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if url_name == 'admin_form_components' %}active{% endif %}" href="{% url 'tatrytravel:admin_form_components' %}">
+                <a class="nav-link {% if url_name == 'form_components' %}active{% endif %}" href="{% url 'inventor:manager:form_components' %}">
                     <i class="material-icons">view_module</i>
                     <span>Forms &amp; Components</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if url_name == 'admin_tables' %}active{% endif %}" href="{% url 'tatrytravel:admin_tables' %}">
+                <a class="nav-link {% if url_name == 'tables' %}active{% endif %}" href="{% url 'inventor:manager:tables' %}">
                     <i class="material-icons">table_chart</i>
                     <span>Tables</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if url_name == 'admin_user_profile' %}active{% endif %}" href="{% url 'tatrytravel:admin_user_profile' %}">
+                <a class="nav-link {% if url_name == 'user_profile' %}active{% endif %}" href="{% url 'inventor:manager:user_profile' %}">
                     <i class="material-icons">person</i>
                     <span>User Profile</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if url_name == 'admin_errors' %}active{% endif %}" href="{% url 'tatrytravel:admin_errors' %}">
+                <a class="nav-link {% if url_name == 'errors' %}active{% endif %}" href="{% url 'inventor:manager:errors' %}">
                     <i class="material-icons">error</i>
                     <span>Errors</span>
                 </a>

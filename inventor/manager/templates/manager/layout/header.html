@@ -54,11 +54,11 @@
                     <span class="d-none d-md-inline-block">{{ request.user }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item" href="{% url 'tatrytravel:admin_user_profile' %}">
+                    <a class="dropdown-item" href="{% url 'inventor:manager:user_profile' %}">
                         <i class="material-icons">&#xE7FD;</i> Profile</a>
-                    <a class="dropdown-item" href="{% url 'tatrytravel:admin_components_blog_posts' %}">
+                    <a class="dropdown-item" href="{% url 'inventor:manager:components_blog_posts' %}">
                         <i class="material-icons">vertical_split</i> Blog Posts</a>
-                    <a class="dropdown-item" href="{% url 'tatrytravel:admin_add_new_post' %}">
+                    <a class="dropdown-item" href="{% url 'inventor:manager:add_new_post' %}">
                         <i class="material-icons">note_add</i> Add New Post</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{% url 'account_logout' %}">
