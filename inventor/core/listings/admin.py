@@ -145,9 +145,11 @@ try:
     admin.site.unregister(Accommodation)
     @admin.register(Accommodation)
     class AccommodationAdmin(ListingAdmin):
-        fieldsets = ListingTypeAdmin.fieldsets + BookingMixinAdmin.fieldsets + (
-            (_('Specific'), {'fields': ('amenities', 'star_rating', 'rooms')}),
-        )
+        pass
+        # TODO: fix fieldsets
+        # fieldsets = fieldsets + BookingMixinAdmin.fieldsets + (
+        #     (_('Specific'), {'fields': ('amenities', 'star_rating', 'rooms')}),
+        # )
 except (NotRegistered, ImportError, TypeError):
     pass
 
