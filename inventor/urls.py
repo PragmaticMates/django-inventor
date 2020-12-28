@@ -14,6 +14,7 @@ urlpatterns = (
     path('newsletter/', NewsletterView.as_view(), name='newsletter'),
     path(pgettext_lazy('url', 'partners/'), PartnerListView.as_view(), name='partners'),
     path(pgettext_lazy('url', 'accounts/'), include('inventor.core.accounts.urls', namespace='accounts')),
+    path(pgettext_lazy('url', 'manager/'), include('inventor.manager.urls', namespace='manager')),
 )
 
 if 'inventor.core.subscriptions' in settings.INSTALLED_APPS:
