@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from django.utils.translation import pgettext_lazy
 from django.views.generic import TemplateView
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path(pgettext_lazy("url", 'form-components'), TemplateView.as_view(template_name='manager/form-components.html'), name='form_components'),
     path(pgettext_lazy("url", 'tables'), TemplateView.as_view(template_name='manager/tables.html'), name='tables'),
     path(pgettext_lazy("url", 'errors'), TemplateView.as_view(template_name='manager/errors.html'), name='errors'),
+    path(pgettext_lazy('url', ''), include('inventor.manager.listings.urls', namespace='listings')),
 ]
