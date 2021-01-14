@@ -17,7 +17,7 @@ class HomeView(TemplateView):
         context_data.update({
             'localities': Locality.objects.all(),
             'categories': Category.objects.without_parent(),
-            'articles': Article.objects.published()[:3],
+            'articles': Article.objects.highlighted().order_by('-created')[:3],
         })
 
         # TODO: refactor to more universal/generic solution: move to template tag?
