@@ -1,0 +1,7 @@
+Manager:
+- horizontal navigation (MailerLite style)
+- main menu: Dashboard, Listings, Bookings, Search
+- user menu: profile, billing, logout
+- listing menu: info/stats, bookings, gallery, reviews
+- listing action button: edit, SEO, "show on website"
+- check authentication
