@@ -10,9 +10,6 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def seo(context):
-    from pprint import pprint
-    pprint(context)
-    pprint(context.get('request'))
     request = context['request']
     path = request.path
     obj = context.get('object', None)
@@ -60,9 +57,6 @@ def seo(context):
     s.update({
         'locale': request.LANGUAGE_CODE,
     })
-
-    # from pprint import pprint
-    # pprint(s)
 
     # TODO: cache
     return s
