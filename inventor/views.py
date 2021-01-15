@@ -27,7 +27,7 @@ class HomeView(TemplateView):
                 'top_accommodations': Accommodation.objects
                       # .promoted()
                       .published()
-                      .only('id', 'slug', 'title', 'promoted',
+                      .only('id', 'slug', 'title', 'i18n', 'promoted',
                             'locality_id', 'locality__title',
                             'image', 'price', 'price_unit', 'price_starts_at')
                       .annotate(locality_title=F('locality__title'))

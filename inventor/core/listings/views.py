@@ -2,12 +2,12 @@ from django.core.validators import EMPTY_VALUES
 from django.db.models import F
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, FormView
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import ListView
+from hitcount.views import HitCountDetailView
+
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 from inventor.core.lexicons.models import Feature, Category
 from inventor.core.listings.filters import ListingFilter
-from inventor.core.listings.forms import BookingForm
 from inventor.core.listings.models.general import Listing
 
 
@@ -82,11 +82,11 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         return context_data
 
 
-class ListingDetailView(SingleObjectMixin, FormView):
+class ListingDetailView(HitCountDetailView):
     model = Listing
     template_name = 'listings/listing_detail.html'
-    form_class = BookingForm
     slug_field = 'slug_i18n'
+    count_hit = True
 
     # def get_queryset(self):
     #     return super().get_queryset().select_subclasses()
@@ -128,17 +128,6 @@ class ListingDetailView(SingleObjectMixin, FormView):
             pass
 
         return context_data
-
-    def form_valid(self, form):
-        # todo send message and inform user
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        # todo inform user
-        return super().form_invalid(form)
-
-    def get_success_url(self):
-        return self.object.get_absolute_url()
 
     def get_template_names(self):
         names = super().get_template_names()

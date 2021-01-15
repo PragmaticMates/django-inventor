@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% load i18n static thumbnail crispy_forms_tags %}
+{% load i18n static thumbnail crispy_forms_tags hitcount_tags bookings %}
 
 {% block main_class %}bg-gray-100 listing-detail{% endblock %}
 
@@ -42,6 +42,10 @@
                             {% endfor %}
                         </span>
                     {% endif %}
+                    <span class="text-secondary d-block">
+                        <i class="fas fa-fw fa-eye mr-2 text-light opacity-50p"></i>
+                        <a class="text-secondary" href="{{ category.get_absolute_url }}">{% trans 'Seen today' %}: {% get_hit_count for object within "days=1,minutes=30" %}</a>
+                    </span>
                 </div>
 {#                {% if object.price %}#}
 {#                    <div class="col-md-auto py-4 d-flex align-items-center">#}
@@ -189,10 +193,11 @@
                 {% endif %}
             </div>
             <div class="col-md-4">
-                {% if form %}
+                {% if object.booking_enabled %}
                     <h4 class=" mt-2">{% trans 'Booking form' %}</h4>
                     <div class="card shadow-sm border-0 bg-white p-4 mb-5">
-                        {% crispy form %}
+                        {% booking_form object as book_form %}
+                        {% crispy book_form %}
                     </div>
                 {% endif %}
 
