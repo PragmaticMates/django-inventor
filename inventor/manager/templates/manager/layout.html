@@ -1,1 +1,25 @@
-{% extends 'manager/layout-sidebar.html' %}
+{% extends 'manager/skeleton.html' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <main class="main-content col-12 p-0">
+
+                <!-- Main Navbar -->
+                {% include 'manager/layout/header.html' %}
+                <!-- / .main-navbar -->
+
+                <!-- Content -->
+{#                {% include 'admin/home.html' %}#}
+                <div class=container>
+                {% block content %}{% endblock %}
+                </div>
+                <!-- End Content -->
+
+                {% include 'manager/layout/footer.html' %}
+            </main>
+        </div>
+    </div>
+{% endblock %}
+
+{#{% extends 'manager/layout-sidebar.html' %}#}
