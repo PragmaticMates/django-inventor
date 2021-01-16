@@ -7,27 +7,33 @@
                 <li class="nav-item">
                     <a class="nav-link {% if url_name == 'dashboard' %}active{% endif %}" href="{% url 'inventor:manager:dashboard' %}">
                         <i class="material-icons">edit</i>
-                        <span>Blog Dashboard</span>
+                        <span>{% trans 'Dashboard' %}</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if url_name == 'listing_list' %}active{% endif %}" href="{% url 'inventor:manager:listings:listing_list' %}">
                         <i class="material-icons">table_chart</i>
-                        <span>Listings</span>
+                        <span>{% trans 'Listings' %}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if url_name == 'tables' %}active{% endif %}" href="{% url 'inventor:manager:tables' %}">
-                        <i class="material-icons">table_chart</i>
-                        <span>Tables</span>
+                    <a class="nav-link {% if url_name == 'booking_list' %}active{% endif %}" href="#">
+                        <i class="material-icons">event_available</i>
+                        <span>{% trans 'Bookings' %}</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if url_name == 'user_profile' %}active{% endif %}" href="{% url 'inventor:manager:user_profile' %}">
-                        <i class="material-icons">person</i>
-                        <span>User Profile</span>
-                    </a>
-                </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link {% if url_name == 'tables' %}active{% endif %}" href="{% url 'inventor:manager:tables' %}">#}
+{#                        <i class="material-icons">table_chart</i>#}
+{#                        <span>Tables</span>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link {% if url_name == 'user_profile' %}active{% endif %}" href="{% url 'inventor:manager:user_profile' %}">#}
+{#                        <i class="material-icons">person</i>#}
+{#                        <span>User Profile</span>#}
+{#                    </a>#}
+{#                </li>#}
             </ul>
         </div>
 
@@ -84,13 +90,18 @@
                     <span class="d-none d-md-inline-block">{{ request.user }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item" href="{% url 'inventor:manager:user_profile' %}">
-                        <i class="material-icons">&#xE7FD;</i> Profile</a>
-                    <a class="dropdown-item" href="{% url 'inventor:manager:components_blog_posts' %}">
-                        <i class="material-icons">vertical_split</i> Blog Posts</a>
-                    <a class="dropdown-item" href="{% url 'inventor:manager:add_new_post' %}">
-                        <i class="material-icons">note_add</i> Add New Post</a>
-                    <div class="dropdown-divider"></div>
+{#                    <a class="dropdown-item" href="{% url 'inventor:manager:user_profile' %}">#}
+                    <a class="dropdown-item" href="{% url 'inventor:accounts:user_update_profile' %}">
+                        <i class="material-icons">&#xE7FD;</i> {% trans 'Profile' %}</a>
+{#                    <a class="dropdown-item" href="{% url 'inventor:manager:components_blog_posts' %}">#}
+{#                        <i class="material-icons">vertical_split</i> Blog Posts</a>#}
+{#                    <a class="dropdown-item" href="{% url 'inventor:manager:add_new_post' %}">#}
+{#                        <i class="material-icons">note_add</i> Add New Post</a>#}
+{#                    <div class="dropdown-divider"></div>#}
+                    <a class="dropdown-item" href="{% url 'commerce:orders' %}">
+                        <i class="material-icons">receipt</i> {% trans 'My orders' %}</a>
+{#                    <a class="dropdown-item" href="{% url 'inventor:subscriptions:user_plan' %}">#}
+{#                        <i class="material-icons">note_add</i>{% trans 'My subscription' %}</a>#}
                     <a class="dropdown-item text-danger" href="{% url 'account_logout' %}">
                         <i class="material-icons text-danger">&#xE879;</i> Logout </a>
                 </div>
