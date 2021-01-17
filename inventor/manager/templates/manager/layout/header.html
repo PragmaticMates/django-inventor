@@ -17,7 +17,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if url_name == 'booking_list' %}active{% endif %}" href="#">
+                    <a class="nav-link {% if url_name == 'booking_list' %}active{% endif %}" href="{% url 'inventor:manager:bookings:booking_list' %}">
                         <i class="material-icons">event_available</i>
                         <span>{% trans 'Bookings' %}</span>
                     </a>
@@ -102,6 +102,7 @@
                         <i class="material-icons">receipt</i> {% trans 'My orders' %}</a>
 {#                    <a class="dropdown-item" href="{% url 'inventor:subscriptions:user_plan' %}">#}
 {#                        <i class="material-icons">note_add</i>{% trans 'My subscription' %}</a>#}
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{% url 'account_logout' %}">
                         <i class="material-icons text-danger">&#xE879;</i> Logout </a>
                 </div>

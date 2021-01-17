@@ -1,0 +1,73 @@
+{% extends 'manager/layout.html' %}
+{% load i18n static pragmatic_tags inventor %}
+
+{% block main_class %}bg-gray-100{% endblock %}
+
+{% block content %}
+
+    <div class="top-full-width container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 py-4">
+                    <h1>{{ title|title }}</h1>
+{#                    <nav aria-label="breadcrumb">#}
+{#                        <ol class="breadcrumb">#}
+{#                            <li class="breadcrumb-item"><a href="{% url 'inventor:home' %}">{% trans 'Home' %}</a></li>#}
+{#                            <li class="breadcrumb-item"><a href="{% url 'listings:listing_list' %}">{% trans 'Listings' %}</a></li>#}
+{#                            <li class="breadcrumb-item active" aria-current="page">Data</li>#}
+{#                        </ol>#}
+{#                    </nav>#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row py-5">
+{#            <side class="col-md-3 filter-wrapper">#}
+{#                <h3>{% trans 'Filter' %}</h3>#}
+{#                <div class="card p-4">#}
+{#                    {% include 'helpers/filter-vertical.html' %}#}
+{#                </div>#}
+{#            </side>#}
+            <div class="col-md-9">
+{#            <div class="col-md-12">#}
+                <div class="queryset-actions row">
+{#                    <div class="col-sm-auto">{% include 'helpers/filter-modal.html' with asynchronous_load=True small=True %}</div>#}
+{#                    <div class="col-sm d-none d-lg-block">{% filter_values filter %}</div>#}
+                    <div class="col-sm"></div>
+                    {% sorting %}
+                    {% display_modes %}
+                </div>
+
+                    {% for object in object_list %}
+                        <div class="card mb-4 p-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    #{{ object.pk }}<br>
+                                    {{ object.get_status_display }}<br>
+                                    {{ object.listing }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ object.book_from }}<br>
+                                    {{ object.book_to }}<br>
+                                    {{ object.price }} EUR
+                                </div>
+                                <div class="col-md-4">
+                                    {{ object.number_of_persons }}<br>
+                                    {{ object.person }}<br>
+                                    {{ object.phone }}<br>
+                                    {{ object.email }}
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        {% trans 'No data to display' %}
+                    {% endfor %}
+
+
+                {% paginator page_obj %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
