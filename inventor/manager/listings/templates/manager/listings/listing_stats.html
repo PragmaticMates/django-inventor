@@ -10,13 +10,13 @@
             <div class="row py-5">
                 <div class="col-md">
                     <h1>{{ object|title }}</h1>
-{#                    <nav aria-label="breadcrumb">#}
-{#                        <ol class="breadcrumb">#}
-{#                            <li class="breadcrumb-item"><a href="{% url 'inventor:home' %}">{% trans 'Home' %}</a></li>#}
-{#                            <li class="breadcrumb-item"><a href="{% url 'listings:listing_list' %}">{% trans 'Listings' %}</a></li>#}
-{#                            <li class="breadcrumb-item active" aria-current="page">Data</li>#}
-{#                        </ol>#}
-{#                    </nav>#}
+                    {#                    <nav aria-label="breadcrumb">#}
+                    {#                        <ol class="breadcrumb">#}
+                    {#                            <li class="breadcrumb-item"><a href="{% url 'inventor:home' %}">{% trans 'Home' %}</a></li>#}
+                    {#                            <li class="breadcrumb-item"><a href="{% url 'listings:listing_list' %}">{% trans 'Listings' %}</a></li>#}
+                    {#                            <li class="breadcrumb-item active" aria-current="page">Data</li>#}
+                    {#                        </ol>#}
+                    {#                    </nav>#}
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link {% if url_name == 'listing_stats' %}active{% endif %}" href="{% url 'inventor:manager:listings:listing_stats' object.slug %}">
@@ -51,7 +51,14 @@
                     </ul>
                 </div>
                 <div class="col-md-auto">
-                    todo actions
+                    <div class="dropdown show">
+                        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% trans 'Actions' %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" target="_blank" href="{% url 'listings:listing_detail' object.slug %}">{% trans 'Show on website' %}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
