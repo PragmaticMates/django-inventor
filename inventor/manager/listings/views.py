@@ -15,8 +15,8 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     template_name = 'manager/listings/listing_list.html'
     filter_class = ListingFilter
     paginate_by = 12
-    displays = ['columns']
-    paginate_by_display = {'columns': [12, 24, 48]}
+    displays = ['rows']
+    paginate_by_display = {'rows': [12, 24, 48]}
     sorting_options = {
         '-created': _('Newest'),
         'created': _('Oldest'),

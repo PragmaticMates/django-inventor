@@ -39,15 +39,13 @@
                     {% sorting %}
                     {% display_modes %}
                 </div>
-                <div class="row">
-                    {% for object in object_list %}
+                {% for object in object_list %}
 {#                        <div class="col-md-4">#}
-                            {% include 'manager/listings/widgets/listing_column_item.html' %}
+                        {% include 'manager/listings/widgets/listing_row_item.html' %}
 {#                        </div>#}
-                    {% empty %}
-                        {% trans 'No data to display' %}
-                    {% endfor %}
-                </div>
+                {% empty %}
+                    {% trans 'No data to display' %}
+                {% endfor %}
 
                 {% paginator page_obj %}
             </div>

@@ -1,0 +1,46 @@
+{% load i18n static thumbnail %}
+
+{#<div class="card rounded-0 shadow-sm listing-item">#}
+{#    <a href="{{ object.get_absolute_url }}">#}
+{#        <div class="listing-image {% if object.image %}bg-cover{% else %} d-flex align-items-center justify-content-center{% endif %}"#}
+{#             {% if object.image %}style="background-image: url('{% thumbnail object.image "500" as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}');" {% endif %}>#}
+{#        </div>#}
+{#        {% if object.price %}#}
+{#            <div class="listing-price">#}
+{#                <i class="fas fa-tag mr-2"></i>{{ object.get_price_display }}#}
+{#            </div>#}
+{#        {% endif %}#}
+{#        {% if object.promoted %}#}
+{#            <div class="listing-ribbon">#}
+{#                <span>{% trans 'TOP' %}</span>#}
+{#            </div>#}
+{#        {% endif %}#}
+{#        <div class="listing-name">#}
+{#            <span class="listing-category">#}
+{#                {{ object.get_listing_type_display }}#}
+{#            </span>#}
+{#            <strong class="d-block">{{ object.title|capfirst }}</strong>#}
+{#            {% if object.locality_title %}#}
+{#                <small><i class="fas fa-map-marker-alt mr-2"></i>{{ object.locality_title }}</small>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    </a>#}
+{#</div>#}
+
+<div class="row card card-small card-post card-post--1 mb-4">
+    <div class="col-md-4 card-post__image"
+         {% if object.image %}style="background-image: url('{% thumbnail object.image "500" as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}');" {% endif %}>
+        <a href="#" class="card-post__category badge badge-pill badge-info">{{ object.get_listing_type_display }}</a>
+{#            <div class="card-post__author d-flex">#}
+{#                <a href="#" class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('images/avatars/0.jpg');">Written by Anna Kunis</a>#}
+{#            </div>#}
+    </div>
+    <div class="col-md-8 card-body">
+        <h5 class="card-title">
+            <a class="text-fiord-blue" href="{% url 'inventor:manager:listings:listing_stats' object.slug %}">{{ object.title|capfirst }}</a>
+        </h5>
+{#            <p class="card-text d-inline-block mb-3">However venture pursuit he am mr cordial. Forming musical am hearing studied be luckily. But in for determine what would#}
+{#                see...</p>#}
+        <span class="text-muted">{{ object.locality_title }}</span>
+    </div>
+</div>
