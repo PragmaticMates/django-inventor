@@ -1,0 +1,67 @@
+{% extends 'manager/layout.html' %}
+{% load i18n static pragmatic_tags inventor %}
+
+{% block main_class %}bg-gray-100{% endblock %}
+
+{% block content %}
+
+    <div class="top-full-width container-fluid">
+        <div class="container">
+            <div class="row py-5">
+                <div class="col-md">
+                    <h1>{{ object|title }}</h1>
+{#                    <nav aria-label="breadcrumb">#}
+{#                        <ol class="breadcrumb">#}
+{#                            <li class="breadcrumb-item"><a href="{% url 'inventor:home' %}">{% trans 'Home' %}</a></li>#}
+{#                            <li class="breadcrumb-item"><a href="{% url 'listings:listing_list' %}">{% trans 'Listings' %}</a></li>#}
+{#                            <li class="breadcrumb-item active" aria-current="page">Data</li>#}
+{#                        </ol>#}
+{#                    </nav>#}
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link {% if url_name == 'listing_stats' %}active{% endif %}" href="{% url 'inventor:manager:listings:listing_stats' object.slug %}">
+                                <span>{% trans 'Statstics' %}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if url_name == 'listing_info' %}active{% endif %}" href="{% url 'inventor:manager:listings:listing_info' object.slug %}">
+                                <span>{% trans 'Information' %}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if url_name == 'listing_bookings' %}active{% endif %}" href="{% url 'inventor:manager:listings:listing_bookings' object.slug %}">
+                                <span>{% trans 'Bookings' %}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if url_name == 'listing_gallery' %}active{% endif %}" href="{% url 'inventor:manager:listings:listing_gallery' object.slug %}">
+                                <span>{% trans 'Gallery' %}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if url_name == 'listing_reviews' %}active{% endif %}" href="{% url 'inventor:manager:listings:listing_reviews' object.slug %}">
+                                <span>{% trans 'Riviews' %}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if url_name == 'listing_seo' %}active{% endif %}" href="{% url 'inventor:manager:listings:listing_seo' object.slug %}">
+                                <span>{% trans 'SEO' %}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-auto">
+                    todo actions
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-12">
+                {{ object }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
