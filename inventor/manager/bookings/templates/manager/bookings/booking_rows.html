@@ -30,7 +30,7 @@
 {#                    {% include 'helpers/filter-vertical.html' %}#}
 {#                </div>#}
 {#            </side>#}
-            <div class="col-md-9">
+            <div class="col-md-12">
 {#            <div class="col-md-12">#}
                 <div class="queryset-actions row">
 {#                    <div class="col-sm-auto">{% include 'helpers/filter-modal.html' with asynchronous_load=True small=True %}</div>#}
@@ -41,26 +41,7 @@
                 </div>
 
                     {% for object in object_list %}
-                        <div class="card mb-4 p-4">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    #{{ object.pk }}<br>
-                                    {{ object.get_status_display }}<br>
-                                    {{ object.listing }}
-                                </div>
-                                <div class="col-md-4">
-                                    {{ object.book_from }}<br>
-                                    {{ object.book_to }}<br>
-                                    {{ object.price }} EUR
-                                </div>
-                                <div class="col-md-4">
-                                    {{ object.number_of_persons }}<br>
-                                    {{ object.person }}<br>
-                                    {{ object.phone }}<br>
-                                    {{ object.email }}
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'manager/bookings/widgets/booking.html' %}
                     {% empty %}
                         {% trans 'No data to display' %}
                     {% endfor %}

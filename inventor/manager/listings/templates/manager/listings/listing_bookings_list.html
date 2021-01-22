@@ -1,0 +1,39 @@
+{% extends 'manager/layout.html' %}
+{% load i18n static pragmatic_tags inventor %}
+
+{% block main_class %}bg-gray-100{% endblock %}
+
+{% block content %}
+
+    {% include 'manager/listings/layout/listing_top.html' %}
+
+    <div class="container">
+        <div class="row py-5">
+{#            <side class="col-md-3 filter-wrapper">#}
+{#                <h3>{% trans 'Filter' %}</h3>#}
+{#                <div class="card p-4">#}
+{#                    {% include 'helpers/filter-vertical.html' %}#}
+{#                </div>#}
+{#            </side>#}
+            <div class="col-md-12">
+{#            <div class="col-md-12">#}
+                <div class="queryset-actions row">
+{#                    <div class="col-sm-auto">{% include 'helpers/filter-modal.html' with asynchronous_load=True small=True %}</div>#}
+{#                    <div class="col-sm d-none d-lg-block">{% filter_values filter %}</div>#}
+                    <div class="col-sm"></div>
+                    {% sorting %}
+                    {% display_modes %}
+                </div>
+
+                    {% for object in object_list %}
+                        {% include 'manager/bookings/widgets/booking.html' %}
+                    {% empty %}
+                        {% trans 'No data to display' %}
+                    {% endfor %}
+
+
+                {% paginator page_obj %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

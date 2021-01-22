@@ -3,6 +3,7 @@ from django.db.models import F
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView
+from inventor.core.bookings.models import Booking
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 
 from inventor.core.lexicons.models import Category
@@ -131,3 +132,39 @@ class ListingStatsView(DetailView):
         names = super().get_template_names()
         obj = self.get_object()
         return [f"manager/listings/{obj.__class__.__name__.lower()}_stats.html"] + names
+
+
+class ListingBookingsListView(DisplayListViewMixin, SortingListViewMixin, ListView):
+    model = Booking
+    template_name = 'manager/listings/listing_bookings_list.html'
+    # filter_class = BookingFilter
+    paginate_by = 12
+    displays = ['rows']
+    paginate_by_display = {'rows': [12, 24, 48]}
+    sorting_options = {
+        '-created': _('Newest'),
+        'created': _('Oldest'),
+    }
+    slug_field = 'slug'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.listing_slug = self.kwargs.get(self.slug_field)
+        self.listing = Listing.objects.get(slug=self.listing_slug)
+        print(self.listing_slug)
+        # self.filter = self.filter_class(**self.get_filter_kwargs())
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return super().get_queryset().filter(listing__slug=self.listing_slug)
+
+    def get_template_names(self):
+        names = super().get_template_names()
+        names.insert(1, f"manager/listings/listing_bookings{self.template_name_suffix}.html")
+        return names
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data.update({
+            'object': self.listing
+        })
+        return context_data
