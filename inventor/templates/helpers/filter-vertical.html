@@ -1,7 +1,6 @@
 {% load i18n crispy_forms_tags %}
 
 <section class="filter-vertical">
-    <h2 class="d-none">{% trans 'Filter' %}</h2>
     <form action="" method="get" class="filter">
         {% if request.GET.display %}
             <input type="hidden" name="display" value="{{ request.GET.display }}">
