@@ -38,7 +38,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">
-                <a class="text-fiord-blue" href="#">{{ object.title|capfirst }}</a>
+                <a class="text-fiord-blue" href="{% url 'inventor:manager:listings:listing_stats' object.slug %}">{{ object.title|capfirst }}</a>
             </h5>
 {#            <p class="card-text d-inline-block mb-3">However venture pursuit he am mr cordial. Forming musical am hearing studied be luckily. But in for determine what would#}
 {#                see...</p>#}

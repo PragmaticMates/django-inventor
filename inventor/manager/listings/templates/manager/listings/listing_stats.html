@@ -1,0 +1,18 @@
+{% extends 'manager/layout.html' %}
+{% load i18n static pragmatic_tags inventor %}
+
+{% block main_class %}bg-gray-100{% endblock %}
+
+{% block top %}
+    {% include 'manager/listings/layout/listing_top.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-12">
+                {{ object }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
