@@ -1,0 +1,64 @@
+{% load i18n flatpages_i18n %}
+
+<div id="cookie-banner" class="fixed-bottom text-center p-2 bg-white border-top d-none">
+    <small>
+        <p class="mb-0 d-inline-block">
+            {% trans 'We use cookies to give you the best experience.' %}
+        </p>
+
+        {% get_flatpage_i18n 'privacy' as privacy_policy_flatpage %}
+        {% if privacy_policy_flatpage %}
+            <a href="{{ privacy_policy_flatpage.get_absolute_url }}" target="_blank">{% trans 'Learn more' %}</a>
+        {% endif %}
+
+        <button type="button" class="btn btn-link border-primary btn-sm ml-2 my-1" onclick="hideCookieBanner()">
+            {% trans 'I understand' %}
+        </button>
+    </small>
+</div>
+
+<script>
+    /*
+    * Javascript to show and hide cookie banner using local storage
+    */
+
+    /**
+     * Shows the Cookie banner
+     */
+    function showCookieBanner(){
+        let cookieBanner = document.getElementById("cookie-banner");
+        cookieBanner.style.cssText = 'display:block !important';
+
+        var height = cookieBanner.offsetHeight;
+        document.querySelector('footer').style = 'margin-bottom: ' + height + 'px';
+    }
+
+    /**
+     * Hides the Cookie banner and saves the value to local storage
+     */
+    function hideCookieBanner(){
+        localStorage.setItem("isCookieAccepted", "yes");
+
+        let cookieBanner = document.getElementById("cookie-banner");
+        cookieBanner.style.display = "none";
+
+        document.querySelector('footer').style = 'margin-bottom: 0px';
+    }
+
+    /**
+     * Checks the local storage and shows Cookie banner based on it.
+     */
+    function initializeCookieBanner(){
+        let isCookieAccepted = localStorage.getItem("isCookieAccepted");
+        if (isCookieAccepted === null) {
+            localStorage.clear();
+            localStorage.setItem("isCookieAccepted", "no");
+            showCookieBanner();
+        } else if (isCookieAccepted === "no") {
+            showCookieBanner();
+        }
+    }
+
+    // Assigning values to window object
+    window.onload = initializeCookieBanner();
+</script>
