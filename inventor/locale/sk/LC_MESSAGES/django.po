@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-25 23:14+0100\n"
-"PO-Revision-Date: 2021-01-25 23:15+0058\n"
+"POT-Creation-Date: 2021-01-26 10:59+0100\n"
+"PO-Revision-Date: 2021-01-26 11:00+0058\n"
 "Last-Translator: b'Erik Telepovsky <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -1463,7 +1463,6 @@ msgstr "Domov"
 #: core/listings/templates/listings/listing_columns.html:29
 #: manager/listings/templates/manager/listings/listing_columns.html:14
 #: manager/listings/templates/manager/listings/listing_rows.html:14
-#: templates/helpers/filter-vertical.html:4
 msgid "Filter"
 msgstr "Filter"
 
@@ -1580,13 +1579,17 @@ msgstr "Detaily"
 msgid "Subscribers"
 msgstr "Odberatelia"
 
-#: core/newsletters/forms.py:12
+#: core/newsletters/forms.py:13
 msgid "Enter your e-mail"
 msgstr "Zadajte svoj e-mail"
 
-#: core/newsletters/forms.py:27
+#: core/newsletters/forms.py:28
 msgid "Subscribe"
 msgstr "Prihlásiť sa"
+
+#: core/newsletters/forms.py:41
+msgid "Please accept cookies at first to verify you are not a robot"
+msgstr "Akceptujte cookies pre overenie, že nie ste robot."
 
 #: core/newsletters/models.py:7
 msgid "subscribed"
@@ -1600,28 +1603,28 @@ msgstr "odberateľ"
 msgid "subscribers"
 msgstr "odberatelia"
 
-#: core/newsletters/views.py:24
+#: core/newsletters/views.py:29
 #, python-format
 msgid "New email in newsletter database: %s"
 msgstr "Nový email v newsletter databáze: %s"
 
-#: core/newsletters/views.py:27
+#: core/newsletters/views.py:32
 msgid "Newsletter form"
 msgstr "Newsletter formulár"
 
-#: core/newsletters/views.py:33
+#: core/newsletters/views.py:38
 msgid "Failed to sign up. Please try again."
 msgstr "Registrácia zlyhala. Skúste znova."
 
-#: core/newsletters/views.py:36
+#: core/newsletters/views.py:41
 msgid "Your e-mail has been successfully saved. Thank you."
 msgstr "Váš e-mail bol úspešne uložený. Ďakujeme."
 
-#: core/newsletters/views.py:38
+#: core/newsletters/views.py:43
 msgid "Thank you! You are already subscribed."
 msgstr "Ďakujeme! Už ste na odber prihlásený."
 
-#: core/newsletters/views.py:43
+#: core/newsletters/views.py:48
 msgid "Failed to send message. Please try again."
 msgstr "Správu sa nepodarilo odoslať. Skúste znova."
 
@@ -1997,11 +2000,8 @@ msgctxt "url"
 msgid "errors/"
 msgstr ""
 
-#: templates/helpers/cookie_banner.html:9
+#: templates/helpers/cookie_banner.html:10
 #, python-format
-#| msgid ""
-#| "We use <a href=\"{url}\" target=\"_blank\">cookies</a> to give you the best "
-#| "experience."
 msgid ""
 "We use <a href=\"%(url)s\" target=\"_blank\">cookies</a> to give you the "
 "best experience."
@@ -2009,15 +2009,15 @@ msgstr ""
 "Používame <a href=\"%(url)s\" target=\"_blank\">cookies</a>, aby sme vám "
 "poskytli čo najlepší zážitok."
 
-#: templates/helpers/cookie_banner.html:11
+#: templates/helpers/cookie_banner.html:12
 msgid "We use cookies to give you the best experience."
 msgstr "Používame cookies, aby sme vám poskytli čo najlepší zážitok."
 
-#: templates/helpers/cookie_banner.html:16
+#: templates/helpers/cookie_banner.html:17
 msgid "I understand"
 msgstr "Rozumiem"
 
-#: templates/helpers/filter-vertical.html:20
+#: templates/helpers/filter-vertical.html:19
 msgid "Search"
 msgstr "Hľadať"
 
