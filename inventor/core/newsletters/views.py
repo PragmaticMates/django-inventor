@@ -17,6 +17,11 @@ class NewsletterView(BaseFormView):
     def get(self, request, *args, **kwargs):
         return HttpResponseBadRequest()
 
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['request'] = self.request
+        return form_kwargs
+
     def form_valid(self, form):
         subscription, created = self.save_email(form.cleaned_data['email'])
 
@@ -43,7 +48,10 @@ class NewsletterView(BaseFormView):
         messages.error(self.request, _('Failed to send message. Please try again.'))
 
         for field, errors in form.errors.items():
-            messages.warning(self.request, '{}: {}'.format(field, '. '.join(errors)))
+            if field != '__all__':
+                messages.warning(self.request, '{}: {}'.format(field, '. '.join(errors)))
+            else:
+                messages.warning(self.request, '{}'.format('. '.join(errors)))
 
         return redirect(self.get_success_url())
 
