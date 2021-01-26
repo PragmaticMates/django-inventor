@@ -31,6 +31,8 @@ class NewsletterForm(forms.Form):
 
         self.cookies_accepted = request.COOKIES.get('isCookieAccepted', 'no') == 'yes'
 
+        # TODO: when cookies accepted and form submitted on the same request, we need to skip captcha
+
         if not settings.DEBUG and self.cookies_accepted:
             # add captcha field dynamically because we have multiple forms on a single page
             self.fields['captcha'] = ReCaptchaField(label='', widget=ReCaptchaV3())
