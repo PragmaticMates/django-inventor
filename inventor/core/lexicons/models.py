@@ -18,13 +18,14 @@ class RegularLexicon(SlugMixin, models.Model):
     title = models.CharField(_('title'), max_length=100, unique=True)
     slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, default='')
     description = models.TextField(_('description'), blank=True)
+    i18n = TranslationField(fields=('title', 'slug', 'description'))
 
     class Meta:
         abstract = True
         ordering = ('title',)
 
     def __str__(self):
-        return self.title
+        return self.title_i18n
 
 
 class Category(SlugMixin, MPTTModel):
@@ -64,6 +65,7 @@ class Feature(SlugMixin, models.Model):
     # listing_type = models.ForeignKey(
     #     ContentType, verbose_name=_('listing type'), on_delete=models.PROTECT,
     #     blank=True, null=True, default=None)  # or many to many?
+    i18n = TranslationField(fields=('title', 'slug'))
 
     class Meta:
         verbose_name = _('feature')
@@ -71,7 +73,7 @@ class Feature(SlugMixin, models.Model):
         ordering = ('title',)
 
     def __str__(self):
-        return self.title
+        return self.title_i18n
 
 
 class Locality(SlugMixin, MPTTModel):
@@ -85,6 +87,7 @@ class Locality(SlugMixin, MPTTModel):
         upload_to='localities',
         blank=True, null=True, default=None
     )
+    i18n = TranslationField(fields=('description',))
 
     class MPTTMeta:
         order_insertion_by = ['title']
