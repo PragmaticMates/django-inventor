@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.core.validators import EMPTY_VALUES
 from django.db.models import F
 from django.shortcuts import redirect
@@ -44,11 +45,24 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         self.filter = self.filter_class(**self.get_filter_kwargs())
         return super().dispatch(request, *args, **kwargs)
 
+    def get_listing_class_by_queryset(self):
+        subclasses = getattr(self.get_whole_queryset(), 'subclasses', None)
+
+        if subclasses is not None and len(subclasses) == 1:
+            subclass = subclasses[0]
+            model = apps.get_model('listings', subclass)
+            return model
+
+        return None
+
     def get_filter_kwargs(self):
+        listing_type = self.get_listing_class_by_queryset()
+
         return {
             'data': self.request.GET,
             'queryset': self.get_whole_queryset(),
-            'listing_type': None if self.model == Listing else self.model,
+            'listing_type': self.model if self.model != Listing else listing_type,
+            'inheritance': False if self.model != Listing else listing_type != self.model
         }
 
     def get_template_names(self):

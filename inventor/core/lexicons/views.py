@@ -44,6 +44,7 @@ class CategoryDetailView(ListingListView):
             'lexicon': self.lexicon,
             'data': data
         })
+
         return filter_kwargs
 
     def get_whole_queryset(self):

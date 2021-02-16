@@ -58,7 +58,7 @@ class ListingFilter(django_filters.FilterSet):
             },
         }
 
-    def __init__(self, listing_type=None, lexicon=None, *args, **kwargs):
+    def __init__(self, listing_type=None, lexicon=None, inheritance=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.helper = SingleSubmitFormHelper()
@@ -107,9 +107,11 @@ class ListingFilter(django_filters.FilterSet):
                 listing_type._meta.get_field('duration')
                 self._meta.fields.append('duration')
                 segment = f'listings.{listing_type.__name__}.duration'
+                field_prefix = f'{listing_type.__name__.lower()}__' if inheritance else ''
+
                 self.filters['duration'] = SliderFilter(
                     label=_('Duration'), min_value=5, max_value=60, step=5, appended_text='min',
-                    has_range=True, show_inputs=False, queryset_method='published', segment=segment, field_name='duration'
+                    has_range=True, show_inputs=False, queryset_method='published', segment=segment, field_name=f'{field_prefix}duration'
                 )
                 self.filters['duration'].init_segments(segment)
                 self.form.fields['duration'] = self.filters['duration'].field
