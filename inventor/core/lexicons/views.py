@@ -1,5 +1,5 @@
 from django.core.validators import EMPTY_VALUES
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 
 from inventor.core.lexicons.models import Category
@@ -11,7 +11,7 @@ class CategoryDetailView(ListingListView):
     lexicon = Category
 
     def dispatch(self, request, *args, **kwargs):
-        self.category = Category.objects.get(slug_i18n=kwargs.get('slug'))
+        self.category = get_object_or_404(Category, slug_i18n=kwargs.get('slug'))
 
         # redirect to listing list view if multiple or none categories requested
         same_referer = request.path in request.META.get('HTTP_REFERER', '')
