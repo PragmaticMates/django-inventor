@@ -139,9 +139,9 @@ class Listing(SlugMixin, AbstractProduct):
             price = price[:-3]
 
         if inventor_settings.CURRENCY_AFTER_AMOUNT:
-            price_display = '{}{}'.format(price, inventor_settings.CURRENCY_SYMBOL)
+            price_display = '{} {}'.format(price, inventor_settings.CURRENCY_SYMBOL)  # example: 10 €
         else:
-            price_display = '{}{}'.format(inventor_settings.CURRENCY_SYMBOL, price)
+            price_display = '{}{}'.format(inventor_settings.CURRENCY_SYMBOL, price)   # example: $10
 
         if self.price_starts_at:
             price_display = '{} {}'.format(_('starts at'), price_display)
