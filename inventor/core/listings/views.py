@@ -1,7 +1,7 @@
 from django.apps import apps
 from django.core.validators import EMPTY_VALUES
 from django.db.models import F
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from hitcount.views import HitCountDetailView
@@ -35,7 +35,7 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         # redirect to category detail view if single category requested
         requested_categories = request.GET.getlist('categories')
         if len(requested_categories) == 1:
-            category = Category.objects.get(slug_i18n=requested_categories[0])
+            category = get_object_or_404(Category, slug_i18n=requested_categories[0])
             params = request.GET.copy()
             del params['categories']
             params = f'?{params.urlencode()}' if params not in EMPTY_VALUES else ''
