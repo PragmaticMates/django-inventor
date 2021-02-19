@@ -10,7 +10,11 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def seo(context):
-    request = context['request']
+    request = context.get('request', None)
+
+    if not request:
+        return {}
+
     path = request.path
     obj = context.get('object', None)
     view = context.get('view', None)
