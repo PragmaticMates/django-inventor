@@ -8,12 +8,12 @@
             {% include 'helpers/hotjar.html' %}
         {% endif %}
         {% seo as seo %}
-        <title>{{ settings.PAGE_TITLE }}{% if seo.title %} | {{ seo.title }}{% endif %}</title>
+        <title>{% if seo.title %}{{ seo.title }} | {% endif %}{{ settings.PAGE_TITLE }}</title>
         <meta charset="utf-8">
         <meta name="description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ settings.PAGE_DESCRIPTION }}{% endif %}">
         <meta name="keywords" content="{% if seo.keywords %}{{ seo.keywords }}{% else %}{{ settings.PAGE_KEYWORDS }}{% endif %}">
         <meta name="author" content="{% if seo.author %}{{ seo.author }}{% else %}{{ settings.PAGE_AUTHOR }}{% endif %}">
-        <meta property="og:title" content="{{ settings.PAGE_TITLE }}{% if seo.title %} | {{ seo.title }}{% endif %}">
+        <meta property="og:title" content="{% if seo.title %}{{ seo.title }} | {% endif %}{{ settings.PAGE_TITLE }}">
         <meta property="og:description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ settings.PAGE_DESCRIPTION }}{% endif %}">
         <meta property="og:url" content="{% uri request.path %}">
         <meta property="og:type" content="website">
