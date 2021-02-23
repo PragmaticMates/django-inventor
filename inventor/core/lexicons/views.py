@@ -13,19 +13,27 @@ class CategoryDetailView(ListingListView):
     def dispatch(self, request, *args, **kwargs):
         self.category = get_object_or_404(Category, slug_i18n=kwargs.get('slug'))
 
-        # redirect to listing list view if multiple or none categories requested
+        # we should redirect from category detail to listing list view if:
+        # - filtering by multiple categories
+        # - filtering none categories
+        # - filtering different category
+        # Note: filtering means changing filter. We need to stay on same page if just changing page.
+
+        # redirect to listing list view if needed
         same_referer = request.path in request.META.get('HTTP_REFERER', '')
         requested_categories = request.GET.getlist('categories')
+        is_paginating = 'page' in request.GET
 
-        should_redirect = len(requested_categories) == 0 and same_referer
-        should_redirect = should_redirect or len(requested_categories) > 1
-        should_redirect = should_redirect or len(requested_categories) == 1 and requested_categories[0] != self.category.slug_i18n
+        if not is_paginating:
+            empty_categories = len(requested_categories) == 0 and same_referer
+            multiple_categories = len(requested_categories) > 1
+            different_category = len(requested_categories) == 1 and requested_categories[0] != self.category.slug_i18n
 
-        if should_redirect:
-            params = request.GET.urlencode()
-            params = f'?{params}' if params not in EMPTY_VALUES else ''
-            url = f"{reverse('listings:listing_list')}{params}"
-            return redirect(url)
+            if empty_categories or multiple_categories or different_category:
+                params = request.GET.urlencode()
+                params = f'?{params}' if params not in EMPTY_VALUES else ''
+                url = f"{reverse('listings:listing_list')}{params}"
+                return redirect(url)
 
         self.filter = self.filter_class(**self.get_filter_kwargs())
 
