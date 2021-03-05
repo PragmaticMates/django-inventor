@@ -1,4 +1,4 @@
-{% load i18n static thumbnail %}
+{% load i18n static thumbnail hitcount_tags %}
 
 {#<div class="card rounded-0 shadow-sm listing-item">#}
 {#    <a href="{{ object.get_absolute_url }}">#}
@@ -27,7 +27,7 @@
 {#    </a>#}
 {#</div>#}
 
-<div class="row card card-small card-post card-post--1 mb-4">
+<div class="row card card-small card-post card-post--1 position-relative mb-4">
     <div class="col-md-4 card-post__image"
          {% if object.image %}style="background-image: url('{% thumbnail object.image "500" as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}');" {% endif %}>
         <a href="#" class="card-post__category badge badge-pill badge-info">{{ object.get_listing_type_display }}</a>
@@ -36,11 +36,39 @@
 {#            </div>#}
     </div>
     <div class="col-md-8 card-body">
+        {% if object.promoted %}
+            <div class="listing-ribbon">
+                <span>{% trans 'TOP' %}</span>
+            </div>
+        {% endif %}
         <h5 class="card-title">
             <a class="text-fiord-blue" href="{% url 'inventor:manager:listings:listing_stats' object.slug %}">{{ object.title|capfirst }}</a>
         </h5>
+        <div class="row">
+            {% if object.locality_title %}
+                <div class="col-md-6 text-muted mb-2">
+                    <i class="fas fa-fw fa-map-marker-alt mr-2"></i>
+                    <span>{{ object.locality_title }}</span>
+                </div>
+            {% endif %}
+            <div class="col-md-6">
+                <span class="text-muted d-block">
+                    <i class="fas fa-fw fa-eye mr-2 text-light opacity-50p"></i>
+                    <a class="text-muted" href="{{ category.get_absolute_url }}">{% trans 'Seen today' %}: {% get_hit_count for object within "days=1,minutes=30" %}</a>
+                </span>
+            </div>
+            {% if object.categories.exists %}
+                <div class="col-12">
+                    <span class="text-secondary d-block">
+                        <i class="fas fa-fw fa-folder mr-2 text-light opacity-50p"></i>
+                        {% for category in object.categories.all %}
+                            <a class="text-secondary" href="{{ category.get_absolute_url }}">{{ category }}{% if not forloop.last %}, {% endif %}</a>
+                        {% endfor %}
+                    </span>
+                </div>
+            {% endif %}
+        </div>
 {#            <p class="card-text d-inline-block mb-3">However venture pursuit he am mr cordial. Forming musical am hearing studied be luckily. But in for determine what would#}
 {#                see...</p>#}
-        <span class="text-muted">{{ object.locality_title }}</span>
     </div>
 </div>
