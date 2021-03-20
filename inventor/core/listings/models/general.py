@@ -298,8 +298,8 @@ class Photo(models.Model):
     i18n = TranslationField(fields=('description',))
 
     class Meta:
-        verbose_name = _(u'photo')
-        verbose_name_plural = _(u'photos')
+        verbose_name = _('photo')
+        verbose_name_plural = _('photos')
         ordering = ('created',)
         indexes = [GinIndex(fields=["i18n"]), ]
 
@@ -324,3 +324,43 @@ class Photo(models.Model):
 
     def get_absolute_url(self):
         return reverse('inventor:photo_download', kwargs={'pk': self.pk})
+
+
+class Group(SlugMixin, models.Model):
+    # definition
+    title = models.CharField(_('title'), max_length=100)
+    slug = models.SlugField(unique=True, max_length=SlugMixin.MAX_SLUG_LENGTH, blank=True)
+    description = models.TextField(_('description'), blank=True)
+
+    # previews
+    image = thumbnail.ImageField(
+        verbose_name=_('image'),
+        help_text=_('photo or image'),
+        max_length=1024,
+        upload_to='images',
+        blank=True
+    )
+
+    banner = models.ImageField(
+        verbose_name=_('banner'),
+        help_text=_('photo or image'),
+        max_length=1024 * 5,
+        upload_to='banners',
+        blank=True
+    )
+
+    video_url = models.URLField(_('video URL'), max_length=300, blank=True)
+    listings = models.ManyToManyField(to=Listing, verbose_name=_('listings'), blank=True, related_name='groups')
+    i18n = TranslationField(fields=('slug', 'title', 'description',))
+
+    class Meta:
+        verbose_name = _('group')
+        verbose_name_plural = _('groups')
+        ordering = ('title',)
+        indexes = [GinIndex(fields=["i18n"]), ]
+
+    def __str__(self):
+        return self.title_i18n
+
+    def get_absolute_url(self):
+        return reverse('listings:group_detail', args=(self.slug_i18n,))

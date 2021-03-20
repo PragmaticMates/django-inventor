@@ -1,8 +1,10 @@
 from django.contrib import admin, messages
 from django.contrib.admin.sites import NotRegistered
 from django.contrib.gis.db import models
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
+from modeltrans.admin import ActiveLanguageMixin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin, NestedTabularInline
 from sorl.thumbnail.admin import AdminImageMixin
 
@@ -10,7 +12,7 @@ from commerce.admin import SupplyInline
 from inventor import settings
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.forms import PhotoForm
-from inventor.core.listings.models.general import Album, Video, Photo, Listing
+from inventor.core.listings.models.general import Album, Video, Photo, Listing, Group
 from inventor.helpers import get_listing_types_classes
 
 
@@ -234,3 +236,18 @@ for model in get_listing_types_classes():
         model_admin.inlines = list(model_admin.inlines)[:] + [AlbumInline]
 
     admin.site.register(model, model_admin)
+
+
+@admin.register(Group)
+class GroupAdmin(ActiveLanguageMixin, admin.ModelAdmin):
+    search_fields = ['title', 'description']
+    list_display = ('title', 'slug', 'description', 'list_of_listings')
+    # autocomplete_fields = ['listings']  # An admin for model "Listing" has to be registered
+    filter_horizontal = ['listings']
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('listings')
+
+    def list_of_listings(self, obj):
+        # return mark_safe('<br>'.join([str(listing) for listing in obj.listings.all()]))
+        return mark_safe('<br>'.join(map(str, obj.listings.all())))

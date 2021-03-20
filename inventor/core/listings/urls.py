@@ -3,16 +3,17 @@ from django.utils.translation import pgettext_lazy
 
 from inventor import settings as inventor_settings
 from inventor.core.listings.models.general import Listing
-from inventor.core.listings.views import ListingListView, ListingDetailView
+from inventor.core.listings.views import ListingListView, ListingDetailView, GroupDetailView
 
 app_name = 'listings'
 
 urlpatterns = []
 
+# groups
+urlpatterns.append(path(pgettext_lazy('url', 'group/<str:slug>/'), GroupDetailView.as_view(), name='group_detail'))
 
 if inventor_settings.LISTINGS_URL_ENABLED:
     urlpatterns.append(path(pgettext_lazy('url', 'listings/'), ListingListView.as_view(), name='listing_list'))
-
 
 # lists
 for index, listing_type in enumerate(Listing.__subclasses__()):

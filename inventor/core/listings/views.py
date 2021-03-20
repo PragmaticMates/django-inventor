@@ -9,7 +9,7 @@ from hitcount.views import HitCountDetailView
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 from inventor.core.lexicons.models import Feature, Category
 from inventor.core.listings.filters import ListingFilter
-from inventor.core.listings.models.general import Listing
+from inventor.core.listings.models.general import Listing, Group
 
 
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
@@ -73,7 +73,7 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     def get_queryset(self):
         queryset = self.filter.qs\
             .annotate(locality_title=F('locality__title'))\
-            .prefetch_related('categories')
+            .prefetch_related('categories', 'groups')
         return self.sort_queryset(queryset)
 
     def get_whole_queryset(self):
@@ -147,3 +147,15 @@ class ListingDetailView(HitCountDetailView):
         names = super().get_template_names()
         obj = self.get_object()
         return [f"listings/{obj.__class__.__name__.lower()}_detail.html"] + names
+
+
+class GroupDetailView(HitCountDetailView):
+    model = Group
+    # template_name = 'listings/listing_detail.html'
+    slug_field = 'slug_i18n'
+    count_hit = True
+    #
+    # def get_template_names(self):
+    #     names = super().get_template_names()
+    #     obj = self.get_object()
+    #     return [f"listings/{obj.__class__.__name__.lower()}_detail.html"] + names
