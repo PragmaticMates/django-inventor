@@ -29,7 +29,7 @@
      * Hides the Cookie banner and saves the value to cookies
      */
     function hideCookieBanner(){
-        document.cookie = "isCookieAccepted=yes;path=/";
+        document.cookie = "isCookieAccepted=yes;path=/;max-age=28980000";
         let cookieBanner = document.getElementById("cookie-banner");
         cookieBanner.style.display = "none";
         document.querySelector('footer').style = 'margin-bottom: 0px';
