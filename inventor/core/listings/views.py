@@ -29,7 +29,8 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     }
 
     def get_sorting_options(self):
-        return {**{'-promoted': (_('Promoted'), ['-promoted', 'awaiting', 'created'])}, **self.sorting_options}
+        # TODO: configurable sorting options (at least order)
+        return {**{'-promoted': (_('Promoted'), ['-promoted', 'awaiting', '-created'])}, **self.sorting_options}
 
     def dispatch(self, request, *args, **kwargs):
         # redirect to category detail view if single category requested
