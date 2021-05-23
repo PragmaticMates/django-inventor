@@ -174,6 +174,20 @@ class ListingSwitchFavoriteView(LoginRequiredMixin, BaseDetailView):
         return redirect(back_url)
 
 
+class ListingFavoritesView(LoginRequiredMixin, ListView):
+    model = Listing
+    template_name = 'listings/favorites.html'
+    paginate_by = 12
+
+    def get_queryset(self):
+        return self.request.user.favorite_listings\
+            .published() \
+            .not_hidden() \
+            .annotate(locality_title=F('locality__title')) \
+            .prefetch_related('categories', 'groups') \
+            .select_subclasses()
+
+
 class GroupDetailView(HitCountDetailView):
     model = Group
     # template_name = 'listings/listing_detail.html'

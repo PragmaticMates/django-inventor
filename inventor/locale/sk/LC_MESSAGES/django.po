@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 22:28+0200\n"
-"PO-Revision-Date: 2021-05-23 22:30+0058\n"
+"POT-Creation-Date: 2021-05-24 00:06+0200\n"
+"PO-Revision-Date: 2021-05-24 00:06+0058\n"
 "Last-Translator: b'Erik PRAGMATIC <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -580,7 +580,6 @@ msgid "Sharing on social networks"
 msgstr "Zdieľanie na sociálnych sieťach"
 
 #: core/accounts/models.py:82
-#| msgid "listings"
 msgid "favorite listings"
 msgstr "obľúbené položky"
 
@@ -1540,27 +1539,32 @@ msgstr "Rezervácia cez booking.com"
 msgid "TOP"
 msgstr "TOP"
 
-#: core/listings/urls.py:13
+#: core/listings/urls.py:14
 msgctxt "url"
 msgid "group/<str:slug>/"
 msgstr "skupina/<str:slug>/"
 
-#: core/listings/urls.py:16 manager/listings/urls.py:14
+#: core/listings/urls.py:17 manager/listings/urls.py:14
 msgctxt "url"
 msgid "listings/"
 msgstr "polozky/"
 
-#: core/listings/urls.py:28
+#: core/listings/urls.py:29
 msgctxt "url"
 msgid "<str:slug>/"
 msgstr "<str:slug>/"
 
-#: core/listings/urls.py:31
-#| msgctxt "url"
-#| msgid "<str:slug>/reviews/"
+#: core/listings/urls.py:32
 msgctxt "url"
 msgid "listings/<str:slug>/favorite/"
 msgstr "polozky/<str:slug>/oblubene/"
+
+#: core/listings/urls.py:33
+#| msgctxt "url"
+#| msgid "listings/<str:slug>/favorite/"
+msgctxt "url"
+msgid "listings/favorites/"
+msgstr "polozky/oblubene/"
 
 #: core/listings/views.py:26 manager/bookings/views.py:16
 #: manager/listings/views.py:22 manager/listings/views.py:145
@@ -1588,11 +1592,11 @@ msgstr "Názov"
 msgid "Promoted"
 msgstr "Propagované"
 
-#: core/listings/views.py:172
+#: core/listings/views.py:168
 msgid "Listing removed from your favorite list"
 msgstr "Položka odstránená z Vášho obľúbeného zoznamu"
 
-#: core/listings/views.py:176
+#: core/listings/views.py:171
 msgid "Listing added into your favorite list"
 msgstr "Položka pridaná do Vášho obľúbeného zoznamu"
 

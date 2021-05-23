@@ -3,7 +3,8 @@ from django.utils.translation import pgettext_lazy
 
 from inventor import settings as inventor_settings
 from inventor.core.listings.models.general import Listing
-from inventor.core.listings.views import ListingListView, ListingDetailView, ListingSwitchFavoriteView, GroupDetailView
+from inventor.core.listings.views import ListingListView, ListingDetailView, ListingSwitchFavoriteView, ListingFavoritesView, \
+    GroupDetailView
 
 app_name = 'listings'
 
@@ -29,3 +30,4 @@ urlpatterns.append(path(pgettext_lazy('url', '<str:slug>/'), ListingDetailView.a
 
 # favorites
 urlpatterns.append(path(pgettext_lazy('url', 'listings/<str:slug>/favorite/'), ListingSwitchFavoriteView.as_view(), name='listing_favorite_switch'))
+urlpatterns.append(path(pgettext_lazy('url', 'listings/favorites/'), ListingFavoritesView.as_view(), name='favorites'))
