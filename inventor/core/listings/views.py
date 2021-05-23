@@ -162,16 +162,11 @@ class ListingSwitchFavoriteView(LoginRequiredMixin, BaseDetailView):
         listing = self.get_object()
         user = request.user
 
-        from icecream import ic
-        ic(user.favorite_listings.all())
-
         # add or remove favorite
         if listing in user.favorite_listings.all():
-            ic('yes')
             user.favorite_listings.remove(listing)
             messages.info(request, _('Listing removed from your favorite list'))
         else:
-            ic('no')
             user.favorite_listings.add(listing)
             messages.success(request, _('Listing added into your favorite list'))
 
