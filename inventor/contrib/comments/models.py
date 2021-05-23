@@ -10,3 +10,6 @@ class ReviewComment(ThreadedComment):
     rating = models.PositiveSmallIntegerField(_('rating'),
         validators=[MinValueValidator(RATING_MIN), MaxValueValidator(RATING_MAX)],
         blank=True, null=True, default=None)
+
+
+from .signals import *  # TODO: move to apps.py

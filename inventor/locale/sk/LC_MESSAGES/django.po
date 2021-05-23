@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 13:43+0200\n"
-"PO-Revision-Date: 2021-05-23 13:43+0058\n"
+"POT-Creation-Date: 2021-05-23 14:07+0200\n"
+"PO-Revision-Date: 2021-05-23 14:07+0058\n"
 "Last-Translator: b'Erik PRAGMATIC <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -231,6 +231,10 @@ msgstr "Už máte účet? <a href=\"%(login_url)s\">Prihláste sa</a>."
 #: contrib/comments/models.py:10
 msgid "rating"
 msgstr "hodnotenie"
+
+#: contrib/comments/signals.py:7
+msgid "You comment has been posted!"
+msgstr "Váš komentár bol pridaný!"
 
 #: contrib/comments/templates/comments/comment_notification_email.txt:3
 #, python-format
@@ -1119,7 +1123,6 @@ msgid "photos"
 msgstr "fotografie"
 
 #: core/listings/models/general.py:352
-#| msgid "video"
 msgid "video URL"
 msgstr "video URL"
 

@@ -7,17 +7,17 @@
 <div id="comments">
     {% for comment in comment_list|fill_tree|annotate_tree %}
         {% if comment.open %}
-            <ul class="comment-wrapper">
+            <ul class="comments-wrapper">
         {% else %}
             </li>
         {% endif %}
         <li id="c{{ comment.id }}" class="comment">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-7 text-left user">
 {#                    {% include 'accounts/helpers/user_info.html' with user=comment.user %}#}
-                    {{ user }}
+                    {{ comment.user }}
                 </div>
-                <div class="col-md-5 text-right">
+                <div class="col-5 text-right date">
                     <small class="date">{{ comment.submit_date|naturaltime }}</small>
                 </div>
             </div>
@@ -28,6 +28,6 @@
             {{ comment.comment|linebreaks }}
         {% for close in comment.close %}</li></ul>{% endfor %}
     {% empty %}
-        <p class="p-5 m-0">{% trans 'No comments yet.' %}</p>
+        <p class="m-0">{% trans 'No comments yet.' %}</p>
     {% endfor %}
 </div>

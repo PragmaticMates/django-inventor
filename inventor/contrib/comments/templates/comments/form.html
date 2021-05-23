@@ -1,6 +1,6 @@
 {% load comments i18n crispy_forms_tags %}
 
-<form action="{% comment_form_target %}" method="post">
+<form action="{% comment_form_target %}" method="post" class="comments-form">
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ request.path }}"/>
     {% crispy form %}
