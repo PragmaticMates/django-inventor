@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-20 15:19+0100\n"
-"PO-Revision-Date: 2021-03-20 15:20+0058\n"
+"POT-Creation-Date: 2021-05-23 13:43+0200\n"
+"PO-Revision-Date: 2021-05-23 13:43+0058\n"
 "Last-Translator: b'Erik PRAGMATIC <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -228,19 +228,7 @@ msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
 msgstr "Už máte účet? <a href=\"%(login_url)s\">Prihláste sa</a>."
 
-#: contrib/comments/models.py:11
-msgid "comment"
-msgstr "komentár"
-
-#: contrib/comments/models.py:12
-msgid "review"
-msgstr "hodnotenie"
-
-#: contrib/comments/models.py:15
-msgid "type"
-msgstr "typ"
-
-#: contrib/comments/models.py:16
+#: contrib/comments/models.py:10
 msgid "rating"
 msgstr "hodnotenie"
 
@@ -258,13 +246,9 @@ msgstr "Čítať viac na tejto URL: %(url)s"
 msgid "Send"
 msgstr "Poslať"
 
-#: contrib/comments/templates/comments/list.html:24
-msgid "Reply"
-msgstr "Odpovedať"
-
-#: contrib/comments/templates/comments/list.html:30
+#: contrib/comments/templates/comments/list.html:31
 msgid "No comments yet."
-msgstr "Zatial bez komentárov."
+msgstr "Zatiaľ bez komentárov."
 
 #: contrib/comments/templates/comments/list_and_form.html:3
 msgid "Comments"
@@ -360,7 +344,7 @@ msgstr "Nesprávna požiadavka!"
 
 #: contrib/sitemaps/apps.py:11 contrib/sitemaps/apps.py:12
 msgid "Site Maps"
-msgstr ""
+msgstr "Mapy stránky"
 
 #: core/accounts/admin.py:14
 msgid "Password"
@@ -1135,10 +1119,9 @@ msgid "photos"
 msgstr "fotografie"
 
 #: core/listings/models/general.py:352
-#, fuzzy
 #| msgid "video"
 msgid "video URL"
-msgstr "video"
+msgstr "video URL"
 
 #: core/listings/models/general.py:357
 msgid "group"
@@ -1495,6 +1478,7 @@ msgid "No data to display"
 msgstr "Žiadne údaje na zobrazenie"
 
 #: core/listings/templates/listings/listing_detail.html:47
+#: manager/listings/templates/manager/listings/widgets/listing_row_item.html:57
 msgid "Seen today"
 msgstr "Dnes videné"
 
@@ -1519,6 +1503,7 @@ msgid "Video"
 msgstr "Video"
 
 #: core/listings/templates/listings/listing_detail.html:102
+#: manager/listings/templates/manager/listings/layout/listing_top.html:38
 msgid "Reviews"
 msgstr "Hodnotenia"
 
@@ -1543,12 +1528,11 @@ msgid "Reservation via booking.com"
 msgstr "Rezervácia cez booking.com"
 
 #: core/listings/templates/listings/widgets/listing_item.html:15
+#: manager/listings/templates/manager/listings/widgets/listing_row_item.html:41
 msgid "TOP"
 msgstr "TOP"
 
 #: core/listings/urls.py:13
-#| msgctxt "url"
-#| msgid "book/<str:slug>/"
 msgctxt "url"
 msgid "group/<str:slug>/"
 msgstr "skupina/<str:slug>/"
@@ -1585,7 +1569,7 @@ msgstr "Cena (od najdrahšieho)"
 msgid "Title"
 msgstr "Názov"
 
-#: core/listings/views.py:32 manager/listings/views.py:31
+#: core/listings/views.py:33 manager/listings/views.py:31
 msgid "Promoted"
 msgstr "Propagované"
 
@@ -1945,12 +1929,6 @@ msgstr "Štatistiky"
 msgid "Information"
 msgstr "Informácie"
 
-#: manager/listings/templates/manager/listings/layout/listing_top.html:38
-#, fuzzy
-#| msgid "Reviews"
-msgid "Riviews"
-msgstr "Hodnotenia"
-
 #: manager/listings/templates/manager/listings/layout/listing_top.html:43
 msgid "SEO"
 msgstr "SEO"
@@ -2020,12 +1998,12 @@ msgstr ""
 #: manager/urls.py:13
 msgctxt "url"
 msgid "tables/"
-msgstr ""
+msgstr "tabulky/"
 
 #: manager/urls.py:14
 msgctxt "url"
 msgid "errors/"
-msgstr ""
+msgstr "chyby/"
 
 #: templates/helpers/cookie_banner.html:10
 #, python-format
@@ -2076,6 +2054,22 @@ msgstr "manazer/"
 msgctxt "url"
 msgid "subscriptions/"
 msgstr "predplatne/"
+
+#~ msgid "comment"
+#~ msgstr "komentár"
+
+#~ msgid "review"
+#~ msgstr "hodnotenie"
+
+#~ msgid "type"
+#~ msgstr "typ"
+
+#~ msgid "Reply"
+#~ msgstr "Odpovedať"
+
+#, fuzzy
+#~ msgid "Riviews"
+#~ msgstr "Hodnotenia"
 
 #~ msgid "Learn more"
 #~ msgstr "Zistiť viac"

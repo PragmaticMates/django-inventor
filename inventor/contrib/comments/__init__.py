@@ -4,5 +4,5 @@ def get_model():
 
 
 def get_form():
-    from inventor.contrib.comments.forms import CommentForm
-    return CommentForm
+    from inventor.contrib.comments.forms import ReviewCommentForm
+    return ReviewCommentForm

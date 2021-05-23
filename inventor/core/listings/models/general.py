@@ -98,8 +98,8 @@ class Listing(SlugMixin, AbstractProduct):
     social_networks = HStoreField(verbose_name=_('social networks'), blank=True, default=dict)
 
     # relations
-    comments = GenericRelation(get_comment_model(), content_type_field='content_type', object_id_field='object_pk',
-                               related_query_name='comment')
+    # comments = GenericRelation(get_comment_model(), content_type_field='content_type', object_id_field='object_pk',
+    #                            related_query_name='comment')
 
     supplies = GenericRelation('commerce.Supply', content_type_field='content_type', object_id_field='object_id',
                                related_query_name='product')
