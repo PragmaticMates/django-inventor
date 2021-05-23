@@ -8,6 +8,7 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 # from whistle.mixins import UserNotificationsMixin
 from internationalflavor.countries import CountryField
+
 from inventor.core.accounts.managers import UserManager, UserQuerySet
 from inventor.core.accounts.utils import avatar_path_handler, avatar_thumbnail_exists, create_avatar_thumbnail
 
@@ -76,6 +77,9 @@ class User(AbstractBaseUser, PermissionsMixin):  # UserNotificationsMixin
     agree_privacy_policy = models.BooleanField(_('Privacy policy'), default=True)
     agree_marketing_purposes = models.BooleanField(_('Marketing purposes'), default=True)
     agree_social_networks_sharing = models.BooleanField(_('Sharing on social networks'), default=True)
+
+    # relations
+    favorite_listings = models.ManyToManyField('listings.Listing', verbose_name=_('favorite listings'), related_name='favorite_of_users')
 
     objects = UserManager()
     qs = UserQuerySet.as_manager()

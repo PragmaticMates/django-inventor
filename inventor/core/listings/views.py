@@ -1,9 +1,12 @@
 from django.apps import apps
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.validators import EMPTY_VALUES
 from django.db.models import F
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
+from django.views.generic.detail import BaseDetailView
 from hitcount.views import HitCountDetailView
 
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
@@ -148,6 +151,32 @@ class ListingDetailView(HitCountDetailView):
         names = super().get_template_names()
         obj = self.get_object()
         return [f"listings/{obj.__class__.__name__.lower()}_detail.html"] + names
+
+
+class ListingSwitchFavoriteView(LoginRequiredMixin, BaseDetailView):
+    model = Listing
+    template_name = 'listings/listing_detail.html'
+    slug_field = 'slug_i18n'
+
+    def get(self, request, *args, **kwargs):
+        listing = self.get_object()
+        user = request.user
+
+        from icecream import ic
+        ic(user.favorite_listings.all())
+
+        # add or remove favorite
+        if listing in user.favorite_listings.all():
+            ic('yes')
+            user.favorite_listings.remove(listing)
+            messages.info(request, _('Listing removed from your favorite list'))
+        else:
+            ic('no')
+            user.favorite_listings.add(listing)
+            messages.success(request, _('Listing added into your favorite list'))
+
+        back_url = request.GET.get('back_url', listing.get_absolute_url())
+        return redirect(back_url)
 
 
 class GroupDetailView(HitCountDetailView):

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 14:07+0200\n"
-"PO-Revision-Date: 2021-05-23 14:07+0058\n"
+"POT-Creation-Date: 2021-05-23 22:28+0200\n"
+"PO-Revision-Date: 2021-05-23 22:30+0058\n"
 "Last-Translator: b'Erik PRAGMATIC <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -418,32 +418,32 @@ msgstr "Klasifikácia"
 msgid "Status"
 msgstr "Stav"
 
-#: core/accounts/forms.py:233 core/accounts/models.py:28
+#: core/accounts/forms.py:233 core/accounts/models.py:29
 msgid "first name"
 msgstr "krstné meno"
 
-#: core/accounts/forms.py:234 core/accounts/models.py:29
+#: core/accounts/forms.py:234 core/accounts/models.py:30
 msgid "last name"
 msgstr "priezvisko"
 
-#: core/accounts/forms.py:235 core/accounts/models.py:33
+#: core/accounts/forms.py:235 core/accounts/models.py:34
 #: core/bookings/models.py:43 core/listings/models/general.py:93
 msgid "phone"
 msgstr "telefón"
 
-#: core/accounts/forms.py:236 core/accounts/models.py:36
+#: core/accounts/forms.py:236 core/accounts/models.py:37
 msgid "street and number"
 msgstr "ulica a číslo"
 
-#: core/accounts/forms.py:237 core/accounts/models.py:37
+#: core/accounts/forms.py:237 core/accounts/models.py:38
 msgid "postcode"
 msgstr "PSČ"
 
-#: core/accounts/forms.py:238 core/accounts/models.py:38
+#: core/accounts/forms.py:238 core/accounts/models.py:39
 msgid "city"
 msgstr "mesto"
 
-#: core/accounts/forms.py:239 core/accounts/models.py:39
+#: core/accounts/forms.py:239 core/accounts/models.py:40
 msgid "Country"
 msgstr "Krajina"
 
@@ -459,15 +459,15 @@ msgstr "DIČ"
 msgid "VAT ID"
 msgstr "IČ DPH"
 
-#: core/accounts/forms.py:243 core/accounts/models.py:42
+#: core/accounts/forms.py:243 core/accounts/models.py:43
 msgid "date of birth"
 msgstr "dátum narodenia"
 
-#: core/accounts/forms.py:244 core/accounts/models.py:45
+#: core/accounts/forms.py:244 core/accounts/models.py:46
 msgid "gender"
 msgstr "pohlavie"
 
-#: core/accounts/forms.py:245 core/accounts/models.py:46
+#: core/accounts/forms.py:245 core/accounts/models.py:47
 msgid "team/club"
 msgstr "tím/klub"
 
@@ -510,32 +510,32 @@ msgstr "Iné"
 msgid "Sign up"
 msgstr "Registrovať sa"
 
-#: core/accounts/models.py:23
+#: core/accounts/models.py:24
 msgid "male"
 msgstr "muž"
 
-#: core/accounts/models.py:24
+#: core/accounts/models.py:25
 msgid "female"
 msgstr "žena"
 
-#: core/accounts/models.py:32 core/bookings/models.py:44
+#: core/accounts/models.py:33 core/bookings/models.py:44
 #: core/listings/models/general.py:94
 msgid "email"
 msgstr "email"
 
-#: core/accounts/models.py:50
+#: core/accounts/models.py:51
 msgid "staff status"
 msgstr "status zamestnanca"
 
-#: core/accounts/models.py:52
+#: core/accounts/models.py:53
 msgid "Designates whether the user can log into this admin site."
 msgstr "Určuje, či sa užívateľ môže prihlásiť do administrácie"
 
-#: core/accounts/models.py:55
+#: core/accounts/models.py:56
 msgid "active"
 msgstr "aktívny"
 
-#: core/accounts/models.py:58
+#: core/accounts/models.py:59
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
@@ -543,47 +543,52 @@ msgstr ""
 "Určuje, či sa má užívateľ považovať za aktívneho. Namiesto mazania účtu "
 "nastavte na neaktívne."
 
-#: core/accounts/models.py:62
+#: core/accounts/models.py:63
 msgid "date joined"
 msgstr "dátum registrácie"
 
-#: core/accounts/models.py:63
+#: core/accounts/models.py:64
 msgid "last seen"
 msgstr "naposledy videný"
 
-#: core/accounts/models.py:66
+#: core/accounts/models.py:67
 msgid "avatar"
 msgstr "avatar"
 
-#: core/accounts/models.py:67 core/listings/models/general.py:291
+#: core/accounts/models.py:68 core/listings/models/general.py:291
 msgid "photo, image or icon"
 msgstr "fotka, obrázok alebo ikona"
 
-#: core/accounts/models.py:72
+#: core/accounts/models.py:73
 msgid "language"
 msgstr "jazyk"
 
-#: core/accounts/models.py:75
+#: core/accounts/models.py:76
 msgid "Terms and conditions"
 msgstr "Obchodné podmienky"
 
-#: core/accounts/models.py:76
+#: core/accounts/models.py:77
 msgid "Privacy policy"
 msgstr "Spracovanie osobných údajov"
 
-#: core/accounts/models.py:77
+#: core/accounts/models.py:78
 msgid "Marketing purposes"
 msgstr "Marketingové účely"
 
-#: core/accounts/models.py:78
+#: core/accounts/models.py:79
 msgid "Sharing on social networks"
 msgstr "Zdieľanie na sociálnych sieťach"
 
-#: core/accounts/models.py:84 core/subscriptions/models.py:172
+#: core/accounts/models.py:82
+#| msgid "listings"
+msgid "favorite listings"
+msgstr "obľúbené položky"
+
+#: core/accounts/models.py:88 core/subscriptions/models.py:172
 msgid "user"
 msgstr "užívateľ"
 
-#: core/accounts/models.py:85
+#: core/accounts/models.py:89
 msgid "users"
 msgstr "užívatelia"
 
@@ -1550,31 +1555,46 @@ msgctxt "url"
 msgid "<str:slug>/"
 msgstr "<str:slug>/"
 
-#: core/listings/views.py:23 manager/bookings/views.py:16
+#: core/listings/urls.py:31
+#| msgctxt "url"
+#| msgid "<str:slug>/reviews/"
+msgctxt "url"
+msgid "listings/<str:slug>/favorite/"
+msgstr "polozky/<str:slug>/oblubene/"
+
+#: core/listings/views.py:26 manager/bookings/views.py:16
 #: manager/listings/views.py:22 manager/listings/views.py:145
 msgid "Newest"
 msgstr "Najnovšie"
 
-#: core/listings/views.py:24 manager/bookings/views.py:17
+#: core/listings/views.py:27 manager/bookings/views.py:17
 #: manager/listings/views.py:23 manager/listings/views.py:146
 msgid "Oldest"
 msgstr "Najstaršie"
 
-#: core/listings/views.py:26 manager/listings/views.py:25
+#: core/listings/views.py:29 manager/listings/views.py:25
 msgid "Price (Low to high)"
 msgstr "Cena (od najlacnejšieho)"
 
-#: core/listings/views.py:27 manager/listings/views.py:26
+#: core/listings/views.py:30 manager/listings/views.py:26
 msgid "Price (High to low)"
 msgstr "Cena (od najdrahšieho)"
 
-#: core/listings/views.py:28 manager/listings/views.py:27
+#: core/listings/views.py:31 manager/listings/views.py:27
 msgid "Title"
 msgstr "Názov"
 
-#: core/listings/views.py:33 manager/listings/views.py:31
+#: core/listings/views.py:36 manager/listings/views.py:31
 msgid "Promoted"
 msgstr "Propagované"
+
+#: core/listings/views.py:172
+msgid "Listing removed from your favorite list"
+msgstr "Položka odstránená z Vášho obľúbeného zoznamu"
+
+#: core/listings/views.py:176
+msgid "Listing added into your favorite list"
+msgstr "Položka pridaná do Vášho obľúbeného zoznamu"
 
 #: core/newsletters/admin.py:36
 #, python-format
