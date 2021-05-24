@@ -2,6 +2,7 @@ from allauth.utils import build_absolute_uri
 from django import template
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Count
 from django.template import TemplateDoesNotExist
 from filer.models import File
 from inventor.core.lexicons.models import Category
@@ -11,10 +12,21 @@ from inventor.core.listings.models.listing_types import Race
 register = template.Library()
 
 
-@register.simple_tag
-def inventor_listings(**kwargs):
-    return Listing\
-        .objects\
+@register.simple_tag(takes_context=True)
+def inventor_listings(context, proxy='all'):
+    if proxy == 'all':
+        listings = Listing.objects.all()
+
+    if proxy == 'recommended':
+        listings = Listing.objects\
+            .annotate(Count('favorite_of_users'))\
+            .filter(favorite_of_users__count__gt=0)
+
+    if proxy == 'favorites':
+        user = context.get('user', None)
+        listings = user.favorite_listings if user else Listing.objects.none()
+
+    return listings \
         .published()\
         .not_hidden()\
         .select_subclasses()\
