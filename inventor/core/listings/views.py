@@ -2,7 +2,7 @@ from django.apps import apps
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.validators import EMPTY_VALUES
-from django.db.models import F
+from django.db.models import F, Count
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
@@ -76,7 +76,10 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
 
     def get_queryset(self):
         queryset = self.filter.qs\
-            .annotate(locality_title=F('locality__title'))\
+            .annotate(
+                locality_title=F('locality__title'),
+                favorite_of_users__count=Count('favorite_of_users')
+            )\
             .prefetch_related('categories', 'groups')
         return self.sort_queryset(queryset)
 
