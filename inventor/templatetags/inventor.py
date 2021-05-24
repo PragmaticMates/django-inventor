@@ -15,12 +15,15 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def inventor_listings(context, proxy='all'):
     if proxy == 'all':
-        listings = Listing.objects.all()
+        listings = Listing.objects\
+            .all()\
+            .order_by('-promoted', 'awaiting', '-created')
 
     if proxy == 'recommended':
         listings = Listing.objects\
             .annotate(Count('favorite_of_users'))\
-            .filter(favorite_of_users__count__gt=0)
+            .filter(favorite_of_users__count__gt=0)\
+            .order_by('-favorite_of_users__count')
 
     if proxy == 'favorites':
         user = context.get('user', None)
@@ -30,8 +33,7 @@ def inventor_listings(context, proxy='all'):
         .published()\
         .not_hidden()\
         .select_subclasses()\
-        .prefetch_related('categories')\
-        .order_by('-promoted', 'awaiting', 'created')
+        .prefetch_related('categories')
 
 
 @register.simple_tag
