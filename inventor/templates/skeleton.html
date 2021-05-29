@@ -38,6 +38,7 @@
         <link href="{% static 'css/inventor.css' %}?v={{ deployment_timestamp }}" rel="stylesheet" type="text/css">
         <link href="{% static 'node_modules/simplelightbox/dist/simple-lightbox.min.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'node_modules/owl.carousel/dist/assets/owl.carousel.min.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'node_modules/tiny-slider/dist/tiny-slider.css' %}" rel="stylesheet" type="text/css">
 
         {% block css %}{% endblock %}
 
@@ -47,6 +48,7 @@
         <script src="{% static 'node_modules/lazysizes/plugins/unveilhooks/ls.unveilhooks.min.js' %}"></script>
         <script src="{% static 'node_modules/lazysizes/plugins/bgset/ls.bgset.min.js' %}"></script>
         <script src="{% static 'node_modules/lazysizes/plugins/respimg/ls.respimg.min.js' %}"></script>
+        <script src="{% static 'node_modules/tiny-slider/dist/min/tiny-slider.js' %}"></script>
 
         {% block priority_js %}{% endblock %}
         <script src="{% url 'javascript-catalog' %}"></script>
