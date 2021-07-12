@@ -1,5 +1,6 @@
 from django.contrib import admin, messages
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 
@@ -15,7 +16,10 @@ class SubscriberAdmin(admin.ModelAdmin):
     actions = ['sync_with_accounts', 'export_to_xls', 'export_to_list']
 
     def sync_with_accounts(self, request, queryset):
-        unsubscribed_emails = get_user_model().objects.filter(agree_marketing_purposes=False).values_list('email', flat=True)
+        unsubscribed_emails = get_user_model().objects.filter(
+            Q(agree_marketing_purposes=False) |
+            Q(is_active=False)
+        ).values_list('email', flat=True)
         unsubscribed_subscribers = Subscriber.objects.filter(email__in=list(unsubscribed_emails))
         unsubscribed_subscribers_count = unsubscribed_subscribers.count()
         unsubscribed_subscribers.delete()
