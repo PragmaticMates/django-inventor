@@ -13,6 +13,7 @@ from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 from inventor.core.lexicons.models import Feature, Category
 from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.models.general import Listing, Group
+from inventor import settings as inventor_settings
 
 
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
@@ -32,8 +33,10 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     }
 
     def get_sorting_options(self):
-        # TODO: configurable sorting options (at least order)
-        return {**{'-promoted': (_('Promoted'), ['-promoted', 'awaiting', '-created'])}, **self.sorting_options}
+        return {
+            **{'-promoted': (_('Promoted'), inventor_settings.LISTING_SORTING_OPTIONS.get('-promoted', '-promoted'))},
+            **self.sorting_options
+        }
 
     def dispatch(self, request, *args, **kwargs):
         # redirect to category detail view if single category requested
