@@ -1,7 +1,7 @@
-{% load i18n %}
-
+{% load i18n inventor %}
 {% blocktrans with user=comment.user %}{{ user }} wrote:{% endblocktrans %}
 
 {{ comment.comment }}
 
-{% blocktrans %}Read more at this URL: {{ url }}{% endblocktrans %}
+{% uri content_object.get_absolute_url as object_url %}
+{% blocktrans with url=object_url %}Read more at this URL: {{ url }}{% endblocktrans %}

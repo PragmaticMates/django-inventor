@@ -10,6 +10,9 @@ class UserQuerySet(models.QuerySet):
     def superusers(self):
         return self.filter(is_superuser=True)
 
+    def staff(self):
+        return self.filter(is_staff=True)
+
     def with_perm(self, perm_name):  # TODO: this is already since Django 3.0.
         if '.' in perm_name:
             app_label, codename = perm_name.split('.', maxsplit=1)

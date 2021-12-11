@@ -230,9 +230,9 @@ for model in get_listing_types_classes():
     model_admin = admin.site._registry[model].__class__
     admin.site.unregister(model)
 
-    if settings.VIDEOS_ENABLED and not VideoInline in model_admin.inlines:
+    if settings.VIDEOS_ENABLED and VideoInline not in model_admin.inlines:
         model_admin.inlines = list(model_admin.inlines)[:] + [VideoInline]
-    if settings.GALLERY_ENABLED and not AlbumInline in model_admin.inlines:
+    if settings.GALLERY_ENABLED and AlbumInline not in model_admin.inlines:
         model_admin.inlines = list(model_admin.inlines)[:] + [AlbumInline]
 
     admin.site.register(model, model_admin)

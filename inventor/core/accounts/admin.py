@@ -8,7 +8,7 @@ from inventor.core.accounts.models import User
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'phone', 'is_staff', 'is_superuser')
+    list_display = ('email', 'first_name', 'last_name', 'phone', 'is_active', 'is_staff', 'is_superuser')
     search_fields = ('first_name', 'last_name', 'email')
     add_fieldsets = (
         (_('Password'), {'fields': ('password1', 'password2')}),
