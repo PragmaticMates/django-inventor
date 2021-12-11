@@ -6,6 +6,8 @@ from django.template import loader
 from django.utils.translation import ugettext_lazy as _
 from django_comments.moderation import CommentModerator
 
+from icecream import ic
+
 
 class ListingCommentModerator(CommentModerator):
     email_notification = True
@@ -16,14 +18,12 @@ class ListingCommentModerator(CommentModerator):
         notifications have been requested.
 
         """
-        from icecream import ic
-        ic('email 2', self.email_notification)
         if not self.email_notification:
             return
 
         # TODO: refactor to notifications
         recipient_list = [user.email for user in get_user_model().objects.active().staff()]
-        ic(recipient_list)
+        ic(f'Sending comment for {content_object} to {recipient_list}')
 
         t = loader.get_template('comments/comment_notification_email.txt')
         c = {
