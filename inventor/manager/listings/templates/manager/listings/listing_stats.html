@@ -1,5 +1,5 @@
 {% extends 'manager/layout.html' %}
-{% load i18n static pragmatic_tags inventor %}
+{% load i18n static pragmatic_tags inventor hitcount_tags %}
 
 {% block main_class %}bg-gray-100{% endblock %}
 
@@ -10,8 +10,58 @@
 {% block content %}
     <div class="container">
         <div class="row py-5">
-            <div class="col-md-12">
-                {{ object }}
+
+            <div class="col-lg col-md-6 col-sm-6 mb-4">
+                <div class="stats-small stats-small--1 card card-small">
+                    <div class="card-body p-0 d-flex">
+                        <div class="d-flex flex-column m-auto">
+                            <div class="stats-small__data text-center">
+                                <span class="stats-small__label text-uppercase">{% trans 'Seen today' %}</span>
+                                <h6 class="stats-small__value count my-3">{% get_hit_count for object within "days=1,minutes=30" %}</h6>
+                            </div>
+                            <div class="stats-small__data">
+                                <span class="stats-small__percentage stats-small__percentage--increase">0%</span>
+                            </div>
+                        </div>
+                        <canvas height="120" class="blog-overview-stats-small-1"></canvas>
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-lg col-md-6 col-sm-6 mb-4">
+                <div class="stats-small stats-small--1 card card-small">
+                    <div class="card-body p-0 d-flex">
+                        <div class="d-flex flex-column m-auto">
+                            <div class="stats-small__data text-center">
+                                <span class="stats-small__label text-uppercase">Bookings</span>
+{#                                TODO: Booking count #}
+                                <h6 class="stats-small__value count my-3">{{ object.booking_set.count }}</h6>
+                            </div>
+                            <div class="stats-small__data">
+                                <span class="stats-small__percentage stats-small__percentage--increase">0%</span>
+                            </div>
+                        </div>
+                        <canvas height="120" class="blog-overview-stats-small-2"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg col-md-4 col-sm-6 mb-4">
+                <div class="stats-small stats-small--1 card card-small">
+                    <div class="card-body p-0 d-flex">
+                        <div class="d-flex flex-column m-auto">
+                            <div class="stats-small__data text-center">
+                                <span class="stats-small__label text-uppercase">Reviews</span>
+{#                                TODO: Review count #}
+                                <h6 class="stats-small__value count my-3">0</h6>
+                            </div>
+                            <div class="stats-small__data">
+                                <span class="stats-small__percentage stats-small__percentage--decrease">0%</span>
+                            </div>
+                        </div>
+                        <canvas height="120" class="blog-overview-stats-small-3"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
