@@ -47,6 +47,7 @@ class Listing(SlugMixin, AbstractProduct):
     published = models.BooleanField(_('published'), default=True)
     hidden = models.BooleanField(_('hidden'), default=False)
     promoted = models.BooleanField(_('promoted'), default=False)
+    rank = models.PositiveSmallIntegerField(_('rank'), default=1)
 
     # specification
     categories = models.ManyToManyField(to=Category, verbose_name=_('categories'), blank=True, related_name='listings_of_category')

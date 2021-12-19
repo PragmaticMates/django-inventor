@@ -19,5 +19,5 @@ USE_PLACEHOLDERS = getattr(django_settings, 'INVENTOR_USE_PLACEHOLDERS', False)
 LISTINGS_URL_ENABLED = getattr(django_settings, 'INVENTOR_LISTINGS_URL_ENABLED', True)
 SEO_FOR_MODELS = getattr(django_settings, 'INVENTOR_SEO_FOR_MODELS', ['Listing'])
 LISTING_SORTING_OPTIONS = getattr(django_settings, 'INVENTOR_LISTING_SORTING_OPTIONS', {
-    '-promoted': ['-promoted', 'awaiting', '-created']
+    '-promoted': ['-promoted', '-rank', 'awaiting', '-created']
 })

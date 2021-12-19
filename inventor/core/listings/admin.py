@@ -94,7 +94,7 @@ class ListingAdmin(AdminImageMixin, NestedModelAdmin):
     def fieldsets(self):
         fieldsets_definition = {
             'DEFINITION': (_('Definition'), {'fields': ('title_i18n', 'slug_i18n', 'description_i18n',)}),
-            'MANAGEMENT': (_('Management'), {'fields': ('author', 'published', 'hidden', 'promoted')}),
+            'MANAGEMENT': (_('Management'), {'fields': ('author', 'published', 'hidden', 'promoted', 'rank')}),
             'SPECIFICATION': (_('Specification'), {'fields': (('categories', 'features'),)}),
             'PRICE': (_('Price'), {'fields': (('price_starts_at', 'price', 'price_unit', 'price_per_person', 'availability', 'awaiting'),)}),
             'LOCATION': (_('Location'), {'fields': ('locality', 'country', 'address', 'point')}),
