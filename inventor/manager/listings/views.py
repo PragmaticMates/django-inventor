@@ -1,16 +1,19 @@
 from django.core.validators import EMPTY_VALUES
 from django.db.models import F
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView, UpdateView
+from inventor.core.seo.models import Seo
+
 from inventor.core.bookings.models import Booking
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.models.general import Listing
-from inventor.manager.listings.forms import ListingInfoForm
+from inventor.manager.listings.forms import ListingInfoForm, ListingSeoForm
 
 
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
@@ -159,6 +162,41 @@ class ListingInformationView(UpdateView):
 
     def get_success_url(self):
         return self.request.META.get('HTTP_REFERER', reverse('inventor:manager:listings:listing_info', kwargs={'slug': self.object.slug}))
+
+
+class ListingSeoView(UpdateView):
+    model = Listing
+    template_name = 'manager/listings/listing_form.html'
+    slug_field = 'slug_i18n'
+    form_class = ListingSeoForm
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.seo_object = Seo.objects.for_object(self.object)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return super().get_object(queryset).get_real_instance()
+
+    def get_form_kwargs(self):
+        """Return the keyword arguments for instantiating the form."""
+        kwargs = super().get_form_kwargs()
+        if hasattr(self, 'seo_object'):
+            kwargs.update({'instance': self.seo_object})
+        return kwargs
+
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.seo_object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_template_names(self):
+        names = super().get_template_names()
+        obj = self.get_object()
+        return [f"manager/listings/{obj.__class__.__name__.lower()}_info.html"] + names
+
+    def get_success_url(self):
+        return self.request.META.get('HTTP_REFERER', reverse('inventor:manager:listings:listing_seo', kwargs={'slug': self.object.slug}))
 
 
 class ListingBookingsListView(DisplayListViewMixin, SortingListViewMixin, ListView):
