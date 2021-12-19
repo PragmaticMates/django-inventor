@@ -3,7 +3,7 @@ from django.utils.translation import pgettext_lazy
 
 from inventor import settings as inventor_settings
 from inventor.core.listings.models.general import Listing
-from inventor.manager.listings.views import ListingListView, ListingStatsView, ListingBookingsListView
+from inventor.manager.listings.views import ListingListView, ListingStatsView, ListingBookingsListView, ListingInformationView
 
 app_name = 'manager_listings'
 
@@ -25,7 +25,7 @@ for index, listing_type in enumerate(Listing.__subclasses__()):
 
 # listing detail
 urlpatterns.append(path(pgettext_lazy('url', '<str:slug>/stats/'), ListingStatsView.as_view(), name='listing_stats'))
-urlpatterns.append(path(pgettext_lazy('url', '<str:slug>/info/'), ListingStatsView.as_view(), name='listing_info'))
+urlpatterns.append(path(pgettext_lazy('url', '<str:slug>/info/'), ListingInformationView.as_view(), name='listing_info'))
 urlpatterns.append(path(pgettext_lazy('url', '<str:slug>/bookings/'), ListingBookingsListView.as_view(), name='listing_bookings'))
 urlpatterns.append(path(pgettext_lazy('url', '<str:slug>/gallery/'), ListingStatsView.as_view(), name='listing_gallery'))
 urlpatterns.append(path(pgettext_lazy('url', '<str:slug>/reviews/'), ListingStatsView.as_view(), name='listing_reviews'))

@@ -1,31 +1,27 @@
 {% extends 'manager/skeleton.html' %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row">
-            <main class="main-content col-12 p-0">
+    <main class="main-content">
 
-                <!-- Main Navbar -->
-                {% include 'manager/layout/header.html' %}
-                <!-- / .main-navbar -->
+        <!-- Main Navbar -->
+        {% include 'manager/layout/header.html' %}
+        <!-- / .main-navbar -->
 
-                <!-- Top -->
-                <div class="top-full-width">
-                {% block top %}{% endblock %}
-                </div>
-                <!-- End Top -->
-
-                <!-- Content -->
-{#                {% include 'admin/home.html' %}#}
-                <div class=container>
-                {% block content %}{% endblock %}
-                </div>
-                <!-- End Content -->
-
-                {% include 'manager/layout/footer.html' %}
-            </main>
+        <!-- Top -->
+        <div class="top-full-width">
+        {% block top %}{% endblock %}
         </div>
-    </div>
+        <!-- End Top -->
+
+        <!-- Content -->
+{#                {% include 'admin/home.html' %}#}
+        <div class="container flex-grow-1">
+        {% block content %}{% endblock %}
+        </div>
+        <!-- End Content -->
+
+        {% include 'manager/layout/footer.html' %}
+    </main>
 {% endblock %}
 
 {#{% extends 'manager/layout-sidebar.html' %}#}

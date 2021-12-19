@@ -18,7 +18,7 @@
                     <a href="{{ object.get_list_url }}" class="listing-category d-inline-block mb-2">
                         {{ object.get_listing_type_display }}
                     </a>
-                    <h1 class="mb-3">{{ object.title }}</h1>
+                    <h1 class="mb-3">{{ object.title_i18n }}</h1>
 {#                    <span class="listing-category d-inline-block mb-3">#}
 {#                        {{ object.get_listing_type_display }}#}
 {#                    </span>#}
@@ -74,7 +74,7 @@
                                         <a class="nav-link" href="#gallery"><i class="mr-2 fa fa-image"></i> {% trans 'Gallery' %}<span class="sr-only">(current)</span></a>
                                     </li>
                                 {% endif %}
-                                {% if object.description %}
+                                {% if object.description_i18n %}
                                     <li class="nav-item">
                                         <a class="nav-link" href="#description"><i class="mr-2 fa fa-pen"></i> {% trans 'Description' %}</a>
                                     </li>
@@ -123,7 +123,7 @@
                         <div class="card shadow-sm border-0 shadow-sm bg-white px-4 pt-4 pb-1">
                         {% for album in object.album_set.all %}
                             <b class="text-secondary">{{ album.title }}</b>
-                            {% if album.description %}<p>{{ album.description }}</p>{% endif %}
+                            {% if album.description_i18n %}<p>{{ album.description_i18n }}</p>{% endif %}
                             <div class="row mx-n1 gallery mb-3">
                             {% for photo in album.photo_set.all %}
                                 <div class="col-xl-2 col-md-3 col-sm-4 col-4 p-1">
@@ -136,12 +136,12 @@
                         </div>
                     </section>
                 {% endif %}
-                {% if object.description %}
+                {% if object.description_i18n %}
                     <section class="mb-5" id="description">
                         <h2>{% trans 'Description' %}</h2>
                         <div class="card shadow-sm border-0 bg-white p-4">
                             <p class="text-light mb-0">
-                                {{ object.description|linebreaksbr }}
+                                {{ object.description_i18n|linebreaksbr }}
                             </p>
                         </div>
                     </section>
@@ -153,7 +153,10 @@
                         <div class="card shadow-sm border-0 bg-white p-4">
                             <div class="column-count-xl-4 column-count-lg-3 column-count-sm-2 column-count-1">
                                 {% for amenity in all_amenities %}
-                                    <div class="mb-2 text-secondary"><i class="fad fa-{% if amenity in amenities %}check-circle text-success{% else %}times-circle text-danger{% endif %} fa-lg mr-3"></i>{{ amenity }}</div>
+                                    <div class="mb-2 text-secondary">
+                                        <i class="fad fa-{% if amenity in amenities %}check-circle text-success{% else %}times-circle text-danger{% endif %} fa-lg mr-3"></i>
+                                        {{ amenity }}
+                                    </div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -209,7 +212,7 @@
                                 <a target="_blank" class="d-flex flex-column align-items-center bg-white p-4"
                                    href="https://www.google.com/maps/search/?api=1&query={{ object.point.y }},{{ object.point.x }}">
                                     <img class="" src="{% static 'images/google_maps_logo.png' %}" alt="Google Maps logo" width="168" height="164">
-                                    <p class="text-center text-secondary mb-0"><strong>Referencie a poloha v google mapách</strong></p>
+                                    <p class="text-center text-secondary mb-0"><strong>{% trans 'Referencie a poloha v google mapách' %}</strong></p>
                                 </a>
                             </div>
                         {% endif %}
