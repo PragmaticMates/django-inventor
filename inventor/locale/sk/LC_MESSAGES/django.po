@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-24 00:06+0200\n"
-"PO-Revision-Date: 2021-05-24 00:06+0058\n"
-"Last-Translator: b'Erik PRAGMATIC <erik@pragmaticmates.com>'\n"
+"POT-Creation-Date: 2021-12-19 19:13+0100\n"
+"PO-Revision-Date: 2021-12-19 19:14+0058\n"
+"Last-Translator: b'Erik Telepovsky <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -232,11 +232,16 @@ msgstr "Už máte účet? <a href=\"%(login_url)s\">Prihláste sa</a>."
 msgid "rating"
 msgstr "hodnotenie"
 
+#: contrib/comments/moderation.py:33
+#, python-format
+msgid "[%(site)s] New comment posted on \"%(object)s\""
+msgstr "[%(site)s] Nový komentár k \"%(object)s\""
+
 #: contrib/comments/signals.py:7
 msgid "You comment has been posted!"
 msgstr "Váš komentár bol pridaný!"
 
-#: contrib/comments/templates/comments/comment_notification_email.txt:3
+#: contrib/comments/templates/comments/comment_notification_email.txt:2
 #, python-format
 msgid "%(user)s wrote:"
 msgstr "%(user)s napísal:"
@@ -427,7 +432,7 @@ msgid "last name"
 msgstr "priezvisko"
 
 #: core/accounts/forms.py:235 core/accounts/models.py:34
-#: core/bookings/models.py:43 core/listings/models/general.py:93
+#: core/bookings/models.py:43 core/listings/models/general.py:94
 msgid "phone"
 msgstr "telefón"
 
@@ -519,7 +524,7 @@ msgid "female"
 msgstr "žena"
 
 #: core/accounts/models.py:33 core/bookings/models.py:44
-#: core/listings/models/general.py:94
+#: core/listings/models/general.py:95
 msgid "email"
 msgstr "email"
 
@@ -555,7 +560,7 @@ msgstr "naposledy videný"
 msgid "avatar"
 msgstr "avatar"
 
-#: core/accounts/models.py:68 core/listings/models/general.py:291
+#: core/accounts/models.py:68 core/listings/models/general.py:292
 msgid "photo, image or icon"
 msgstr "fotka, obrázok alebo ikona"
 
@@ -779,7 +784,7 @@ msgstr "stav"
 msgid "traveler"
 msgstr "cestovateľ"
 
-#: core/bookings/models.py:32 core/listings/models/general.py:113
+#: core/bookings/models.py:32 core/listings/models/general.py:114
 msgid "listing"
 msgstr "položka"
 
@@ -807,19 +812,19 @@ msgstr "cena"
 msgid "message"
 msgstr "správa"
 
-#: core/bookings/models.py:42 core/listings/models/general.py:92
+#: core/bookings/models.py:42 core/listings/models/general.py:93
 msgid "person"
 msgstr "osoba"
 
 #: core/bookings/models.py:46 core/faqs/models.py:10
-#: core/listings/models/general.py:107 core/listings/models/general.py:296
+#: core/listings/models/general.py:108 core/listings/models/general.py:297
 #: core/partners/models.py:19 core/subscriptions/models.py:37
 #: core/subscriptions/models.py:109
 msgid "created"
 msgstr "vytvorené"
 
 #: core/bookings/models.py:47 core/faqs/models.py:11
-#: core/listings/models/general.py:108 core/listings/models/general.py:297
+#: core/listings/models/general.py:109 core/listings/models/general.py:298
 #: core/partners/models.py:20 core/subscriptions/models.py:38
 #: core/subscriptions/models.py:110 core/subscriptions/models.py:181
 msgid "modified"
@@ -860,16 +865,16 @@ msgstr "Farba"
 
 #: core/lexicons/models.py:18 core/lexicons/models.py:32
 #: core/lexicons/models.py:63 core/lexicons/models.py:80
-#: core/listings/models/general.py:41 core/listings/models/general.py:260
-#: core/listings/models/general.py:275 core/listings/models/general.py:331
+#: core/listings/models/general.py:41 core/listings/models/general.py:261
+#: core/listings/models/general.py:276 core/listings/models/general.py:332
 #: core/partners/models.py:8 core/seo/models.py:27
 msgid "title"
 msgstr "názov"
 
 #: core/lexicons/models.py:20 core/lexicons/models.py:34
 #: core/lexicons/models.py:82 core/listings/models/general.py:43
-#: core/listings/models/general.py:261 core/listings/models/general.py:276
-#: core/listings/models/general.py:295 core/listings/models/general.py:333
+#: core/listings/models/general.py:262 core/listings/models/general.py:277
+#: core/listings/models/general.py:296 core/listings/models/general.py:334
 #: core/partners/models.py:18 core/seo/models.py:28
 #: core/subscriptions/models.py:484
 msgid "description"
@@ -887,7 +892,7 @@ msgstr "typ položky"
 msgid "category"
 msgstr "kategória"
 
-#: core/lexicons/models.py:49 core/listings/models/general.py:52
+#: core/lexicons/models.py:49 core/listings/models/general.py:53
 msgid "categories"
 msgstr "kategórie"
 
@@ -895,11 +900,11 @@ msgstr "kategórie"
 msgid "feature"
 msgstr "výhoda"
 
-#: core/lexicons/models.py:72 core/listings/models/general.py:53
+#: core/lexicons/models.py:72 core/listings/models/general.py:54
 msgid "features"
 msgstr "výhody"
 
-#: core/lexicons/models.py:85 core/listings/models/general.py:301
+#: core/lexicons/models.py:85 core/listings/models/general.py:302
 msgid "photo"
 msgstr "fotografia"
 
@@ -1039,102 +1044,106 @@ msgstr "skryté"
 msgid "promoted"
 msgstr "propagované"
 
-#: core/listings/models/general.py:56
+#: core/listings/models/general.py:50
+msgid "rank"
+msgstr "hodnosť"
+
+#: core/listings/models/general.py:57
 msgid "price starts at"
 msgstr "cena začína od"
 
-#: core/listings/models/general.py:59
+#: core/listings/models/general.py:60
 msgid "price unit"
 msgstr "jednotka ceny"
 
-#: core/listings/models/general.py:60
+#: core/listings/models/general.py:61
 msgid "price per person"
 msgstr "cena za osobu"
 
-#: core/listings/models/general.py:66
+#: core/listings/models/general.py:67
 msgid "address"
 msgstr "adresa"
 
-#: core/listings/models/general.py:66
+#: core/listings/models/general.py:67
 msgid "street, postcode, city"
 msgstr "ulica, PSČ, mesto"
 
-#: core/listings/models/general.py:71
+#: core/listings/models/general.py:72
 msgid "country"
 msgstr "krajina"
 
-#: core/listings/models/general.py:72
+#: core/listings/models/general.py:73
 msgid "point"
 msgstr "bod"
 
-#: core/listings/models/general.py:76 core/listings/models/general.py:337
+#: core/listings/models/general.py:77 core/listings/models/general.py:338
 #: core/partners/models.py:10 core/seo/models.py:33
 msgid "image"
 msgstr "obrázok"
 
-#: core/listings/models/general.py:77 core/listings/models/general.py:85
-#: core/listings/models/general.py:338 core/listings/models/general.py:346
+#: core/listings/models/general.py:78 core/listings/models/general.py:86
+#: core/listings/models/general.py:339 core/listings/models/general.py:347
 #: core/listings/models/listing_types.py:117
 msgid "photo or image"
 msgstr "fotka alebo obrázok"
 
-#: core/listings/models/general.py:84 core/listings/models/general.py:345
+#: core/listings/models/general.py:85 core/listings/models/general.py:346
 msgid "banner"
 msgstr "baner"
 
-#: core/listings/models/general.py:95 core/partners/models.py:17
+#: core/listings/models/general.py:96 core/partners/models.py:17
 msgid "website"
 msgstr "webstránka"
 
-#: core/listings/models/general.py:98
+#: core/listings/models/general.py:99
 msgid "social networks"
 msgstr "sociálne siete"
 
-#: core/listings/models/general.py:114 core/listings/models/general.py:353
+#: core/listings/models/general.py:115 core/listings/models/general.py:354
 msgid "listings"
 msgstr "položky"
 
-#: core/listings/models/general.py:147
+#: core/listings/models/general.py:148
 msgid "starts at"
 msgstr "od"
 
-#: core/listings/models/general.py:262
+#: core/listings/models/general.py:263
 msgid "URL"
 msgstr "URL"
 
-#: core/listings/models/general.py:265
+#: core/listings/models/general.py:266
 msgid "video"
 msgstr "video"
 
-#: core/listings/models/general.py:266
+#: core/listings/models/general.py:267
 msgid "videos"
 msgstr "videá"
 
-#: core/listings/models/general.py:279
+#: core/listings/models/general.py:280
 msgid "album"
 msgstr "album"
 
-#: core/listings/models/general.py:280
+#: core/listings/models/general.py:281
 msgid "albums"
 msgstr "albumy"
 
-#: core/listings/models/general.py:290
+#: core/listings/models/general.py:291
 msgid "file"
 msgstr "súbor"
 
-#: core/listings/models/general.py:302
+#: core/listings/models/general.py:303
 msgid "photos"
 msgstr "fotografie"
 
-#: core/listings/models/general.py:352
+#: core/listings/models/general.py:353
 msgid "video URL"
 msgstr "video URL"
 
-#: core/listings/models/general.py:357
+#: core/listings/models/general.py:358
 msgid "group"
 msgstr "skupina"
 
-#: core/listings/models/general.py:358
+#: core/listings/models/general.py:359
 msgid "groups"
 msgstr "skupiny"
 
@@ -1560,47 +1569,45 @@ msgid "listings/<str:slug>/favorite/"
 msgstr "polozky/<str:slug>/oblubene/"
 
 #: core/listings/urls.py:33
-#| msgctxt "url"
-#| msgid "listings/<str:slug>/favorite/"
 msgctxt "url"
 msgid "listings/favorites/"
 msgstr "polozky/oblubene/"
 
-#: core/listings/views.py:26 manager/bookings/views.py:16
+#: core/listings/views.py:27 manager/bookings/views.py:16
 #: manager/listings/views.py:22 manager/listings/views.py:145
 msgid "Newest"
 msgstr "Najnovšie"
 
-#: core/listings/views.py:27 manager/bookings/views.py:17
+#: core/listings/views.py:28 manager/bookings/views.py:17
 #: manager/listings/views.py:23 manager/listings/views.py:146
 msgid "Oldest"
 msgstr "Najstaršie"
 
-#: core/listings/views.py:29 manager/listings/views.py:25
+#: core/listings/views.py:30 manager/listings/views.py:25
 msgid "Price (Low to high)"
 msgstr "Cena (od najlacnejšieho)"
 
-#: core/listings/views.py:30 manager/listings/views.py:26
+#: core/listings/views.py:31 manager/listings/views.py:26
 msgid "Price (High to low)"
 msgstr "Cena (od najdrahšieho)"
 
-#: core/listings/views.py:31 manager/listings/views.py:27
+#: core/listings/views.py:32 manager/listings/views.py:27
 msgid "Title"
 msgstr "Názov"
 
-#: core/listings/views.py:36 manager/listings/views.py:31
+#: core/listings/views.py:37 manager/listings/views.py:31
 msgid "Promoted"
 msgstr "Propagované"
 
-#: core/listings/views.py:168
+#: core/listings/views.py:174
 msgid "Listing removed from your favorite list"
 msgstr "Položka odstránená z Vášho obľúbeného zoznamu"
 
-#: core/listings/views.py:171
+#: core/listings/views.py:177
 msgid "Listing added into your favorite list"
 msgstr "Položka pridaná do Vášho obľúbeného zoznamu"
 
-#: core/newsletters/admin.py:36
+#: core/newsletters/admin.py:40
 #, python-format
 msgid "Deleted subscribers: %d. New subscribers: %s"
 msgstr "Zmazaní odberatelia: %d. Noví odberatelia: %s"

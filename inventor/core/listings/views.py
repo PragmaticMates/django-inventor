@@ -34,7 +34,7 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
 
     def get_sorting_options(self):
         return {
-            **{'-promoted': (_('Promoted'), inventor_settings.LISTING_SORTING_OPTIONS.get('-promoted', '-promoted'))},
+            **{'-promoted': (_('Promoted'), inventor_settings.LISTING_SORTING_OPTIONS.get('-promoted', ['-promoted', '-rank']))},
             **self.sorting_options
         }
 
