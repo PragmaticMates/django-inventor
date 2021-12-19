@@ -1,14 +1,16 @@
 from django.core.validators import EMPTY_VALUES
 from django.db.models import F
 from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from inventor.core.bookings.models import Booking
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.models.general import Listing
+from inventor.manager.listings.forms import ListingInfoForm
 
 
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
@@ -132,6 +134,31 @@ class ListingStatsView(DetailView):
         names = super().get_template_names()
         obj = self.get_object()
         return [f"manager/listings/{obj.__class__.__name__.lower()}_stats.html"] + names
+
+
+class ListingInformationView(UpdateView):
+    model = Listing
+    template_name = 'manager/listings/listing_info.html'
+    slug_field = 'slug_i18n'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return super().get_object(queryset).get_real_instance()
+
+    def get_form_class(self):
+        # TODO: form by real instance?
+        return ListingInfoForm
+
+    def get_template_names(self):
+        names = super().get_template_names()
+        obj = self.get_object()
+        return [f"manager/listings/{obj.__class__.__name__.lower()}_info.html"] + names
+
+    def get_success_url(self):
+        return self.request.META.get('HTTP_REFERER', reverse('inventor:manager:listings:listing_info', kwargs={'slug': self.object.slug}))
 
 
 class ListingBookingsListView(DisplayListViewMixin, SortingListViewMixin, ListView):
