@@ -39,15 +39,16 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         }
 
     def dispatch(self, request, *args, **kwargs):
-        # redirect to category detail view if single category requested
+        # redirect to category detail view if single category requested (not related to listing type)
         requested_categories = request.GET.getlist('categories')
         if len(requested_categories) == 1:
             category = get_object_or_404(Category, slug_i18n=requested_categories[0])
-            params = request.GET.copy()
-            del params['categories']
-            params = f'?{params.urlencode()}' if params not in EMPTY_VALUES else ''
-            url = f"{category.get_absolute_url()}{params}"
-            return redirect(url)
+            if not category.listing_type:
+                params = request.GET.copy()
+                del params['categories']
+                params = f'?{params.urlencode()}' if params not in EMPTY_VALUES else ''
+                url = f"{category.get_absolute_url()}{params}"
+                return redirect(url)
 
         self.filter = self.filter_class(**self.get_filter_kwargs())
         return super().dispatch(request, *args, **kwargs)
