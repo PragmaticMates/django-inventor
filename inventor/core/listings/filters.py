@@ -3,10 +3,10 @@ from crispy_forms.layout import Layout
 from django import forms
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models
-from django.db.models import Q
 from django.forms import HiddenInput
 from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import ModelSelect2Widget
+from mptt.forms import TreeNodeMultipleChoiceField
 
 from inventor import settings
 from pragmatic.filters import SliderFilter
@@ -85,11 +85,14 @@ class ListingFilter(django_filters.FilterSet):
             self.form.fields['locality'].widget = HiddenInput()
 
         # categories, localities and features searched by slug
-        self.filters['categories'].field_name = 'categories__slug_i18n'
+        # self.filters['categories'].field_name = 'categories__slug_i18n'
         self.filters['categories'].method = 'filter_categories'  # search by nested categories as well
-
         self.filters['features'].field_name = 'features__slug_i18n'
         self.filters['features'].conjoined = True  # changed filter logic of features
+
+        # by default, show all parent categories in the filter:
+        # self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
+        # self.form.fields['categories'].queryset = Category.objects.all()  # use this with TreeNodeMultipleChoiceField only
 
         if listing_type:
             # dynamic categories
@@ -125,16 +128,18 @@ class ListingFilter(django_filters.FilterSet):
                 self.form.fields['duration'] = self.filters['duration'].field
             except FieldDoesNotExist:
                 pass  # do not add duration if it does not exist
-
         else:
-            self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
+            self.form.fields['categories'].queryset = Category.objects.all()  # use this with TreeNodeMultipleChoiceField only
 
         if not self.form.fields['categories'].queryset.exists():
             self.form.fields['categories'].widget = HiddenInput()
         else:
-            self.form.fields['categories'] = forms.MultipleChoiceField(
+            # self.form.fields['categories'] = forms.MultipleChoiceField(
+            self.form.fields['categories'] = TreeNodeMultipleChoiceField(
                 label=_('Categories'),
-                choices=list(self.form.fields['categories'].queryset.values_list('slug_i18n', 'title_i18n')),  # TODO: cache?
+                queryset=self.form.fields['categories'].queryset,
+                to_field_name='slug_i18n',
+                # choices=list(self.form.fields['categories'].queryset.values_list('slug_i18n', 'title_i18n')),  # TODO: cache?
                 required=False,
                 widget=forms.CheckboxSelectMultiple
             )
@@ -176,4 +181,6 @@ class ListingFilter(django_filters.FilterSet):
                 continue
 
     def filter_categories(self, queryset, name, value):
-        return queryset.by_category_slugs(value)
+        if not value:
+            return queryset
+        return queryset.of_categories(value, deep=True)

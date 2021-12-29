@@ -36,21 +36,23 @@ class ListingQuerySet(InheritanceQuerySet):
     def not_promoted(self):
         return self.filter(promoted=False)
 
+    def of_categories(self, categories, deep=True):
+        filter_categories = categories
+
+        if deep:
+            filter_categories = []
+
+            for category in categories:
+                desc = category.get_descendants(include_self=True)
+                ids = desc.values_list('id', flat=True)
+                filter_categories += ids
+
+        return self.filter(categories__in=filter_categories)
+
     def of_category(self, category, deep=True):
-        # TODO: more nested categories
-        slugs = [category.slug_i18n]
-
-        if deep and category.parent:
-            slugs.append(category.parent.slug_i18n)
-
-        return self.by_category_slugs(slugs, deep)
-
-    def by_category_slugs(self, slugs, deep=True):
-        # TODO: more nested categories
-        return self.filter(
-            Q(categories__slug_i18n__in=slugs) |
-            Q(categories__parent__slug_i18n__in=slugs)
-        ) if deep else self.filter(categories__slug_i18n__in=slugs)
+        if deep:
+            return self.filter(categories__in=category.get_descendants(include_self=True))
+        return self.filter(categories=category)
 
     def by_keyword(self, keyword):
         return self.filter(

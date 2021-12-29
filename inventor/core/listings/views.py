@@ -43,7 +43,8 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         requested_categories = request.GET.getlist('categories')
         if len(requested_categories) == 1:
             category = get_object_or_404(Category, slug_i18n=requested_categories[0])
-            if not category.listing_type:
+
+            if not category.listing_type or self.model == Listing:
                 params = request.GET.copy()
                 del params['categories']
                 params = f'?{params.urlencode()}' if params not in EMPTY_VALUES else ''
