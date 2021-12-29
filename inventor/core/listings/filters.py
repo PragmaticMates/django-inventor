@@ -3,6 +3,7 @@ from crispy_forms.layout import Layout
 from django import forms
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models
+from django.db.models import Q
 from django.forms import HiddenInput
 from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import ModelSelect2Widget
@@ -21,10 +22,13 @@ class ListingFilter(django_filters.FilterSet):
     locality = django_filters.ModelChoiceFilter(
         label=_('Locality'),
         queryset=Locality.objects.all(),
+        to_field_name='slug',
         widget=ModelSelect2Widget(
             model=Locality,
             queryset=Locality.objects.all(),
             search_fields=['title__icontains'],
+            data_view='auto-slug-json',
+            attrs={'data-minimum-input-length': 0}
         )
     )
 
@@ -82,6 +86,7 @@ class ListingFilter(django_filters.FilterSet):
 
         # categories and localities searched by slug
         self.filters['categories'].field_name = 'categories__slug_i18n'
+        self.filters['categories'].method = 'filter_categories'  # search by nested categories as well
 
         if listing_type:
             # dynamic categories
@@ -175,3 +180,6 @@ class ListingFilter(django_filters.FilterSet):
         for feature in value:
             queryset = queryset.filter(features=feature)
         return queryset
+
+    def filter_categories(self, queryset, name, value):
+        return queryset.by_category_slugs(value)
