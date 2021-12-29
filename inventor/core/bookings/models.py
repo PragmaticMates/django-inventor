@@ -90,7 +90,7 @@ class Booking(models.Model):
             EmailManager.send_mail(
                 to=self.listing.author,
                 template_prefix='bookings/mails/booking_request',
-                subject=f"{_('Booking request')} #{self.id}",
+                subject='%s #%d' % (_('Booking request'), self.id),
                 data={'booking': self},
                 reply_to=self.email,
                 request=None
