@@ -87,11 +87,11 @@ class Booking(models.Model):
         # send message to owner
         with override_language(self.listing.author.preferred_language):
             # TODO: notify using whistle
-
             EmailManager.send_mail(
                 to=self.listing.author,
                 template_prefix='bookings/mails/booking_request',
-                subject=_('Booking request'),
+                subject=f"{_('Booking request')} #{self.id}",
                 data={'booking': self},
+                reply_to=self.email,
                 request=None
             )
