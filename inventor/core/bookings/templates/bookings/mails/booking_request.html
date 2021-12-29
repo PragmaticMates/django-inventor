@@ -1,0 +1,9 @@
+{% load i18n %}
+<strong>{{ booking.listing.get_listing_type_display|title }}:</strong> {{ booking.listing }}<br>
+<strong>{% trans 'Booking from' %}:</strong> {{ booking.get_book_from_display }}<br>
+<strong>{% trans 'Booking to' %}:</strong> {{ booking.get_book_to_display }}<br>
+<strong>{% trans 'Number of guests' %}:</strong> {{ booking.number_of_persons }}<br>
+<strong>{% trans 'Contact person' %}:</strong> {{ booking.person }}<br>
+<strong>{% trans 'E-mail' %}:</strong> {{ booking.email }}<br>
+<strong>{% trans 'Phone' %}:</strong> {{ booking.phone }}<br>
+<strong>{% trans 'Message' %}:</strong> {{ booking.message }}<br>

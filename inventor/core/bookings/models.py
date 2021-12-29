@@ -2,7 +2,9 @@ from django.conf import settings
 from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator, EMPTY_VALUES
 from django.db import transaction
-from django.utils.translation import ugettext_lazy as _
+from django.template.defaultfilters import date
+from django.utils.translation import ugettext_lazy as _, override as override_language
+from pragmatic.managers import EmailManager
 
 from inventor import settings as inventor_settings
 from inventor.core.listings.managers import ListingQuerySet
@@ -50,7 +52,8 @@ class Booking(models.Model):
     class Meta:
         verbose_name = _('booking')
         verbose_name_plural = _('bookings')
-        ordering = ('created',)
+        ordering = ('-created',)
+        get_latest_by = 'created'
 
     def __str__(self):
         return f'#{self.id}'
@@ -71,3 +74,24 @@ class Booking(models.Model):
             self.hash_key = Booking.generate_hash_key()
 
         return super().save(*args, **kwargs)
+
+    def get_book_from_display(self):
+        # TODO: check booking date settings of listing (or type)
+        return date(self.book_from, settings.DATE_FORMAT)
+
+    def get_book_to_display(self):
+        # TODO: check booking date settings of listing (or type)
+        return date(self.book_to, settings.DATE_FORMAT)
+
+    def send_request(self):
+        # send message to owner
+        with override_language(self.listing.author.preferred_language):
+            # TODO: notify using whistle
+
+            EmailManager.send_mail(
+                to=self.listing.author,
+                template_prefix='bookings/mails/booking_request',
+                subject=_('Booking request'),
+                data={'booking': self},
+                request=None
+            )

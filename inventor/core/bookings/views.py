@@ -33,8 +33,12 @@ class BookingView(SingleObjectMixin, FormView):
         booking.traveler = self.request.user
         booking.save()
 
-        # TODO: send message
+        # send message to owner
+        booking.send_request()
+
+        # inform traveler
         messages.success(self.request, 'Your request has been successfully sent to listing owner.')
+
         return super().form_valid(form)
 
     def form_invalid(self, form):

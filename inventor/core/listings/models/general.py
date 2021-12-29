@@ -191,10 +191,12 @@ class Listing(SlugMixin, AbstractProduct):
         return self.__class__.__name__
 
     def get_listing_type_display(self):
-        return self.listing_class._meta.verbose_name
+        # return self.listing_class._meta.verbose_name
+        return self.get_real_instance().listing_class._meta.verbose_name
 
     def get_listing_type_display_plural(self):
-        return self.listing_class._meta.verbose_name_plural
+        # return self.listing_class._meta.verbose_name_plural
+        return self.get_real_instance().listing_class._meta.verbose_name_plural
 
     @cached_property
     def all_images(self):
