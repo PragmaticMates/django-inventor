@@ -147,7 +147,7 @@ class ListingFilter(django_filters.FilterSet):
             )
 
             # changed filter logic of features
-            self.filters['features'].method = 'filter_features'
+            self.filters['features'].conjoined = True
 
         self.hide_fields_by_settings(listing_type, lexicon)
 
@@ -174,12 +174,6 @@ class ListingFilter(django_filters.FilterSet):
                 del self.form.fields[field_name]
                 # self.form.fields[field_name].widget = HiddenInput()
                 continue
-
-    def filter_features(self, queryset, name, value):
-        # return listings having ALL features, not AT LEAST one
-        for feature in value:
-            queryset = queryset.filter(features=feature)
-        return queryset
 
     def filter_categories(self, queryset, name, value):
         return queryset.by_category_slugs(value)
