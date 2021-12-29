@@ -6,7 +6,7 @@ from django.db import models
 from django.forms import HiddenInput
 from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import ModelSelect2Widget
-from mptt.forms import TreeNodeMultipleChoiceField
+from mptt.forms import TreeNodeMultipleChoiceField, TreeNodeChoiceField
 
 from inventor import settings
 from pragmatic.filters import SliderFilter
@@ -135,13 +135,20 @@ class ListingFilter(django_filters.FilterSet):
             self.form.fields['categories'].widget = HiddenInput()
         else:
             # self.form.fields['categories'] = forms.MultipleChoiceField(
-            self.form.fields['categories'] = TreeNodeMultipleChoiceField(
+            #     label=_('Categories'),
+            #     choices=list(self.form.fields['categories'].queryset.values_list('slug_i18n', 'title_i18n')),  # TODO: cache?
+            #     required=False,
+            #     widget=forms.CheckboxSelectMultiple
+            # )
+
+            categories_widget = self.get_widget_by_settings('categories')
+            categories_field = TreeNodeMultipleChoiceField if categories_widget == forms.CheckboxSelectMultiple else TreeNodeChoiceField
+            self.form.fields['categories'] = categories_field(
                 label=_('Categories'),
                 queryset=self.form.fields['categories'].queryset,
                 to_field_name='slug_i18n',
-                # choices=list(self.form.fields['categories'].queryset.values_list('slug_i18n', 'title_i18n')),  # TODO: cache?
                 required=False,
-                widget=forms.CheckboxSelectMultiple
+                widget=categories_widget
             )
 
         if not self.form.fields['features'].queryset.exists():
@@ -155,6 +162,15 @@ class ListingFilter(django_filters.FilterSet):
             )
 
         self.hide_fields_by_settings(listing_type, lexicon)
+
+    def get_widget_by_settings(self, field):
+        widgets = settings.LISTING_FILTER.get('widgets', {})
+
+        # currently supported for categories only
+        if field != 'categories':
+            raise NotImplementedError("Other then 'categories' field not supported")
+
+        return getattr(forms, widgets.get(field, 'CheckboxSelectMultiple'))
 
     def hide_fields_by_settings(self, listing_type, lexicon):
         hidden_fields = settings.LISTING_FILTER.get('hidden_fields', {})
@@ -183,4 +199,8 @@ class ListingFilter(django_filters.FilterSet):
     def filter_categories(self, queryset, name, value):
         if not value:
             return queryset
+
+        if isinstance(value, Category):
+            return queryset.of_category(value)
+
         return queryset.of_categories(value, deep=True)
