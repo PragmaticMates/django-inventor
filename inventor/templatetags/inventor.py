@@ -1,5 +1,5 @@
 from allauth.utils import build_absolute_uri
-from django import template
+from django import template, forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count
@@ -86,3 +86,31 @@ def listing_template(obj):
         return template_name
     except TemplateDoesNotExist:
         return f'listings/widgets/listing{suffix}.html'
+
+
+@register.simple_tag
+def get_choice_instance(**kwargs):
+    field = kwargs.get('field', None)
+    choice = kwargs.get('choice', None)
+    choice_instance = None
+
+    if isinstance(field, forms.ModelMultipleChoiceField):
+        choice_instance = field.to_python([choice])[0]
+    elif isinstance(field, forms.ModelChoiceField):
+        choice_instance = field.to_python(choice)
+
+    return choice_instance
+
+
+@register.simple_tag
+def get_next_choice_instance(**kwargs):
+    field = kwargs.get('field', None)
+    choice = kwargs.get('choice', None)
+    choices = [c for c in dict(field.choices)]
+    next_choice_idx = choices.index(choice) + 1
+
+    if next_choice_idx + 1 >= len(choices):
+        return None
+
+    next_choice = choices[next_choice_idx]
+    return get_choice_instance(**{'field': field, 'choice': next_choice})
