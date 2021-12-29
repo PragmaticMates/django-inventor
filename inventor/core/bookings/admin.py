@@ -9,6 +9,11 @@ class BookingAdmin(admin.ModelAdmin):
     list_display = ('id', 'listing', 'traveler', 'created')
     list_display_links = ('id',)
     autocomplete_fields = ['traveler']
+    actions = ['send_request']
+
+    def send_request(self, request, queryset):
+        for booking in queryset:
+            booking.send_request()
 
 
 class BookingMixinAdmin(admin.ModelAdmin):
