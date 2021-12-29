@@ -84,9 +84,12 @@ class ListingFilter(django_filters.FilterSet):
         if not self.form.fields['locality'].queryset.exists():
             self.form.fields['locality'].widget = HiddenInput()
 
-        # categories and localities searched by slug
+        # categories, localities and features searched by slug
         self.filters['categories'].field_name = 'categories__slug_i18n'
         self.filters['categories'].method = 'filter_categories'  # search by nested categories as well
+
+        self.filters['features'].field_name = 'features__slug_i18n'
+        self.filters['features'].conjoined = True  # changed filter logic of features
 
         if listing_type:
             # dynamic categories
@@ -141,13 +144,10 @@ class ListingFilter(django_filters.FilterSet):
         else:
             self.form.fields['features'] = forms.MultipleChoiceField(
                 label=_('Features'),
-                choices=list(self.form.fields['features'].queryset.values_list('pk', 'title')),  # TODO: cache?
+                choices=list(self.form.fields['features'].queryset.values_list('slug_i18n', 'title')),  # TODO: cache?
                 required=False,
                 widget=forms.CheckboxSelectMultiple
             )
-
-            # changed filter logic of features
-            self.filters['features'].conjoined = True
 
         self.hide_fields_by_settings(listing_type, lexicon)
 
