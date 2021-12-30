@@ -5,6 +5,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count
 from django.template import TemplateDoesNotExist
 from filer.models import File
+from mptt.forms import TreeNodeChoiceField, TreeNodeMultipleChoiceField
+
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.models.general import Listing
 from inventor.core.listings.models.listing_types import Race
@@ -89,28 +91,37 @@ def listing_template(obj):
 
 
 @register.simple_tag
-def get_choice_instance(**kwargs):
+def get_choices_with_parents(**kwargs):
     field = kwargs.get('field', None)
-    choice = kwargs.get('choice', None)
-    choice_instance = None
 
-    if isinstance(field, forms.ModelMultipleChoiceField):
-        choice_instance = field.to_python([choice])[0]
-    elif isinstance(field, forms.ModelChoiceField):
-        choice_instance = field.to_python(choice)
-
-    return choice_instance
-
-
-@register.simple_tag
-def get_next_choice_instance(**kwargs):
-    field = kwargs.get('field', None)
-    choice = kwargs.get('choice', None)
-    choices = [c for c in dict(field.choices)]
-    next_choice_idx = choices.index(choice) + 1
-
-    if next_choice_idx + 1 >= len(choices):
+    if not isinstance(field, TreeNodeMultipleChoiceField) and not isinstance(field, TreeNodeChoiceField):
         return None
 
-    next_choice = choices[next_choice_idx]
-    return get_choice_instance(**{'field': field, 'choice': next_choice})
+    return dict(field.queryset.values_list('slug', 'parent'))
+
+
+@register.filter()
+def has_choice_children(choices_with_parents, choice):
+    current_parent = choices_with_parents.get(choice, None)
+    next_choice = _get_next_choice(choice, choices_with_parents)
+    next_parent = choices_with_parents.get(next_choice, None) if next_choice else None
+
+    return current_parent is None and next_parent is not None
+
+
+@register.filter()
+def is_last_child(choices_with_parents, choice):
+    current_parent = choices_with_parents.get(choice, None)
+    next_choice = _get_next_choice(choice, choices_with_parents)
+    next_parent = choices_with_parents.get(next_choice, None) if next_choice else None
+
+    return current_parent is not None and next_parent is None
+
+
+def _get_next_choice(choice, choices_with_parents):
+    choices = list(choices_with_parents)
+    try:
+        next_choice = choices[choices.index(choice) + 1]
+    except (ValueError, IndexError):
+        next_choice = None
+    return next_choice
