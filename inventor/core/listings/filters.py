@@ -148,7 +148,8 @@ class ListingFilter(django_filters.FilterSet):
                 queryset=self.form.fields['categories'].queryset,
                 to_field_name='slug_i18n',
                 required=False,
-                widget=categories_widget
+                widget=categories_widget,
+                level_indicator=''
             )
 
         if not self.form.fields['features'].queryset.exists():
