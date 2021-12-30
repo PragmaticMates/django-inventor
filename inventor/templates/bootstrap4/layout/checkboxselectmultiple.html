@@ -3,7 +3,7 @@
 
 {% get_choices_with_parents field=field.field as choices_with_parents %}
 {% if choices_with_parents != None %}
-<div class="{% if field_class %} {{ field_class }}{% endif %}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
+<div class="{% if field_class %} {{ field_class }}{% endif %} field-{{ field.name }}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
     {% for choice in field.field.choices %}
     {% with choice.0|stringformat:"s" as choice_str %}
     {% if choices_with_parents|has_choice_children:choice.0 %}
@@ -46,6 +46,47 @@
 
     {% include 'bootstrap4/layout/help_text.html' %}
 </div>
+<script>
+    jQuery(document).ready(function ($) {
+        $('.field-{{ field.name }} input:checkbox').each(function () {
+            $(this).change(function () {
+                const collapseParents = $(this).closest('.field-{{ field.name }} .collapse');
+                const toggleBtn = $(this).next().find('[data-toggle="collapse"]');
+
+                if (collapseParents.length) {  // child
+                    const collapseId = '#' + collapseParents.attr('id');
+                    const wrapper = $('[data-target="' + collapseId + '"]').closest('.custom-checkbox');
+                    const parentCheckbox = wrapper.find('input:checkbox');
+
+                    if ($(collapseId + ' input:checked').length === $(collapseId + ' input').length) {
+                        if (!parentCheckbox.is(":checked")) {
+                            parentCheckbox.prop('checked', true);
+                        }
+                    } else {
+                        if (parentCheckbox.is(":checked")) {
+                            parentCheckbox.prop('checked', false);
+                        }
+                    }
+
+
+                } else if (toggleBtn.length) {  // parent
+                    const target = toggleBtn.attr('data-target');
+
+                    if ($(this).is(":checked")) {
+                        $(target +' input:checkbox').each(function () {
+                            $(this).prop('checked', true);
+                        })
+                    } else {
+                        $(target +' input:checkbox').each(function () {
+                            $(this).prop('checked', false);
+                        })
+                    }
+                }
+            });
+        });
+
+    });
+</script>
 {% else %}
     {% include 'bootstrap4/layout/checkboxselectmultiple_original.html' %}
 {% endif %}
