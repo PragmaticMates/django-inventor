@@ -97,7 +97,7 @@ def get_choices_with_parents(**kwargs):
     if not isinstance(field, TreeNodeMultipleChoiceField) and not isinstance(field, TreeNodeChoiceField):
         return None
 
-    return dict(field.queryset.values_list('slug', 'parent'))
+    return dict(field.queryset.values_list('slug_i18n', 'parent'))  # TODO: slug is not universal identifier
 
 
 @register.filter()
