@@ -1,0 +1,51 @@
+{% load crispy_forms_filters inventor %}
+{% load l10n %}
+
+<div class="{% if field_class %} {{ field_class }}{% endif %}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
+
+    {% for choice in field.field.choices %}
+    {% get_choice_instance field=field.field choice=choice.0 as choice_instance %}
+    {% get_next_choice_instance field=field.field choice=choice.0 as next_choice_instance %}
+    {% with choice_instance.children.exists as has_children %}
+    {% with choice.0|stringformat:"s" as choice_str %}
+    {% if has_children %}
+        <div class="{%if use_custom_control%}custom-control custom-radio{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">
+            <input type="radio" class="{%if use_custom_control%}custom-control-input{% else %}form-check-input{% endif %}{% if field.errors %} is-invalid{% endif %}"{% if choice.0|stringformat:"s" == field.value|default_if_none:""|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {% if field.field.disabled %}disabled="true"{% endif %} {{ field.field.widget.attrs|flatatt }}>
+            <label for="id_{{ field.html_name }}_{{ forloop.counter }}" class="{%if use_custom_control%}custom-control-label{% else %}form-check-label{% endif %}">
+                {{ choice.1|unlocalize }}
+                <button class="btn btn-link collapsed p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse-{{ choice_str }}" aria-expanded="false" aria-controls="collapse-{{ choice_str }}">
+                </button>
+            </label>
+            {% if field.errors and forloop.last and not inline_class %}
+                {% include 'bootstrap4/layout/field_errors_block.html' %}
+            {% endif %}
+        </div>
+        <div id="collapse-{{ choice_str }}" class="collapse pl-3" aria-labelledby="heading-{{ choice_str }}">
+    {% else %}
+        <div class="{%if use_custom_control%}custom-control custom-radio{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">
+            <input type="radio" class="{%if use_custom_control%}custom-control-input{% else %}form-check-input{% endif %}{% if field.errors %} is-invalid{% endif %}"{% if choice.0|stringformat:"s" == field.value|default_if_none:""|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {% if field.field.disabled %}disabled="true"{% endif %} {{ field.field.widget.attrs|flatatt }}>
+            <label for="id_{{ field.html_name }}_{{ forloop.counter }}" class="{%if use_custom_control%}custom-control-label{% else %}form-check-label{% endif %}">
+                {{ choice.1|unlocalize }}
+            </label>
+            {% if field.errors and forloop.last and not inline_class %}
+                {% include 'bootstrap4/layout/field_errors_block.html' %}
+            {% endif %}
+        </div>
+{#        TODO: simplify condition #}
+        {% if next_choice_instance != None and choice_instance.parent != next_choice_instance.parent and choice_instance.parent != None or choice_instance.parent != None and forloop.last  %}
+            </div>
+        {% endif %}
+    {% endif %}
+    {% endwith %}
+    {% endwith %}
+    {% endfor %}
+    {% if field.errors and inline_class %}
+    <div class="w-100 {%if use_custom_control%}custom-control custom-radio{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">
+        {# the following input is only meant to allow boostrap to render the error message as it has to be after an invalid input. As the input has no name, no data will be sent. #}
+        <input type="checkbox" class="custom-control-input {% if field.errors %}is-invalid{%endif%}">
+        {% include 'bootstrap4/layout/field_errors_block.html' %}
+    </div>
+    {% endif %}
+
+    {% include 'bootstrap4/layout/help_text.html' %}
+</div>
