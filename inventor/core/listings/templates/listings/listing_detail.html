@@ -337,6 +337,19 @@
                 {#    $(".show-contact").remove();#}
                 {#}, 1500);#}
             });
+
+            function stickyHeader() {
+                if (window.scrollY < 499) {
+                    $('.second-navbar').removeClass('sticky-header')
+                } else {
+                    $('.second-navbar').addClass('sticky-header')
+                }
+            }
+
+            stickyHeader();
+            window.addEventListener("scroll", function () {
+                stickyHeader();
+            });
         });
     </script>
 {% endblock %}
