@@ -97,7 +97,7 @@ def get_choices_with_parents(**kwargs):
     if not isinstance(field, TreeNodeMultipleChoiceField) and not isinstance(field, TreeNodeChoiceField):
         return None
 
-    return dict(field.queryset.values_list(field.to_field_name, 'parent'))
+    return dict(field.queryset.values_list(field.to_field_name or 'id', 'parent'))
 
 
 @register.filter()
