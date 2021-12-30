@@ -35,7 +35,7 @@
                         </span>
                     {% endif %}
                     {% if object.categories.exists %}
-                        <span class="text-secondary d-block">
+                        <span class="text-secondary d-block mb-1">
                             <i class="fas fa-fw fa-folder mr-2 text-light opacity-50p"></i>
                             {% for category in object.categories.all %}
                                 <a class="text-secondary" href="{{ category.get_absolute_url }}">{{ category }}{% if not forloop.last %}, {% endif %}</a>
@@ -44,7 +44,7 @@
                     {% endif %}
                     <span class="text-secondary d-block">
                         <i class="fas fa-fw fa-eye mr-2 text-light opacity-50p"></i>
-                        <a class="text-secondary" href="{{ category.get_absolute_url }}">{% trans 'Seen today' %}: {% get_hit_count for object within "days=1,minutes=30" %}</a>
+                        <a class="text-secondary" href="{{ category.get_absolute_url }}">{% trans 'Seen today' %}: {% get_hit_count for object within "days=1,minutes=30" %} ({% trans 'in total' %} {% get_hit_count for object %}x)</a>
                     </span>
                 </div>
 {#                {% if object.price %}#}
