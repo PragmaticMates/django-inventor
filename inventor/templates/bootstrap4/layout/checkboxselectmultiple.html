@@ -48,6 +48,15 @@
 </div>
 <script>
     jQuery(document).ready(function ($) {
+        $('.field-{{ field.name }} input:checked').each(function () {
+            const collapseParents = $(this).closest('.field-{{ field.name }} .collapse');
+
+            if (collapseParents.length && !collapseParents.hasClass('show')) {
+                const collapseId = '#' + collapseParents.attr('id');
+                $(collapseId).collapse('show');
+            }
+        })
+
         $('.field-{{ field.name }} input:checkbox').each(function () {
             $(this).change(function () {
                 const collapseParents = $(this).closest('.field-{{ field.name }} .collapse');
@@ -73,9 +82,9 @@
                     const target = toggleBtn.attr('data-target');
 
                     if ($(this).is(":checked")) {
-                        $(target +' input:checkbox').each(function () {
-                            $(this).prop('checked', true);
-                        })
+                        {#$(target +' input:checkbox').each(function () {#}
+                        {#    $(this).prop('checked', true);#}
+                        {#})#}
                     } else {
                         $(target +' input:checkbox').each(function () {
                             $(this).prop('checked', false);
