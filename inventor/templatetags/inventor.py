@@ -114,8 +114,9 @@ def is_last_child(choices_with_parents, choice):
     current_parent = choices_with_parents.get(choice, None)
     next_choice = _get_next_choice(choice, choices_with_parents)
     next_parent = choices_with_parents.get(next_choice, None) if next_choice else None
+    choices_has_any_parent = None in choices_with_parents.values()
 
-    return current_parent is not None and next_parent is None
+    return current_parent is not None and next_parent is None and choices_has_any_parent
 
 
 def _get_next_choice(choice, choices_with_parents):
