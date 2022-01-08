@@ -48,11 +48,12 @@
             </div>
         </form>
 
-        <ul class="navbar-nav border-left flex-row ">
-            <li class="nav-item border-right dropdown notifications">
+        <ul class="navbar-nav flex-row ">
+            <li class="nav-item dropdown notifications">
                 <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="nav-link-icon__wrapper">
-                        <i class="material-icons">&#xE7F4;</i>
+{#                        <i class="material-icons">&#xE7F4;</i>#}
+                        <i class="far fa-lg fa-bell"></i>
                         <span class="badge badge-pill badge-danger">2</span>
                     </div>
                 </a>
@@ -86,7 +87,8 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" src="{% static 'images/avatars/0.jpg' %}" alt="User Avatar">
+{#                    <img class="user-avatar rounded-circle mr-2" src="{% static 'images/avatars/0.jpg' %}" alt="User Avatar">#}
+                    <img class="user-avatar rounded-circle mr-2" src="{% static 'images/avatars/gravatar.png' %}" alt="User Avatar">
                     <span class="d-none d-md-inline-block">{{ request.user }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
