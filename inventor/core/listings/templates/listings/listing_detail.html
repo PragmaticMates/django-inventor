@@ -57,52 +57,45 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid second-navbar">
+    <div class="second-navbar">
         <div class="container">
             <div class="row">
                 <div class="col-sm d-flex align-items-center">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mr-auto">
-                                {% if object.album_set.exists %}
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#gallery"><i class="mr-2 fa fa-image"></i> {% trans 'Gallery' %}<span class="sr-only">(current)</span></a>
-                                    </li>
-                                {% endif %}
-                                {% if object.description_i18n %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#description"><i class="mr-2 fa fa-pen"></i> {% trans 'Description' %}</a>
-                                    </li>
-                                {% endif %}
-                                {% if all_amenities %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#amenities"><i class="mr-2 fa fa-list"></i> {% trans 'Amenities' %}</a>
-                                    </li>
-                                {% endif %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#features"><i class="mr-2 fa fa-list"></i> {% trans 'Features' %}</a>
+                    <nav class="navbar navbar-light">
+                        <ul class="navbar-nav mr-auto">
+                            {% if object.album_set.exists %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#gallery"><i class="mr-2 fa fa-image"></i> {% trans 'Gallery' %}<span class="sr-only">(current)</span></a>
                                 </li>
-                                {% if object.videos.exists %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#videos"><i class="mr-2 fa fa-video"></i> {% trans 'Video' %}</a>
-                                    </li>
-                                {% endif %}
+                            {% endif %}
+                            {% if object.description_i18n %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="mr-2 fa fa-map-marker-alt"></i> {% trans 'Location' %}</a>
+                                    <a class="nav-link" href="#description"><i class="mr-2 fa fa-pen"></i> {% trans 'Description' %}</a>
                                 </li>
+                            {% endif %}
+                            {% if all_amenities %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="mr-2 fa fa-address-card"></i> {% trans 'Contact' %}</a>
+                                    <a class="nav-link" href="#amenities"><i class="mr-2 fa fa-list"></i> {% trans 'Amenities' %}</a>
                                 </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#features"><i class="mr-2 fa fa-list"></i> {% trans 'Features' %}</a>
+                            </li>
+                            {% if object.videos.exists %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="mr-2 fa fa-star"></i> {% trans 'Reviews' %}</a>
+                                    <a class="nav-link" href="#videos"><i class="mr-2 fa fa-video"></i> {% trans 'Video' %}</a>
                                 </li>
-                            </ul>
-                        </div>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="mr-2 fa fa-map-marker-alt"></i> {% trans 'Location' %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="mr-2 fa fa-address-card"></i> {% trans 'Contact' %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="mr-2 fa fa-star"></i> {% trans 'Reviews' %}</a>
+                            </li>
+                        </ul>
                     </nav>
                 </div>
             </div>
