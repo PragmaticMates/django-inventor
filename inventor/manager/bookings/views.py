@@ -54,13 +54,13 @@ class BookingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     #
     #     return qs
 
-    # def get_context_data(self, **kwargs):
-    #     context_data = super().get_context_data(**kwargs)
-    #     context_data.update({
-    #         'title': self.model._meta.verbose_name_plural,
-    #         'filter': self.filter
-    #     })
-    #     return context_data
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data.update({
+            'title': self.model._meta.verbose_name_plural,
+            # 'filter': self.filter
+        })
+        return context_data
 
 
 # class BookingView(SingleObjectMixin, FormView):
