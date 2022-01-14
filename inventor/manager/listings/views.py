@@ -33,7 +33,7 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     }
 
     def get_sorting_options(self):
-        return {**{'-promoted': (_('Promoted'), ['-promoted', 'awaiting', 'created'])}, **self.sorting_options}
+        return {**{'-promoted': (_('Promoted'), ['-promoted', '-rank', 'created'])}, **self.sorting_options}
 
     def dispatch(self, request, *args, **kwargs):
         # redirect to category detail view if single category requested
@@ -161,7 +161,7 @@ class ListingInformationView(UpdateView):
         return [f"manager/listings/{obj.__class__.__name__.lower()}_info.html"] + names
 
     def get_success_url(self):
-        return self.request.META.get('HTTP_REFERER', reverse('inventor:manager:listings:listing_info', kwargs={'slug': self.object.slug}))
+        return reverse('inventor:manager:listings:listing_info', kwargs={'slug': self.object.slug_i18n})
 
 
 class ListingSeoView(UpdateView):
@@ -188,6 +188,8 @@ class ListingSeoView(UpdateView):
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
         self.seo_object = form.save()
+        self.seo_object.content_object = self.object
+        self.seo_object.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_template_names(self):
@@ -196,7 +198,7 @@ class ListingSeoView(UpdateView):
         return [f"manager/listings/{obj.__class__.__name__.lower()}_info.html"] + names
 
     def get_success_url(self):
-        return self.request.META.get('HTTP_REFERER', reverse('inventor:manager:listings:listing_seo', kwargs={'slug': self.object.slug}))
+        return reverse('inventor:manager:listings:listing_seo', kwargs={'slug': self.object.slug})
 
 
 class ListingBookingsListView(DisplayListViewMixin, SortingListViewMixin, ListView):

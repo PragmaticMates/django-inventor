@@ -19,7 +19,7 @@
 {#            <span class="listing-category">#}
 {#                {{ object.get_listing_type_display }}#}
 {#            </span>#}
-{#            <strong class="d-block">{{ object.title|capfirst }}</strong>#}
+{#            <strong class="d-block">{{ object.title_i18n|capfirst }}</strong>#}
 {#            {% if object.locality_title %}#}
 {#                <small><i class="fas fa-map-marker-alt mr-2"></i>{{ object.locality_title }}</small>#}
 {#            {% endif %}#}
@@ -42,7 +42,7 @@
             </div>
         {% endif %}
         <h5 class="card-title">
-            <a class="text-fiord-blue" href="{% url 'inventor:manager:listings:listing_stats' object.slug %}">{{ object.title|capfirst }}</a>
+            <a class="text-fiord-blue" href="{% url 'inventor:manager:listings:listing_stats' object.slug_i18n %}">{{ object.title_i18n|capfirst }}</a>
         </h5>
         <div class="row">
             {% if object.locality_title %}
@@ -51,14 +51,22 @@
                     <span>{{ object.locality_title }}</span>
                 </div>
             {% endif %}
+            {% if object.price %}
+                <div class="col-md-6">
+                    <span class="text-muted d-block">
+                        <i class="fas fa-fw fa-money-bill mr-2 text-light opacity-50p"></i>
+                        <a class="text-muted" href="{{ category.get_absolute_url }}">{{ object.get_price_display|capfirst }}</a>
+                    </span>
+                </div>
+            {% endif %}
             <div class="col-md-6">
                 <span class="text-muted d-block">
                     <i class="fas fa-fw fa-eye mr-2 text-light opacity-50p"></i>
-                    <a class="text-muted" href="{{ category.get_absolute_url }}">{% trans 'Seen today' %}: {% get_hit_count for object within "days=1,minutes=30" %}</a>
+                    <a class="text-muted" href="{{ category.get_absolute_url }}">{% trans 'Seen today' %}: {% get_hit_count for object within "days=1,minutes=30" %} ({% trans 'in total' %} {% get_hit_count for object %}x)</a>
                 </span>
             </div>
             {% if object.categories.exists %}
-                <div class="col-12">
+                <div class="col-6">
                     <span class="text-secondary d-block">
                         <i class="fas fa-fw fa-folder mr-2 text-light opacity-50p"></i>
                         {% for category in object.categories.all %}

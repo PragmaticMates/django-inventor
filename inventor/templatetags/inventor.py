@@ -24,7 +24,7 @@ def inventor_listings(context, proxy='all', limit=None):
         .prefetch_related('categories')
 
     if proxy == 'all':
-        listings = listings.order_by('-promoted', 'awaiting', '-created')
+        listings = listings.order_by('-promoted', '-rank', '-created')
 
     if proxy == 'recommended':
         listings = listings \
