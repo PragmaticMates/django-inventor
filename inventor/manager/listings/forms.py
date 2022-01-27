@@ -31,12 +31,9 @@ class ListingInfoForm(forms.ModelForm):
         self.helper = SingleSubmitFormHelper()
         self.helper.layout = Layout(
             Row(
-                Div(
-                    'title_i18n',
-                    'slug_i18n',
-                    css_class='col-sm-6'
-                ),
-                Div('description_i18n', css_class='col-6'),
+                Div('title_i18n', css_class='col-sm-6'),
+                Div('slug_i18n', css_class='col-sm-6'),
+                Div('description_i18n', css_class='col-12'),
             ),
             FormActions(
                 Submit('submit', _('Submit'), css_class='btn-secondary')
@@ -58,14 +55,9 @@ class ListingSeoForm(forms.ModelForm):
         self.helper = SingleSubmitFormHelper()
         self.helper.layout = Layout(
             Row(
-                Div(
-                    'title_i18n',
-                    'keywords_i18n',
-                    css_class='col-sm-6'
-                ),
-                Div(
-                    'description_i18n', css_class='col-sm-6'
-                ),
+                Div('title_i18n', css_class='col-sm-6'),
+                Div('keywords_i18n', css_class='col-sm-6'),
+                Div('description_i18n', css_class='col-sm-12'),
             ),
             FormActions(
                 Submit('submit', _('Submit'), css_class='btn-secondary')
