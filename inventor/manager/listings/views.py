@@ -12,10 +12,11 @@ from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 
 from inventor.core.lexicons.models import Category
 from inventor.core.listings.filters import ListingFilter
-from inventor.core.listings.models.general import Listing
+from inventor.core.listings.models.general import Listing, Album
 from inventor.manager.listings.forms import ListingInfoForm, ListingSeoForm
 
 
+# TODO: LoginPermissionRequiredMixin
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     model = Listing
     template_name = 'manager/listings/listing_list.html'
@@ -235,3 +236,44 @@ class ListingBookingsListView(DisplayListViewMixin, SortingListViewMixin, ListVi
             'object': self.listing
         })
         return context_data
+
+
+class ListingAlbumsListView(DisplayListViewMixin, SortingListViewMixin, ListView):
+    model = Album
+    template_name = 'manager/listings/listing_albums_list.html'
+    # filter_class = BookingFilter
+    paginate_by = 12
+    displays = ['rows']
+    paginate_by_display = {'rows': [12, 24, 48]}
+    # sorting_options = {
+    #     '-created': _('Newest'),
+    #     'created': _('Oldest'),
+    # }
+    slug_field = 'slug'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.listing_slug = self.kwargs.get(self.slug_field)
+        self.listing = Listing.objects.get(slug=self.listing_slug)
+        # print(self.listing_slug)
+        # self.filter = self.filter_class(**self.get_filter_kwargs())
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return super().get_queryset().filter(listing__slug=self.listing_slug)
+
+    def get_template_names(self):
+        names = super().get_template_names()
+        names.insert(1, f"manager/listings/listing_albums{self.template_name_suffix}.html")
+        return names
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data.update({
+            'object': self.listing
+        })
+        return context_data
+
+
+class ListingAlbumsDetailView(DetailView):
+    model = Album
+    template_name = 'manager/listings/listing_albums_detail.html'

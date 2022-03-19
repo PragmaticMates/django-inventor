@@ -1,0 +1,33 @@
+{% extends 'manager/layout.html' %}
+{% load i18n static pragmatic_tags inventor thumbnail %}
+
+{% block main_class %}bg-gray-100{% endblock %}
+
+{% block top %}
+    {% include 'manager/listings/layout/listing_top.html' with object=album.listing %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row py-5">
+{#            <side class="col-md-3 filter-wrapper">#}
+{#                <h3>{% trans 'Filter' %}</h3>#}
+{#                <div class="card p-4">#}
+{#                    {% include 'helpers/filter-vertical.html' %}#}
+{#                </div>#}
+{#            </side>#}
+            <div class="col-md-12">
+                <h4 class="text-secondary">{{ album.title }}</h4>
+                {% if album.description_i18n %}<p>{{ album.description_i18n }}</p>{% endif %}
+                <div class="row gallery mb-3">
+                    {% for photo in album.photo_set.all %}
+                        <div class="col-xl-2 col-md-3 col-sm-4 col-4 p-1">
+                            <a class="gallery-thumbnail" href="{{ photo.file.url }}"
+                               style=" background-image: url('{% thumbnail photo.file '500' as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}')"></a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

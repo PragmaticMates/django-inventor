@@ -1,0 +1,48 @@
+{% extends 'manager/layout.html' %}
+{% load i18n static pragmatic_tags inventor thumbnail %}
+
+{% block main_class %}bg-gray-100{% endblock %}
+
+{% block top %}
+    {% include 'manager/listings/layout/listing_top.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-12">
+{#            <div class="col-md-12">#}
+{#                <div class="queryset-actions row">#}
+{#                    <div class="col-sm-auto">{% include 'helpers/filter-modal.html' with asynchronous_load=True small=True %}</div>#}
+{#                    <div class="col-sm d-none d-lg-block">{% filter_values filter %}</div>#}
+{#                    <div class="col-sm"></div>#}
+{#                    {% sorting %}#}
+{#                    {% display_modes %}#}
+{#                </div>#}
+                <div class="row">
+                    {% for album in object_list %}
+                        <div class="col-md-4">
+                            <div class="card mb-3 position-relative">
+                                <img src="{% thumbnail album.photo_set.last.file '500' as thumbnail %}{{ thumbnail.url }}{% endthumbnail %}" class="card-img-top" alt="...">
+                                <div class="card-body">
+{#                                    TODO: title_i18n #}
+                                    <h5 class="card-title">
+                                        <a href="{% url 'inventor:manager:listings:listing_album_detail' album.pk %}">
+                                            {{ album.title }}
+                                        </a>
+                                    </h5>
+                                    <p class="card-text">{{ album.description_i18n }}</p>
+{#                                    <a href="{% url 'inventor:manager:listings:listing_album_detail' album.pk %}" class="btn btn-primary">Go somewhere</a>#}
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        {% trans 'No data to display' %}
+                    {% endfor %}
+                </div>
+
+                {% paginator page_obj %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
