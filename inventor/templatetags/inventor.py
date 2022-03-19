@@ -1,5 +1,6 @@
 from allauth.utils import build_absolute_uri
-from django import template, forms
+from django import template
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count
@@ -30,6 +31,15 @@ def inventor_listings(context, proxy='all', limit=None):
         listings = listings \
             .filter(favorite_of_users__count__gt=0)\
             .order_by('-favorite_of_users__count')
+
+    if proxy == 'not_purchased' and 'commerce' in settings.INSTALLED_APPS:
+        from commerce.models import PurchasedItem
+        user = context.get('user', None)
+        purchased_items = PurchasedItem.objects\
+            .of_not_cancelled_nor_refunded_orders()\
+            .filter(order__user=user)\
+            .values_list('object_id', flat=True)  # TODO: gm2m with content_type
+        listings = listings.exclude(id__in=list(purchased_items))
 
     if proxy == 'favorites':
         user = context.get('user', None)
