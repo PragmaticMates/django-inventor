@@ -1,5 +1,6 @@
 from allauth.utils import build_absolute_uri
 from django import template
+from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
@@ -16,13 +17,20 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def inventor_listings(context, proxy='all', limit=None):
-    listings = Listing.objects \
+def inventor_listings(context, proxy='all', listing_type=None, limit=None):
+    if listing_type:
+        listing_type_class = apps.get_model(f'listings.{listing_type}')
+    else:
+        listing_type_class = Listing
+
+    listings = listing_type_class.objects \
         .published() \
         .not_hidden() \
-        .select_subclasses() \
         .annotate(Count('favorite_of_users')) \
         .prefetch_related('categories')
+
+    if listing_type_class == Listing:
+        listings = listings.select_subclasses()
 
     if proxy == 'all':
         listings = listings.order_by('-promoted', '-rank', '-created')
