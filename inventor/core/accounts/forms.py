@@ -333,12 +333,13 @@ class SignupForm(AllAuthSignupForm):
         attrs_to_save = []
 
         for attr, value in self.cleaned_data.items():
-            if attr.startswith('dont_'):
-                attr = attr.replace('dont_', '')
-                value = not value
+            if attr not in ['username', 'email']:  # handled in allauth
+                if attr.startswith('dont_'):
+                    attr = attr.replace('dont_', '')
+                    value = not value
 
-            if attr in field_names:
-                setattr(user, attr, value)
-                attrs_to_save.append(attr)
+                if attr in field_names:
+                    setattr(user, attr, value)
+                    attrs_to_save.append(attr)
 
         user.save(update_fields=attrs_to_save)
