@@ -1,0 +1,90 @@
+<div class="modal fade crispy-modal" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content crispy-modal-content"></div>
+    </div>
+</div>
+
+{% with object_name|default:'object' as object_name %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        function update{{ object_name|capfirst }}ModalForm() {
+            $(".update-{{ object_name }}").each(function () {
+                $(this).modalForm({
+                    modalID: "#modal",
+                    modalContent: ".crispy-modal-content",
+                    modalForm: ".crispy-modal-content form",
+                    formURL: $(this).data('form-url'),
+                    asyncUpdate: {{ asyncUpdate|default:'false' }},
+                    errorClass: '.is-invalid, .invalid-feedback, .alert-danger',
+                    asyncSettings: {
+                        closeOnSubmit: {{ closeOnSubmit|default:'true' }},
+                        addModalFormFunction: update{{ object_name|capfirst }}ModalForm
+                    }
+                });
+
+                $(this).click(function (e) {
+                    e.preventDefault();
+                });
+            });
+        }
+
+        function create{{ object_name|capfirst }}ModalForm() {
+            $(".create-{{ object_name }}").each(function () {
+                $(this).modalForm({
+                    modalID: "#modal",
+                    modalContent: ".crispy-modal-content",
+                    modalForm: ".crispy-modal-content form",
+                    formURL: $(this).data('form-url'),
+                    asyncUpdate: {{ asyncUpdate|default:'false' }},
+                    errorClass: '.is-invalid, .invalid-feedback, .alert-danger',
+                    asyncSettings: {
+                        closeOnSubmit: {{ closeOnSubmit|default:'true' }},
+                        addModalFormFunction: create{{ object_name|capfirst }}ModalForm
+                    }
+                });
+
+                $(this).click(function (e) {
+                    e.preventDefault();
+                });
+            });
+        }
+
+        function delete{{ object_name|capfirst }}ModalForm() {
+            $(".delete-{{ object_name }}").each(function () {
+                $(this).modalForm({
+                    formURL: $(this).data('form-url'),
+                    isDeleteForm: true,
+                    asyncUpdate: {{ asyncUpdate|default:'false' }},
+                    errorClass: '.is-invalid, .invalid-feedback, .alert-danger',
+                    asyncSettings: {
+                        closeOnSubmit: {{ closeOnSubmit|default:'true' }},
+                        addModalFormFunction: delete{{ object_name|capfirst }}ModalForm
+                    }
+                });
+
+                $(this).click(function (e) {
+                    e.preventDefault();
+                });
+            });
+        }
+
+        update{{ object_name|capfirst }}ModalForm();
+        create{{ object_name|capfirst }}ModalForm();
+        delete{{ object_name|capfirst }}ModalForm();
+
+        // fix double modal close issue
+        $('#modal').on('click', '[data-bs-dismiss]', function () {
+            const dismiss = $(this).data('bs-dismiss');
+
+            if (dismiss !== 'modal') {
+                {#$('#' + dismiss).modal('hide');#}
+                $('#' + dismiss).hide();
+                $('.modal-backdrop.fade.show').last().remove();
+            }
+        });
+    });
+</script>
+{% endwith %}
+
+{% block js %}
+{% endblock %}
