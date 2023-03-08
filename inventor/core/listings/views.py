@@ -206,3 +206,7 @@ class GroupDetailView(HitCountDetailView):
     #     names = super().get_template_names()
     #     obj = self.get_object()
     #     return [f"listings/{obj.__class__.__name__.lower()}_detail.html"] + names
+
+
+class GroupListView(ListView):
+    model = Group

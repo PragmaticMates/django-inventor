@@ -15,8 +15,9 @@
             <div class="filter-items col-sm-12">
                 {% crispy filter.form filter.helper %}
             </div>
-            <div class="form-actions col-sm-12">
-                <button type="submit" class="btn btn-primary py-2 col"><i class="fas fa-search"></i> {% trans 'Search' %}</button>
+            <div class="form-actions col-sm-12 text-center">
+                <button type="submit" class="btn btn-primary py-2 col mb-2"><i class="fas fa-search"></i> {% trans 'Search' %}</button>
+                <a href="{{ request.path }}">{% trans 'Reset filter' %}</a>
             </div>
         </div>
     </form>
