@@ -3,6 +3,7 @@ from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView, UpdateView
 from inventor.core.seo.models import Seo
@@ -11,16 +12,15 @@ from inventor.core.bookings.models import Booking
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 
 from inventor.core.lexicons.models import Category
-from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.models.general import Listing, Album
 from inventor.manager.listings.forms import ListingInfoForm, ListingSeoForm
+from inventor import settings as inventor_settings
 
 
 # TODO: LoginPermissionRequiredMixin
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     model = Listing
     template_name = 'manager/listings/listing_list.html'
-    filter_class = ListingFilter
     paginate_by = 12
     displays = ['rows']
     paginate_by_display = {'rows': [12, 24, 48]}
@@ -32,6 +32,10 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         '-price': _('Price (High to low)'),
         'title': _('Title'),
     }
+
+    @property
+    def filter_class(self):
+        return import_string(inventor_settings.LISTING_FILTER_CLASS)
 
     def get_sorting_options(self):
         return {**{'-promoted': (_('Promoted'), ['-promoted', '-rank', 'created'])}, **self.sorting_options}

@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.validators import EMPTY_VALUES
 from django.db.models import F, Count
 from django.shortcuts import redirect, get_object_or_404
+from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from django.views.generic.detail import BaseDetailView
@@ -11,7 +12,6 @@ from hitcount.views import HitCountDetailView
 
 from pragmatic.mixins import DisplayListViewMixin, SortingListViewMixin
 from inventor.core.lexicons.models import Feature, Category
-from inventor.core.listings.filters import ListingFilter
 from inventor.core.listings.models.general import Listing, Group
 from inventor import settings as inventor_settings
 
@@ -19,7 +19,6 @@ from inventor import settings as inventor_settings
 class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
     model = Listing
     template_name = 'listings/listing_list.html'
-    filter_class = ListingFilter
     paginate_by = 12
     displays = ['columns']
     paginate_by_display = {'columns': [12, 24, 48]}
@@ -31,6 +30,10 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
         '-price': _('Price (High to low)'),
         'title': _('Title'),
     }
+
+    @property
+    def filter_class(self):
+        return import_string(inventor_settings.LISTING_FILTER_CLASS)
 
     def get_sorting_options(self):
         return {
