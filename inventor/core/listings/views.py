@@ -84,11 +84,8 @@ class ListingListView(DisplayListViewMixin, SortingListViewMixin, ListView):
 
     def get_queryset(self):
         queryset = self.filter.qs\
-            .annotate(
-                locality_title=F('locality__title'),
-                favorite_of_users__count=Count('favorite_of_users')
-            )\
-            .prefetch_related('categories', 'groups')
+            .with_annotations()\
+            .with_prefetched()
         return self.sort_queryset(queryset)
 
     def get_whole_queryset(self):
