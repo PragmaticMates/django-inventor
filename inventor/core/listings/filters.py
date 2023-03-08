@@ -9,6 +9,7 @@ from django_select2.forms import ModelSelect2Widget
 from mptt.forms import TreeNodeMultipleChoiceField, TreeNodeChoiceField
 
 from inventor import settings
+from inventor.core.listings.models.listing_types import Exercise
 from pragmatic.filters import SliderFilter
 
 from inventor.core.lexicons.models import Category, Locality
@@ -74,6 +75,7 @@ class ListingFilter(django_filters.FilterSet):
             'locality',
             'price',
             'duration',
+            'difficulty',
             'categories', 'features'
         )
         self.form.fields['locality'].empty_label = _('All localities')
@@ -113,12 +115,14 @@ class ListingFilter(django_filters.FilterSet):
             if not Listing.objects.published().with_price().exists():
                 self.form.fields['price'].widget = HiddenInput()
 
+            # subclass specific filters
+            field_prefix = f'{listing_type.__name__.lower()}__' if inheritance else ''
+
             # Exercise duration
             try:
                 listing_type._meta.get_field('duration')
                 self._meta.fields.append('duration')
                 segment = f'listings.{listing_type.__name__}.duration'
-                field_prefix = f'{listing_type.__name__.lower()}__' if inheritance else ''
 
                 self.filters['duration'] = SliderFilter(
                     label=_('Duration'), min_value=5, max_value=60, step=5, appended_text='min',
@@ -128,6 +132,17 @@ class ListingFilter(django_filters.FilterSet):
                 self.form.fields['duration'] = self.filters['duration'].field
             except FieldDoesNotExist:
                 pass  # do not add duration if it does not exist
+
+            # Exercise difficulty
+            try:
+                listing_type._meta.get_field('difficulty')
+                self._meta.fields.append('difficulty')
+                choices = ([(str(x), str(x)) for x in range(1, Exercise.MAX_DIFFICULTY+1)])
+                self.filters['difficulty'] = django_filters.ChoiceFilter(
+                    field_name=f'{field_prefix}difficulty', choices=choices)
+                self.form.fields['difficulty'] = self.filters['difficulty'].field
+            except FieldDoesNotExist:
+                pass  # do not add difficulty if it does not exist
         else:
             self.form.fields['categories'].queryset = Category.objects.all()  # use this with TreeNodeMultipleChoiceField only
 

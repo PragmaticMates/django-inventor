@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, F, Count
 from model_utils.managers import InheritanceQuerySet
 
 
@@ -59,6 +59,15 @@ class ListingQuerySet(InheritanceQuerySet):
             Q(title_i18n__unaccent__icontains=keyword) |
             Q(description_i18n__unaccent__icontains=keyword)
         )
+
+    def with_annotations(self):
+        return self.annotate(
+            locality_title=F('locality__title'),
+            favorite_of_users__count=Count('favorite_of_users')
+        )
+
+    def with_prefetched(self):
+        return self.prefetch_related('categories', 'groups')
 
     def select_subclasses(self, *subclasses):
         if not subclasses:

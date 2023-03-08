@@ -149,8 +149,9 @@ class Training(Listing):
 
 
 class Exercise(Listing):
+    MAX_DIFFICULTY = 10
     section = _('health & body')
-    difficulty = models.PositiveSmallIntegerField(_('difficulty'), blank=True, null=True, default=None, validators=[MaxValueValidator(10)])
+    difficulty = models.PositiveSmallIntegerField(_('difficulty'), blank=True, null=True, default=None, validators=[MaxValueValidator(MAX_DIFFICULTY)])
     duration = models.PositiveSmallIntegerField(_('duration'), help_text='min', blank=True, null=True, default=None)
 
     class Meta:
