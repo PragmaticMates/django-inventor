@@ -47,11 +47,18 @@ def seo(context):
     # image
     image = s.get('image', None)
     if image and isinstance(image, ImageFieldFile):
-        s.update({
-            'image': image.url,
-            'image_width': image.width,
-            'image_height': image.height
-        })
+        try:
+            s.update({
+                'image': image.url,
+                'image_width': image.width,
+                'image_height': image.height
+            })
+        except FileNotFoundError:
+            s.update({
+                'image': None,
+                'image_width': None,
+                'image_height': None
+            })
     elif not image and getattr(settings, 'PAGE_IMAGE', None):
         s.update({
             'image': settings.PAGE_IMAGE,
