@@ -1,7 +1,9 @@
 {% if modal_title %}
     <div class="modal-header">
         <h5 class="modal-title">{{ modal_title|safe }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="{{ modal_id|default:'modal' }}" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 {% endif %}
 
@@ -16,7 +18,7 @@
 {% if modal_close or modal_submit %}
     <div class="modal-footer">
         {% if modal_close %}
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="{{ modal_id|default:'modal' }}">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="{{ modal_id|default:'modal' }}">Close</button>
         {% endif %}
         {% if modal_submit %}
             <button type="submit" class="btn btn-primary btn-lg btn-long submit-btn">{{ modal_submit }}</button>
