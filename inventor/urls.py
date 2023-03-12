@@ -15,6 +15,7 @@ urlpatterns = (
     path(pgettext_lazy('url', 'partners/'), PartnerListView.as_view(), name='partners'),
     path(pgettext_lazy('url', 'accounts/'), include('inventor.core.accounts.urls', namespace='accounts')),
     path(pgettext_lazy('url', 'bookings/'), include('inventor.core.bookings.urls', namespace='bookings')),
+    path(pgettext_lazy('url', 'lists/'), include('inventor.core.lists.urls', namespace='lists')),
     path(pgettext_lazy('url', 'manager/'), include('inventor.manager.urls', namespace='manager')),
 )
 

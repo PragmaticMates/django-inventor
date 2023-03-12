@@ -1,7 +1,7 @@
 from django.urls import path
 from django.utils.translation import pgettext_lazy
 
-from inventor.core.lists.views import ListFormView
+from inventor.core.lists.views import AddToListView
 from inventor import settings as inventor_settings
 from inventor.core.listings.models.general import Listing
 from inventor.core.listings.views import ListingListView, ListingDetailView, ListingSwitchFavoriteView, ListingFavoritesView, \
@@ -29,7 +29,6 @@ for index, listing_type in enumerate(Listing.__subclasses__()):
 
 # listing detail
 urlpatterns.append(path(pgettext_lazy('url', '<str:slug>/'), ListingDetailView.as_view(), name='listing_detail'))
-urlpatterns.append(path(pgettext_lazy('url', '<str:slug>/lists'), ListFormView.as_view(), name='lists_form'))
 
 # favorites
 urlpatterns.append(path(pgettext_lazy('url', 'listings/<str:slug>/favorite/'), ListingSwitchFavoriteView.as_view(), name='listing_favorite_switch'))
