@@ -1,6 +1,6 @@
 from bootstrap_modal_forms.generic import BSModalUpdateView, BSModalFormView
+from bootstrap_modal_forms.utils import is_ajax
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.views.generic.detail import SingleObjectMixin
 from inventor.core.listings.models.general import Listing
 
@@ -31,5 +31,10 @@ class AddToListView(LoginRequiredMixin, SingleObjectMixin, BSModalFormView):
         })
         return form_kwargs
 
+    def get_success_url(self):
+        return self.object.get_absolute_url()
+
     def form_valid(self, form):
-        return redirect(self.object.get_absolute_url())
+        if not is_ajax(self.request.META):
+            form.save()
+        return super().form_valid(form)

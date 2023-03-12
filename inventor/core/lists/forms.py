@@ -56,16 +56,23 @@ class ListForm(BSModalForm):
             raise ValidationError(_('List with such title already exists'))
         return new_list_title
 
-    def save(self, *args, **kwargs):
-        print('Save')
+    def save(self):
+        # existing lists
         # user_lists = self.user.list_set.all()
         lists = self.cleaned_data['lists']
 
-        self.listing.lists.remove()
-        self.listing.lists.add(lists)
+        # remove previous lists
+        if self.listing.lists.exists():
+            self.listing.lists.remove(*list(self.listing.lists.all().values_list('id', flat=True)))
 
+        if lists.count() > 0:
+            self.listing.lists.add(*list(lists.values_list('id', flat=True)))
+
+        # new lists
         new_list_title = self.cleaned_data.get('new_list_title')
 
         if new_list_title not in EMPTY_VALUES:
-            new_list = List.objects.get_or_create(user=self.user, title=new_list_title)
-            self.listing.lists.add(new_list)
+            new_list, created = List.objects.get_or_create(user=self.user, title=new_list_title)
+            self.listing.lists.add(new_list.id)
+
+        self.user.list_set.filter(listings__isnull=True).delete()
