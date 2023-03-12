@@ -239,11 +239,18 @@ for model in get_listing_types_classes():
 
 
 @admin.register(Group)
-class GroupAdmin(ActiveLanguageMixin, admin.ModelAdmin):
+class GroupAdmin(admin.ModelAdmin):
     search_fields = ['title', 'description']
-    list_display = ('title', 'slug', 'description', 'list_of_listings')
+    list_display = ('title', 'slug', 'description', 'list_of_listings', 'weight')
     # autocomplete_fields = ['listings']  # An admin for model "Listing" has to be registered
+    list_editable = ['weight']
     filter_horizontal = ['listings']
+
+    fieldsets = [
+        (_('Definition'), {'fields': ('title_i18n', 'slug_i18n', 'description_i18n',)}),
+        (_('Media'), {'fields': ('image', 'banner', 'video_url')}),
+        (_('Management'), {'fields': ('listings', 'weight')}),
+    ]
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('listings')
