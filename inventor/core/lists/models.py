@@ -22,4 +22,4 @@ class List(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('lists:list_detail', args=(self.id,))
+        return reverse('inventor:lists:list_detail', args=(self.id,))

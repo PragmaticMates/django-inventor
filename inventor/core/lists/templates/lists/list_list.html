@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% load i18n static pragmatic_tags carousels %}
+
+{% block main_class %}bg-gray-100{% endblock %}
+
+{% block top_full_width %}
+    <div class="top-full-width container-fluid d-flex">
+        {% if request.user.is_authenticated %}
+            <div class="row py-5 flex-grow-1">
+                <div class="col text-center flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+                    <h1 class="text-uppercase text-white mb-3">{% trans 'My lists' %}</h1>
+{#                    <h5 class="font-weight-light text-white mb-4">#}
+{#                        {% trans 'Joga videá a vedené meditácie len za 20€/mesiac.' %}#}
+{#                    </h5>#}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container px-5 pt-5">
+        {% for list in object_list %}
+            <div class="row pb-5">
+                <h4 class="col-12">{{ list }}</h4>
+                {% for object in list.listings.all %}
+                    <div class="col-md-6 col-lg-6 col-xl-4 mb-4">
+                        {% include 'listings/widgets/listing_item.html' %}
+                    </div>
+                {% empty %}
+                    <div class="col-12 text-center">{% trans 'No data to display' %}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

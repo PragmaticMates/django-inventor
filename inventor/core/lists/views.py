@@ -1,10 +1,11 @@
-from bootstrap_modal_forms.generic import BSModalUpdateView, BSModalFormView
+from bootstrap_modal_forms.generic import BSModalFormView
 from bootstrap_modal_forms.utils import is_ajax
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 from inventor.core.listings.models.general import Listing
-
 from inventor.core.lists.forms import ListForm
+from inventor.core.lists.models import List
 
 
 class AddToListView(LoginRequiredMixin, SingleObjectMixin, BSModalFormView):
@@ -38,3 +39,10 @@ class AddToListView(LoginRequiredMixin, SingleObjectMixin, BSModalFormView):
         if not is_ajax(self.request.META):
             form.save()
         return super().form_valid(form)
+
+
+class MyListsView(LoginRequiredMixin, ListView):
+    model = List
+
+    def get_queryset(self):
+        return self.request.user.list_set.all()
