@@ -30,7 +30,7 @@ class ListForm(BSModalForm):
 
         if user_lists.exists():
             self.fields['lists'].queryset = user.list_set.all()
-            self.fields['lists'].initial = listing.list_set.all()
+            self.fields['lists'].initial = listing.lists.all()
         else:
             self.modal_message = _("You don't have any list yet. Create a new one.'")
             self.fields['lists'].widget = HiddenInput()
