@@ -15,7 +15,7 @@ class ListForm(BSModalForm):
     modal_title = _('Add to list')
     modal_submit = _('Submit')
     modal_message = _('Choose from existing lists or create a new one:')
-    lists = forms.ModelMultipleChoiceField(queryset=List.objects.all(), widget=forms.CheckboxSelectMultiple)
+    lists = forms.ModelMultipleChoiceField(queryset=List.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
     new_list_title = forms.CharField(label=_('New list'), required=False)
 
     def __init__(self, user, listing, *args, **kwargs):
