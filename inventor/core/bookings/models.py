@@ -3,7 +3,10 @@ from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator, EMPTY_VALUES
 from django.db import transaction
 from django.template.defaultfilters import date
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _, override as override_language
+
+from inventor.core.bookings.querysets import BookingQuerySet
 from pragmatic.managers import EmailManager
 
 from inventor import settings as inventor_settings
@@ -47,7 +50,7 @@ class Booking(models.Model):
 
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
-    objects = ListingQuerySet.as_manager()
+    objects = BookingQuerySet.as_manager()
 
     class Meta:
         verbose_name = _('booking')
@@ -75,13 +78,24 @@ class Booking(models.Model):
 
         return super().save(*args, **kwargs)
 
+    def get_date_display(self):
+        book_from = self.get_book_from_display()
+        book_to = self.get_book_from_display()
+
+        if book_from != book_to:
+            return f'{book_from} - {book_to}'
+
+        return book_from
+
     def get_book_from_display(self):
         # TODO: check booking date settings of listing (or type)
-        return date(self.book_from, settings.DATE_FORMAT)
+        current_tz = timezone.get_current_timezone()
+        return date(self.book_from.astimezone(current_tz), settings.DATE_FORMAT)
 
     def get_book_to_display(self):
         # TODO: check booking date settings of listing (or type)
-        return date(self.book_to, settings.DATE_FORMAT)
+        current_tz = timezone.get_current_timezone()
+        return date(self.book_to.astimezone(current_tz), settings.DATE_FORMAT)
 
     def send_request(self):
         # send message to owner

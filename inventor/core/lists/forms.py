@@ -15,7 +15,7 @@ class ListForm(BSModalForm):
     modal_title = _('Add to list')
     modal_submit = _('Submit')
     modal_message = _('Choose from existing lists or create a new one:')
-    lists = forms.ModelMultipleChoiceField(queryset=List.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
+    lists = forms.ModelMultipleChoiceField(label=_('My lists'), queryset=List.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
     new_list_title = forms.CharField(label=_('New list'), required=False)
 
     def __init__(self, user, listing, *args, **kwargs):
@@ -29,7 +29,7 @@ class ListForm(BSModalForm):
         user_lists = user.list_set.all()
 
         if user_lists.exists():
-            self.fields['lists'].queryset = user.list_set.all()
+            self.fields['lists'].queryset = user_lists
             self.fields['lists'].initial = listing.lists.all()
         else:
             self.modal_message = _("You don't have any list yet. Create a new one.'")
