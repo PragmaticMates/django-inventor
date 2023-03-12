@@ -352,6 +352,8 @@ class Group(SlugMixin, models.Model):
         blank=True
     )
 
+    weight = models.PositiveSmallIntegerField(_('weight'), help_text=_(u'ordering'), db_index=True,
+        blank=True, null=True, default=0)
     video_url = models.URLField(_('video URL'), max_length=300, blank=True)
     listings = models.ManyToManyField(to=Listing, verbose_name=_('listings'), blank=True, related_name='groups')
     i18n = TranslationField(fields=('slug', 'title', 'description',))
@@ -359,7 +361,7 @@ class Group(SlugMixin, models.Model):
     class Meta:
         verbose_name = _('group')
         verbose_name_plural = _('groups')
-        ordering = ('title',)
+        ordering = ('weight', 'title',)
         indexes = [GinIndex(fields=["i18n"]), ]
 
     def __str__(self):
