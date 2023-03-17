@@ -72,6 +72,12 @@ def inventor_partners(**kwargs):
 
 
 @register.simple_tag
+def inventor_plans(**kwargs):
+    from inventor.core.subscriptions.models import Plan
+    return Plan.objects.all()
+
+
+@register.simple_tag
 def inventor_stats(stat):
     if stat == 'approved_files':
         return File.objects.filter(folder__name='approved').count()  # TODO: move to settings
