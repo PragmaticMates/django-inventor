@@ -35,6 +35,9 @@ def inventor_listings(context, proxy='all', listing_type=None, limit=None):
     if proxy == 'all':
         listings = listings.order_by('-promoted', '-rank', '-created')
 
+    if proxy == 'newest':
+        listings = listings.order_by('-created')
+
     if proxy == 'recommended':
         top_listings = listings \
             .filter(favorite_of_users__count__gt=0)\
