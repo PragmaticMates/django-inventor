@@ -32,7 +32,7 @@ class ListForm(BSModalForm):
             self.fields['lists'].queryset = user_lists
             self.fields['lists'].initial = listing.lists.all()
         else:
-            self.modal_message = _("You don't have any list yet. Create a new one.'")
+            self.modal_message = _("You don't have any list yet. Create a new one.")
             self.fields['lists'].widget = HiddenInput()
             self.fields['new_list_title'].required = True
 

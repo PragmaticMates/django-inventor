@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-29 18:26+0100\n"
-"PO-Revision-Date: 2021-12-29 18:26+0058\n"
-"Last-Translator: b'  <erik@pragmaticmates.com>'\n"
+"POT-Creation-Date: 2023-04-09 12:17+0200\n"
+"PO-Revision-Date: 2023-04-09 12:17+0058\n"
+"Last-Translator: b'Erik PRAGMATIC <erik@pragmaticmates.com>'\n"
 "Language-Team: \n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -368,8 +368,8 @@ msgid "Personal info"
 msgstr "Osobné informácie"
 
 #: core/accounts/admin.py:20
-#: core/listings/templates/listings/listing_detail.html:99
-#: core/listings/templates/listings/listing_detail.html:228
+#: core/listings/templates/listings/listing_detail.html:93
+#: core/listings/templates/listings/listing_detail.html:221
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -408,7 +408,8 @@ msgid "Preferred language"
 msgstr "Preferovaný jazyk"
 
 #: core/accounts/forms.py:160 core/accounts/forms.py:226
-#: manager/listings/forms.py:30 manager/listings/forms.py:60
+#: core/lists/forms.py:16 manager/listings/forms.py:39
+#: manager/listings/forms.py:63
 msgid "Submit"
 msgstr "Potvrdiť"
 
@@ -433,7 +434,7 @@ msgid "last name"
 msgstr "priezvisko"
 
 #: core/accounts/forms.py:235 core/accounts/models.py:34
-#: core/bookings/models.py:45 core/listings/models/general.py:94
+#: core/bookings/models.py:48 core/listings/models/general.py:94
 msgid "phone"
 msgstr "telefón"
 
@@ -524,7 +525,7 @@ msgstr "muž"
 msgid "female"
 msgstr "žena"
 
-#: core/accounts/models.py:33 core/bookings/models.py:46
+#: core/accounts/models.py:33 core/bookings/models.py:49
 #: core/listings/models/general.py:95
 msgid "email"
 msgstr "email"
@@ -589,7 +590,8 @@ msgstr "Zdieľanie na sociálnych sieťach"
 msgid "favorite listings"
 msgstr "obľúbené položky"
 
-#: core/accounts/models.py:88 core/subscriptions/models.py:172
+#: core/accounts/models.py:88 core/lists/models.py:10
+#: core/subscriptions/models.py:172
 msgid "user"
 msgstr "užívateľ"
 
@@ -606,12 +608,8 @@ msgstr "Nástenka"
 msgid "My dashboard"
 msgstr "Moja nástenka"
 
-#: core/accounts/templates/accounts/user_dashboard.html:24
-msgid "Beat a challenge"
-msgstr "Zdolať výzvu"
-
 #: core/accounts/templates/accounts/user_profile_form.html:5
-#: manager/templates/manager/layout/header.html:95
+#: manager/templates/manager/layout/header.html:97
 msgid "Profile"
 msgstr "Profil"
 
@@ -661,7 +659,7 @@ msgstr "Nemôžete zmazať svoj vlastný účet"
 msgid "User successfully deleted"
 msgstr "Užívateľ úspešne zmazaný"
 
-#: core/bookings/admin.py:21
+#: core/bookings/admin.py:22
 msgid "Booking"
 msgstr "Rezervácia"
 
@@ -758,94 +756,93 @@ msgstr "minimálny počet osôb"
 msgid "capacity"
 msgstr "kapacita"
 
-#: core/bookings/models.py:24
+#: core/bookings/models.py:27
 msgid "Awaiting approval"
 msgstr "Čaká sa schválenie"
 
-#: core/bookings/models.py:25
+#: core/bookings/models.py:28
 msgid "Pending payment"
 msgstr "Čaká sa na úhradu"
 
-#: core/bookings/models.py:26
+#: core/bookings/models.py:29
 msgid "Approved"
 msgstr "Schválené"
 
-#: core/bookings/models.py:27
+#: core/bookings/models.py:30
 msgid "Cancelled"
 msgstr "Zrušené"
 
-#: core/bookings/models.py:28
+#: core/bookings/models.py:31
 msgid "No-show"
 msgstr "Nedorazil"
 
-#: core/bookings/models.py:29
+#: core/bookings/models.py:32
 msgid "Completed"
 msgstr "Dokončené"
 
-#: core/bookings/models.py:31
+#: core/bookings/models.py:34
 msgid "status"
 msgstr "stav"
 
-#: core/bookings/models.py:32
+#: core/bookings/models.py:35
 msgid "traveler"
 msgstr "cestovateľ"
 
-#: core/bookings/models.py:34 core/listings/models/general.py:114
+#: core/bookings/models.py:37 core/listings/models/general.py:114
 msgid "listing"
 msgstr "položka"
 
-#: core/bookings/models.py:35
+#: core/bookings/models.py:38
 msgid "hash key"
 msgstr "hash kľúč"
 
-#: core/bookings/models.py:36
+#: core/bookings/models.py:39
 msgid "book from"
 msgstr "rezervácia od"
 
-#: core/bookings/models.py:37
+#: core/bookings/models.py:40
 msgid "book to"
 msgstr "rezervácia do"
 
-#: core/bookings/models.py:38
+#: core/bookings/models.py:41
 msgid "number of persons"
 msgstr "počet osôb"
 
-#: core/bookings/models.py:39 core/subscriptions/models.py:102
+#: core/bookings/models.py:42 core/subscriptions/models.py:102
 msgid "price"
 msgstr "cena"
 
-#: core/bookings/models.py:41
+#: core/bookings/models.py:44
 msgid "message"
 msgstr "správa"
 
-#: core/bookings/models.py:44 core/listings/models/general.py:93
+#: core/bookings/models.py:47 core/listings/models/general.py:93
 msgid "person"
 msgstr "osoba"
 
-#: core/bookings/models.py:48 core/faqs/models.py:10
+#: core/bookings/models.py:51 core/faqs/models.py:10
 #: core/listings/models/general.py:108 core/listings/models/general.py:299
 #: core/partners/models.py:19 core/subscriptions/models.py:37
 #: core/subscriptions/models.py:109
 msgid "created"
 msgstr "vytvorené"
 
-#: core/bookings/models.py:49 core/faqs/models.py:11
+#: core/bookings/models.py:52 core/faqs/models.py:11
 #: core/listings/models/general.py:109 core/listings/models/general.py:300
 #: core/partners/models.py:20 core/subscriptions/models.py:38
 #: core/subscriptions/models.py:110 core/subscriptions/models.py:181
 msgid "modified"
 msgstr "upravené"
 
-#: core/bookings/models.py:53
+#: core/bookings/models.py:56
 msgid "booking"
 msgstr "rezervácia"
 
-#: core/bookings/models.py:54
+#: core/bookings/models.py:57
 msgid "bookings"
 msgstr "rezervácie"
 
-#: core/bookings/models.py:94
-#| msgid "Booking to"
+#: core/bookings/models.py:107
 msgid "Booking request"
 msgstr "Dopyt rezervácie"
 
@@ -858,6 +855,7 @@ msgid "Booking to"
 msgstr "Rezervácia do"
 
 #: core/bookings/templates/bookings/mails/booking_request.html:9
+#: manager/bookings/templates/manager/bookings/widgets/booking.html:26
 msgid "Message"
 msgstr "Správa"
 
@@ -882,8 +880,8 @@ msgstr "často kladená otázka"
 msgid "frequently asked questions"
 msgstr "často kladené otázky"
 
-#: core/lexicons/admin.py:35 core/listings/views.py:32
-#: manager/listings/views.py:32
+#: core/lexicons/admin.py:35 core/listings/views.py:31
+#: manager/listings/views.py:33
 msgid "Title"
 msgstr "Názov"
 
@@ -895,7 +893,7 @@ msgstr "Farba"
 #: core/lexicons/models.py:63 core/lexicons/models.py:80
 #: core/listings/models/general.py:41 core/listings/models/general.py:263
 #: core/listings/models/general.py:278 core/listings/models/general.py:334
-#: core/partners/models.py:8 core/seo/models.py:27
+#: core/lists/models.py:11 core/partners/models.py:8 core/seo/models.py:27
 msgid "title"
 msgstr "názov"
 
@@ -903,7 +901,7 @@ msgstr "názov"
 #: core/lexicons/models.py:82 core/listings/models/general.py:43
 #: core/listings/models/general.py:264 core/listings/models/general.py:279
 #: core/listings/models/general.py:298 core/listings/models/general.py:336
-#: core/partners/models.py:18 core/seo/models.py:28
+#: core/lists/models.py:12 core/partners/models.py:18 core/seo/models.py:28
 #: core/subscriptions/models.py:484
 msgid "description"
 msgstr "opis"
@@ -971,21 +969,21 @@ msgstr "kategoria/<str:slug>/"
 msgid "Convert to {0}"
 msgstr "Konvertovať na {0}"
 
-#: core/listings/admin.py:86 core/listings/filters.py:147
+#: core/listings/admin.py:86 core/listings/filters.py:162
 #: templates/home.html:5
 msgid "Categories"
 msgstr "Kategórie"
 
 #: core/listings/admin.py:91 core/listings/admin.py:99
-#: core/listings/filters.py:21
+#: core/listings/filters.py:22
 msgid "Price"
 msgstr "Cena"
 
-#: core/listings/admin.py:96 core/seo/admin.py:22
+#: core/listings/admin.py:96 core/listings/admin.py:250 core/seo/admin.py:22
 msgid "Definition"
 msgstr "Definícia"
 
-#: core/listings/admin.py:97
+#: core/listings/admin.py:97 core/listings/admin.py:252
 msgid "Management"
 msgstr "Manažment"
 
@@ -994,8 +992,8 @@ msgid "Specification"
 msgstr "Špecifikácia"
 
 #: core/listings/admin.py:100
-#: core/listings/templates/listings/listing_detail.html:96
-#: core/listings/templates/listings/listing_detail.html:208
+#: core/listings/templates/listings/listing_detail.html:90
+#: core/listings/templates/listings/listing_detail.html:201
 msgid "Location"
 msgstr "Poloha"
 
@@ -1020,7 +1018,7 @@ msgstr "Prevýšenie"
 msgid "Specific"
 msgstr "Špecifické"
 
-#: core/listings/admin.py:197 core/listings/filters.py:124
+#: core/listings/admin.py:197 core/listings/filters.py:128
 msgid "Duration"
 msgstr "Trvanie"
 
@@ -1028,27 +1026,31 @@ msgstr "Trvanie"
 msgid "Options"
 msgstr "Možnosti"
 
+#: core/listings/admin.py:251
+msgid "Media"
+msgstr "Médiá"
+
 #: core/listings/apps.py:7
 #: core/listings/templates/listings/listing_columns.html:16
 #: manager/listings/apps.py:8 manager/templates/manager/layout/header.html:16
 msgid "Listings"
 msgstr "Položky"
 
-#: core/listings/filters.py:20
+#: core/listings/filters.py:21
 msgid "Keyword"
 msgstr "Kľúčové slovo"
 
-#: core/listings/filters.py:23
+#: core/listings/filters.py:24
 msgid "Locality"
 msgstr "Lokalita"
 
-#: core/listings/filters.py:79
+#: core/listings/filters.py:81
 msgid "All localities"
 msgstr "Všetky lokality"
 
-#: core/listings/filters.py:158
-#: core/listings/templates/listings/listing_detail.html:88
-#: core/listings/templates/listings/listing_detail.html:167
+#: core/listings/filters.py:174
+#: core/listings/templates/listings/listing_detail.html:82
+#: core/listings/templates/listings/listing_detail.html:160
 msgid "Features"
 msgstr "Výhody"
 
@@ -1127,7 +1129,8 @@ msgstr "webstránka"
 msgid "social networks"
 msgstr "sociálne siete"
 
-#: core/listings/models/general.py:115 core/listings/models/general.py:356
+#: core/listings/models/general.py:115 core/listings/models/general.py:358
+#: core/lists/models.py:13
 msgid "listings"
 msgstr "položky"
 
@@ -1167,11 +1170,19 @@ msgstr "fotografie"
 msgid "video URL"
 msgstr "video URL"
 
-#: core/listings/models/general.py:360
+#: core/listings/models/general.py:356
+msgid "weight"
+msgstr "váha"
+
+#: core/listings/models/general.py:356 core/subscriptions/models.py:21
+msgid "ordering"
+msgstr "zoradenie"
+
+#: core/listings/models/general.py:362
 msgid "group"
 msgstr "skupina"
 
-#: core/listings/models/general.py:361
+#: core/listings/models/general.py:363
 msgid "groups"
 msgstr "skupiny"
 
@@ -1291,7 +1302,7 @@ msgid "sport"
 msgstr "šport"
 
 #: core/listings/models/listing_types.py:110
-#: core/listings/models/listing_types.py:170
+#: core/listings/models/listing_types.py:171
 msgid "distance"
 msgstr "vzdialenosť"
 
@@ -1317,7 +1328,7 @@ msgid "races/"
 msgstr "preteky/"
 
 #: core/listings/models/listing_types.py:140
-#: core/listings/models/listing_types.py:152
+#: core/listings/models/listing_types.py:153
 msgid "health & body"
 msgstr "zdravie & telo"
 
@@ -1334,171 +1345,171 @@ msgctxt "url"
 msgid "trainings/"
 msgstr "treningy/"
 
-#: core/listings/models/listing_types.py:153
+#: core/listings/models/listing_types.py:154
 msgid "difficulty"
 msgstr "náročnosť"
 
-#: core/listings/models/listing_types.py:154 core/subscriptions/models.py:100
+#: core/listings/models/listing_types.py:155 core/subscriptions/models.py:100
 msgid "duration"
 msgstr "trvanie"
 
-#: core/listings/models/listing_types.py:157
+#: core/listings/models/listing_types.py:158
 msgid "exercise"
 msgstr "cvičenie"
 
-#: core/listings/models/listing_types.py:158
+#: core/listings/models/listing_types.py:159
 msgid "exercises"
 msgstr "cvičenia"
 
-#: core/listings/models/listing_types.py:162
+#: core/listings/models/listing_types.py:163
 msgctxt "url"
 msgid "exercises/"
 msgstr "cvicenia/"
 
-#: core/listings/models/listing_types.py:169
+#: core/listings/models/listing_types.py:170
 msgid "tourism"
 msgstr "turizmus"
 
-#: core/listings/models/listing_types.py:173
+#: core/listings/models/listing_types.py:174
 msgid "trip"
 msgstr "výlet"
 
-#: core/listings/models/listing_types.py:174
+#: core/listings/models/listing_types.py:175
 msgid "trips"
 msgstr "výlety"
 
-#: core/listings/models/listing_types.py:178
+#: core/listings/models/listing_types.py:179
 msgctxt "url"
 msgid "trips/"
 msgstr "vylety/"
 
-#: core/listings/models/listing_types.py:182
-#: core/listings/models/listing_types.py:190
+#: core/listings/models/listing_types.py:183
+#: core/listings/models/listing_types.py:191
 msgid "events"
 msgstr "podujatia"
 
-#: core/listings/models/listing_types.py:185
+#: core/listings/models/listing_types.py:186
 msgid "datetime range"
 msgstr "dátumový rozsah"
 
-#: core/listings/models/listing_types.py:189
+#: core/listings/models/listing_types.py:190
 msgid "event"
 msgstr "podujatie"
 
-#: core/listings/models/listing_types.py:194
+#: core/listings/models/listing_types.py:195
 msgctxt "url"
 msgid "events/"
 msgstr "podujatia/"
 
-#: core/listings/models/listing_types.py:198
-#: core/listings/models/listing_types.py:271
+#: core/listings/models/listing_types.py:199
+#: core/listings/models/listing_types.py:272
 msgid "shopping"
 msgstr "nakupovanie"
 
-#: core/listings/models/listing_types.py:201
+#: core/listings/models/listing_types.py:202
 msgid "shop"
 msgstr "obchod"
 
-#: core/listings/models/listing_types.py:202
+#: core/listings/models/listing_types.py:203
 msgid "shops"
 msgstr "obchody"
 
-#: core/listings/models/listing_types.py:206
+#: core/listings/models/listing_types.py:207
 msgctxt "url"
 msgid "shops/"
 msgstr "obchody/"
 
-#: core/listings/models/listing_types.py:210
+#: core/listings/models/listing_types.py:211
 msgid "automotive"
 msgstr "svet automobilov"
 
-#: core/listings/models/listing_types.py:213
 #: core/listings/models/listing_types.py:214
+#: core/listings/models/listing_types.py:215
 msgid "vehicle"
 msgstr "vozidlo"
 
-#: core/listings/models/listing_types.py:218
+#: core/listings/models/listing_types.py:219
 msgctxt "url"
 msgid "vehicles/"
 msgstr "vozidla/"
 
-#: core/listings/models/listing_types.py:222
+#: core/listings/models/listing_types.py:223
 msgid "dating"
 msgstr "zoznamka"
 
-#: core/listings/models/listing_types.py:225
+#: core/listings/models/listing_types.py:226
 msgid "profile"
 msgstr "profil"
 
-#: core/listings/models/listing_types.py:226
+#: core/listings/models/listing_types.py:227
 msgid "profiles"
 msgstr "profily"
 
-#: core/listings/models/listing_types.py:230
+#: core/listings/models/listing_types.py:231
 msgctxt "url"
 msgid "profiles/"
 msgstr "profily/"
 
-#: core/listings/models/listing_types.py:234
+#: core/listings/models/listing_types.py:235
 msgid "work"
 msgstr "práca"
 
-#: core/listings/models/listing_types.py:237
+#: core/listings/models/listing_types.py:238
 msgid "job"
 msgstr "pracovná ponuka"
 
-#: core/listings/models/listing_types.py:238
+#: core/listings/models/listing_types.py:239
 msgid "jobs"
 msgstr "pracovné ponuky"
 
-#: core/listings/models/listing_types.py:242
+#: core/listings/models/listing_types.py:243
 msgctxt "url"
 msgid "jobs/"
 msgstr "pracovne-ponuky/"
 
-#: core/listings/models/listing_types.py:246
+#: core/listings/models/listing_types.py:247
 msgid "education"
 msgstr "vzdelanie"
 
-#: core/listings/models/listing_types.py:249
+#: core/listings/models/listing_types.py:250
 msgid "course"
 msgstr "kurz"
 
-#: core/listings/models/listing_types.py:250
+#: core/listings/models/listing_types.py:251
 msgid "courses"
 msgstr "kurzy"
 
-#: core/listings/models/listing_types.py:254
+#: core/listings/models/listing_types.py:255
 msgctxt "url"
 msgid "courses/"
 msgstr "kurzy/"
 
-#: core/listings/models/listing_types.py:258
+#: core/listings/models/listing_types.py:259
 msgid "flora and fauna"
 msgstr "flóra a fauna"
 
-#: core/listings/models/listing_types.py:262
+#: core/listings/models/listing_types.py:263
 msgid "animal or plant"
 msgstr "zviera alebo rastlina"
 
-#: core/listings/models/listing_types.py:263
+#: core/listings/models/listing_types.py:264
 msgid "animals and plants"
 msgstr "zvieratá a rastliny"
 
-#: core/listings/models/listing_types.py:267
+#: core/listings/models/listing_types.py:268
 msgctxt "url"
 msgid "animals-and-plants/"
 msgstr "zvierata-a-rastliny/"
 
-#: core/listings/models/listing_types.py:274
+#: core/listings/models/listing_types.py:275
 msgid "product"
 msgstr "produkt"
 
-#: core/listings/models/listing_types.py:275
+#: core/listings/models/listing_types.py:276
 msgid "products"
 msgstr "produkty"
 
-#: core/listings/models/listing_types.py:279
+#: core/listings/models/listing_types.py:280
 msgctxt "url"
 msgid "products/"
 msgstr "produkty/"
@@ -1514,7 +1525,9 @@ msgid "Filter"
 msgstr "Filter"
 
 #: core/listings/templates/listings/listing_columns.html:48
+#: core/lists/templates/lists/list_list.html:31
 #: manager/bookings/templates/manager/bookings/booking_rows.html:45
+#: manager/listings/templates/manager/listings/listing_albums_list.html:40
 #: manager/listings/templates/manager/listings/listing_bookings_list.html:32
 #: manager/listings/templates/manager/listings/listing_columns.html:34
 #: manager/listings/templates/manager/listings/listing_rows.html:33
@@ -1523,56 +1536,61 @@ msgstr "Žiadne údaje na zobrazenie"
 
 #: core/listings/templates/listings/listing_detail.html:47
 #: manager/listings/templates/manager/listings/listing_stats.html:19
-#: manager/listings/templates/manager/listings/widgets/listing_row_item.html:57
+#: manager/listings/templates/manager/listings/widgets/listing_row_item.html:65
 msgid "Seen today"
 msgstr "Dnes videné"
 
-#: core/listings/templates/listings/listing_detail.html:74
-#: core/listings/templates/listings/listing_detail.html:121
+#: core/listings/templates/listings/listing_detail.html:47
+#: manager/listings/templates/manager/listings/widgets/listing_row_item.html:65
+msgid "in total"
+msgstr "celkom"
+
+#: core/listings/templates/listings/listing_detail.html:68
+#: core/listings/templates/listings/listing_detail.html:114
 #: manager/listings/templates/manager/listings/layout/listing_top.html:33
 msgid "Gallery"
 msgstr "Galéria"
 
-#: core/listings/templates/listings/listing_detail.html:79
-#: core/listings/templates/listings/listing_detail.html:141
+#: core/listings/templates/listings/listing_detail.html:73
+#: core/listings/templates/listings/listing_detail.html:134
 msgid "Description"
 msgstr "Opis"
 
-#: core/listings/templates/listings/listing_detail.html:84
-#: core/listings/templates/listings/listing_detail.html:152
+#: core/listings/templates/listings/listing_detail.html:78
+#: core/listings/templates/listings/listing_detail.html:145
 msgid "Amenities"
 msgstr "Vybavenie"
 
-#: core/listings/templates/listings/listing_detail.html:92
+#: core/listings/templates/listings/listing_detail.html:86
 msgid "Video"
 msgstr "Video"
 
-#: core/listings/templates/listings/listing_detail.html:102
+#: core/listings/templates/listings/listing_detail.html:96
 #: manager/listings/templates/manager/listings/layout/listing_top.html:38
 msgid "Reviews"
 msgstr "Hodnotenia"
 
-#: core/listings/templates/listings/listing_detail.html:191
+#: core/listings/templates/listings/listing_detail.html:184
 msgid "Videos"
 msgstr "Videá"
 
-#: core/listings/templates/listings/listing_detail.html:200
+#: core/listings/templates/listings/listing_detail.html:193
 msgid "Booking form"
 msgstr "Rezervačný formulár"
 
-#: core/listings/templates/listings/listing_detail.html:215
+#: core/listings/templates/listings/listing_detail.html:208
 msgid "Referencie a poloha v google mapách"
 msgstr ""
 
-#: core/listings/templates/listings/listing_detail.html:244
+#: core/listings/templates/listings/listing_detail.html:237
 msgid "Show more"
 msgstr "Zobraziť viac"
 
-#: core/listings/templates/listings/listing_detail.html:260
+#: core/listings/templates/listings/listing_detail.html:253
 msgid "Social"
 msgstr "Sociálne"
 
-#: core/listings/templates/listings/listing_detail.html:274
+#: core/listings/templates/listings/listing_detail.html:267
 msgid "Reservation via booking.com"
 msgstr "Rezervácia cez booking.com"
 
@@ -1581,50 +1599,55 @@ msgstr "Rezervácia cez booking.com"
 msgid "TOP"
 msgstr "TOP"
 
-#: core/listings/urls.py:14
+#: core/listings/urls.py:15
 msgctxt "url"
 msgid "group/<str:slug>/"
 msgstr "skupina/<str:slug>/"
 
-#: core/listings/urls.py:17 manager/listings/urls.py:14
+#: core/listings/urls.py:16
+msgctxt "url"
+msgid "groups/"
+msgstr "skupiny/"
+
+#: core/listings/urls.py:19 manager/listings/urls.py:14
 msgctxt "url"
 msgid "listings/"
 msgstr "polozky/"
 
-#: core/listings/urls.py:29
+#: core/listings/urls.py:31
 msgctxt "url"
 msgid "<str:slug>/"
 msgstr "<str:slug>/"
 
-#: core/listings/urls.py:32
+#: core/listings/urls.py:34
 msgctxt "url"
 msgid "listings/<str:slug>/favorite/"
 msgstr "polozky/<str:slug>/oblubene/"
 
-#: core/listings/urls.py:33
+#: core/listings/urls.py:35
 msgctxt "url"
 msgid "listings/favorites/"
 msgstr "polozky/oblubene/"
 
-#: core/listings/views.py:27 manager/bookings/views.py:16
-#: manager/listings/views.py:27 manager/listings/views.py:210
+#: core/listings/views.py:26 manager/bookings/views.py:16
+#: manager/listings/views.py:28 manager/listings/views.py:217
 msgid "Newest"
 msgstr "Najnovšie"
 
-#: core/listings/views.py:28 manager/bookings/views.py:17
-#: manager/listings/views.py:28 manager/listings/views.py:211
+#: core/listings/views.py:27 manager/bookings/views.py:17
+#: manager/listings/views.py:29 manager/listings/views.py:218
 msgid "Oldest"
 msgstr "Najstaršie"
 
-#: core/listings/views.py:30 manager/listings/views.py:30
+#: core/listings/views.py:29 manager/listings/views.py:31
 msgid "Price (Low to high)"
 msgstr "Cena (od najlacnejšieho)"
 
-#: core/listings/views.py:31 manager/listings/views.py:31
+#: core/listings/views.py:30 manager/listings/views.py:32
 msgid "Price (High to low)"
 msgstr "Cena (od najdrahšieho)"
 
-#: core/listings/views.py:37 manager/listings/views.py:36
+#: core/listings/views.py:40 manager/listings/views.py:41
 msgid "Promoted"
 msgstr "Propagované"
 
@@ -1635,6 +1658,44 @@ msgstr "Položka odstránená z Vášho obľúbeného zoznamu"
 #: core/listings/views.py:179
 msgid "Listing added into your favorite list"
 msgstr "Položka pridaná do Vášho obľúbeného zoznamu"
+
+#: core/lists/forms.py:15
+msgid "Add to list"
+msgstr "Pridať do zoznamu"
+
+#: core/lists/forms.py:17
+msgid "Choose from existing lists or create a new one:"
+msgstr "Zvoľte z existujúceho zoznamju alebo vytvorte nový:"
+
+#: core/lists/forms.py:18 core/lists/templates/lists/list_list.html:11
+msgid "My lists"
+msgstr "Moje zoznamy"
+
+#: core/lists/forms.py:19
+msgid "New list"
+msgstr "Nový zoznam"
+
+#: core/lists/forms.py:35
+#| msgid "You don't have any list yet. Create a new one.'"
+msgid "You don't have any list yet. Create a new one."
+msgstr "Ešte nemáte žiaden zozname. Vytvorte si nový."
+
+#: core/lists/forms.py:56
+msgid "List with such title already exists"
+msgstr "Zoznam s takýmto názvom už existuje"
+
+#: core/lists/models.py:16
+msgid "list"
+msgstr "zoznam"
+
+#: core/lists/models.py:17
+msgid "lists"
+msgstr "zoznamy"
+
+#: core/lists/urls.py:9
+msgctxt "url"
+msgid "add-to-list/<str:slug>/"
+msgstr "pridat-do-zoznamu/<str:slug>/"
 
 #: core/newsletters/admin.py:40
 #, python-format
@@ -1757,6 +1818,10 @@ msgid ""
 "<a href=\"https://developers.facebook.com/docs/sharing/webmasters/images/\" "
 "target=\"_blank\">Read more</a>."
 msgstr ""
+"Minimálne rozlíšenie: 200 x 200 px. Odporúčané rozlíšenie: 1200 x 630 px "
+"(1.9:1). <a "
+"href=\"https://developers.facebook.com/docs/sharing/webmasters/images/\" "
+"target=\"_blank\">Čítať viac</a>."
 
 #: core/seo/models.py:43 core/seo/models.py:44
 msgid "SEO fields"
@@ -1783,10 +1848,6 @@ msgstr "Odoslať pripomienku"
 #: core/subscriptions/apps.py:11
 msgid "Subscriptions"
 msgstr "Predplatné"
-
-#: core/subscriptions/models.py:21
-msgid "ordering"
-msgstr "zoradenie"
 
 #: core/subscriptions/models.py:21
 msgid "to set order in pricing"
@@ -2034,7 +2095,12 @@ msgctxt "url"
 msgid "<str:slug>/seo/"
 msgstr "<str:slug>/seo/"
 
-#: manager/templates/manager/layout/header.html:102
+#: manager/listings/urls.py:33
+msgctxt "url"
+msgid "albums/<int:pk>/"
+msgstr "albumy/<int:pk>/"
+
+#: manager/templates/manager/layout/header.html:104
 msgid "My orders"
 msgstr "Moje objednávky"
 
@@ -2046,17 +2112,17 @@ msgstr "pouzivatelsky-profil/"
 #: manager/urls.py:10
 msgctxt "url"
 msgid "components-blogs/"
-msgstr ""
+msgstr "komponenty-blogu/"
 
 #: manager/urls.py:11
 msgctxt "url"
 msgid "add-new-post/"
-msgstr ""
+msgstr "pridat-novy-post/"
 
 #: manager/urls.py:12
 msgctxt "url"
 msgid "form-components/"
-msgstr ""
+msgstr "formularove-komponenty/"
 
 #: manager/urls.py:13
 msgctxt "url"
@@ -2089,6 +2155,10 @@ msgstr "Rozumiem"
 msgid "Search"
 msgstr "Hľadať"
 
+#: templates/helpers/filter-vertical.html:20
+msgid "Reset filter"
+msgstr "Obnoviť filter"
+
 #: templates/widgets/subscribe.html:6
 msgid "Join our newsletter"
 msgstr "Prihláste sa na odber noviniek"
@@ -2110,13 +2180,21 @@ msgstr "ucty/"
 
 #: urls.py:18
 msgctxt "url"
+msgid "lists/"
+msgstr "zoznamy/"
+
+#: urls.py:19
+msgctxt "url"
 msgid "manager/"
 msgstr "manazer/"
 
-#: urls.py:23
+#: urls.py:24
 msgctxt "url"
 msgid "subscriptions/"
 msgstr "predplatne/"
+
+#~ msgid "Beat a challenge"
+#~ msgstr "Zdolať výzvu"
 
 #~ msgid "comment"
 #~ msgstr "komentár"
