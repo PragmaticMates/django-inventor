@@ -36,9 +36,13 @@ def inventor_listings(context, proxy='all', listing_type=None, limit=None):
         listings = listings.order_by('-promoted', '-rank', '-created')
 
     if proxy == 'recommended':
-        listings = listings \
+        top_listings = listings \
             .filter(favorite_of_users__count__gt=0)\
-            .order_by('-favorite_of_users__count')
+            .order_by('-favorite_of_users__count')[:5]
+
+        listings = listings \
+            .filter(id__in=top_listings)\
+            .order_by('?')
 
     if proxy == 'not_purchased' and 'commerce' in settings.INSTALLED_APPS:
         from commerce.models import PurchasedItem
