@@ -23,7 +23,7 @@
         {% for list in object_list %}
             <div class="row pb-5">
                 <h4 class="col-12">{{ list }}</h4>
-                {% for object in list.listings.all %}
+                {% for object in list.listings.with_annotations.with_prefetched.select_subclasses %}
                     <div class="col-md-6 col-lg-6 col-xl-4 mb-4">
                         {% include 'listings/widgets/listing_item.html' %}
                     </div>
