@@ -139,7 +139,7 @@ class ListingFilter(django_filters.FilterSet):
                 self._meta.fields.append('difficulty')
                 choices = ([(str(x), str(x)) for x in range(1, Exercise.MAX_DIFFICULTY+1)])
                 self.filters['difficulty'] = django_filters.ChoiceFilter(
-                    field_name=f'{field_prefix}difficulty', choices=choices)
+                    label=_('difficulty'), field_name=f'{field_prefix}difficulty', choices=choices)
                 self.form.fields['difficulty'] = self.filters['difficulty'].field
             except FieldDoesNotExist:
                 pass  # do not add difficulty if it does not exist
