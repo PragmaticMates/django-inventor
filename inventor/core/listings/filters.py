@@ -69,28 +69,39 @@ class ListingFilter(django_filters.FilterSet):
         self.helper = SingleSubmitFormHelper()
         self.helper.form_tag = False
         self.helper.disable_csrf = True
-        self.helper.layout = Layout(
-            'keyword',
+        filters = ['keyword',
             'promoted',
             'locality',
             'price',
             'duration',
             'difficulty',
             'categories', 'features'
-        )
-        self.form.fields['locality'].empty_label = _('All localities')
+        ]
 
-        if not Listing.objects.published().promoted().exists():
-            self.form.fields['promoted'].widget = HiddenInput()
+        for filter in filters:
+            try:
+                getattr(self, f'setup_{filter}_filter')(listing_type, inheritance)
+            except AttributeError:
+                pass
+
+        self.hide_fields_by_settings(listing_type, lexicon)
+
+        self.helper.layout = Layout(*filters)
+
+    def setup_locality_filter(self, listing_type, inheritance):
+        self.form.fields['locality'].empty_label = _('All localities')
 
         if not self.form.fields['locality'].queryset.exists():
             self.form.fields['locality'].widget = HiddenInput()
 
+    def setup_promoted_filter(self, listing_type, inheritance):
+        if not Listing.objects.published().promoted().exists():
+            self.form.fields['promoted'].widget = HiddenInput()
+
+    def setup_categories_filter(self, listing_type, inheritance):
         # categories, localities and features searched by slug
         # self.filters['categories'].field_name = 'categories__slug_i18n'
         self.filters['categories'].method = 'filter_categories'  # search by nested categories as well
-        self.filters['features'].field_name = 'features__slug_i18n'
-        self.filters['features'].conjoined = True  # changed filter logic of features
 
         # by default, show all parent categories in the filter:
         # self.form.fields['categories'].queryset = Category.objects.filter(parent=None)
@@ -106,43 +117,6 @@ class ListingFilter(django_filters.FilterSet):
             if listing_type_categories.exclude(parent=None).exists():
                 self.form.fields['categories'].queryset = listing_type_categories.exclude(parent=None)
 
-            # dynamic price segment based on listing type
-            segment = f'listings.{listing_type.__name__}.price'
-            self.filters['price'].init_segments(segment)
-            self.form.fields['price'] = self.filters['price'].field
-
-            # hide price if not required
-            if not Listing.objects.published().with_price().exists():
-                self.form.fields['price'].widget = HiddenInput()
-
-            # subclass specific filters
-            field_prefix = f'{listing_type.__name__.lower()}__' if inheritance else ''
-
-            # Exercise duration
-            try:
-                listing_type._meta.get_field('duration')
-                self._meta.fields.append('duration')
-                segment = f'listings.{listing_type.__name__}.duration'
-
-                self.filters['duration'] = SliderFilter(
-                    label=_('Duration'), min_value=5, max_value=60, step=5, appended_text='min',
-                    has_range=True, show_inputs=False, queryset_method='published', segment=segment, field_name=f'{field_prefix}duration'
-                )
-                self.filters['duration'].init_segments(segment)
-                self.form.fields['duration'] = self.filters['duration'].field
-            except FieldDoesNotExist:
-                pass  # do not add duration if it does not exist
-
-            # Exercise difficulty
-            try:
-                listing_type._meta.get_field('difficulty')
-                self._meta.fields.append('difficulty')
-                choices = ([(str(x), str(x)) for x in range(1, Exercise.MAX_DIFFICULTY+1)])
-                self.filters['difficulty'] = django_filters.ChoiceFilter(
-                    label=_('difficulty'), field_name=f'{field_prefix}difficulty', choices=choices)
-                self.form.fields['difficulty'] = self.filters['difficulty'].field
-            except FieldDoesNotExist:
-                pass  # do not add difficulty if it does not exist
         else:
             self.form.fields['categories'].queryset = Category.objects.all()  # use this with TreeNodeMultipleChoiceField only
 
@@ -167,6 +141,10 @@ class ListingFilter(django_filters.FilterSet):
                 level_indicator=''
             )
 
+    def setup_features_filter(self, listing_type, inheritance):
+        self.filters['features'].field_name = 'features__slug_i18n'
+        self.filters['features'].conjoined = True  # changed filter logic of features
+
         if not self.form.fields['features'].queryset.exists():
             self.form.fields['features'].widget = HiddenInput()
         else:
@@ -177,7 +155,52 @@ class ListingFilter(django_filters.FilterSet):
                 widget=forms.CheckboxSelectMultiple
             )
 
-        self.hide_fields_by_settings(listing_type, lexicon)
+    def setup_price_filter(self, listing_type, inheritance):
+        if listing_type:
+            # dynamic price segment based on listing type
+            segment = f'listings.{listing_type.__name__}.price'
+            self.filters['price'].init_segments(segment)
+            self.form.fields['price'] = self.filters['price'].field
+
+            # hide price if not required
+            if not Listing.objects.published().with_price().exists():
+                self.form.fields['price'].widget = HiddenInput()
+
+    def setup_duration_filter(self, listing_type, inheritance):
+        if listing_type:
+            # subclass specific filters
+            field_prefix = f'{listing_type.__name__.lower()}__' if inheritance else ''
+
+            # Exercise duration
+            try:
+                listing_type._meta.get_field('duration')
+                self._meta.fields.append('duration')
+                segment = f'listings.{listing_type.__name__}.duration'
+
+                self.filters['duration'] = SliderFilter(
+                    label=_('Duration'), min_value=5, max_value=60, step=5, appended_text='min',
+                    has_range=True, show_inputs=False, queryset_method='published', segment=segment, field_name=f'{field_prefix}duration'
+                )
+                self.filters['duration'].init_segments(segment)
+                self.form.fields['duration'] = self.filters['duration'].field
+            except FieldDoesNotExist:
+                pass  # do not add duration if it does not exist
+
+    def setup_difficulty_filter(self, listing_type, inheritance):
+        # subclass specific filters
+        field_prefix = f'{listing_type.__name__.lower()}__' if inheritance else ''
+
+        if listing_type:
+            # Exercise difficulty
+            try:
+                listing_type._meta.get_field('difficulty')
+                self._meta.fields.append('difficulty')
+                choices = ([(str(x), str(x)) for x in range(1, Exercise.MAX_DIFFICULTY+1)])
+                self.filters['difficulty'] = django_filters.ChoiceFilter(
+                    label=_('difficulty'), field_name=f'{field_prefix}difficulty', choices=choices)
+                self.form.fields['difficulty'] = self.filters['difficulty'].field
+            except FieldDoesNotExist:
+                pass  # do not add difficulty if it does not exist
 
     def get_widget_by_settings(self, field):
         widgets = settings.LISTING_FILTER.get('widgets', {})

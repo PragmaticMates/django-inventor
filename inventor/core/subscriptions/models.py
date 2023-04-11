@@ -123,8 +123,8 @@ class Pricing(models.Model):
 
     def get_duration_display(self):
         period_localize = dict(self.PERIODS_PLURALIZE).get(self.period)
-        preiod_display = period_localize[0] if self.duration == 1 else period_localize[1]  # TODO: i18n
-        return f'{self.duration} {preiod_display}'
+        period_display = period_localize[0] if self.duration == 1 else period_localize[1]  # TODO: i18n
+        return f'{self.duration} {period_display}' if self.duration != 1 else period_display
 
     def get_price_display(self):
         return f'{self.price} {settings.INVENTOR_CURRENCY}'
