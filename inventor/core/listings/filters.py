@@ -69,14 +69,8 @@ class ListingFilter(django_filters.FilterSet):
         self.helper = SingleSubmitFormHelper()
         self.helper.form_tag = False
         self.helper.disable_csrf = True
-        filters = ['keyword',
-            'promoted',
-            'locality',
-            'price',
-            'duration',
-            'difficulty',
-            'categories', 'features'
-        ]
+
+        filters = self.get_listing_filters()
 
         for filter in filters:
             try:
@@ -87,6 +81,18 @@ class ListingFilter(django_filters.FilterSet):
         self.hide_fields_by_settings(listing_type, lexicon)
 
         self.helper.layout = Layout(*filters)
+
+    def get_listing_filters(self):
+        return [
+            'keyword',
+            'promoted',
+            'locality',
+            'price',
+            'duration',
+            'difficulty',
+            'categories',
+            'features'
+        ]
 
     def setup_locality_filter(self, listing_type, inheritance):
         self.form.fields['locality'].empty_label = _('All localities')
