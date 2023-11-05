@@ -69,6 +69,9 @@ class ListingQuerySet(InheritanceQuerySet):
     def with_prefetched(self):
         return self.prefetch_related('categories', 'groups')
 
+    def order_by_rank(self):
+        return self.order_by('-rank')
+
     def select_subclasses(self, *subclasses):
         if not subclasses:
             from inventor.helpers import get_listing_types_classes
