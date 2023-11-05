@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% if modal_title %}
     <div class="modal-header">
         <h5 class="modal-title">{{ modal_title|safe }}</h5>
@@ -18,7 +20,7 @@
 {% if modal_close or modal_submit %}
     <div class="modal-footer">
         {% if modal_close %}
-            <button type="button" class="btn btn-secondary" data-dismiss="{{ modal_id|default:'modal' }}">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="{{ modal_id|default:'modal' }}">{% trans 'Close' %}</button>
         {% endif %}
         {% if modal_submit %}
             <button type="submit" class="btn btn-primary">{{ modal_submit }}</button>
