@@ -1,8 +1,14 @@
 from bootstrap_modal_forms.generic import BSModalFormView
 from bootstrap_modal_forms.utils import is_ajax
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
-from django.views.generic.detail import SingleObjectMixin
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import ListView, DeleteView
+from django.views.generic.detail import SingleObjectMixin, DetailView
+from pragmatic.mixins import DeleteObjectMixin
+
 from inventor.core.listings.models.general import Listing
 from inventor.core.lists.forms import ListForm
 from inventor.core.lists.models import List
@@ -46,3 +52,19 @@ class MyListsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return self.request.user.list_set.all()
+
+
+# class MyListDeleteView(LoginRequiredMixin, DeleteObjectMixin, DeleteView):
+class MyListDeleteView(LoginRequiredMixin, DetailView):
+    model = List
+    success_url = reverse_lazy('inventor:lists:list_list')
+    # template_name = 'confirm_delete.html'
+
+    def get_queryset(self):
+        return self.request.user.list_set.all()
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        messages.success(request, _('List successfully deleted'))
+        return redirect(self.success_url)
