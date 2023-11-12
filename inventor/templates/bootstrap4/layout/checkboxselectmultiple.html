@@ -1,101 +1,104 @@
 {% load crispy_forms_filters inventor %}
 {% load l10n %}
 
-{% get_choices_with_parents field=field.field as choices_with_parents %}
-{% if choices_with_parents != None %}
-<div class="{% if field_class %} {{ field_class }}{% endif %} field-{{ field.name }}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
-    {% for choice in field.field.choices %}
-    {% with choice.0|stringformat:"s" as choice_str %}
-    {% if choices_with_parents|has_choice_children:choice.0 %}
-        <div class="{% if use_custom_control %}custom-control custom-checkbox{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">
-            <input type="checkbox" class="{% if use_custom_control %}custom-control-input{% else %}form-check-input{% endif %}{% if field.errors %} is-invalid{% endif %}"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|default_if_none:""|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {% if field.field.disabled %}disabled="true"{% endif %} {{ field.field.widget.attrs|flatatt }}>
-            <label class="{%if use_custom_control%}custom-control-label{% else %}form-check-label{% endif %}" for="id_{{ field.html_name }}_{{ forloop.counter }}">
-                {{ choice.1|unlocalize }}
-                <button class="btn btn-link collapsed p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse-{{ choice_str }}" aria-expanded="false" aria-controls="collapse-{{ choice_str }}">
-                </button>
-            </label>
+{% include 'bootstrap4/layout/checkboxselectmultiple_original.html' %}
 
-            {% if field.errors and forloop.last and not inline_class %}
-                {% include 'bootstrap4/layout/field_errors_block.html' %}
-                {% endif %}
-        </div>
-        <div id="collapse-{{ choice_str }}" class="collapse pl-3" aria-labelledby="heading-{{ choice_str }}">
-    {% else %}
-        <div class="{% if use_custom_control %}custom-control custom-checkbox{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">
-            <input type="checkbox" class="{% if use_custom_control %}custom-control-input{% else %}form-check-input{% endif %}{% if field.errors %} is-invalid{% endif %}"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|default_if_none:""|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {% if field.field.disabled %}disabled="true"{% endif %} {{ field.field.widget.attrs|flatatt }}>
-            <label class="{%if use_custom_control%}custom-control-label{% else %}form-check-label{% endif %}" for="id_{{ field.html_name }}_{{ forloop.counter }}">
-                {{ choice.1|unlocalize }}
-            </label>
-            {% if field.errors and forloop.last and not inline_class %}
-                {% include 'bootstrap4/layout/field_errors_block.html' %}
-                {% endif %}
-        </div>
-        {% if choices_with_parents|is_last_child:choice.0 %}
-            </div>
-        {% endif %}
-    {% endif %}
-    {% endwith %}
-    {% endfor %}
-    {% if field.errors and inline_class %}
-    <div class="w-100 {%if use_custom_control%}custom-control custom-checkbox{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">
-         the following input is only meant to allow boostrap to render the error message as it has to be after an invalid input. As the input has no name, no data will be sent.
-        <input type="checkbox" class="custom-control-input {% if field.errors %}is-invalid{%endif%}">
-        {% include 'bootstrap4/layout/field_errors_block.html' %}
-    </div>
-    {% endif %}
-
-    {% include 'bootstrap4/layout/help_text.html' %}
-</div>
-<script>
-    jQuery(document).ready(function ($) {
-        $('.field-{{ field.name }} input:checked').each(function () {
-            const collapseParents = $(this).closest('.field-{{ field.name }} .collapse');
-
-            if (collapseParents.length && !collapseParents.hasClass('show')) {
-                const collapseId = '#' + collapseParents.attr('id');
-                $(collapseId).collapse('show');
-            }
-        })
-
-        $('.field-{{ field.name }} input:checkbox').each(function () {
-            $(this).change(function () {
-                const collapseParents = $(this).closest('.field-{{ field.name }} .collapse');
-                const toggleBtn = $(this).next().find('[data-toggle="collapse"]');
-
-                if (collapseParents.length) {  // child
-                    const collapseId = '#' + collapseParents.attr('id');
-                    const wrapper = $('[data-target="' + collapseId + '"]').closest('.custom-checkbox');
-                    const parentCheckbox = wrapper.find('input:checkbox');
-
-                    if ($(collapseId + ' input:checked').length === $(collapseId + ' input').length) {
-                        if (!parentCheckbox.is(":checked")) {
-                            parentCheckbox.prop('checked', true);
-                        }
-                    } else {
-                        if (parentCheckbox.is(":checked")) {
-                            parentCheckbox.prop('checked', false);
-                        }
-                    }
-
-
-                } else if (toggleBtn.length) {  // parent
-                    const target = toggleBtn.attr('data-target');
-
-                    if ($(this).is(":checked")) {
+{#{% get_choices_with_parents field=field.field as choices_with_parents %}#}
+{#{% if choices_with_parents != None %}#}
+{#<div class="{% if field_class %} {{ field_class }}{% endif %} field-{{ field.name }}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>#}
+{#    {% for choice in field.field.choices %}#}
+{#    {% with choice.0|stringformat:"s" as choice_str %}#}
+{##}
+{#    {% if choices_with_parents|has_choice_children:choice.0 %}#}
+{#        <div class="{% if use_custom_control %}custom-control custom-checkbox{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">#}
+{#            <input type="checkbox" class="{% if use_custom_control %}custom-control-input{% else %}form-check-input{% endif %}{% if field.errors %} is-invalid{% endif %}"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|default_if_none:""|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {% if field.field.disabled %}disabled="true"{% endif %} {{ field.field.widget.attrs|flatatt }}>#}
+{#            <label class="{%if use_custom_control%}custom-control-label{% else %}form-check-label{% endif %}" for="id_{{ field.html_name }}_{{ forloop.counter }}">#}
+{#                {{ choice.1|unlocalize }}#}
+{#                <button class="btn btn-link collapsed p-0 dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapse-{{ choice_str }}" aria-expanded="false" aria-controls="collapse-{{ choice_str }}">#}
+{#                </button>#}
+{#            </label>#}
+{##}
+{#            {% if field.errors and forloop.last and not inline_class %}#}
+{#                {% include 'bootstrap4/layout/field_errors_block.html' %}#}
+{#                {% endif %}#}
+{#        </div>#}
+{#        <div id="collapse-{{ choice_str }}" class="collapse pl-3" aria-labelledby="heading-{{ choice_str }}">#}
+{#    {% else %}#}
+{#        <div class="{% if use_custom_control %}custom-control custom-checkbox{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">#}
+{#            <input type="checkbox" class="{% if use_custom_control %}custom-control-input{% else %}form-check-input{% endif %}{% if field.errors %} is-invalid{% endif %}"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|default_if_none:""|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {% if field.field.disabled %}disabled="true"{% endif %} {{ field.field.widget.attrs|flatatt }}>#}
+{#            <label class="{%if use_custom_control%}custom-control-label{% else %}form-check-label{% endif %}" for="id_{{ field.html_name }}_{{ forloop.counter }}">#}
+{#                {{ choice.1|unlocalize }}#}
+{#            </label>#}
+{#            {% if field.errors and forloop.last and not inline_class %}#}
+{#                {% include 'bootstrap4/layout/field_errors_block.html' %}#}
+{#                {% endif %}#}
+{#        </div>#}
+{#        {% if choices_with_parents|is_last_child:choice.0 %}#}
+{#            </div>#}
+{#        {% endif %}#}
+{#    {% endif %}#}
+{#    {% endwith %}#}
+{#    {% endfor %}#}
+{#    {% if field.errors and inline_class %}#}
+{#    <div class="w-100 {%if use_custom_control%}custom-control custom-checkbox{% if inline_class %} custom-control-inline{% endif %}{% else %}form-check{% if inline_class %} form-check-inline{% endif %}{% endif %}">#}
+{#         the following input is only meant to allow boostrap to render the error message as it has to be after an invalid input. As the input has no name, no data will be sent.#}
+{#        <input type="checkbox" class="custom-control-input {% if field.errors %}is-invalid{%endif%}">#}
+{#        {% include 'bootstrap4/layout/field_errors_block.html' %}#}
+{#    </div>#}
+{#    {% endif %}#}
+{##}
+{#    {% include 'bootstrap4/layout/help_text.html' %}#}
+{#</div>#}
+{#<script>#}
+{#    jQuery(document).ready(function ($) {#}
+{#        $('.field-{{ field.name }} input:checked').each(function () {#}
+{#            const collapseParents = $(this).closest('.field-{{ field.name }} .collapse');#}
+{##}
+{#            if (collapseParents.length && !collapseParents.hasClass('show')) {#}
+{#                const collapseId = '#' + collapseParents.attr('id');#}
+{#                $(collapseId).collapse('show');#}
+{#            }#}
+{#        })#}
+{##}
+{#        $('.field-{{ field.name }} input:checkbox').each(function () {#}
+{#            $(this).change(function () {#}
+{#                const collapseParents = $(this).closest('.field-{{ field.name }} .collapse');#}
+{#                const toggleBtn = $(this).next().find('[data-toggle="collapse"]');#}
+{##}
+{#                if (collapseParents.length) {  // child#}
+{#                    const collapseId = '#' + collapseParents.attr('id');#}
+{#                    const wrapper = $('[data-target="' + collapseId + '"]').closest('.custom-checkbox');#}
+{#                    const parentCheckbox = wrapper.find('input:checkbox');#}
+{##}
+{#                    if ($(collapseId + ' input:checked').length === $(collapseId + ' input').length) {#}
+{#                        if (!parentCheckbox.is(":checked")) {#}
+{#                            parentCheckbox.prop('checked', true);#}
+{#                        }#}
+{#                    } else {#}
+{#                        if (parentCheckbox.is(":checked")) {#}
+{#                            parentCheckbox.prop('checked', false);#}
+{#                        }#}
+{#                    }#}
+{##}
+{##}
+{#                } else if (toggleBtn.length) {  // parent#}
+{#                    const target = toggleBtn.attr('data-target');#}
+{##}
+{#                    if ($(this).is(":checked")) {#}
                         {#$(target +' input:checkbox').each(function () {#}
                         {#    $(this).prop('checked', true);#}
                         {#})#}
-                    } else {
-                        $(target +' input:checkbox').each(function () {
-                            $(this).prop('checked', false);
-                        })
-                    }
-                }
-            });
-        });
-
-    });
-</script>
-{% else %}
-    {% include 'bootstrap4/layout/checkboxselectmultiple_original.html' %}
-{% endif %}
+{#                    } else {#}
+{#                        $(target +' input:checkbox').each(function () {#}
+{#                            $(this).prop('checked', false);#}
+{#                        })#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{#        });#}
+{##}
+{#    });#}
+{#</script>#}
+{#{% else %}#}
+{#    {% include 'bootstrap4/layout/checkboxselectmultiple_original.html' %}#}
+{#{% endif %}#}
