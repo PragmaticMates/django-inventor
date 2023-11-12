@@ -1,6 +1,3 @@
-default_app_config = 'inventor.contrib.sitemaps.apps.SiteMapsConfig'
-
-
 from urllib.parse import urlencode
 from urllib.request import urlopen
 

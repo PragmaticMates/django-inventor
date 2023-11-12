@@ -7,7 +7,7 @@ from django.contrib.gis.db.models import Avg
 from django.contrib.postgres.indexes import GinIndex
 from django.urls import reverse
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_comments import get_model as get_comment_model
 from internationalflavor.countries import CountryField
 from modeltrans.fields import TranslationField

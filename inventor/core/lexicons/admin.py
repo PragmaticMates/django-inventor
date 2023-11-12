@@ -3,9 +3,9 @@ from django.db import models
 from django.forms import TextInput
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from modeltrans.admin import ActiveLanguageMixin
-from mptt.admin import DraggableMPTTAdmin, TreeRelatedFieldListFilter
+from mptt.admin import DraggableMPTTAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 from inventor.core.lexicons.models import Locality, Category, Feature
 from inventor.helpers import get_listing_types_classes

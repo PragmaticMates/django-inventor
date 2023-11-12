@@ -4,11 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.module_loading import import_string
-from django.utils.translation import ugettext_lazy as _
-from django.views import View
-from django.views.generic import UpdateView, ListView, CreateView, DetailView, DeleteView, TemplateView
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import UpdateView, CreateView, DetailView, DeleteView, TemplateView
 from pragmatic.mixins import LoginPermissionRequiredMixin, DeleteObjectMixin
-# from inventor.core.accounts.filters import UserFilter
 from inventor.core.accounts.forms import UserForm
 from inventor.core.accounts.models import User
 

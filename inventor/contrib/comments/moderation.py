@@ -3,7 +3,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template import loader
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django_comments.moderation import CommentModerator
 
 from icecream import ic

@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _, override as override_language
+from django.utils.translation import gettext_lazy as _, override as override_language
 
 from inventor.core.subscriptions.querysets import PlanQuerySet, UserPlanQuerySet
 from pragmatic.managers import EmailManager

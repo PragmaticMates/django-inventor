@@ -5,7 +5,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import EMPTY_VALUES
 from django.forms import HiddenInput
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from inventor.core.lists.models import List
 from inventor.forms import ModalContentLayout

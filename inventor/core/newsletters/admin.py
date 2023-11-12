@@ -2,7 +2,7 @@ from django.contrib import admin, messages
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from inventor.core.newsletters.exporters import SubscriberXlsxListExporter
 from inventor.core.newsletters.models import Subscriber

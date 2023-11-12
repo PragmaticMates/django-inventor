@@ -9,7 +9,7 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.db.models import Q
 from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from martor.utils import LazyEncoder
 
 from inventor.contrib.martor.utils import scale_down_image, rotate_jpeg_by_exif

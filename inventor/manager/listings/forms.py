@@ -1,13 +1,12 @@
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.layout import Layout, Row, Div, Submit
 from django import forms
-from django.utils.translation import ugettext_lazy as _
-from modeltrans.forms import TranslationModelForm
-
-from inventor.core.seo.models import Seo
-from pragmatic.forms import SingleSubmitFormHelper
+from django.utils.translation import gettext_lazy as _
 
 from inventor.core.listings.models.general import Listing
+from inventor.core.seo.models import Seo
+
+from pragmatic.forms import SingleSubmitFormHelper
 
 
 class ListingInfoForm(forms.ModelForm):

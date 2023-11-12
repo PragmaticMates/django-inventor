@@ -4,7 +4,7 @@ from crispy_forms.layout import Layout, Div, Submit, Fieldset, Row
 from django import forms
 from django.forms import Textarea
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from inventor.core.bookings.models import Booking
 
 

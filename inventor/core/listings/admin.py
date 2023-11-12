@@ -3,7 +3,7 @@ from django.contrib.admin.sites import NotRegistered
 from django.contrib.gis.db import models
 from django.db.models import Prefetch
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
 from modeltrans.admin import ActiveLanguageMixin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin, NestedTabularInline

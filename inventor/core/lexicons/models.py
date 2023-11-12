@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.db import models
 from django.contrib.postgres.indexes import GinIndex
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from modeltrans.fields import TranslationField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel

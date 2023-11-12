@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from django.utils.translation import ugettext_lazy as _, ugettext
+from django.utils.translation import gettext_lazy as _, gettext
 from outputs.mixins import ExcelExporterMixin
 from inventor.core.newsletters.models import Subscriber
 
@@ -12,8 +12,8 @@ class SubscriberXlsxListExporter(ExcelExporterMixin):
     def selectable_fields():
         # attribute, label, width, format (self.FORMATS), value
         return OrderedDict({
-            ugettext('Details'): [
-                ('email', ugettext('E-mail'), 30),
+            gettext('Details'): [
+                ('email', gettext('E-mail'), 30),
                 # ('subscribed', ugettext('subscribed'), 20, 'datetime'),
             ],
         })
@@ -23,7 +23,7 @@ class SubscriberXlsxListExporter(ExcelExporterMixin):
         super().__init__(**kwargs)
 
     def get_worksheet_title(self, index=0):
-        return ugettext('Subscribers')
+        return gettext('Subscribers')
 
     def get_queryset(self):
         return self.queryset

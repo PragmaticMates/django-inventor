@@ -5,7 +5,7 @@ from django.core.validators import EMPTY_VALUES
 from django.db.models import F, Count
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.module_loading import import_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView
 from django.views.generic.detail import BaseDetailView
 from hitcount.views import HitCountDetailView

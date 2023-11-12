@@ -2,7 +2,7 @@ from django.contrib.postgres.fields import DateTimeRangeField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.template.defaultfilters import floatformat
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from sorl import thumbnail
 
 from inventor.core.bookings.mixins import BookingMixin

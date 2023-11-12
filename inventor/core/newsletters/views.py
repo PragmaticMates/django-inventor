@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import BaseFormView
 
 from inventor.core.newsletters.forms import NewsletterForm

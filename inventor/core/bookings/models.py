@@ -4,13 +4,12 @@ from django.core.validators import MinValueValidator, EMPTY_VALUES
 from django.db import transaction
 from django.template.defaultfilters import date
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _, override as override_language
+from django.utils.translation import gettext_lazy as _, override as override_language
 
 from inventor.core.bookings.querysets import BookingQuerySet
 from pragmatic.managers import EmailManager
 
 from inventor import settings as inventor_settings
-from inventor.core.listings.managers import ListingQuerySet
 from inventor.core.listings.models.general import Listing
 from inventor.utils import generate_hash
 
