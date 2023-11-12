@@ -4,5 +4,5 @@ from django.utils.translation import ugettext_lazy as _
 
 class Config(AppConfig):
     name = 'inventor.manager.listings'
-    label = 'manager.listings'
+    label = 'manager_listings'
     verbose_name = _('Listings')
