@@ -354,8 +354,8 @@ class Group(SlugMixin, models.Model):
 
     video_url = models.URLField(_('video URL'), max_length=300, blank=True)
     weight = models.PositiveSmallIntegerField(_('weight'), help_text=_(u'ordering'), db_index=True,
-        blank=True, null=True, default=0)
-    listings = models.ManyToManyField(to=Listing, verbose_name=_('listings'), blank=True, related_name='groups')
+        blank=True, default=0)
+    listings = models.ManyToManyField(to=Listing, through='GroupListing', verbose_name=_('listings'), blank=True, related_name='groups')
     i18n = TranslationField(fields=('slug', 'title', 'description',))
 
     class Meta:
@@ -369,3 +369,19 @@ class Group(SlugMixin, models.Model):
 
     def get_absolute_url(self):
         return reverse('listings:group_detail', args=(self.slug_i18n,))
+
+
+class GroupListing(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    weight = models.PositiveSmallIntegerField(_('weight'), help_text=_(u'ordering'), db_index=True,
+        blank=True, default=0)
+
+    class Meta:
+        verbose_name = _("Group listing")
+        verbose_name_plural = _("Group listings")
+        ordering = ('weight',)
+        unique_together = [('group', 'listing'),]
+
+    def __str__(self):
+        return str(self.listing)

@@ -1,6 +1,7 @@
 from django.contrib import admin, messages
 from django.contrib.admin.sites import NotRegistered
 from django.contrib.gis.db import models
+from django.db.models import Prefetch
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from mapwidgets import GooglePointFieldWidget
@@ -12,7 +13,7 @@ from commerce.admin import SupplyInline
 from inventor import settings
 from inventor.core.bookings.admin import BookingMixinAdmin
 from inventor.core.listings.forms import PhotoForm
-from inventor.core.listings.models.general import Album, Video, Photo, Listing, Group
+from inventor.core.listings.models.general import Album, Video, Photo, Listing, Group, GroupListing
 from inventor.helpers import get_listing_types_classes
 
 
@@ -238,6 +239,11 @@ for model in get_listing_types_classes():
     admin.site.register(model, model_admin)
 
 
+class GroupListingInline(NestedTabularInline):
+    model = GroupListing
+    extra = 3
+
+
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
     search_fields = ['title', 'description']
@@ -245,16 +251,19 @@ class GroupAdmin(admin.ModelAdmin):
     # autocomplete_fields = ['listings']  # An admin for model "Listing" has to be registered
     list_editable = ['weight']
     filter_horizontal = ['listings']
+    inlines = [GroupListingInline]
 
     fieldsets = [
         (_('Definition'), {'fields': ('title_i18n', 'slug_i18n', 'description_i18n',)}),
         (_('Media'), {'fields': ('image', 'banner', 'video_url')}),
-        (_('Management'), {'fields': ('listings', 'weight')}),
+        (_('Management'), {'fields': ('weight',)}),
     ]
 
     def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related('listings')
+        return super().get_queryset(request).prefetch_related(Prefetch(
+            'listings',
+            queryset=Listing.objects.order_by('grouplisting__weight').distinct(),
+        ),)
 
     def list_of_listings(self, obj):
-        # return mark_safe('<br>'.join([str(listing) for listing in obj.listings.all()]))
         return mark_safe('<br>'.join(map(str, obj.listings.all())))
