@@ -222,7 +222,6 @@ class ListingBookingsListView(DisplayListViewMixin, SortingListViewMixin, ListVi
     def dispatch(self, request, *args, **kwargs):
         self.listing_slug = self.kwargs.get(self.slug_field)
         self.listing = Listing.objects.get(slug=self.listing_slug)
-        print(self.listing_slug)
         # self.filter = self.filter_class(**self.get_filter_kwargs())
         return super().dispatch(request, *args, **kwargs)
 
@@ -258,7 +257,6 @@ class ListingAlbumsListView(DisplayListViewMixin, SortingListViewMixin, ListView
     def dispatch(self, request, *args, **kwargs):
         self.listing_slug = self.kwargs.get(self.slug_field)
         self.listing = Listing.objects.get(slug=self.listing_slug)
-        # print(self.listing_slug)
         # self.filter = self.filter_class(**self.get_filter_kwargs())
         return super().dispatch(request, *args, **kwargs)
 
