@@ -71,11 +71,14 @@ def markdown_search_user(request):
 
 @login_required
 def markdown_image_uploader(request):
+    def is_ajax(request):
+        return request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
+
     """
     Makdown image upload for locale storage
     and represent as json to markdown editor.
     """
-    if request.method == 'POST' and request.is_ajax():
+    if request.method == 'POST' and is_ajax(request):
         if 'markdown-image-upload' in request.FILES:
             image = request.FILES['markdown-image-upload']
             image_jpeg_types = [
